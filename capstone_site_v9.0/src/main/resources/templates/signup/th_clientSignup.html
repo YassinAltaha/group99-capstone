@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" type="text/css" href="resources/css/base.css" media="all" />
+<meta charset="UTF-8">
+<!-- <meta charset="ISO-8859-1"> -->
+<title>Insert title here</title>
+</head>
+  <body>
+		
+	<div th:replace="fragments/navbars/navbar :: navbar">
+	</div>
+
+
+		
+ <div class="message-highlight" align="center">
+		<h2>Client Information</h2>
+
+		<form th:action="@{/saveClientInfo}" th:object="${client}" method="post">
+		<table>
+			<tr>
+				<td><label for="clientName">Name:</label> </td>
+				<td><input th:field="*{clientName}" /></td>
+			</tr>
+			
+			<tr>
+				<td><label for="clientCompany">Company:</label></td>
+				<td><input th:field="*{clientCompany}" /></td>
+			</tr>
+
+			<tr>
+			
+				<td><label for="clientContact">Contact:</label> </td>
+				<td><input th:field="*{clientContact}" /></td>
+			</tr>
+			
+			<tr>
+				<td><label for="clientAddress">Address:</label> </td>
+				<td><input th:field="*{clientAddress}" /></td>
+			</tr>
+			
+			<tr>
+				<td><label for="clientEmail">Email:</label> </td> 
+				<td><input th:field="*{clientEmail}" /></td>
+			</tr>
+			
+			<tr>
+				<td><label for="password">Password:</label></td>
+				<td><input th:field="*{password}" /></td>
+			</tr>
+
+			<tr>
+				<td colspan="2"> <input type="submit" value="Submit" /></td>
+			<tr>
+			
+			</table>
+		</form>
+		<table style="border-style: hidden;">
+			<tr th:each="error :${errors}">
+				<td th:text="*{error}" colspan="2"></td>
+			</tr>
+		</table>
+		
+	</div>
+		
+</body>
+</html>

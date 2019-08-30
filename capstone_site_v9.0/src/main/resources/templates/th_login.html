@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" type="text/css" href="resources/css/base.css" media="all" />
+<meta charset="UTF-8">
+<!-- <meta charset="ISO-8859-1"> -->
+<title>Insert title here</title>
+</head>
+  <body>
+				
+				<div th:replace="fragments/navbars/navbar :: navbar">
+				</div>
+
+  <div class="" align="center">
+  
+      <p>HOME PAGE</p>
+      <h2>USER LOGIN</h2>
+      
+		<form th:action="@{/login}" method="POST">
+		
+			<div th:if="${param.error}">
+				Email or Password Error
+			</div>
+			
+			<div th:if="${param.logout}">
+				You have successfully logged out		
+			</div>
+			
+			Email:<input type="text" id="username" name="username" placeholder="username"/>
+			
+			Password:<input type="password" id="password" name="password" placeholder="password"/>
+			
+			<input type="submit" name="login_submit" id="login_submit" value="Login"/>
+			
+		</form>
+		<a href="/listProjects" th:href="@{/}">home/unsecure page</a>
+  </div>
+
+</body>
+</html>

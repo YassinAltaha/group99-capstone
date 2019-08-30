@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="UTF-8">
+<!-- <meta charset="ISO-8859-1"> -->
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div th:replace="fragments/navbars/prof_nav :: profNav">
+	</div>
+	
+<!-- View-dependent nav area -->
+	<div class="bg-white" align="center">
+
+		<h2>All Projects</h2>
+		<div th:if="${msg}">
+			<div class="msg">Project Assigned to group</div> <!-- changed the ${msg} to static record updated cus of lazy -->
+		</div>
+
+		<table>
+			<tr>
+				<th>Title</th>
+				<th>Description</th>
+				<th>Status</th>
+				<th>Group Name</th>
+				<th>Options</th>
+			</tr>
+			<div th:each="project : ${projectList}" >
+				<tr> 
+					<td><p th:text="${project.title}"></td>
+					<td><p th:text="${project.description}"></td>
+					<td><p th:text="${project.status}"></td>
+					<td><p th:text="${project?.GroupBean?.groupName}"></td>
+					<td>
+					<a th:href="@{/professor/profAssignProject/{id}(id=${project.projectId})}"> Edit </a>
+					</td>
+					
+				</tr>
+			</div> 
+		</table>
+	</div>
+	
+
+</body>
+</html>

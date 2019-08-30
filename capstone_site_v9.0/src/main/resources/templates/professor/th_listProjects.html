@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="UTF-8">
+<!-- <meta charset="ISO-8859-1"> -->
+<title>Insert title here</title>
+</head>
+<body>
+
+  
+	<div th:replace="fragments/navbars/prof_nav :: profNav">
+	</div>
+	
+<!-- View-dependent nav area -->
+	<div class="bg-white" align="center">
+
+		<h2>All Projects</h2>
+		<div th:if="${msg}">
+			<div class="msg">Record updated</div> <!-- changed the ${msg} to static record updated cus of lazy -->
+		</div>
+		
+
+
+		<table>
+			<tr>
+				<th>Client Name</th>
+				<th>Title</th>
+				<th>Description</th>
+				<th>Status</th>
+				<th>Professor Note</th>
+				<th>Options</th>
+			</tr>
+				
+			<div th:each="project : *{projectList}" >
+				<tr> 
+					<td><p th:utext="*{project.client.clientName}"></p></td>
+					<td><p th:utext="*{project.title}"> </p></td>
+					<td><p th:utext="*{project.description}"></p></td>
+					<td><p th:utext="*{project.status}"></p></td>
+					<td><p th:utext="*{project.profNote}"></p></td>
+					<td>
+					<a th:href="@{/professor/profEditProject/{id}(id=${project.projectId})}"> Edit </a>
+					</td>
+				 
+				</tr>
+			</div> 
+			
+			
+		</table>
+	</div>
+	
+
+</body>
+</html>

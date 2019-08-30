@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+
+<meta charset="UTF-8">
+<!-- <meta charset="ISO-8859-1"> -->
+<title>Insert title here</title>
+</head>
+<body>
+  
+   
+   
+	<div th:replace="fragments/navbars/student_nav :: Student_Nav">
+	</div>
+	
+	
+	<div class="bg-white" align="center">
+	
+	<div th:if=${error}>
+		<p th:value="*{error}">
+	</div>
+		<form th:action="@{/student/addGroup}" th:object="${group}" method="post">
+			<table>
+			<tr>
+			<th colspan="2">
+				Create Group
+			</th>
+			</tr>
+			<tr>
+				
+				<td>Group Name: </td>
+				<td><input th:field="*{groupName}"/></td>
+				
+			</tr>
+			
+			<tr>
+				<td><input type="submit" value="Create Group" /></td>
+			</tr>
+			
+			</table>
+		</form>
+		
+	</div>
+	
+
+</body>
+</html>

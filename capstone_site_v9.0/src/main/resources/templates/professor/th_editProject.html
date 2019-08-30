@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="UTF-8">
+<!-- <meta charset="ISO-8859-1"> -->
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div th:replace="fragments/navbars/prof_nav :: profNav">
+	</div>
+	
+<!-- View-dependent nav area -->
+	<div class="message-highlight" align="center">
+		<h2>Update the Project Status & Notes</h2>
+		
+		<form th:action="@{/professor/updateProject}" th:object="${project}" method="POST">
+			<input type="hidden" name="projectId" th:field="${project.projectId}" />
+			
+			<table>
+			
+			<tr>
+			<td><label >Project Title:</label></td>
+			<td><input type="text" readonly="true" th:value="${project.title}" /></td>
+			</tr>
+			
+			<tr>
+			<td><label >Project Status:</label> </td>
+			<td>
+				<select th:field="${project.status}" >
+						<option th:value="Approved">Approved</option>
+						<option th:value="Completed">Completed</option>
+						<option th:value="Pending">Pending</option>
+						<option th:value="Rejected">Rejected</option>									
+				</select> 
+				 </td>
+			</tr>
+			<tr>
+			<td><label >Teacher's Note</label></td>
+			<td>
+				<input th:field="${project.profNote}" type="text" th:value="${project.profNote}" />
+			</td>
+			</tr>
+				
+			<tr>
+				<td colspan="2"><input type="submit" value="Update" /></td>
+			</tr>
+			
+			</table>
+		</form>
+	</div>
+	
+
+</body>
+</html>

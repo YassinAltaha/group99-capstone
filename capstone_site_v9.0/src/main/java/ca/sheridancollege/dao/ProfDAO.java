@@ -1,0 +1,73 @@
+package ca.sheridancollege.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.Query;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import ca.sheridancollege.bean.GroupBean;
+import ca.sheridancollege.bean.Professor;
+import ca.sheridancollege.bean.Project;
+import ca.sheridancollege.bean.Role;
+
+public class ProfDAO {
+	SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+
+
+
+	public Professor findProfByEmail(String profEmail) {
+		List<Professor> profs = sessionFactory.openSession().createQuery("from Professor where profEmail=:profEmail")
+				.setParameter("profEmail", profEmail).list();
+		if (profs.size() > 0) {
+			return profs.get(0);
+		} else {
+			System.out.println("*** NO PROF FOUND ***");
+			return null;
+		}
+	}
+
+
+
+	public void addProf(Professor p) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		String pass = p.getPassword();
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String hasedPassword = passwordEncoder.encode(pass);
+
+		Professor professor = new Professor(p.getProfName(), p.getProfEmail(), hasedPassword, p.getProgram());
+	
+		professor.setRole(Role.ROLE_ADMIN);
+
+		session.save(professor);
+	
+
+		session.getTransaction().commit();
+		session.close();
+	}
+	
+	public List<String> validateProfessor(Professor p) {
+		List<String> errorList = new ArrayList<String>();
+		ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+		Validator validator = validatorFactory.getValidator();
+
+		Set<ConstraintViolation<Professor>> violationErrors = validator.validate(p);
+		if (!violationErrors.isEmpty()) {
+			for (ConstraintViolation<Professor> error : violationErrors) {
+				errorList.add(error.getPropertyPath() + " :: " + error.getMessage());
+			}
+		}
+		return errorList;
+	}
+}
