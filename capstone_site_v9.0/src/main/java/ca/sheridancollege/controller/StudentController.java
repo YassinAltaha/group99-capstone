@@ -19,6 +19,7 @@ import ca.sheridancollege.dao.StudentDAO;
 @Controller
 public class StudentController {
 	
+	
 	StudentDAO dao = new StudentDAO();
 	
 	//Signup 1.1
@@ -39,8 +40,7 @@ public class StudentController {
 	@RequestMapping("/saveStudent")
 	public String saveStudent(Model model, @ModelAttribute Student student) {
 		
-		//incase teachers request that we limit the use of the dao
-		
+		//incase teachers request that we limit the use of the dao	
 //		if(!dao.validateStudent(student).isEmpty()) {
 //			
 //			model.addAttribute("Errors", dao.validateStudent(student));
