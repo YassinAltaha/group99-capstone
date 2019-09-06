@@ -21,7 +21,7 @@ import ca.sheridancollege.dao.ProjectDAO;
 
 @Controller
 public class ClientController {
-
+// test
 	
 	//Client Signup(form)
 	@RequestMapping("/addClientInfo")
@@ -194,7 +194,7 @@ public class ClientController {
 		return "/client/th_clientProjects";
 	}
 	
-	
+
 	//Main pages
 	@RequestMapping("/client")
 	public String goStudentHome() {
