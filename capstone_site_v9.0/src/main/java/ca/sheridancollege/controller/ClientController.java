@@ -183,7 +183,7 @@ public class ClientController {
 		
 		ClientDAO dao = new ClientDAO();
 		
-		//Method at line 196
+		//Method at line 233
 		Client c = getAuthClient();
 		
 		int clientId = c.getClientId();
