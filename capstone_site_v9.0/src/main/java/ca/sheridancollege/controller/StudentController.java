@@ -73,9 +73,6 @@ public class StudentController {
 //		
 
 		
-		
-		
-		
 		synchronized (Student.class) {
 			//student validation
 			if(dao.validateStudent(student).isEmpty())
@@ -174,15 +171,14 @@ public class StudentController {
 //			}
 //		}
 		
+		
+		
 		// Create passcode
 		// add Student to the group
 		// set the group program based on student program
 		// set passcode
 		// Add group to DB
 		// set the student to the group
-		
-		
-		
 		//check groupName if it exists
 		if(groupDAO.searchGroupByName(group.getGroupName()).isEmpty())
 		{
