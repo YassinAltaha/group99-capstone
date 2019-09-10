@@ -42,17 +42,23 @@ public class ProfessorController {
 		
 		
 		synchronized (Professor.class) {	
+			
+			//testing using the Professor Validtions 
 			if (profDAO.validateProfessor(professor).isEmpty()) {
 				//test if the username is used
 				try {
+					
 					profDAO.addProf(professor);
+					
+				//Catch	
 				//sends the user back to Sign with new error message
 				}catch (Exception e)
 				{
+					
 					model.addAttribute("errors", "Email Already used");
 					return "signup/th_profSignup";
 				}
-				
+				//Validtion Failed
 			} else {
 				model.addAttribute("errors", profDAO.validateProfessor(professor));
 				return "signup/th_profSignup";

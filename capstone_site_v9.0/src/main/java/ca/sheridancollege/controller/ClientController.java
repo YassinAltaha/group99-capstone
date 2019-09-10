@@ -14,14 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import ca.sheridancollege.bean.*;
 import ca.sheridancollege.dao.ClientDAO;
 import ca.sheridancollege.dao.ProjectDAO;
 
 @Controller
 public class ClientController {
-// test 
+ 
 	
 	//Client Signup(form)
 	@RequestMapping("/addClientInfo")
@@ -39,6 +38,7 @@ public class ClientController {
 
 		synchronized (Client.class) {
 			
+			//testing using the Client Validations 
 			if(dao.validateClint(client).isEmpty())
 			{
 				//test if the email is used
@@ -82,7 +82,7 @@ public class ClientController {
 		int sP = 0;
 		project.setStatus("Pending");
 		
-		//Method at line 223
+		//Getting the Client Using Security Context (Method in page)
 		Client c = getAuthClient();
 		
 		sP = dao.addProject(project, c.getClientId()); // status,
@@ -123,6 +123,7 @@ public class ClientController {
 		List<Project> projectList = new ArrayList<Project>();
 		
 		ClientDAO clientDao = new ClientDAO();
+		//Getting the Client Using Security Context (Method in page)
 		Client c = getAuthClient();
 		
 		//getting list of projects based on the project's client's ID
@@ -183,7 +184,7 @@ public class ClientController {
 		
 		ClientDAO dao = new ClientDAO();
 		
-		//Method at line 233
+		//Getting the Client Using Security Context (Method in page)
 		Client c = getAuthClient();
 		
 		int clientId = c.getClientId();

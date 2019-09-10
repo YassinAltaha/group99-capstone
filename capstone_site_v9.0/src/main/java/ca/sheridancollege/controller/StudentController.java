@@ -81,7 +81,6 @@ public class StudentController {
 				if(dao.checkStudentByEmail(student.getStudent_email()) == false)
 				{
 					//email IS new
-					
 					//Checking if studentID is unique
 					if(dao.checkStudenID(student.getStudent_id()) == false)
 					{
@@ -104,7 +103,6 @@ public class StudentController {
 			else
 			{
 				model.addAttribute("errors", dao.validateStudent(student));
-				model.addAttribute("student", new Student());
 				return "/signup/th_studentSignup";
 			}	
 		}	
@@ -122,8 +120,9 @@ public class StudentController {
 		Student student = getAuthStudent();
 		if(student.getGroup() != null)
 		{
-			
+			model.addAttribute("GroupInfo", student.getGroup());
 			model.addAttribute("inGroup", true);
+			
 		}else
 		{
 			
@@ -132,6 +131,14 @@ public class StudentController {
 		
 		
 		return "/student/th_group_info";
+	}
+	
+	
+	
+	@RequestMapping("/student/joinGroup")
+	public String JoinGroup() {
+		
+		return "/student/th_about";
 	}
 	
 	//Create Group 1.1
@@ -179,7 +186,7 @@ public class StudentController {
 		// set passcode
 		// Add group to DB
 		// set the student to the group
-		//check groupName if it exists
+		// check groupName if it exists
 		if(groupDAO.searchGroupByName(group.getGroupName()).isEmpty())
 		{
 			//Creating a 4 digit pass code for group
@@ -199,11 +206,12 @@ public class StudentController {
 			dao.updateStudent(s);
 			
 			model.addAttribute("inGroup", true);
+			model.addAttribute("GroupInfo", s.getGroup());
 			return "/student/th_group_info";
 			
 		}else
 		{
-			model.addAttribute("error", "Group name is not unique");
+			model.addAttribute("error", "Group name is used");
 			return "/student/th_create_group";
 		}
 	}

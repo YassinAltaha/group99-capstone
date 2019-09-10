@@ -32,34 +32,44 @@ public class MyUserDetails implements UserDetailsService {
 		//create the User object with the proper GrantedAuthorities 
 		if(profDAO.findProfByEmail(email) != null)
 		{
+			//Getting the Prof Object From the email
 			ca.sheridancollege.bean.Professor prof = profDAO.findProfByEmail(email);
 			
-			//line 102
+			//line 112
+			//Create the List of Granted Authorities with a Role Prof
 			List<GrantedAuthority> authorityList = buildUserAuthorities(prof.getRole());
 			
-			//line 73
+			//line 85
+			//create the User object with the proper GrantedAuthorities (Professor)
 			return buildProfUserForAuthentication(prof, authorityList);
 			
 		}
 		else if(clientDAO.findClientByEmail(email) != null)
 		{
+			//Getting the Client Object From the email
 			ca.sheridancollege.bean.Client client = clientDAO.findClientByEmail(email);
 			
-			//line 102
+			//line 112
+			//Create the List of Granted Authorities with a Role Client
 			List<GrantedAuthority> authorityList = buildUserAuthorities(client.getRole());
 			
-			//line 73
+			//line 94
+			//create the User object with the proper GrantedAuthorities (Client)
 			return buildClientUserForAuthentication(client, authorityList);
 			
 		}
 		else if(studentDAO.getStudentByEmail(email) != null)
 		{
+			//Getting the Student Object From the email
 			ca.sheridancollege.bean.Student student = studentDAO.getStudentByEmail(email);
 			
-			//line 102
+			//line 112
+			//Create the List of Granted Authorities with a Role Client
 			List<GrantedAuthority> authorityList = buildUserAuthorities(student.getRole());
 			
-			//line90
+			
+			//create the User object with the proper GrantedAuthorities (Student)
+			//line 103
 			return buildStudentUserForAuthentication(student, authorityList);
 		}else
 		{
@@ -75,7 +85,7 @@ public class MyUserDetails implements UserDetailsService {
 	private User buildProfUserForAuthentication(ca.sheridancollege.bean.Professor prof,
 			List<GrantedAuthority> authorityList) { // import from securty.cores
 
-		// this user is securty Core user
+		// this User is Security Core User
 		return new User(prof.getProfEmail(), prof.getPassword(), true, true, true, true, authorityList);
 	}
 	
@@ -84,7 +94,7 @@ public class MyUserDetails implements UserDetailsService {
 	private User buildClientUserForAuthentication(ca.sheridancollege.bean.Client client,
 			List<GrantedAuthority> authorityList) { // import from securty.cores
 
-		// this user is securty Core user
+		// this User is Security Core User
 		return new User(client.getClientEmail(), client.getPassword(), true, true, true, true, authorityList);
 	}
 	
@@ -93,11 +103,11 @@ public class MyUserDetails implements UserDetailsService {
 	private User buildStudentUserForAuthentication(ca.sheridancollege.bean.Student student,
 			List<GrantedAuthority> authorityList) { // import from securty.cores
 
-		// this user is securty Core user
+		// this User is Security Core User
 		return new User(student.getStudent_email(), student.getPassword(), true, true, true, true, authorityList);
 	}
 	
-	
+	//this method is used for all users to make sure that all the roles are set
 	//changes the role from enums to GrantedAuthority to be used with spring
 	private List<GrantedAuthority> buildUserAuthorities(Role role) {
 		
