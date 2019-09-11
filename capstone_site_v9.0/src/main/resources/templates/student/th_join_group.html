@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+
+<meta charset="UTF-8">
+<!-- <meta charset="ISO-8859-1"> -->
+<title>Insert title here</title>
+</head>
+<body>
+  
+   
+   
+	<div th:replace="fragments/navbars/navbar :: Student_Nav">
+	</div>
+	
+	
+	<div class="bg-white" align="center">
+	
+	<div th:if=${error}>
+		<p th:value="*{error}">
+	</div>
+	
+			<table>
+				<tr th:if="${error}">
+					<td colspan = "3">
+						<p th:text="*{error}" />
+					</td>
+				
+				</tr>
+			
+				<tr>
+					<th colspan="3">
+						Join Group
+					</th>
+				</tr>
+				
+				<tr th:each="group : ${groupList}">
+					
+					<td>Group Name: </td>
+					<td><p th:text="*{group.groupName}"/></td>
+					
+					<td><a th:href="@{/student/join_group/{id}(id = ${group.groupId})}">Join Group</a>
+				</tr>
+			
+			</table>
+		
+	</div>
+	
+
+</body>
+</html>

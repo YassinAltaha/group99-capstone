@@ -8,7 +8,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ca.sheridancollege.bean.Client;
 import ca.sheridancollege.bean.GroupBean;
@@ -136,10 +139,79 @@ public class StudentController {
 	
 	
 	@RequestMapping("/student/joinGroup")
-	public String JoinGroup() {
+	public String JoinGroup(Model model) {
 		
-		return "/student/th_about";
+		
+		GroupDAO groupDAO = new GroupDAO();
+		List<GroupBean> groupList = groupDAO.getAllGroups();
+		model.addAttribute("groupList", groupList);
+		return "/student/th_join_group";
 	}
+	
+	@RequestMapping(value="/student/join_group/{id}" , method = RequestMethod.GET)
+	public String JoinGroup(Model model,  @PathVariable int id) {
+		
+		
+		GroupDAO groupDAO = new GroupDAO();
+		
+		if(groupDAO.getGroupById(id) != null)
+		{
+			GroupBean group = groupDAO.getGroupById(id);
+			model.addAttribute("groupInfo", group);
+			return "/student/th_join_group_protal";
+			
+		}else
+		{
+			model.addAttribute("error", "Sorry No group hold this id");
+			return "/student/th_join_group";
+		}	
+	}
+	
+	@RequestMapping(value="/student/join_group/{id}", method = RequestMethod.POST)
+	public String testPasscode(Model model,
+							   @PathVariable int id,
+							   @RequestParam(value="password_test") int pass ) {
+		
+		
+		String passcode = Integer.toString(pass);
+		
+		GroupDAO groupDAO = new GroupDAO();
+		
+		
+		//making sure the Path Variable is not being used without 
+		if(groupDAO.getGroupById(id) != null)
+		{
+			GroupBean group = groupDAO.getGroupById(id);
+			String test = group.getPasscode();
+			
+			
+			//Testing the passcode input
+			if(test.equals(passcode))
+			{
+				
+				Student s = getAuthStudent();
+				
+				s.setGroup(group);
+				
+				dao.updateStudent(s);
+				
+				model.addAttribute("inGroup", true);
+				model.addAttribute("GroupInfo", group);
+				return "/student/th_group_info";
+			}
+			
+			model.addAttribute("groupInfo", group);
+			return "/student/th_join_group_protal";
+		}else
+		{
+			model.addAttribute("error", "Sorry No group hold this id");
+			return "/student/th_join_group";
+		}	
+	}
+	
+	
+	
+	
 	
 	//Create Group 1.1
 	@RequestMapping("/student/createGroup")
@@ -220,7 +292,7 @@ public class StudentController {
 	@RequestMapping("/student/deleteGroup")
 	public String deleteGroup() {
 		
-		return "/student/th_about";
+		return "/student/common/th_about";
 	}
 	
 	

@@ -13,7 +13,6 @@ import ca.sheridancollege.bean.GroupBean;
 
 public class GroupDAO {
 
-	List<GroupBean> groupList = new ArrayList<GroupBean>();
 
 	SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 
@@ -53,6 +52,33 @@ public class GroupDAO {
 		session.close();
 
 		return groupList;
+	}
+	
+	public void updateGroup(GroupBean g)
+	{
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+			session.update(g);
+			
+		session.getTransaction().commit();
+		session.close();
+	}
+	
+	
+	public GroupBean getGroupById(int groupId) {
+		
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		Query query = session.createQuery("from GroupBean where groupId=:groupId");
+		query.setParameter("groupId", groupId);
+		GroupBean group =  (GroupBean) query.getSingleResult();
+
+		session.getTransaction().commit();
+		session.close();
+
+		return group;
 	}
 	
 	public List<GroupBean> getAllGroups() {

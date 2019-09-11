@@ -22,6 +22,8 @@ public class GroupController {
 		model.addAttribute("groupBean", g);
 		return "/student/createGroup";
 	}
+	
+	
 
 	@RequestMapping("/addGroup")
 	public String goAddGroup(Model model, @ModelAttribute GroupBean groupBean) {
