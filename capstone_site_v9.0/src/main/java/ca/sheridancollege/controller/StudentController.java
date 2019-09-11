@@ -197,6 +197,7 @@ public class StudentController {
 				
 				model.addAttribute("inGroup", true);
 				model.addAttribute("GroupInfo", group);
+				
 				return "/student/th_group_info";
 			}
 			

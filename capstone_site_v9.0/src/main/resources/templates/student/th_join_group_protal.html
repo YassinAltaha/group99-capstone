@@ -18,7 +18,7 @@
 	
 	<div class="bg-white" align="center">
 	
-			<form th:object="${groupInfo}" method="post" th:action="@{/student/join_group/{id}(id = ${groupInfo.groupId})}" >
+			<form th:object="${GroupInfo}" method="post" th:action="@{/student/join_group/{id}(id = ${GroupInfo.groupId})}" >
 				<table>
 				
 					<tr th:if="${error}">
@@ -29,7 +29,7 @@
 					</tr>
 				
 					<tr>
-						<th colspan="3" th:text="'Join Group  ' + ${groupInfo.groupName}">
+						<th colspan="3" th:text="'Join Group  ' + ${GroupInfo.groupName}">
 							
 						</th>
 					</tr>
@@ -37,7 +37,7 @@
 					<tr>
 						
 						<td>PASSCODE FOR TESTING: </td>
-						<td><input th:value="${groupInfo.passcode}" /> </td>
+						<td><input th:value="${GroupInfo.passcode}" /> </td>
 						
 					</tr>
 					
