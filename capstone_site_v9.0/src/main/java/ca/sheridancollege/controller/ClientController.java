@@ -20,10 +20,6 @@ import ca.sheridancollege.dao.ProjectDAO;
 
 @Controller
 public class ClientController {
-<<<<<<< HEAD
-=======
- 
->>>>>>> branch 'master' of https://github.com/exospher3/group99-capstone.git
 	
 	//Client Signup(form)
 	@RequestMapping("/addClientInfo")
