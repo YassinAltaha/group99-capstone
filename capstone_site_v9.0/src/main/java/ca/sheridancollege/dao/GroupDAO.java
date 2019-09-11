@@ -13,7 +13,6 @@ import ca.sheridancollege.bean.GroupBean;
 
 public class GroupDAO {
 
-
 	SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 
 	public void addGroup(GroupBean groupBean) {
@@ -25,9 +24,7 @@ public class GroupDAO {
 		session.getTransaction().commit();
 		session.close();
 	}
-	
-	
-	
+
 	public void deleteGroup(GroupBean groupBean) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -37,8 +34,6 @@ public class GroupDAO {
 		session.getTransaction().commit();
 		session.close();
 	}
-	
-	
 
 	public List<GroupBean> searchGroupByName(String groupName) {
 		Session session = sessionFactory.openSession();
@@ -53,34 +48,32 @@ public class GroupDAO {
 
 		return groupList;
 	}
-	
-	public void updateGroup(GroupBean g)
-	{
+
+	public void updateGroup(GroupBean g) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		
-			session.update(g);
-			
+
+		session.update(g);
+
 		session.getTransaction().commit();
 		session.close();
 	}
-	
-	
+
 	public GroupBean getGroupById(int groupId) {
-		
+
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
 		Query query = session.createQuery("from GroupBean where groupId=:groupId");
 		query.setParameter("groupId", groupId);
-		GroupBean group =  (GroupBean) query.getSingleResult();
+		GroupBean group = (GroupBean) query.getSingleResult();
 
 		session.getTransaction().commit();
 		session.close();
 
 		return group;
 	}
-	
+
 	public List<GroupBean> getAllGroups() {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();

@@ -19,7 +19,7 @@ public class LoginAccessDeniedHandler implements AccessDeniedHandler {
 	public void handle(HttpServletRequest request, HttpServletResponse response,
 			AccessDeniedException accessDeniedException) throws IOException, ServletException {
 
-		//This will fire if the user is accessing unauthorized data
+		// This will fire if the user is accessing unauthorized data
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth != null) {
 			System.out.println(auth.getName() + " was trying to access protected resource: " + request.getRequestURI());

@@ -38,7 +38,7 @@ public class Project implements Serializable {
 	private int GroupId;
 
 	@ManyToOne(cascade = CascadeType.ALL, targetEntity = ca.sheridancollege.bean.Client.class)
-	@JoinColumn(name="clientId")
+	@JoinColumn(name = "clientId")
 	private Client client;
 
 	@OneToOne(cascade = CascadeType.ALL, targetEntity = GroupBean.class, fetch = FetchType.EAGER)
@@ -58,7 +58,6 @@ public class Project implements Serializable {
 		this.client = client;
 	}
 
-	
 	public Project(String title, String description, String status, String profNote) {
 
 		this.title = title;

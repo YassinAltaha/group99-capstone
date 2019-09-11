@@ -20,7 +20,7 @@ import ca.sheridancollege.bean.Role;
 import ca.sheridancollege.bean.Student;
 
 public class StudentDAO {
-	
+
 	SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 
 	public void addStudent(Student s) {
@@ -31,14 +31,8 @@ public class StudentDAO {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hasedPassword = passwordEncoder.encode(pass);
 
-		Student student = new Student(s.getStudent_id()
-				,s.getName()
-				,s.getProgram()
-				,s.getGpa()
-				,s.getSkill()
-				,s.getStudent_email()
-				,hasedPassword
-				);
+		Student student = new Student(s.getStudent_id(), s.getName(), s.getProgram(), s.getGpa(), s.getSkill(),
+				s.getStudent_email(), hasedPassword);
 
 		student.setRole(Role.ROLE_STUDENT);
 		session.save(student);
@@ -46,39 +40,32 @@ public class StudentDAO {
 		session.close();
 
 	}
-	
-	
-	public Student getStudentByEmail(String email)
-	{
+
+	public Student getStudentByEmail(String email) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		
-			Query query = session.createQuery("From Student where student_email=:student_email");
-			query.setParameter("student_email", email);
-			
-			Student s = (Student) query.getSingleResult();
-			
+
+		Query query = session.createQuery("From Student where student_email=:student_email");
+		query.setParameter("student_email", email);
+
+		Student s = (Student) query.getSingleResult();
+
 		session.getTransaction().commit();
 		session.close();
-		
+
 		return s;
 	}
 
-	
-	public void updateStudent(Student s)
-	{
+	public void updateStudent(Student s) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		
-			session.update(s);
+
+		session.update(s);
 		session.getTransaction().commit();
 		session.close();
 	}
-	
-	
-	
-	public Boolean checkStudentByEmail(String email)
-	{
+
+	public Boolean checkStudentByEmail(String email) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
@@ -88,16 +75,15 @@ public class StudentDAO {
 		List<Student> s = (List<Student>) query.getResultList();
 		session.getTransaction().commit();
 		session.close();
-		
+
 		if (s.size() > 0) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
-	public Boolean checkStudenID(String studentID)
-	{
+
+	public Boolean checkStudenID(String studentID) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
@@ -107,14 +93,14 @@ public class StudentDAO {
 		List<Student> s = (List<Student>) query.getResultList();
 		session.getTransaction().commit();
 		session.close();
-		
+
 		if (s.size() > 0) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
+
 	public List<String> validateStudent(Student s) {
 		List<String> errorList = new ArrayList<String>();
 		ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
@@ -128,9 +114,9 @@ public class StudentDAO {
 		}
 		return errorList;
 	}
-	
+
 	public List<Student> getAllStudents() {
-		
+
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 

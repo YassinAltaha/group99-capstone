@@ -15,27 +15,24 @@ public class GroupController {
 
 	@RequestMapping("/createGroup")
 	public String goAboutStudent(Model model) {
-		
-		//give a new Group Bean
+
+		// give a new Group Bean
 		GroupBean g = new GroupBean();
-		//Attach the Group Bean to The model with "groupBean"
+		// Attach the Group Bean to The model with "groupBean"
 		model.addAttribute("groupBean", g);
 		return "/student/createGroup";
 	}
-	
-	
 
 	@RequestMapping("/addGroup")
 	public String goAddGroup(Model model, @ModelAttribute GroupBean groupBean) {
-		
-		
+
 		String name = groupBean.getGroupName().toString();
-		//testing if the group name is used
+		// testing if the group name is used
 		if (groupDAO.searchGroupByName(name).isEmpty()) {
-			
+
 			groupDAO.addGroup(groupBean);
 			model.addAttribute("groupSuccess", "Successfully created");
-			
+
 		} else {
 			model.addAttribute("groupSuccess", "Group name is not unique");
 		}

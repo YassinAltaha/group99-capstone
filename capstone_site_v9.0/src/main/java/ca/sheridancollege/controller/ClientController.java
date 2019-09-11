@@ -20,7 +20,6 @@ import ca.sheridancollege.dao.ProjectDAO;
 
 @Controller
 public class ClientController {
- 
 	
 	//Client Signup(form)
 	@RequestMapping("/addClientInfo")

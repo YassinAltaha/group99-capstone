@@ -31,7 +31,6 @@ public class ProjectDAO {
 			return projectList;
 		}
 	}
-	
 
 	public List<Project> getApprovedProjects() {
 		Session session = sessionFactory.openSession();
@@ -80,7 +79,7 @@ public class ProjectDAO {
 		session.getTransaction().commit();
 		session.close();
 	}
-	
+
 	public void clientUpdateProject(Project project, int projectId) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -92,16 +91,13 @@ public class ProjectDAO {
 		session.getTransaction().commit();
 		session.close();
 	}
-	
-	
-	
-	public void updateProject(Project p)
-	{
+
+	public void updateProject(Project p) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		
-			session.update(p);
-			
+
+		session.update(p);
+
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -124,70 +120,64 @@ public class ProjectDAO {
 		session.close();
 		return 1;
 	}
-	
+
 	public List<Double> statusPercentage() {
-        List<Double> statusPerList = new ArrayList<Double>();
+		List<Double> statusPerList = new ArrayList<Double>();
 
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
-        Query query1 = session.createQuery("SELECT COUNT(*) from Project WHERE status='Pending'");
-        long penNum = (long)query1.getSingleResult();
-        Query query2 = session.createQuery("SELECT COUNT(*) from Project WHERE status='Approved'");
-        long appNum = (long)query2.getSingleResult();
-        Query query3 = session.createQuery("SELECT COUNT(*) from Project WHERE status='Rejected'");
-        long rejNum = (long)query3.getSingleResult();
-        Query query4 = session.createQuery("SELECT COUNT(*) from Project WHERE status='Completed'");
-        long comNum = (long)query4.getSingleResult();
-
-        Query query = session.createQuery("SELECT COUNT(*) from Project WHERE status is not null");
-        long total =  (long)query.getSingleResult();
-
-        double penNumber = (double)penNum / total;
-        double appNumber = (double)appNum / total;
-        double rejNumber = (double)rejNum / total;
-        double comNumber = (double)comNum / total;
-
-        double pP = Math.round(penNumber*100);
-        double aP = Math.round(appNumber*100);
-        double rP = Math.round(rejNumber*100);
-        double cP = Math.round(comNumber*100);
-
-        statusPerList.add(pP);
-        statusPerList.add(aP);
-        statusPerList.add(rP);
-        statusPerList.add(cP);
-
-        session.getTransaction().commit();
-        session.close();
-        return statusPerList;
-    }
-	
-	public void deleteProject(Project p)
-	{
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		
-			session.delete(p);
-			
+
+		Query query1 = session.createQuery("SELECT COUNT(*) from Project WHERE status='Pending'");
+		long penNum = (long) query1.getSingleResult();
+		Query query2 = session.createQuery("SELECT COUNT(*) from Project WHERE status='Approved'");
+		long appNum = (long) query2.getSingleResult();
+		Query query3 = session.createQuery("SELECT COUNT(*) from Project WHERE status='Rejected'");
+		long rejNum = (long) query3.getSingleResult();
+		Query query4 = session.createQuery("SELECT COUNT(*) from Project WHERE status='Completed'");
+		long comNum = (long) query4.getSingleResult();
+
+		Query query = session.createQuery("SELECT COUNT(*) from Project WHERE status is not null");
+		long total = (long) query.getSingleResult();
+
+		double penNumber = (double) penNum / total;
+		double appNumber = (double) appNum / total;
+		double rejNumber = (double) rejNum / total;
+		double comNumber = (double) comNum / total;
+
+		double pP = Math.round(penNumber * 100);
+		double aP = Math.round(appNumber * 100);
+		double rP = Math.round(rejNumber * 100);
+		double cP = Math.round(comNumber * 100);
+
+		statusPerList.add(pP);
+		statusPerList.add(aP);
+		statusPerList.add(rP);
+		statusPerList.add(cP);
+
+		session.getTransaction().commit();
+		session.close();
+		return statusPerList;
+	}
+
+	public void deleteProject(Project p) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		session.delete(p);
+
 		session.getTransaction().commit();
 		session.close();
 	}
-	
-	public void deleteProjectById(int pid)
-	{
+
+	public void deleteProjectById(int pid) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		
+
 		Project p = session.get(Project.class, pid);
 		session.delete(p);
-			
+
 		session.getTransaction().commit();
 		session.close();
 	}
-	
-	
-	
-	
 
 }

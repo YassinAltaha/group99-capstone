@@ -20,8 +20,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -31,6 +29,7 @@ public class Student implements Serializable {
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	private int id;
+
 	
 	@Column(unique=true)
 	@NotNull(message = "Please enter your Sheridan student number")
@@ -43,52 +42,41 @@ public class Student implements Serializable {
 	
 	@NotNull(message = "Please enter your program")
 	private String program;
-	
-	
+
 	private boolean isGroupLeader;
 	
 	@NotNull(message = "Please enter your GPA")
 	private double gpa;
+
+
 	
 	@NotNull(message = "Please enter a skill")
 	@Size(min = 2, max = 20, message = "Skill must between 2 - 20 letters")
 	private String skill;
-	
-	
+		
 	
 	//Acess points
 	@Column(unique=true)
 	@NotNull(message = "Please enter your email")
 	@Pattern(regexp = ".*@sheridancollege.ca", message = "Ensure email ends with sheridancollege.ca")
 	private String student_email;
-	
+
 	@Column(name = "password", nullable = false, length = 120)
 	@NotNull(message = "Password cannot be empty")
 	private String password;
-	
-	
-	//Role + Relations 
-	@Column(name="role", nullable=false)
+
+	// Role + Relations
+	@Column(name = "role", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Role role;
-	
+
 	@ManyToOne(targetEntity = ca.sheridancollege.bean.GroupBean.class)
-	@JoinColumn(name="groupId")
+	@JoinColumn(name = "groupId")
 	private GroupBean group;
-	
-	
-	
-	//Constructor
-	public Student(
-			String student_id, 
-			String name,
-			String program,
-			double gpa,
-			String skill,
-			String student_email,
-			String password
-			)
-	{
+
+	// Constructor
+	public Student(String student_id, String name, String program, double gpa, String skill, String student_email,
+			String password) {
 		this.student_id = student_id;
 		this.name = name;
 		this.program = program;
@@ -96,12 +84,7 @@ public class Student implements Serializable {
 		this.skill = skill;
 		this.student_email = student_email;
 		this.password = password;
-		
+
 	}
-	
-	
-	
-	
-	
-	
+
 }

@@ -23,8 +23,6 @@ import ca.sheridancollege.bean.Role;
 public class ProfDAO {
 	SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 
-
-
 	public Professor findProfByEmail(String profEmail) {
 		List<Professor> profs = sessionFactory.openSession().createQuery("from Professor where profEmail=:profEmail")
 				.setParameter("profEmail", profEmail).list();
@@ -36,8 +34,6 @@ public class ProfDAO {
 		}
 	}
 
-
-
 	public void addProf(Professor p) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -47,16 +43,15 @@ public class ProfDAO {
 		String hasedPassword = passwordEncoder.encode(pass);
 
 		Professor professor = new Professor(p.getProfName(), p.getProfEmail(), hasedPassword, p.getProgram());
-	
+
 		professor.setRole(Role.ROLE_ADMIN);
 
 		session.save(professor);
-	
 
 		session.getTransaction().commit();
 		session.close();
 	}
-	
+
 	public List<String> validateProfessor(Professor p) {
 		List<String> errorList = new ArrayList<String>();
 		ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();

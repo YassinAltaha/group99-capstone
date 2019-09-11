@@ -29,13 +29,8 @@ public class ClientDAO {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hasedPassword = passwordEncoder.encode(pass);
 
-		Client client = new Client(c.getClientName()
-				,c.getClientCompany()
-				,c.getClientContact()
-				,c.getClientAddress()
-				,c.getClientEmail()
-				,hasedPassword
-				);
+		Client client = new Client(c.getClientName(), c.getClientCompany(), c.getClientContact(), c.getClientAddress(),
+				c.getClientEmail(), hasedPassword);
 
 		client.setRole(Role.ROLE_CLIENT);
 		session.save(client);
@@ -43,7 +38,7 @@ public class ClientDAO {
 		session.close();
 
 	}
-	
+
 	public Client findClientByEmail(String email) {
 		List<Client> client = sessionFactory.openSession().createQuery("from Client where clientEmail=:clientEmail")
 				.setParameter("clientEmail", email).list();
@@ -129,7 +124,7 @@ public class ClientDAO {
 		return clientId;
 
 	}
-	
+
 	public Client getClientByEmail(String clientEmail) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -144,8 +139,6 @@ public class ClientDAO {
 		return c;
 
 	}
-	
-	
 
 	public void editMyProject(Project project, int projectId) {
 		Session session = sessionFactory.openSession();
@@ -158,8 +151,7 @@ public class ClientDAO {
 		session.getTransaction().commit();
 		session.close();
 	}
-	
-	
+
 	public List<String> validateClint(Client c) {
 		List<String> errorList = new ArrayList<String>();
 		ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
@@ -173,7 +165,5 @@ public class ClientDAO {
 		}
 		return errorList;
 	}
-	
-	
-	
+
 }
