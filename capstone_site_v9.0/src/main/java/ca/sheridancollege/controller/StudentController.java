@@ -201,7 +201,8 @@ public class StudentController {
 				return "/student/th_group_info";
 			}
 			
-			model.addAttribute("groupInfo", group);
+			model.addAttribute("error", "Sorry Wrong Passcode");
+			model.addAttribute("GroupInfo", group);
 			return "/student/th_join_group_protal";
 		}else
 		{
