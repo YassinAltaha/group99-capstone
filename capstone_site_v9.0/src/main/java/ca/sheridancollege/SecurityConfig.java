@@ -22,9 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
-	
-	
+
 	@Autowired
 	private SuccessLoginHandler customSuccessHandler;
 
@@ -35,21 +33,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.antMatchers("/professor/**").hasRole("ADMIN")
-				.antMatchers("/client/**").hasRole("CLIENT")
-				.antMatchers("/student/**").hasRole("STUDENT") // THIS NEEDS TO BE CHANGED BACK TO STUDENT WHEN STUDENT ROLE ADDED
-				.antMatchers("/", "/js/**", "/css/**", "/images/**","/resources/**", "/**").permitAll().anyRequest().authenticated()
-				.and()
-				.formLogin().loginPage("/login").permitAll().successHandler(customSuccessHandler)
-				.and()
-				.logout().logoutUrl("/logout").invalidateHttpSession(true)
-				.clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/login?logout").permitAll()
-				.and()
-				.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+		http.authorizeRequests().antMatchers("/professor/**").hasRole("ADMIN").antMatchers("/client/**")
+				.hasRole("CLIENT").antMatchers("/student/**").hasRole("STUDENT") // THIS NEEDS TO BE CHANGED BACK TO
+																					// STUDENT WHEN STUDENT ROLE ADDED
+				.antMatchers("/", "/js/**", "/css/**", "/images/**", "/resources/**", "/**").permitAll().anyRequest()
+				.authenticated().and().formLogin().loginPage("/login").permitAll().successHandler(customSuccessHandler)
+				.and().logout().logoutUrl("/logout").invalidateHttpSession(true).clearAuthentication(true)
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
+				.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
 	}
-	
-
 
 }

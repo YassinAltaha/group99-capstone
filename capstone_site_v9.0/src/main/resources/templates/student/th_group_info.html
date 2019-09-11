@@ -9,41 +9,107 @@
 <title>Insert title here</title>
 </head>
 <body>
-  
    
-   
-	<div th:replace="fragments/navbars/student_nav :: Student_Nav">
+	<div th:replace="fragments/navbars/navbar :: Student_Nav">
 	</div>
 	
-	
 	<div class="bg-white" align="center">
-		
+	
 		<div th:if="${inGroup}">
 			<table>
-			<tr>
-				<th colspan="2">Group Info</th>
-			</tr>
-			
-			<tr>
-			<td>
+				<tr>
+					<th colspan="4">Group Info</th>
+				</tr>
+				<tr>
+						<td>
+						<p style="font-weight:bold;"> Group Name: </p>
+						</td>
+						<td th:text="*{GroupInfo.groupName}">
+						</td>
+
+						<td>
+						<p style="font-weight:bold;">Group Program: </p>
+						</td>
 					
-			</td>
+						<td th:text="*{GroupInfo.program}" >
+						</td>
+				</tr>
+			
+				<tr>
+						<td colspan="3">
+						<p style="font-weight:bold;">Group Password:</p>
+						</td>
+					
+						<td th:text="*{GroupInfo.passcode}">
+						</td>
+					
+				</tr>
+			
+
+			<span th:if="${GroupInfo?.Project != null}">
+			<tr>
+					<th colspan="4">Project Info</th>
 			</tr>
+				<tr>
+						<td>
+						<p style="font-weight:bold;">Project Title:</p>
+						</td>
+					
+						<td th:text="*{GroupInfo?.Project.title}" >
+						</td>
+
+						<td>
+						<p style="font-weight:bold;">Project Description:</p>
+						</td>
+					
+						<td th:text="*{GroupInfo?.Project.description}" >
+						</td>
+				</tr>
+			
+				
+				<tr>
+				
+					<td>
+						<p style="font-weight:bold;">Client Name:</p>
+					</td>
+					
+					<td th:text="*{GroupInfo?.Project.Client.clientName}" >
+					</td>
+					
+					<td>
+						<p style="font-weight:bold;">Client Email:</p>
+					</td>
+					
+					<td th:text="*{GroupInfo?.Project.Client.clientEmail}">
+					</td>
+					
+				</tr>
+			</span>
+			
+			
 			</table>
 			
 		</div>
 		
-		<div th:if="${noGroup}">
 		
-		<table>
-		<tr>
-		<td>
-		<a th:href="@{/student/createGroup}">Create Group </a>
-		</td>
-		</tr>
-		</table>
 		
-			No Group
+		
+		<div th:if="${noGroup}">	
+			<table>
+				<tr>
+					<td>
+						<a th:href="@{/student/createGroup}">Create Group </a>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<a th:href="@{/student/joinGroup}">Join Group </a>
+					</td>
+				</tr>
+			</table>
+		
+
 		</div>
 		
 		

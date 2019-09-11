@@ -8,8 +8,7 @@ import ca.sheridancollege.dao.ProfDAO;
 @Controller
 public class HomeController {
 
-	
-	//Main Page
+	// Main Page
 	@GetMapping("/")
 	public String goMainIndex() {
 		return "default/th_about";
@@ -50,6 +49,5 @@ public class HomeController {
 	public String goContact() {
 		return "/default/th_contact";
 	}
-
 
 }

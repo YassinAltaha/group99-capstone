@@ -14,6 +14,5 @@ import ca.sheridancollege.dao.ProjectDAO;
 
 @Controller
 public class ProjectController {
-	
 
 }

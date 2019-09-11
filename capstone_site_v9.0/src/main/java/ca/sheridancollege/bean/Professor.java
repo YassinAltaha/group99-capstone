@@ -30,7 +30,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 public class Professor implements Serializable {
-	
+
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	private long profId;
@@ -45,7 +45,7 @@ public class Professor implements Serializable {
 	private String profEmail;
 
 	@Column(name = "password", nullable = false, length = 120)
-	@NotNull(message = "Password cannot be left empty")  
+	@NotNull(message = "Password cannot be left empty")
 	private String password;
 
 	@Column(name = "program", nullable = false, length = 45)
@@ -53,9 +53,9 @@ public class Professor implements Serializable {
 	@Size(min = 2, max = 30, message = "Program must between 2 - 30 letters")
 	private String program;
 
-	@Column(name="role", nullable=false)
+	@Column(name = "role", nullable = false)
 	@Enumerated(EnumType.STRING)
-	private Role Role ;
+	private Role Role;
 
 	public Professor(String profName, String profEmail, String password, String program) {
 		this.profName = profName;

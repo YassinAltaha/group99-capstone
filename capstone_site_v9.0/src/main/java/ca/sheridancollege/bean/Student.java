@@ -20,8 +20,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -31,64 +29,49 @@ public class Student implements Serializable {
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(unique=true)
+
+	@Column(unique = true)
 	@NotNull(message = "Must input sheridan student number")
 	@Pattern(regexp = "^[0-9]{9}$", message = "Student# can only be 9 digits")
 	private String student_id;
-	
-	
+
 	@NotNull(message = "Name can't be left empty")
 	private String name;
-	
+
 	@NotNull(message = "Program can't be left empty")
 	private String program;
-	
-	
+
 	private boolean isGroupLeader;
-	
+
 	@NotNull(message = "GPA can't be left empty")
 	private double gpa;
-	
+
 	@NotNull(message = "Must have one strong point")
 	@Size(min = 2, max = 20, message = "Skill must between 2 - 20 letters")
 	private String skill;
-	
-	
-	
-	//Acess points
-	@Column(unique=true)
+
+	// Acess points
+	@Column(unique = true)
 	@NotNull(message = "Email can't be left empty")
 	@Pattern(regexp = ".*@sheridancollege.ca", message = "Ensure email ends with sheridancollege.ca")
 	private String student_email;
-	
+
 	@Column(name = "password", nullable = false, length = 120)
 	@NotNull(message = "Password cannot be empty")
 	private String password;
-	
-	
-	//Role + Relations 
-	@Column(name="role", nullable=false)
+
+	// Role + Relations
+	@Column(name = "role", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Role role;
-	
+
 	@ManyToOne(targetEntity = ca.sheridancollege.bean.GroupBean.class)
-	@JoinColumn(name="groupId")
+	@JoinColumn(name = "groupId")
 	private GroupBean group;
-	
-	
-	
-	//Constructor
-	public Student(
-			String student_id, 
-			String name,
-			String program,
-			double gpa,
-			String skill,
-			String student_email,
-			String password
-			)
-	{
+
+	// Constructor
+	public Student(String student_id, String name, String program, double gpa, String skill, String student_email,
+			String password) {
 		this.student_id = student_id;
 		this.name = name;
 		this.program = program;
@@ -96,12 +79,7 @@ public class Student implements Serializable {
 		this.skill = skill;
 		this.student_email = student_email;
 		this.password = password;
-		
+
 	}
-	
-	
-	
-	
-	
-	
+
 }

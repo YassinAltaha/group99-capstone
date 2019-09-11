@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<div th:replace="fragments/navbars/prof_nav :: profNav">
+	<div th:replace="fragments/navbars/navbar :: profNav">
 	</div>
 	
 <!-- View-dependent nav area -->
@@ -36,6 +36,7 @@
 				<tr>
 				<td><label for="group">Group :</label></td>
 				<td>
+				
 				<select name="groupId" th:value="*{groupId}" >
 					<option th:each="group : ${groups}"
 							
