@@ -14,9 +14,12 @@
 	</div>
 	
 	<div class="bg-white" align="center">
-	
-		<div th:if="${student.group} != null">
+	<div >
+		<p th:text="${error}"> </p>
+	</div>
+		<div style="font-weight:bold;" th:if="${student.group} != null">
 			<table>
+			
 				<tr>
 					<th colspan="4">Group Info</th>
 				</tr>

@@ -250,10 +250,20 @@ public class StudentController {
 		
 		if(s.getGroup() != null)
 		{
-			s.setGroup(null);
-			dao.updateStudent(s);
-			model.addAttribute("student", s);
-			return "/student/th_group_info";
+			if(s.getGroup().getGroupOwnerStudentId() == s.getId())
+			{
+				model.addAttribute("error", "Group Leader can't leave group if it has members");
+				model.addAttribute("student", s);
+				return "/student/th_group_info";
+				
+			}else
+			{
+				s.setGroup(null);
+				dao.updateStudent(s);
+				model.addAttribute("student", s);
+				return "/student/th_group_info";
+			}
+
 		}else
 		{
 			model.addAttribute("error", "Student is not part of a group");
