@@ -30,7 +30,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 public class Client implements Serializable {
-//testing git
+
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	private int clientId;
