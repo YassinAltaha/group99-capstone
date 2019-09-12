@@ -36,14 +36,14 @@ public class Client implements Serializable {
 	private int clientId;
 	
 	@Column(name = "clientName", nullable = false, length = 45)
-	@NotNull(message = "Name cannot be null")
+	@NotNull(message = "Please enter a name")
 	@Size(min = 2, max = 30, message = "Name must between 2 - 30 letters")
 	private String clientName;
 	
 	private String clientCompany;
 	
 	@Column(name = "clientContact", nullable = false, length = 45)
-	@NotNull(message = "Please provid valid phone number")
+	@NotNull(message = "Please provide a valid phone number")
 	@Size(min = 2, max = 30, message = "Name must between 2 - 30 letters")
 	@Pattern(regexp = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$" , message ="Valid format 000-000-0000")
 	private String clientContact;
@@ -53,7 +53,7 @@ public class Client implements Serializable {
 	//check Regex for future development 
 	//regex needs to handle any email
 	@Column(name = "clientEmail", unique = true, nullable = false, length = 45)
-	@NotNull(message = "Must Enter a valid Email")
+	@NotNull(message = "Plese enter a valid email")
 	@Pattern(regexp = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$", message = "Please ensure Email is formated proparly")
 	private String clientEmail;
 	
