@@ -15,7 +15,7 @@
 	
 	<div class="bg-white" align="center">
 	
-		<div th:if="${inGroup}">
+		<div th:if="${student.group} != null">
 			<table>
 				<tr>
 					<th colspan="4">Group Info</th>
@@ -24,14 +24,14 @@
 						<td>
 						<p style="font-weight:bold;"> Group Name: </p>
 						</td>
-						<td th:text="*{GroupInfo.groupName}">
+						<td th:text="*{student.group.groupName}">
 						</td>
 
 						<td>
 						<p style="font-weight:bold;">Group Program: </p>
 						</td>
 					
-						<td th:text="*{GroupInfo.program}" >
+						<td th:text="*{student.group.program}" >
 						</td>
 				</tr>
 			
@@ -40,13 +40,13 @@
 						<p style="font-weight:bold;">Group Password:</p>
 						</td>
 					
-						<td th:text="*{GroupInfo.passcode}">
+						<td th:text="*{student.group.passcode}">
 						</td>
 					
 				</tr>
 			
 
-			<span th:if="${GroupInfo?.Project != null}">
+			<span th:if="${student.group?.Project != null}">
 			<tr>
 					<th colspan="4">Project Info</th>
 			</tr>
@@ -55,14 +55,14 @@
 						<p style="font-weight:bold;">Project Title:</p>
 						</td>
 					
-						<td th:text="*{GroupInfo?.Project.title}" >
+						<td th:text="*{student.group?.Project.title}" >
 						</td>
 
 						<td>
 						<p style="font-weight:bold;">Project Description:</p>
 						</td>
 					
-						<td th:text="*{GroupInfo?.Project.description}" >
+						<td th:text="*{student.group?.Project.description}" >
 						</td>
 				</tr>
 			
@@ -73,14 +73,14 @@
 						<p style="font-weight:bold;">Client Name:</p>
 					</td>
 					
-					<td th:text="*{GroupInfo?.Project.Client.clientName}" >
+					<td th:text="*{student.group?.Project.Client.clientName}" >
 					</td>
 					
 					<td>
 						<p style="font-weight:bold;">Client Email:</p>
 					</td>
 					
-					<td th:text="*{GroupInfo?.Project.Client.clientEmail}">
+					<td th:text="*{student.group?.Project.Client.clientEmail}">
 					</td>
 					
 				</tr>
@@ -94,7 +94,7 @@
 		
 		
 		
-		<div th:if="${noGroup}">	
+		<div th:if="${student.group} == null">	
 			<table>
 				<tr>
 					<td>

@@ -18,16 +18,19 @@
 	
 	<div class="bg-white" align="center">
 	
-	<div th:if=${error}>
-		<p th:value="*{error}">
-	</div>
+
 		<form th:action="@{/student/addGroup}" th:object="${group}" method="post">
 			<table>
 			<tr>
 			<th colspan="2">
 				Create Group
 			</th>
+
 			</tr>
+				<tr  th:if=${error}>
+					<td colspan ="2" th:text="${error}">
+					</td>
+				</tr>
 			<tr>
 				
 				<td>Group Name: </td>

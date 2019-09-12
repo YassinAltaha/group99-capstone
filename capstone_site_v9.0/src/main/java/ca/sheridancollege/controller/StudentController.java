@@ -111,14 +111,7 @@ public class StudentController {
 	public String groupInfo(Model model) {
 
 		Student student = getAuthStudent();
-		if (student.getGroup() != null) {
-			model.addAttribute("GroupInfo", student.getGroup());
-			model.addAttribute("inGroup", true);
-
-		} else {
-
-			model.addAttribute("noGroup", true);
-		}
+		model.addAttribute("student", student);
 
 		return "/student/th_group_info";
 	}
@@ -166,18 +159,22 @@ public class StudentController {
 				Student s = getAuthStudent();
 
 				s.setGroup(group);
-
 				dao.updateStudent(s);
 
-				model.addAttribute("inGroup", true);
-				model.addAttribute("GroupInfo", group);
+//				model.addAttribute("inGroup", true);
+//				model.addAttribute("GroupInfo", group);
+				model.addAttribute("student", s);
 
 				return "/student/th_group_info";
+			}else {
+				
+				model.addAttribute("error", "Sorry Wrong Passcode");
+				model.addAttribute("student", getAuthStudent());
+				return "/student/th_join_group_protal";
+				
 			}
 
-			model.addAttribute("error", "Sorry Wrong Passcode");
-			model.addAttribute("GroupInfo", group);
-			return "/student/th_join_group_protal";
+
 		} else {
 			model.addAttribute("error", "Sorry No group hold this id");
 			return "/student/th_join_group";
@@ -190,7 +187,7 @@ public class StudentController {
 
 		// TEST if students try to add group using links
 		if (getAuthStudent().getGroup() != null) {
-			model.addAttribute("inGroup", true);
+			model.addAttribute("student", getAuthStudent());
 			return "/student/th_group_info";
 		}
 
@@ -205,19 +202,6 @@ public class StudentController {
 		GroupDAO groupDAO = new GroupDAO();
 		Student s = getAuthStudent();
 
-		// incase we need to limmit the use of dao
-
-//		List<GroupBean> gList = groupDAO.getAllGroups();
-//		
-//		for(GroupBean g : gList)
-//		{
-//			if(g.getGroupName() == group.getGroupName())
-//			{
-//				model.addAttribute("error", "Group name is not unique");
-//				return "/student/th_create_group";
-//			}
-//		}
-
 		// Create passcode
 		// add Student to the group
 		// set the group program based on student program
@@ -225,6 +209,7 @@ public class StudentController {
 		// Add group to DB
 		// set the student to the group
 		// check groupName if it exists
+		
 		if (groupDAO.searchGroupByName(group.getGroupName()).isEmpty()) {
 			// Creating a 4 digit pass code for group
 			Random rn = new Random();
@@ -242,12 +227,15 @@ public class StudentController {
 			s.setGroupLeader(true);
 			dao.updateStudent(s);
 
-			model.addAttribute("inGroup", true);
-			model.addAttribute("GroupInfo", s.getGroup());
+//			model.addAttribute("inGroup", true);
+//			model.addAttribute("GroupInfo", s.getGroup());
+			
+			model.addAttribute("student", s);
 			return "/student/th_group_info";
 
 		} else {
 			model.addAttribute("error", "Group name is used");
+			model.addAttribute("group", new GroupBean());
 			return "/student/th_create_group";
 		}
 	}
