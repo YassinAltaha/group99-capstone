@@ -42,16 +42,15 @@ public class StudentController {
 	@RequestMapping("/saveStudent")
 	public String saveStudent(Model model, @ModelAttribute Student student) {
 
-		// incase teachers request that we limit the use of the dao
+		
+//			 incase teachers request that we limit the use of the dao
 //		if(!dao.validateStudent(student).isEmpty()) {
 //			
 //			model.addAttribute("Errors", dao.validateStudent(student));
 //			return "/signup/th_studentSignup";
 //			
 //		}else {
-//			
-//			List<Student> studentList = dao.getAllStudents();
-//			
+//			List<Student> studentList = dao.getAllStudents();			
 //			for(Student s : studentList)
 //			{
 //				if(s.getStudent_email() == student.getStudent_email())
@@ -63,16 +62,13 @@ public class StudentController {
 //					model.addAttribute("Errors", "Student ID is used");
 //					return "/signup/th_studentSignup";
 //				}
-//				
 //			}
-//	
 //			synchronized (Student.class)
 //			{
 //				dao.addStudent(student);
 //				return "th_login";	
 //			}
 //		}
-//		
 
 		synchronized (Student.class) {
 			// student validation
@@ -104,15 +100,12 @@ public class StudentController {
 	}
 
 	// TODO FINISH MAIN PAGE
-	// ADD Group info
-	// ADD join link
 	// ADD delete Group
 	@RequestMapping("/student/group_info")
 	public String groupInfo(Model model) {
 
 		Student student = getAuthStudent();
 		model.addAttribute("student", student);
-
 		return "/student/th_group_info";
 	}
 
@@ -171,11 +164,9 @@ public class StudentController {
 				
 				model.addAttribute("error", "Sorry Wrong Passcode");
 				model.addAttribute("GroupInfo", group);
-				return "/student/th_join_group_protal";
+				return "/student/th_join_group_protal";	
 				
 			}
-
-
 		} else {
 			model.addAttribute("error", "Sorry No group hold this id");
 			model.addAttribute("groupList", groupDAO.getAllGroups());
@@ -269,9 +260,7 @@ public class StudentController {
 			model.addAttribute("error", "Student is not part of a group");
 			model.addAttribute("student", s);
 			return "/student/th_group_info";
-		}
-		
-		
+		}	
 	}
 
 

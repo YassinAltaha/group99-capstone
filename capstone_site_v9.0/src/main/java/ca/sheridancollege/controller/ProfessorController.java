@@ -44,15 +44,16 @@ public class ProfessorController {
 
 			// testing using the Professor Validtions
 			if (profDAO.validateProfessor(professor).isEmpty()) {
+				
 				// test if the username is used
+				// Catch
+				// sends the user back to Sign with new error message
 				try {
-
+					
 					profDAO.addProf(professor);
-
-					// Catch
-					// sends the user back to Sign with new error message
+					return "th_login";
 				} catch (Exception e) {
-
+					
 					model.addAttribute("errors", "Email Already used");
 					return "signup/th_profSignup";
 				}
@@ -61,7 +62,6 @@ public class ProfessorController {
 				model.addAttribute("errors", profDAO.validateProfessor(professor));
 				return "signup/th_profSignup";
 			}
-			return "th_login";
 		}
 	}
 
@@ -70,9 +70,7 @@ public class ProfessorController {
 	public String displayProjects(Model model) {
 
 		List<Project> projectList = projectDAO.getProjects();
-
 		model.addAttribute("projectList", projectList);
-
 		return "/professor/th_listProjects";
 	}
 
@@ -133,7 +131,6 @@ public class ProfessorController {
 		Project project = projectDAO.searchProjectById(projectId);
 		model.addAttribute("groups", list);
 		model.addAttribute("project", project);
-
 		return "/professor/th_assignProject";
 	}
 
@@ -141,20 +138,37 @@ public class ProfessorController {
 	@RequestMapping("/professor/assignProjectForm")
 	public String assignProject(Model model, @ModelAttribute Project project, @RequestParam int projectId,
 			@RequestParam int groupId) {
-
-		model.addAttribute("groupId", groupId);
-		int a = 0;
-		String msg = "";
-		a = projectDAO.assignProject(projectId, groupId);
-		if (a > 0) {
-			msg = "You have successfully assigned a group to a project!";
-		} else {
-			msg = "There has been an error updating this project";
+		
+		Project p = projectDAO.searchProjectById(projectId);
+		//If project is NOT null 
+		if(p != null)
+		{
+			GroupDAO groupDAO = new GroupDAO();
+			GroupBean g = groupDAO.getGroupById(groupId);
+			//if Project does NOT have a Group
+			if(p.getGroupBean() != null)
+			{
+				GroupBean oldGroup = groupDAO.getGroupById(p.getGroupBean().getGroupId());
+				oldGroup.setProject(null);
+				groupDAO.updateGroup(oldGroup);
+			}
+				
+				p.setGroupBean(g);
+				projectDAO.updateProject(p);
+				g.setProject(p);
+				groupDAO.updateGroup(g);
+			model.addAttribute("projectList", projectDAO.getApprovedProjects());
+			return "/professor/th_listApprovedProjects";
+		}else
+		{
+			model.addAttribute("error", "Sorry Project id is not avaiable");
+			model.addAttribute("project", p);
+			return "/professor/th_assignProject";
 		}
-		List<Project> projectList = projectDAO.getApprovedProjects();
-		model.addAttribute("msg", msg);
-		model.addAttribute("projectList", projectList);
-		return "/professor/th_listApprovedProjects";
+		
+		
+		
+		
 	}
 
 	// GO TO - Report page
