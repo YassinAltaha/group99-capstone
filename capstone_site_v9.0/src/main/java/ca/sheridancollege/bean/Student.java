@@ -33,24 +33,24 @@ public class Student implements Serializable {
 	private int id;
 	
 	@Column(unique=true)
-	@NotNull(message = "Please enter your Sheridan student number")
+	@NotNull(message = "Must input sheridan student number")
 	@Pattern(regexp = "^[0-9]{9}$", message = "Student# can only be 9 digits")
 	private String student_id;
 	
 	
-	@NotNull(message = "Please enter your name")
+	@NotNull(message = "Name can't be left empty")
 	private String name;
 	
-	@NotNull(message = "Please enter your program")
+	@NotNull(message = "Program can't be left empty")
 	private String program;
 	
 	
 	private boolean isGroupLeader;
 	
-	@NotNull(message = "Please enter your GPA")
+	@NotNull(message = "GPA can't be left empty")
 	private double gpa;
 	
-	@NotNull(message = "Please enter a skill")
+	@NotNull(message = "Must have one strong point")
 	@Size(min = 2, max = 20, message = "Skill must between 2 - 20 letters")
 	private String skill;
 	
@@ -58,7 +58,7 @@ public class Student implements Serializable {
 	
 	//Acess points
 	@Column(unique=true)
-	@NotNull(message = "Please enter your email")
+	@NotNull(message = "Email can't be left empty")
 	@Pattern(regexp = ".*@sheridancollege.ca", message = "Ensure email ends with sheridancollege.ca")
 	private String student_email;
 	

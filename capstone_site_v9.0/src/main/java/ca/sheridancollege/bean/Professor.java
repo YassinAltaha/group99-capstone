@@ -36,12 +36,12 @@ public class Professor implements Serializable {
 	private long profId;
 
 	@Column(name = "profName", nullable = false, length = 45)
-	@NotNull(message = "Please enter a name")
+	@NotNull(message = "Name cannot be null")
 	@Size(min = 2, max = 30, message = "Name must between 2 - 30 letters")
 	private String profName;
 
 	@Column(name = "profEmail", unique = true, nullable = false, length = 45)
-	@Pattern(regexp = ".*@sheridancollege\\.ca", message = "Email must be a sheridancollege.ca account")
+	@Pattern(regexp = ".*@sheridancollege\\.ca", message = "Ensure email ends with sheridancollege.ca")
 	private String profEmail;
 
 	@Column(name = "password", nullable = false, length = 120)
