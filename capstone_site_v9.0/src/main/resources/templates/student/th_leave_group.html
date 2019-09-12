@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+
+<meta charset="UTF-8">
+<!-- <meta charset="ISO-8859-1"> -->
+<title>Insert title here</title>
+</head>
+<body>
+  
+   
+   
+	<div th:replace="fragments/navbars/navbar :: Student_Nav">
+	</div>
+	
+	
+	<div class="bg-white" align="center">
+	
+	<div th:if=${error}>
+		<p th:value="*{error}">
+	</div>
+	
+		<h1>
+		Leave Group ??
+		</h1>
+		
+	</div>
+	
+
+</body>
+</html>

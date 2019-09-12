@@ -130,15 +130,17 @@ public class StudentController {
 
 		GroupDAO groupDAO = new GroupDAO();
 
-		if (groupDAO.getGroupById(id) != null) {
+		try {
 			GroupBean group = groupDAO.getGroupById(id);
 			model.addAttribute("GroupInfo", group);
 			return "/student/th_join_group_protal";
-
-		} else {
+			
+		}catch(Exception e)
+		{
 			model.addAttribute("error", "Sorry No group hold this id");
 			return "/student/th_join_group";
 		}
+
 	}
 
 	@RequestMapping(value = "/student/join_group/{id}", method = RequestMethod.POST)
@@ -164,12 +166,11 @@ public class StudentController {
 //				model.addAttribute("inGroup", true);
 //				model.addAttribute("GroupInfo", group);
 				model.addAttribute("student", s);
-
 				return "/student/th_group_info";
 			}else {
 				
 				model.addAttribute("error", "Sorry Wrong Passcode");
-				model.addAttribute("student", getAuthStudent());
+				model.addAttribute("GroupInfo", group);
 				return "/student/th_join_group_protal";
 				
 			}
@@ -177,6 +178,7 @@ public class StudentController {
 
 		} else {
 			model.addAttribute("error", "Sorry No group hold this id");
+			model.addAttribute("groupList", groupDAO.getAllGroups());
 			return "/student/th_join_group";
 		}
 	}
@@ -239,6 +241,29 @@ public class StudentController {
 			return "/student/th_create_group";
 		}
 	}
+	
+	
+	@RequestMapping("/student/leave_Group")
+	public String leaveGroup(Model model) {
+		
+		Student s = getAuthStudent();
+		
+		if(s.getGroup() != null)
+		{
+			s.setGroup(null);
+			dao.updateStudent(s);
+			model.addAttribute("student", s);
+			return "/student/th_group_info";
+		}else
+		{
+			model.addAttribute("error", "Student is not part of a group");
+			model.addAttribute("student", s);
+			return "/student/th_group_info";
+		}
+		
+		
+	}
+
 
 	@RequestMapping("/student/deleteGroup")
 	public String deleteGroup() {
