@@ -29,11 +29,11 @@ public class ProfessorController {
 	}
 
 	// Register Professor-1.1(form)
-	@RequestMapping("/signup")
+	@RequestMapping("/professor/addProf")
 	public String goHome(Model model) {
 		Professor professor = new Professor();
 		model.addAttribute("professor", professor);
-		return "signup/th_profSignup";
+		return "professor/th_profSignup";
 	}
 
 	// Register Professor-1.2 (saving prof)
@@ -60,7 +60,7 @@ public class ProfessorController {
 				// Validtion Failed
 			} else {
 				model.addAttribute("errors", profDAO.validateProfessor(professor));
-				return "signup/th_profSignup";
+				return "professor/th_profSignup";
 			}
 		}
 	}
