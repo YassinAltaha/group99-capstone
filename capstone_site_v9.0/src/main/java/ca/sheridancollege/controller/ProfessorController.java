@@ -22,10 +22,26 @@ import ca.sheridancollege.bean.Project;
 public class ProfessorController {
 	ProfDAO profDAO = new ProfDAO();
 	ProjectDAO projectDAO = new ProjectDAO();
+	
+	
 
 	@GetMapping("/prof")
-	public String gohome() {
-		return "professor/common/th_about";
+	public String makeAdmin() {
+		Professor admin = new Professor(
+				"adminName",
+				"admin@sheridancollege.ca",
+				"admin",
+				"ADMIN"
+				);
+		try {
+			profDAO.addProf(admin);
+			return "th_login";
+		}catch (Exception e){
+			
+			return "th_login";
+		}
+		
+		
 	}
 
 	// Register Professor-1.1(form)
