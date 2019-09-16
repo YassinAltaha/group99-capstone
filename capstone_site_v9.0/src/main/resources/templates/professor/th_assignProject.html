@@ -17,39 +17,42 @@
 
 	<div class="message-highlight" align="center">
 		<h2>Assign a Project to a Group</h2>
-
-		
 		
 		<form th:action="@{/professor/assignProjectForm}" th:object="${project}" method="POST">
+				
+				<input type="hidden" name="projectId" th:field="*{projectId}" />
 			<table>
 				<tr>
-				<td><label for="id"></label></td>
-				<td><input type="hidden" name="projectId" th:field="*{projectId}" /></td>
-				</tr>
-				
-	
-				<tr>
-				<td><label >Project Title:</label></td>
-				<td><input readonly="true" th:value="*{title}" /> </td>
+					<td><label >Project Title:</label></td>
+					<td><input readonly th:value="*{title}" /> </td>
 				</tr>
 			
-				<tr>
-				<td><label for="group">Group :</label></td>
-				<td>
-				
-				<select name="groupId" th:value="*{groupId}" >
-					<option th:each="group : ${groups}"
-							
-							th:value="${group.groupId}"
-							th:text="${group.groupName}">
-					</option>
+				<tr th:if="${groups!=null and !groups.empty}">
+					<td><label for="group">Group :</label></td>
+					<td>
 					
-				</select>
-				</td>
+					<select name="groupId" th:value="*{groupId}" >
+						<option th:each="group : ${groups}"
+								
+								th:value="${group.groupId}"
+								th:text="${group.groupName}">
+						</option>
+						
+					</select>
+					</td>
+				</tr>
+				
+				<tr th:unless="${groups!=null and !groups.empty}">
+					<td align="center" colspan="2">
+					<p>No available groups</p>
+					</td>
 				</tr>				
 
-				<tr>
-				<td colspan="2"><input type="submit" value="Update" /></td>
+				<tr >
+					<td><a th:href="@{/professor/listApprovedProjects}"><input type="button" value="Cancel"></a> </td>
+					<td th:if="${groups!=null and !groups.empty}">
+						<input type="submit" value="Update" />
+					</td>
 				</tr>
 			
 			</table>
