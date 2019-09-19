@@ -19,6 +19,7 @@ import ca.sheridancollege.bean.GroupBean;
 import ca.sheridancollege.bean.Professor;
 import ca.sheridancollege.bean.Project;
 import ca.sheridancollege.bean.Role;
+import ca.sheridancollege.bean.Student;
 
 public class ProfDAO {
 	SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
@@ -48,6 +49,16 @@ public class ProfDAO {
 
 		session.save(professor);
 
+		session.getTransaction().commit();
+		session.close();
+	}
+	
+	public void updateProfessor(Professor p) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		session.update(p);
+		
 		session.getTransaction().commit();
 		session.close();
 	}
