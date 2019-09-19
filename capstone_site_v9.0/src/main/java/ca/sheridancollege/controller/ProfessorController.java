@@ -200,7 +200,7 @@ public class ProfessorController {
 	}
 	
 	//Change Password 1.2
-	@RequestMapping(value="/professor/test" ,method=RequestMethod.POST)
+	@RequestMapping(value="/professor/change_password" ,method=RequestMethod.POST)
 	public String changePassword_POST(Model model,
 			@RequestParam String old_password,
 			@RequestParam String new_password, 
