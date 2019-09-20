@@ -36,8 +36,8 @@
 							<th>Rejected</th>
 							<th>Completed</th>
 						</tr>
-						<tr th:each="stat : ${statusPerList}" >
-							<td>
+						<tr >
+							<td th:each="stat : ${statusPerList}">
 								<p th:text="${stat}+'%'" />
 							</td>	 
 						</tr>
