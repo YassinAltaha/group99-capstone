@@ -167,7 +167,7 @@ public class ProfessorController {
 		{
 			GroupDAO groupDAO = new GroupDAO();
 			GroupBean g = groupDAO.getGroupById(groupId);
-			//if Project does NOT have a Group
+			//if Project DOES have a Group
 			if(p.getGroupBean() != null)
 			{
 				GroupBean oldGroup = groupDAO.getGroupById(p.getGroupBean().getGroupId());
