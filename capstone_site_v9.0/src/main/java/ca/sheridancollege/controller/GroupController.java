@@ -31,10 +31,10 @@ public class GroupController {
 		if (groupDAO.searchGroupByName(name).isEmpty()) {
 
 			groupDAO.addGroup(groupBean);
-			model.addAttribute("groupSuccess", "Successfully created");
+			model.addAttribute("groupSuccess", "Group successfully created");
 
 		} else {
-			model.addAttribute("groupSuccess", "Group name is not unique");
+			model.addAttribute("groupSuccess", "Sorry, this group name is already in use");
 		}
 
 		return "/student/createGroup";
