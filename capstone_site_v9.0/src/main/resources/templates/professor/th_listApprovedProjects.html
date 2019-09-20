@@ -5,7 +5,7 @@
 
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
-<title>Insert title here</title>
+<title>List of approved Projects</title>
 </head>
 <body>
 
@@ -28,8 +28,7 @@
 				<th>Group Name</th>
 				<th>Options</th>
 			</tr>
-			<div th:each="project : ${projectList}" >
-				<tr> 
+				<tr th:each="project : ${projectList}"> 
 					<td><p th:text="${project.title}"></td>
 					<td><p th:text="${project.description}"></td>
 					<td><p th:text="${project.status}"></td>
@@ -39,7 +38,6 @@
 					</td>
 					
 				</tr>
-			</div> 
 		</table>
 	</div>
 	

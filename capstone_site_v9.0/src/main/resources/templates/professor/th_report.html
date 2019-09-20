@@ -5,7 +5,7 @@
 
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
-<title>Insert title here</title>
+<title>Reports</title>
 </head>
 <body>
 
@@ -36,14 +36,10 @@
 							<th>Rejected</th>
 							<th>Completed</th>
 						</tr>
-						<tr>
-								
-									<div th:each="stat : ${statusPerList}"> 
-										<td>
-										<p th:text="${stat}+'%'" />
-										</td>	
-									</div> 
-								
+						<tr th:each="stat : ${statusPerList}" >
+							<td>
+								<p th:text="${stat}+'%'" />
+							</td>	 
 						</tr>
 					</table>
 					<form action="/professor/reportStatus">
