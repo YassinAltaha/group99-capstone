@@ -29,10 +29,10 @@ public class StudentDAO {
 
 		String pass = s.getPassword();
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String hasedPassword = passwordEncoder.encode(pass);
+		String hashedPassword = passwordEncoder.encode(pass);
 
 		Student student = new Student(s.getStudent_id(), s.getName(), s.getProgram(), s.getGpa(), s.getSkill(),
-				s.getStudent_email(), hasedPassword);
+				s.getStudent_email(), hashedPassword);
 
 		student.setRole(Role.ROLE_STUDENT);
 		session.save(student);

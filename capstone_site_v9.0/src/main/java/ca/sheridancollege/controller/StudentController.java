@@ -82,12 +82,12 @@ public class StudentController {
 						return "th_login";
 					} else {
 						// StudentID is used
-						model.addAttribute("errors", "Student ID is used");
+						model.addAttribute("errors", "Student ID is already registered");
 						return "/signup/th_studentSignup";
 					}
 				} else {
 					// email is used
-					model.addAttribute("errors", "Email already used");
+					model.addAttribute("errors", "This email is already in use");
 					return "/signup/th_studentSignup";
 				}
 			}
@@ -126,11 +126,11 @@ public class StudentController {
 		try {
 			GroupBean group = groupDAO.getGroupById(id);
 			model.addAttribute("GroupInfo", group);
-			return "/student/th_join_group_protal";
+			return "/student/th_join_group_portal";
 			
 		}catch(Exception e)
 		{
-			model.addAttribute("error", "Sorry No group hold this id");
+			model.addAttribute("error", "Sorry, there was an error joining this group");
 			return "/student/th_join_group";
 		}
 
@@ -162,13 +162,13 @@ public class StudentController {
 				return "/student/th_group_info";
 			}else {
 				
-				model.addAttribute("error", "Sorry Wrong Passcode");
+				model.addAttribute("error", "Incorrect passcode");
 				model.addAttribute("GroupInfo", group);
-				return "/student/th_join_group_protal";	
+				return "/student/th_join_group_portal";	
 				
 			}
 		} else {
-			model.addAttribute("error", "Sorry No group hold this id");
+			model.addAttribute("error", "Sorry, there was an error joining this group");
 			model.addAttribute("groupList", groupDAO.getAllGroups());
 			return "/student/th_join_group";
 		}
@@ -227,7 +227,7 @@ public class StudentController {
 			return "/student/th_group_info";
 
 		} else {
-			model.addAttribute("error", "Group name is used");
+			model.addAttribute("error", "Sorry, this group name is already registered");
 			model.addAttribute("group", new GroupBean());
 			return "/student/th_create_group";
 		}
@@ -243,7 +243,7 @@ public class StudentController {
 		{
 			if(s.getGroup().getGroupOwnerStudentId() == s.getId())
 			{
-				model.addAttribute("error", "Group Leader can't leave group if it has members");
+				model.addAttribute("error", "Group Leader cannot leave group if it has members");
 				model.addAttribute("student", s);
 				return "/student/th_group_info";
 				

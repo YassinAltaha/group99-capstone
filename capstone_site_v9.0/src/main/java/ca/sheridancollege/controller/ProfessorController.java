@@ -76,7 +76,7 @@ public class ProfessorController {
 					return "th_login";
 				} catch (Exception e) {
 					
-					model.addAttribute("errors", "Email Already used");
+					model.addAttribute("errors", "This email is already in use");
 					return "signup/th_profSignup";
 				}
 				// Validtion Failed
@@ -118,7 +118,7 @@ public class ProfessorController {
 			msg = "You have successfully edited this project!";
 
 		} catch (Exception e) {
-			msg = "ERROR while updating Project";
+			msg = "There was an error while updating this project";
 		}
 
 		List<Project> projectList = projectDAO.getProjects();
@@ -183,7 +183,7 @@ public class ProfessorController {
 			return "/professor/th_listApprovedProjects";
 		}else
 		{
-			model.addAttribute("error", "Sorry Project id is not avaiable");
+			model.addAttribute("error", "Sorry, project ID is not avaiable");
 			model.addAttribute("project", p);
 			return "/professor/th_assignProject";
 		}
@@ -219,7 +219,7 @@ public class ProfessorController {
 				String new_encoded_pass = passwordEncoder.encode(new_password);
 				p.setPassword(new_encoded_pass);
 				profDAO.updateProfessor(p);
-				model.addAttribute("error", "password was change Sucessfully");
+				model.addAttribute("error", "Password was successfully updated");
 				}
 				catch(Exception e){
 					
@@ -232,7 +232,7 @@ public class ProfessorController {
 			}
 		}else
 		{
-			model.addAttribute("error", "Sorry Passwords don't match");
+			model.addAttribute("error", "Sorry, passwords don't match");
 		}
 		
 		return "/professor/th_changePassword";

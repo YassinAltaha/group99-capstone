@@ -44,8 +44,8 @@ public class Client implements Serializable {
 
 	@Column(name = "clientContact", nullable = false, length = 45)
 	@NotNull(message = "Please provide a valid phone number")
-	@Size(min = 2, max = 30, message = "Name must between 2 - 30 letters")
-	@Pattern(regexp = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$", message = "Valid format 000-000-0000")
+	@Size(min = 2, max = 30, message = "Please provide a valid phone number")
+	@Pattern(regexp = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$", message = "Valid format is 000-000-0000")
 	private String clientContact;
 
 	private String clientAddress;
@@ -54,11 +54,12 @@ public class Client implements Serializable {
 	// regex needs to handle any email
 	@Column(name = "clientEmail", unique = true, nullable = false, length = 45)
 	@NotNull(message = "Plese enter a valid email")
-	@Pattern(regexp = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$", message = "Please ensure Email is formated proparly")
+	@Pattern(regexp = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$", message = "Please ensure email is valid")
 	private String clientEmail;
 
 	@Column(name = "password", nullable = false, length = 120)
 	@NotNull(message = "Password cannot be empty")
+	@Size(min = 4, max = 120, message = "Password must be at least 4 characters long")
 	private String password;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client")

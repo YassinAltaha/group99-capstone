@@ -48,7 +48,7 @@ public class ClientController {
 				//sends the user back to Sign with new error message
 				}catch(Exception e)
 				{
-					model.addAttribute("errors", "Email Already taken");
+					model.addAttribute("errors", "This email is already in use");
 					return "/signup/th_clientSignup";
 				}
 
@@ -67,8 +67,8 @@ public class ClientController {
 		
 		Project p = new Project();
 		model.addAttribute("project", p);
+		model.addAttribute("client", getAuthClient());
 		return "/client/th_addProject";
-		
 	}
 
 	//Add project-1.2
@@ -95,7 +95,8 @@ public class ClientController {
 			model.addAttribute("myProjectList", projectList);
 			return "/client/th_clientProjects";
 		} else {
-			error = "There was an error adding your project";
+			error = "Sorry, there was an error adding your project";
+			model.addAttribute("client", getAuthClient());
 			model.addAttribute("error", error);
 			model.addAttribute("project", new Project());
 			return "/client/th_addProject";
@@ -150,7 +151,7 @@ public class ClientController {
 			List<Project> projectList = new ArrayList<Project>();
 			projectList = dao.getMyProjects(project.getClient().getClientId());
 			model.addAttribute("myProjectList", projectList);
-			model.addAttribute("msg", "Sorry Project can not be delete Contact Professor for more info");
+			model.addAttribute("msg", "Sorry, this project cannot be deleted. Contact a professor for more info.");
 			return "/client/th_clientProjects";
 		}
 		
@@ -171,7 +172,7 @@ public class ClientController {
 		ClientDAO clientDao = new ClientDAO();
 		projectList = clientDao.getMyProjects(getAuthClient().getClientId());
 		
-		model.addAttribute("msg" , "Project deleted");
+		model.addAttribute("msg" , "Project successfully deleted");
 		model.addAttribute("myProjectList", projectList);
 		return "/client/th_clientProjects";
 	}
