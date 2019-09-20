@@ -33,14 +33,17 @@ public class Student implements Serializable {
 	
 	@Column(unique=true)
 	@NotNull(message = "Please enter your Sheridan student number")
-	@Pattern(regexp = "^[0-9]{9}$", message = "Student# can only be 9 digits")
+	@Pattern(regexp = "^[0-9]{9}$", message = "Student # must be 9 digits")
 	private String student_id;
 	
-	
+	@Column(name = "name", nullable = false, length = 45)
 	@NotNull(message = "Please enter your name")
+	@Size(min = 2, max = 30, message = "Name must between 2 - 30 letters")
 	private String name;
 	
+	@Column(name = "program", nullable = false, length = 45)
 	@NotNull(message = "Please enter your program")
+	@Size(min = 2, max = 30, message = "Program must between 2 - 30 letters")
 	private String program;
 
 	private boolean isGroupLeader;
@@ -48,14 +51,12 @@ public class Student implements Serializable {
 	@NotNull(message = "Please enter your GPA")
 	private double gpa;
 
-
-	
 	@NotNull(message = "Please enter a skill")
 	@Size(min = 2, max = 20, message = "Skill must between 2 - 20 letters")
 	private String skill;
 		
 	
-	//Acess points
+	//Access points
 	@Column(unique=true)
 	@NotNull(message = "Please enter your email")
 	@Pattern(regexp = ".*@sheridancollege.ca", message = "Ensure email ends with sheridancollege.ca")
@@ -63,6 +64,7 @@ public class Student implements Serializable {
 
 	@Column(name = "password", nullable = false, length = 120)
 	@NotNull(message = "Password cannot be empty")
+	@Size(min = 4, max = 120, message = "Password must be at least 4 characters long")
 	private String password;
 
 	// Role + Relations

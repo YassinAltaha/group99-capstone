@@ -219,7 +219,7 @@ public class ProfessorController {
 				String new_encoded_pass = passwordEncoder.encode(new_password);
 				p.setPassword(new_encoded_pass);
 				profDAO.updateProfessor(p);
-				model.addAttribute("error", "password was change Sucessfully");
+				model.addAttribute("error", "Password was successfully updated");
 				}
 				catch(Exception e){
 					
@@ -232,7 +232,7 @@ public class ProfessorController {
 			}
 		}else
 		{
-			model.addAttribute("error", "Sorry Passwords don't match");
+			model.addAttribute("error", "Sorry, passwords don't match");
 		}
 		
 		return "/professor/th_changePassword";
