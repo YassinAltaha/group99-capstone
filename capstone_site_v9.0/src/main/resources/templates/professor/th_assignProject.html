@@ -50,8 +50,8 @@
 
 				<tr >
 					<td><a th:href="@{/professor/listApprovedProjects}"><input type="button" value="Cancel"></a> </td>
-					<td th:if="${groups!=null and !groups.empty}">
-						<input type="submit" value="Update" />
+					<td>
+						<input type="submit" value="Update" th:disabled="${groups==null or groups.empty}" />
 					</td>
 				</tr>
 			

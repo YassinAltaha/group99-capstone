@@ -3,17 +3,23 @@ package ca.sheridancollege.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ca.sheridancollege.dao.ClientDAO;
 import ca.sheridancollege.dao.GroupDAO;
 import ca.sheridancollege.dao.ProfDAO;
 import ca.sheridancollege.dao.ProjectDAO;
+import ca.sheridancollege.bean.Client;
 import ca.sheridancollege.bean.GroupBean;
 import ca.sheridancollege.bean.Professor;
 import ca.sheridancollege.bean.Project;
@@ -181,11 +187,59 @@ public class ProfessorController {
 			model.addAttribute("project", p);
 			return "/professor/th_assignProject";
 		}
+	
+	}
+	
+	
+	
+	//Change Password 1.1
+	@RequestMapping(value="/professor/change_password" ,method = RequestMethod.GET)
+	public String changePassword(Model model)
+	{
+		return "/professor/th_changePassword";
+	}
+	
+	//Change Password 1.2
+	@RequestMapping(value="/professor/change_password" ,method=RequestMethod.POST)
+	public String changePassword_POST(Model model,
+			@RequestParam String old_password,
+			@RequestParam String new_password, 
+			@RequestParam String confirm_password
+			)
+	{
 		
+		if(new_password.equals(confirm_password))
+		{
+			Professor p = getAuthProf();
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			
+			if(passwordEncoder.matches(old_password, p.getPassword()))
+			{	
+				try {
+				String new_encoded_pass = passwordEncoder.encode(new_password);
+				p.setPassword(new_encoded_pass);
+				profDAO.updateProfessor(p);
+				model.addAttribute("error", "password was change Sucessfully");
+				}
+				catch(Exception e){
+					
+					model.addAttribute("error", "Error updating password");
+					System.out.println(e);
+				}
+			}else
+			{
+				model.addAttribute("error", "Old password is incorrect");
+			}
+		}else
+		{
+			model.addAttribute("error", "Sorry Passwords don't match");
+		}
 		
-		
+		return "/professor/th_changePassword";
 		
 	}
+	
+	
 
 	// GO TO - Report page
 	@RequestMapping("/professor/report")
@@ -230,6 +284,18 @@ public class ProfessorController {
 	@RequestMapping("/professor/contact")
 	public String goStudentContact() {
 		return "/professor/common/th_contact";
+	}
+	
+	
+	
+	public Professor getAuthProf()
+	{
+		ProfDAO dao = new ProfDAO();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication(); 
+		String username = auth.getName().toString();		
+		Professor professor = dao.findProfByEmail(username); 
+		return professor;
+		
 	}
 
 }
