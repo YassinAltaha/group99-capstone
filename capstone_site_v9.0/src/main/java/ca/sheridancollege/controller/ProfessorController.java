@@ -49,6 +49,14 @@ public class ProfessorController {
 		
 		
 	}
+	
+	@RequestMapping("/professor/groupList")
+	public String groupHome(Model model) {
+		GroupDAO groupDAO = new GroupDAO();
+		model.addAttribute("groups", groupDAO.getAllGroups());
+		return "professor/th_groupList";
+	}
+	
 
 	// Register Professor-1.1(form)
 	@RequestMapping("/professor/addProf")
