@@ -81,7 +81,8 @@ public class ProfessorController {
 				try {
 					
 					profDAO.addProf(professor);
-					return "th_login";
+					model.addAttribute("errors", professor.getProfName() + " Account was created");
+					return "professor/th_profSignup";
 				} catch (Exception e) {
 					
 					model.addAttribute("errors", "This email is already in use");
