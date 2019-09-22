@@ -46,6 +46,14 @@ public class ProfessorController {
 		}
 			
 	}
+	
+	@RequestMapping("/professor/groupList")
+	public String groupHome(Model model) {
+		GroupDAO groupDAO = new GroupDAO();
+		model.addAttribute("groups", groupDAO.getAllGroups());
+		return "professor/th_groupList";
+	}
+	
 
 	// Register Professor-1.1(form)
 	@RequestMapping("/professor/addProf")
@@ -70,7 +78,8 @@ public class ProfessorController {
 				try {
 					
 					profDAO.addProf(professor);
-					return "th_login";
+					model.addAttribute("errors", professor.getProfName() + " Account was created");
+					return "professor/th_profSignup";
 				} catch (Exception e) {
 					
 					model.addAttribute("errors", "This email is already in use");

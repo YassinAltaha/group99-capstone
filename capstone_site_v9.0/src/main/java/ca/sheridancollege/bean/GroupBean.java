@@ -32,7 +32,7 @@ public class GroupBean implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Project project;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "group", orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "group", fetch = FetchType.EAGER)
 	private List<Student> group_members = new ArrayList<Student>();
 
 	public GroupBean(int groupId, String groupName, long groupOwnerStudentId, String program, String passcode) {

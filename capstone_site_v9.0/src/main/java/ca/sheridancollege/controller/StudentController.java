@@ -155,6 +155,9 @@ public class StudentController {
 
 				s.setGroup(group);
 				dao.updateStudent(s);
+				
+				group.getGroup_members().add(s);
+				groupDAO.updateGroup(group);
 
 //				model.addAttribute("inGroup", true);
 //				model.addAttribute("GroupInfo", group);
@@ -214,6 +217,7 @@ public class StudentController {
 			group.setProgram(s.getProgram());
 
 			group.setPasscode(Integer.toString(pass));
+			group.getGroup_members().add(s);
 			groupDAO.addGroup(group);
 			// updating student
 			s.setGroup(group);
@@ -248,9 +252,10 @@ public class StudentController {
 				return "/student/th_group_info";
 				
 			}else
-			{
+			{	
 				s.setGroup(null);
 				dao.updateStudent(s);
+				
 				model.addAttribute("student", s);
 				return "/student/th_group_info";
 			}
