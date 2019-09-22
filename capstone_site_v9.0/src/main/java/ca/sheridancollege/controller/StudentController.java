@@ -253,8 +253,14 @@ public class StudentController {
 				
 			}else
 			{
+//				GroupBean g = s.getGroup();
+//				GroupDAO groupDAO = new GroupDAO();
+//				g.getGroup_members().remove(s);
+//				groupDAO.updateGroup(g);
+				
 				s.setGroup(null);
 				dao.updateStudent(s);
+				
 				model.addAttribute("student", s);
 				return "/student/th_group_info";
 			}
