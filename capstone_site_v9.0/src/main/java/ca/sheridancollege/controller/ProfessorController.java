@@ -29,8 +29,6 @@ public class ProfessorController {
 	ProfDAO profDAO = new ProfDAO();
 	ProjectDAO projectDAO = new ProjectDAO();
 	
-	
-
 	@GetMapping("/prof")
 	public String makeAdmin() {
 		Professor admin = new Professor(
@@ -46,8 +44,7 @@ public class ProfessorController {
 			
 			return "th_login";
 		}
-		
-		
+			
 	}
 
 	// Register Professor-1.1(form)
