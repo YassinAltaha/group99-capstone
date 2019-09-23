@@ -12,11 +12,15 @@
 	<div th:replace="fragments/navbars/navbar :: profNav">
 	</div>
 	
-<!-- View-dependent nav area -->
-	<div class="bg-white" align="center">
+	
+		<div class="container" align="center">
+		<div class="wrapper block-row">
+			<div class="block large-text callout-with-stats welcome"
+				style="height: 458px;">
 
-	<div class="message-highlight" align="center">
-	<br/>
+
+				<div class="inner-wrapper title-block-wrapper">
+				<br/>
 		<h2>Assign a Project to a Group</h2>
 		
 		<form th:action="@{/professor/assignProjectForm}" th:object="${project}" method="POST">
@@ -58,6 +62,8 @@
 			
 			</table>
 		</form>
+	</div>
+	</div>
 	</div>
 	</div>
 	

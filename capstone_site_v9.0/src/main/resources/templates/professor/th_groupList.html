@@ -15,13 +15,19 @@
 	<div th:replace="fragments/navbars/navbar :: profNav">
 	</div>
 	
-	
-		<div class="bg-white" align="center">
-		<br/>
-			<div th:if="${groups!=null and !groups.empty}" >
-			<<div class="inner-wrapper title-block-wrapper">
-				<h2>Group List</h2>
+		<div class="container" align="center">
+		<div class="wrapper block-row">
+			<div class="block large-text callout-with-stats welcome"
+				style="height: 458px;">
+
+
+				<div class="inner-wrapper title-block-wrapper">
+						
+					<div th:if="${groups!=null and !groups.empty}" >
+						<h2>Group List</h2>
+					</div>
 			</div>
+			
 				<table>
 					<tr>
 						<th>Group ID</th>
@@ -59,6 +65,9 @@
 				<h1> No Groups Available</h1>
 			</div>
 	
+
+		
+		</div>
 		</div>
 
 	

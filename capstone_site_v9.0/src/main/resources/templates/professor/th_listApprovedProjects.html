@@ -12,10 +12,15 @@
 	<div th:replace="fragments/navbars/navbar :: profNav">
 	</div>
 	
-<!-- View-dependent nav area -->
-	<div class="bg-white" align="center">
-		<br/>
-		<div class="inner-wrapper title-block-wrapper">>
+	
+		<div class="container" align="center">
+		<div class="wrapper block-row">
+			<div class="block large-text callout-with-stats welcome"
+				style="height: 458px;">
+
+
+				<div class="inner-wrapper title-block-wrapper">
+				
 		<h2>Approved Projects</h2>
 		</div>
 		<div th:if="${msg}">
@@ -42,6 +47,9 @@
 				</tr>
 		</table>
 	</div>
+	</div>
+	</div>
+	
 	
 
 </body>
