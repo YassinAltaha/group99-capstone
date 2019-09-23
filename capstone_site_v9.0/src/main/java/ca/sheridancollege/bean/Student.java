@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -48,6 +49,9 @@ public class Student implements Serializable {
 
 	private boolean isGroupLeader;
 	
+	@NotNull(message = "Please Select Campus")
+	private String campus;
+	
 	@NotNull(message = "Please enter your GPA")
 	private double gpa;
 
@@ -77,16 +81,27 @@ public class Student implements Serializable {
 	private GroupBean group;
 
 	// Constructor
-	public Student(String student_id, String name, String program, double gpa, String skill, String student_email,
+	public Student(String student_id,
+			String name,
+			String program,
+			String campus,
+			double gpa,
+			String skill,
+			String student_email,
 			String password) {
 		this.student_id = student_id;
 		this.name = name;
 		this.program = program;
+		this.campus = campus;
 		this.gpa = gpa;
 		this.skill = skill;
 		this.student_email = student_email;
 		this.password = password;
+		
 
 	}
+	
+	@Transient
+	public String[] campusList = { "Trafalgar", "Davis", "Hazel" };
 
 }

@@ -218,6 +218,7 @@ public class StudentController {
 
 			group.setPasscode(Integer.toString(pass));
 			group.getGroup_members().add(s);
+			group.setCampus(s.getCampus());
 			groupDAO.addGroup(group);
 			// updating student
 			s.setGroup(group);
