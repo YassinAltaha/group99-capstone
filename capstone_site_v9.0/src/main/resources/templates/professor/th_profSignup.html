@@ -11,47 +11,55 @@
 	<div th:replace="fragments/navbars/navbar :: profNav">
 	</div>
 
+		<div class="container" align="center">
+		<div class="wrapper block-row">
+			<div class="block large-text callout-with-stats welcome"
+				style="height: 458px;">
 
+
+				<div class="inner-wrapper title-block-wrapper">
+					<h2>Professor Sign Up</h2>
+				</div>
+					<form th:action="@{/saveProf}" th:object="${professor}" method="post">
+					<table>
+						<tr>
+							<td><label for="profName">Name:</label> </td>
+							<td><input required th:field="*{profName}" /></td>
+						</tr>
+						
+						<tr>
+							<td><label for="program">Program:</label> </td>
+							<td><input required th:field="*{program}" /></td>
+						</tr>
+						
+						<tr>
+							<td><label for="profEmail">Email:</label></td>
+							<td><input required th:field="*{profEmail}" /></td>
+						</tr>
+						
+						<tr>
+							<td><label for="password">Password:</label> </td>
+							<td><input required th:field="*{password}" type="password" /></td>
+						</tr>
+						
+			
+						<tr>
+							<td colspan="2"> <input type="submit" value="Submit" /></td>
+						<tr>
+						
+						</table>
+					</form>
+					<table style="border-style: hidden;">
+						<tr th:each="error :${errors}">
+							<td th:text="*{error}" colspan="2"></td>
+						</tr>
+					</table>
+					
+				</div>
+			</div>
+		</div>
 		
- <div class="message-highlight" align="center">
-		<h2>Professor Sign Up</h2>
-
-		<form th:action="@{/saveProf}" th:object="${professor}" method="post">
-		<table>
-			<tr>
-				<td><label for="profName">Name:</label> </td>
-				<td><input required th:field="*{profName}" /></td>
-			</tr>
 			
-			<tr>
-				<td><label for="program">Program:</label> </td>
-				<td><input required th:field="*{program}" /></td>
-			</tr>
-			
-			<tr>
-				<td><label for="profEmail">Email:</label></td>
-				<td><input required th:field="*{profEmail}" /></td>
-			</tr>
-			
-			<tr>
-				<td><label for="password">Password:</label> </td>
-				<td><input required th:field="*{password}" type="password" /></td>
-			</tr>
-			
-
-			<tr>
-				<td colspan="2"> <input type="submit" value="Submit" /></td>
-			<tr>
-			
-			</table>
-		</form>
-		<table style="border-style: hidden;">
-			<tr th:each="error :${errors}">
-				<td th:text="*{error}" colspan="2"></td>
-			</tr>
-		</table>
-		
-	</div>
 		
 </body>
 </html>

@@ -14,9 +14,17 @@
 	</div>
 	
 <!-- View-dependent nav area -->
-	<div class="bg-white" align="center">
 
-		<h2>All Projects</h2>
+		<div class="container" align="center">
+		<div class="wrapper block-row">
+			<div class="block large-text callout-with-stats welcome"
+				style="height: 458px;">
+
+
+				<div class="inner-wrapper title-block-wrapper">
+				
+				<h2>All Projects</h2>
+				</div>
 		<div th:if="${msg}">
 			<div class="msg">Record updated</div> <!-- changed the ${msg} to static record updated cus of lazy -->
 		</div>
@@ -46,6 +54,8 @@
 				</tr>
 
 		</table>
+	</div>
+	</div>
 	</div>
 	
 

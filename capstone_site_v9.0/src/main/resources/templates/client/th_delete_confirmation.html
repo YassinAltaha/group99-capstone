@@ -21,7 +21,7 @@
 	 	<div class="bg-white" align="center">
 	 	
 			<!--  display the message -->
-		
+		<br/>
 		<form th:action="@{/client/deleteProject}" th:object="${project}" method="post">
 		<input th:field="*{projectId}" hidden="true" />
 		<table>
