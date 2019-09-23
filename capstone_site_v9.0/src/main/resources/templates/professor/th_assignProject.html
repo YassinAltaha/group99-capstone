@@ -20,9 +20,9 @@
 
 
 				<div class="inner-wrapper title-block-wrapper">
-				<br/>
-		<h2>Assign a Project to a Group</h2>
 		
+				<h2>Assign a Project to a Group</h2>
+				</div>
 		<form th:action="@{/professor/assignProjectForm}" th:object="${project}" method="POST">
 				
 				<input type="hidden" name="projectId" th:field="*{projectId}" />
@@ -62,7 +62,7 @@
 			
 			</table>
 		</form>
-	</div>
+	
 	</div>
 	</div>
 	</div>
