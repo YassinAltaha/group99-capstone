@@ -28,6 +28,7 @@ public class GroupBean implements Serializable {
 	private String program;
 	private String passcode;
 //	private List<Project> projectRankings;
+	private String campus;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Project project;

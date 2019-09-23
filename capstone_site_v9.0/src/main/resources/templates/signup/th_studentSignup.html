@@ -44,6 +44,17 @@
 			</tr>
 			
 			<tr>
+				<td><label for="campus">Campus:</label></td>
+				<td><select required th:field="*{campus}" >
+						<option value="Trafalgar">Trafalgar</option>
+						<option value="Hazel">Hazel</option>
+						<option value="Davis">Davis</option>
+						
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
 				<td><label for="student_email">Email:</label></td>
 				<td><input required th:field="*{student_email}" /></td>
 			</tr>
