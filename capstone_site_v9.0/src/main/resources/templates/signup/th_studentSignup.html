@@ -24,13 +24,22 @@
 			</tr>
 			
 			<tr>
-				<td><label for="student_id">Student_id:</label></td>
+				<td><label for="student_id">Student ID:</label></td>
 				<td><input required th:field="*{student_id}" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="program">Program:</label> </td>
-				<td><input required th:field="*{program}" /></td>
+				<td><select required th:field="*{program}" >
+						<option value="Computer System Analyst">Computer System Analyst</option>
+						<option value="Computer Engineering Technology">Computer Engineering Technology</option>
+						<option value="Internet Communications Technology">Internet Communications Technology</option>
+						<option value="Information Systems Security">Information Systems Security</option>
+						<option value="Information Technologies Support Services">Information Technologies Support Services</option>
+						<option value="Mobile Computing">Mobile Computing</option>
+						<option value="Software Development and Network Engineering">Software Development and Network Engineering</option>
+					</select>
+				</td>
 			</tr>
 			
 			<tr>

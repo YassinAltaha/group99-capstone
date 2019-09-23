@@ -32,10 +32,10 @@ public class ProfessorController {
 	@GetMapping("/prof")
 	public String makeAdmin() {
 		Professor admin = new Professor(
-				"adminName",
-				"admin@sheridancollege.ca",
-				"admin",
-				"ADMIN"
+				"adminName", //professor name
+				"admin@sheridancollege.ca", //account
+				"admin", //password
+				"ADMIN" //program
 				);
 		try {
 			profDAO.addProf(admin);
