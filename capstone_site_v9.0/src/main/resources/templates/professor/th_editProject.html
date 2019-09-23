@@ -13,9 +13,11 @@
 	</div>
 	
 <!-- View-dependent nav area -->
-	<div class="message-highlight" align="center">
+	<div class="bg-white" align="center">
+	<br/>
+		<div class="inner-wrapper title-block-wrapper">
 		<h2>Update the Project Status & Notes</h2>
-		
+		</div>
 		<form th:action="@{/professor/updateProject}" th:object="${project}" method="POST">
 			<input type="hidden" name="projectId" th:field="${project.projectId}" />
 			

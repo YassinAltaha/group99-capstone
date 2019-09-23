@@ -29,8 +29,6 @@ public class ProfessorController {
 	ProfDAO profDAO = new ProfDAO();
 	ProjectDAO projectDAO = new ProjectDAO();
 	
-	
-
 	@GetMapping("/prof")
 	public String makeAdmin() {
 		Professor admin = new Professor(
@@ -150,7 +148,7 @@ public class ProfessorController {
 	// Assign Project to group-1.2
 	@RequestMapping("/professor/profAssignProject/{projectId}")
 	public String editAssignProject(Model model, @PathVariable int projectId) {
-
+		
 		// get all groups without projects
 		GroupDAO groupDAO = new GroupDAO();
 		List<GroupBean> list = new ArrayList<GroupBean>();
