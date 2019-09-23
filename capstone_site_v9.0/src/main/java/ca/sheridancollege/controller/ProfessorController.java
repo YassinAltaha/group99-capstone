@@ -44,8 +44,7 @@ public class ProfessorController {
 			
 			return "th_login";
 		}
-		
-		
+			
 	}
 	
 	@RequestMapping("/professor/groupList")
