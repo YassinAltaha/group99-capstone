@@ -44,7 +44,7 @@
 			
 			<tr>
 				<td><label for="gpa">GPA:</label></td>
-				<td><input required th:field="*{gpa}" /></td>
+				<td><input required type="number"  max="4" min="0" step=".01" th:field="*{gpa}"/></td>
 			</tr>
 			
 			<tr>
