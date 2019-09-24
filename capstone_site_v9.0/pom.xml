@@ -18,6 +18,7 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<start-class>ca.sheridancollege.CapstoneSiteApplication</start-class>
 	</properties>
 
 	<dependencies>
