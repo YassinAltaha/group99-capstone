@@ -40,51 +40,33 @@ public class StudentController {
 	// Checking Email
 	// Checking StudentID
 	@RequestMapping("/saveStudent")
-	public String saveStudent(Model model, @ModelAttribute Student student) {
+	public String saveStudent(Model model, @ModelAttribute Student student, @RequestParam String confirm_password) {
 
-		
-//			 incase teachers request that we limit the use of the dao
-//		if(!dao.validateStudent(student).isEmpty()) {
-//			
-//			model.addAttribute("Errors", dao.validateStudent(student));
-//			return "/signup/th_studentSignup";
-//			
-//		}else {
-//			List<Student> studentList = dao.getAllStudents();			
-//			for(Student s : studentList)
-//			{
-//				if(s.getStudent_email() == student.getStudent_email())
-//				{
-//					model.addAttribute("Errors", "Email already used");
-//					return "/signup/th_studentSignup";
-//				}else if (s.getStudent_id() == student.getStudent_id())
-//				{
-//					model.addAttribute("Errors", "Student ID is used");
-//					return "/signup/th_studentSignup";
-//				}
-//			}
-//			synchronized (Student.class)
-//			{
-//				dao.addStudent(student);
-//				return "th_login";	
-//			}
-//		}
 
 		synchronized (Student.class) {
 			// student validation
 			if (dao.validateStudent(student).isEmpty()) {
 				// Checking if email is unique
 				if (dao.checkStudentByEmail(student.getStudent_email()) == false) {
-					// email IS new
-					// Checking if studentID is unique
-					if (dao.checkStudenID(student.getStudent_id()) == false) {
-						dao.addStudent(student);
-						return "th_login";
-					} else {
-						// StudentID is used
-						model.addAttribute("errors", "Student ID is already registered");
+					
+					if(student.getPassword().equals(confirm_password))
+					{
+						// email IS new
+						// Checking if studentID is unique
+						if (dao.checkStudenID(student.getStudent_id()) == false) {
+							dao.addStudent(student);
+							return "th_login";
+						} else {
+							// StudentID is used
+							model.addAttribute("errors", "Student ID is already registered");
+							return "/signup/th_studentSignup";
+						}
+					}else
+					{
+						model.addAttribute("errors", "Passwords do not match");
 						return "/signup/th_studentSignup";
 					}
+					
 				} else {
 					// email is used
 					model.addAttribute("errors", "This email is already in use");

@@ -32,7 +32,8 @@ public class ClientController {
 
 	//Client Signup(saving)
 	@RequestMapping("/saveClientInfo")
-	public String saveClientInfo(Model model, @ModelAttribute Client client) {
+	public String saveClientInfo(Model model, @ModelAttribute Client client ,
+			@RequestParam String confirm_password) {
 		ClientDAO dao = new ClientDAO();
 
 		synchronized (Client.class) {
@@ -40,18 +41,27 @@ public class ClientController {
 			//testing using the Client Validations 
 			if(dao.validateClint(client).isEmpty())
 			{
-				//test if the email is used
-				try {
-					dao.addClient(client);
-					return "th_login";
-					
-				//sends the user back to Sign with new error message
-				}catch(Exception e)
+				if(client.getPassword().equals(confirm_password))
 				{
-					model.addAttribute("errors", "This email is already in use");
+					//test if the email is used
+					try {
+						dao.addClient(client);
+						return "th_login";
+						
+					//sends the user back to Sign with new error message
+					}catch(Exception e)
+					{
+						model.addAttribute("errors", "This email is already in use");
+						return "/signup/th_clientSignup";
+					}
+
+				}else
+				{
+					model.addAttribute("errors", "Passwords do not match");
 					return "/signup/th_clientSignup";
 				}
-
+				
+				
 			}else
 			{
 				model.addAttribute("errors", dao.validateClint(client));

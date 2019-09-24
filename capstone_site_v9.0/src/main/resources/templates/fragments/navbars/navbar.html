@@ -53,13 +53,13 @@
 			<div class="container">
 				<ul class="nav-primary nav-horizontal" role="navigation">
 					<li><a class="small" href="/">&nbsp;</a></li>
-					<li><a href="/about" target="" data-nav="about" class="">About
+					<li><a href="/about" class="nav-item" data-nav="about">About
 							Sheridan</a></li>
-					<li><a href="/meetProfs" target=""
-						data-nav="meet-our-Professors" class="">Our Professors</a></li>
-					<li><a href="/projects" target="" data-nav="projects" class="">Past Projects</a></li>
-					<li><a href="/faq" target="" data-nav="faq" class="">FAQ</a></li>
-					<li><a href="/contact" target="" data-nav="contactus" class="">Contact
+					<li><a href="/meetProfs"
+						data-nav="meet-our-Professors" class="nav-item">Our Professors</a></li>
+					<li><a href="/projects" class="nav-item" data-nav="projects">Past Projects</a></li>
+					<li><a href="/faq" class="nav-item" data-nav="faq" >FAQ</a></li>
+					<li><a href="/contact" class="nav-item" data-nav="contactus">Contact
 							Us</a></li>
 				</ul>
 			</div>
@@ -92,9 +92,10 @@
 
 				<div class="cta-header-container">
 					<ul class="nav-horizontal cta-header">
-						<!-- <li><a href="/signup" target="">Sign Up</a></li> -->
-						<li><a href="/logout" target="">Logout</a></li>
+						<li><a href="/professor/addProf" target="" data-nav="addProff" class="">Add Professor</a></li>
 						<li><a th:href="@{/professor/change_password}" target="/professor/change_password">Change Password</a></li>
+						<li><a href="/logout" target="">Logout</a></li>
+						
 
 					</ul>
 				</div>
@@ -117,13 +118,11 @@
 			<div class="container">
 				<ul class="nav-primary nav-horizontal" role="navigation">
 					<li><a class="small" href="/">&nbsp;</a></li>
-					<li><a href="/professor/about" target="" data-nav="about" class="">About
-							Sheridan</a></li>
-					<li><a href="/professor/meetProfs" target=""
-						data-nav="meet-our-Professors" class="">Our Professors</a></li>
-					<li><a href="/professor/projects" target="" data-nav="projects" class="">Projects</a></li>
-					<li><a href="/professor/faq" target="" data-nav="faq" class="">FAQ</a></li>
-					<li><a href="/professor/contact" target="" data-nav="contactus" class="">Contact
+					<li><a href="/professor/about" data-nav="about" class="">About Sheridan</a></li>
+					<li><a href="/professor/meetProfs" data-nav="meet-our-Professors" class="">Our Professors</a></li>
+					<li><a href="/professor/projects" data-nav="projects" class="">Projects</a></li>
+					<li><a href="/professor/faq" data-nav="faq" class="">FAQ</a></li>
+					<li><a href="/professor/contact" data-nav="contactus" class="">Contact
 							Us</a></li>
 				</ul>
 			</div>
@@ -140,7 +139,7 @@
                             <li><a href="/professor/listProjects" target="" data-nav="listProject" class="">List Projects</a></li>
                             <li><a href="/professor/groupList" target="" data-nav="groupList" class="">Group List</a></li>
                             <li><a href="/professor/listApprovedProjects" target="" data-nav="listApprovedProject" class="">Assign Projects</a></li>
-                            <li><a href="/professor/addProf" target="" data-nav="addProff" class="">Add Professor</a></li>
+                            
                             <li><a href="/professor/report" target="" data-nav="report" class="">Reports</a></li>
                             </ul>
                 </div>

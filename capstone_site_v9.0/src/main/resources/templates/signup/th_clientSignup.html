@@ -46,11 +46,16 @@
 			
 			<tr>
 				<td><label for="password">Password:</label></td>
-				<td><input required th:field="*{password}" /></td>
+				<td><input type="password" required th:field="*{password}" /></td>
+			</tr>
+			
+			<tr>
+				<td><label for="Confirm password">Confirm Password:</label></td>
+				<td><input type="password" required name="confirm_password" /></td>
 			</tr>
 
 			<tr>
-				<td colspan="2"> <input type="submit" value="Submit" /></td>
+				<td colspan="2" align="center"> <input type="submit" value="Submit" /></td>
 			<tr>
 			
 			</table>
