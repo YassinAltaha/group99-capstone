@@ -32,7 +32,35 @@
 
 
 		<table>
-			<tr>
+			<div th:each="client : *{clientList}">
+				<tr>
+					<th colspan="6">
+						<p th:utext="*{client.clientCompany} + ' Projects'"></p>
+					</th>
+				</tr>
+
+				
+				<tr>
+					<th>Project Title</th>
+					<th>Description</th>
+					<th>Status</th>
+					<th>Professor Note</th>
+					<th>Group</th>
+					<th>Options</th>
+				</tr>
+				<tr th:each="project : *{client.projectList}">
+					<td><p th:utext="*{project.title}"> </p></td>
+					<td><p th:utext="*{project.description}"></p></td>
+					<td><p th:utext="*{project.status}"></p></td>
+					<td><p th:utext="*{project.profNote}"></p></td>
+					<td><p th:utext="*{project.groupBean?.groupName}"></p></td>
+					<td>
+					<a th:href="@{/professor/profEditProject/{id}(id=${project.projectId})}"> Edit </a>
+					</td>
+				</tr>
+				
+			</div>
+<!-- 			<tr>
 				<th>Client Name</th>
 				<th>Title</th>
 				<th>Description</th>
@@ -51,7 +79,7 @@
 					<a th:href="@{/professor/profEditProject/{id}(id=${project.projectId})}"> Edit </a>
 					</td>
 				 
-				</tr>
+				</tr> -->
 
 		</table>
 	</div>

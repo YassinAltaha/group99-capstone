@@ -62,7 +62,7 @@ public class Client implements Serializable {
 	@Size(min = 4, max = 120, message = "Password must be at least 4 characters long")
 	private String password;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "client")
 	private List<Project> projectList = new ArrayList<Project>();
 
 	@Column(name = "role", nullable = false)

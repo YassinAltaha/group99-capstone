@@ -151,6 +151,19 @@ public class ClientDAO {
 		session.getTransaction().commit();
 		session.close();
 	}
+	
+	public List<Client> getAllClients() {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		Query query = session.createQuery("from Client");
+		List<Client> groupList = (List<Client>) query.getResultList();
+
+		session.getTransaction().commit();
+		session.close();
+
+		return groupList;
+	}
 
 	public List<String> validateClint(Client c) {
 		List<String> errorList = new ArrayList<String>();

@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ca.sheridancollege.bean.Client;
 import ca.sheridancollege.bean.GroupBean;
+import ca.sheridancollege.bean.Professor;
 import ca.sheridancollege.bean.Student;
 import ca.sheridancollege.dao.GroupDAO;
 import ca.sheridancollege.dao.StudentDAO;
@@ -230,7 +232,7 @@ public class StudentController {
 		{
 			if(s.getGroup().getGroupOwnerStudentId() == s.getId())
 			{
-				model.addAttribute("error", "Group Leader cannot leave group if it has members");
+				model.addAttribute("error", "Group Leader cannot leave group");
 				model.addAttribute("student", s);
 				return "/student/th_group_info";
 				
@@ -238,7 +240,6 @@ public class StudentController {
 			{	
 				s.setGroup(null);
 				dao.updateStudent(s);
-				
 				model.addAttribute("student", s);
 				return "/student/th_group_info";
 			}
@@ -250,7 +251,55 @@ public class StudentController {
 			return "/student/th_group_info";
 		}	
 	}
-
+	
+	//Change Password 1.1
+	@RequestMapping(value="/student/change_password" ,method = RequestMethod.GET)
+	public String changePassword(Model model)
+	{
+		return "/student/th_change_password";
+	}
+	
+	//Change Password 1.2
+		@RequestMapping(value="/student/change_password" ,method=RequestMethod.POST)
+		public String changePassword_POST(Model model,
+				@RequestParam String old_password,
+				@RequestParam String new_password, 
+				@RequestParam String confirm_password
+				)
+		{
+			
+			if(new_password.equals(confirm_password))
+			{
+				Student s = getAuthStudent();
+				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+				
+				if(passwordEncoder.matches(old_password, s.getPassword()))
+				{	
+					try {
+					String new_encoded_pass = passwordEncoder.encode(new_password);
+					s.setPassword(new_encoded_pass);
+					dao.updateStudent(s);
+					model.addAttribute("error", "Password was successfully updated");
+					}
+					catch(Exception e){
+						
+						model.addAttribute("error", "Error updating password");
+						System.out.println(e);
+					}
+				}else
+				{
+					model.addAttribute("error", "Old password is incorrect");
+				}
+			}else
+			{
+				model.addAttribute("error", "Sorry, passwords don't match");
+			}
+			
+			return "/student/th_change_password";
+			
+		}
+		
+	
 
 	@RequestMapping("/student/deleteGroup")
 	public String deleteGroup() {

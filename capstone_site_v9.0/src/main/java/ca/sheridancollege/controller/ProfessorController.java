@@ -28,6 +28,7 @@ import ca.sheridancollege.bean.Project;
 public class ProfessorController {
 	ProfDAO profDAO = new ProfDAO();
 	ProjectDAO projectDAO = new ProjectDAO();
+	ClientDAO clientDAO = new ClientDAO();
 	
 	@GetMapping("/prof")
 	public String makeAdmin() {
@@ -97,8 +98,8 @@ public class ProfessorController {
 	@RequestMapping("/professor/listProjects")
 	public String displayProjects(Model model) {
 
-		List<Project> projectList = projectDAO.getProjects();
-		model.addAttribute("projectList", projectList);
+		List<Client> clientList = clientDAO.getAllClients();
+		model.addAttribute("clientList", clientList);
 		return "/professor/th_listProjects";
 	}
 
@@ -127,9 +128,9 @@ public class ProfessorController {
 			msg = "There was an error while updating this project";
 		}
 
-		List<Project> projectList = projectDAO.getProjects();
+		List<Client> clientList = clientDAO.getAllClients();
 		model.addAttribute("msg", msg);
-		model.addAttribute("projectList", projectList);
+		model.addAttribute("clientList", clientList);
 
 		return "/professor/th_listProjects";
 
