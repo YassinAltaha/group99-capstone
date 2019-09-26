@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -150,20 +151,31 @@ public class ClientController {
 	public String deleteProject(Model model, @PathVariable int projectId) {
 		ClientDAO dao = new ClientDAO();
 		Project project = dao.searchProjectById(projectId);
-		
-		//INCASE CLIENTS TRY TO DELETE PROJECT USING THE URL
-		if(project.getStatus().equals("Pending") || project.getStatus().equals("Rejected"))
+		Client c = getAuthClient();
+		if(project.getClient().getClientId() == c.getClientId())	
 		{
-			model.addAttribute("project", project);
-			return "/client/th_delete_confirmation";
-		}else
-		{
-			List<Project> projectList = new ArrayList<Project>();
-			projectList = dao.getMyProjects(project.getClient().getClientId());
+			//INCASE CLIENTS TRY TO DELETE PROJECT USING THE URL
+			if(project.getStatus().equals("Pending") || project.getStatus().equals("Rejected"))
+			{
+				model.addAttribute("project", project);
+				return "/client/th_delete_confirmation";
+			}else
+			{
+				List<Project> projectList = dao.getMyProjects(c.getClientId());
+				model.addAttribute("myProjectList", projectList);
+				model.addAttribute("msg", "Sorry, this project cannot be deleted. Contact a professor for more info.");
+				return "/client/th_clientProjects";
+			}
+		}else {
+			
+			List<Project> projectList = dao.getMyProjects(c.getClientId());
 			model.addAttribute("myProjectList", projectList);
-			model.addAttribute("msg", "Sorry, this project cannot be deleted. Contact a professor for more info.");
+			model.addAttribute("msg", "Error retriving project");
 			return "/client/th_clientProjects";
+			
 		}
+		
+		
 		
 	}
 	
@@ -204,6 +216,54 @@ public class ClientController {
 		model.addAttribute("myProjectList", projectList);
 		return "/client/th_clientProjects";
 	}
+	
+	
+	//Change Password 1.1
+		@RequestMapping(value="/client/change_password" ,method = RequestMethod.GET)
+		public String changePassword(Model model)
+		{
+			return "/client/th_change_password";
+		}
+		
+		//Change Password 1.2
+			@RequestMapping(value="/client/change_password" ,method=RequestMethod.POST)
+			public String changePassword_POST(Model model,
+					@RequestParam String old_password,
+					@RequestParam String new_password, 
+					@RequestParam String confirm_password
+					)
+			{
+				ClientDAO dao = new ClientDAO();
+				if(new_password.equals(confirm_password))
+				{
+					Client c = getAuthClient();
+					BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+					
+					if(passwordEncoder.matches(old_password, c.getPassword()))
+					{	
+						try {
+						String new_encoded_pass = passwordEncoder.encode(new_password);
+						c.setPassword(new_encoded_pass);
+						dao.updateClient(c);
+						model.addAttribute("error", "Password was successfully updated");
+						}
+						catch(Exception e){
+							
+							model.addAttribute("error", "Error updating password");
+							System.out.println(e);
+						}
+					}else
+					{
+						model.addAttribute("error", "Old password is incorrect");
+					}
+				}else
+				{
+					model.addAttribute("error", "Sorry, passwords don't match");
+				}
+				
+				return "/client/th_change_password";
+				
+			}
 	
 
 	//Main pages

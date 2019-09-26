@@ -139,6 +139,15 @@ public class ClientDAO {
 		return c;
 
 	}
+	
+	public void updateClient(Client c) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		session.update(c);
+		session.getTransaction().commit();
+		session.close();
+	}
 
 	public void editMyProject(Project project, int projectId) {
 		Session session = sessionFactory.openSession();
