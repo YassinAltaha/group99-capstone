@@ -26,6 +26,10 @@
 				You have successfully logged out		
 			</div>
 			
+			<div th:if="${message}">
+				 You have registered account successfully!	<br/>
+			</div>
+			
 			Email:<input type="text" id="username" name="username" placeholder="username"/>
 			
 			Password:<input type="password" id="password" name="password" placeholder="password"/>

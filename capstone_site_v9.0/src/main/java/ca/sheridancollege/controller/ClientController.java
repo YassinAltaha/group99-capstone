@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import ca.sheridancollege.bean.*;
 import ca.sheridancollege.dao.ClientDAO;
 import ca.sheridancollege.dao.ProjectDAO;
@@ -47,6 +48,11 @@ public class ClientController {
 					//test if the email is used
 					try {
 						dao.addClient(client);
+						
+						//add confirmation message 
+						
+						model.addAttribute("message", true);;
+						
 						return "th_login";
 						
 					//sends the user back to Sign with new error message
