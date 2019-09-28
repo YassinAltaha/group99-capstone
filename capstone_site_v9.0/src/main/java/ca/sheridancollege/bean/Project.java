@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -30,6 +31,7 @@ public class Project implements Serializable {
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	private int projectId;
 	private String title;
+	@Lob
 	private String description;
 	private String status;
 	private String profNote;

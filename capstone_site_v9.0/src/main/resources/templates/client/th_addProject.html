@@ -26,7 +26,7 @@
 		
 		
 		
-		<form th:action="@{/client/saveProject}" th:object="${project}" method="post">
+		<form th:action="@{/client/saveProject}" th:object="${project}" method="post" id="projectForm">
 		<table>
 			<tr>
 			<td><label >Project Title:</label></td>
@@ -35,7 +35,7 @@
 				
 			<tr>
 			<td><label >Project Description: </label></td>
-			<td><input th:field="*{description}" /></td>
+			<td><textarea form="projectForm" th:field="*{description}" style="width:475px; height:130px;" > </textarea></td>
 			</tr>
 				
 			<tr>
