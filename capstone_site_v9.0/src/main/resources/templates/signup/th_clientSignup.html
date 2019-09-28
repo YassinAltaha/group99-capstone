@@ -40,6 +40,32 @@
 			</tr>
 			
 			<tr>
+				<td><label for="clientIndustry">Industry:</label></td>
+				<td><select required th:field="*{clientIndustry}" >
+						<option value="Agriculture/Food Technology">Agriculture/Food Technology</option>
+						<option value="Building Technology">Building Technology</option>
+						<option value="Environmental Technology">Environmental Technology</option>
+						<option value="Medical/Heath Science Technology">Medical/Heath Science Technology</option>
+						<option value="Information/Communication Technology">Information/Communication Technology</option>
+						<option value="Manufacturing Technology">Manufacturing Technology</option>						
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td><label for="clientScale">Organization Size:</label></td>
+				<td><select required th:field="*{clientScale}" >
+						<option value="Large Enterprise">Large Enterprise(500+ employees)</option>
+						<option value="Small-to-medium Enterprise">Small-to-medium Enterprise(5-499 employees)</option>
+						<option value="Startup">Startup(1-4 employees)</option>
+						<option value="Not Yet Registered">Not Yet Registered</option>
+						<option value="Individual Client">Individual Client</option>
+						<option value="NGO/Not for Profit">NGO/Not for Profit</option>						
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
 				<td><label for="clientEmail">Email:</label> </td> 
 				<td><input required th:field="*{clientEmail}" /></td>
 			</tr>

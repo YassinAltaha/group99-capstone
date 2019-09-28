@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -50,6 +51,12 @@ public class Client implements Serializable {
 
 	private String clientAddress;
 
+	@NotNull(message = "Please Select Industry")
+	private String clientIndustry;
+	
+	@NotNull(message = "Please Select Organization Size")
+	private String clientScale;
+	
 	// check Regex for future development
 	// regex needs to handle any email
 	@Column(name = "clientEmail", unique = true, nullable = false, length = 45)
@@ -70,15 +77,23 @@ public class Client implements Serializable {
 	private Role Role;
 
 	// Client Constructor
-	public Client(String clientName, String clientCompany, String clientContact, String clientAddress,
+	public Client(String clientName, String clientCompany, String clientContact, String clientAddress, String clientIndustry, String clientScale,
 			String clientEmail, String password) {
 
 		this.clientName = clientName;
 		this.clientCompany = clientCompany;
 		this.clientContact = clientContact;
 		this.clientAddress = clientAddress;
+		this.clientIndustry = clientIndustry;
+		this.clientScale = clientScale;
 		this.clientEmail = clientEmail;
 		this.password = password;
 	}
+
+	@Transient 
+	public String[] industryList = {"Agriculture/Food Technology","Building Technology","Environmental Technology","Medical/Heath Science Technology","Information/Communication Technology","Manufacturing Technology"};
+
+	@Transient 
+	public String[] scaleList = {"Large Enterprise","Small-to-medium Enterprise","Startup(1-4 employees)","Not Yet Registered","Individual Client","NGO/Not for Profit"};
 
 }
