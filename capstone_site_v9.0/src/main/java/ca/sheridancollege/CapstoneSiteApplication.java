@@ -8,14 +8,13 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @SpringBootApplication
 public class CapstoneSiteApplication extends SpringBootServletInitializer {
 
-	
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(CapstoneSiteApplication.class);
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(CapstoneSiteApplication.class, args);
+	}
+	
+	@Override 
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(CapstoneSiteApplication.class);
 	}
 
 }
