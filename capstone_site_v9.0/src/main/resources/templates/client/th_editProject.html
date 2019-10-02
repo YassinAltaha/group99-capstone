@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css" media="all"/>
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
 <title>Edit Project</title>
@@ -13,38 +13,37 @@
 	<div th:replace="fragments/navbars/navbar :: clientNav">
 	</div>
 	
-
-	
-	
 <!-- View-dependent nav area -->
 	
-	 	<div class="bg-white" align="center">
-	 	<br/>
-			<!--  display the message -->
-			<div th:if="${msg != null}">
-				<p th:value="${msg}"> </p>
-			</div>
-		
+	 <div class="container" align="center">
+	 
 		<form th:action="@{/client/updateProject}" th:object="${project}" method="post" id="projectForm">
-		<input th:field="*{projectId}" hidden="true" />
-		<table>
+		
+		<table class="table">
+			<thead class="bg-primary" align="center">
+				<tr>
+					<th colspan="2" align="center"><h2>Edit Project</h2>
+						<!--  display the message -->
+						<div th:if="${msg != null}">
+							<p th:value="${msg}"> </p>
+						</div>
+					</th>
+				</tr>
+			</thead>
 			<tr>
-				<td colspan="2"><h2>Create Project</h2></td>
+			
+				<td class="w-25"> <label >Project Title: </label> <input th:field="*{projectId}" hidden="true" /></td>
+				<td> <input class="form-control w-autos col-xl-7" th:field="*{title}" /></td>
+				
 			</tr>
-			<tr>
 				
-				<td> <label >Project Title: </label></td>
-				<td> <input th:field="*{title}" /></td>
-				
-			</tr>
-				
-			<tr>
-				<td> <label >Project Description: </label></td>
-				<td><textarea form="projectForm" th:field="*{description}" style="width:475px; height:130px;" > </textarea></td>
+			<tr >
+				<td class="w-25"> <label >Project Description: </label></td>
+				<td><textarea class="form-control w-autos" form="projectForm" th:field="*{description}" style="width:475px; height:130px;" > </textarea></td>
 			</tr>	
-			<tr>
-				<td><a th:href="@{/client/myProject}"> <input type="button" value="Cancel" /> </a></td>
-				<td> <input type="submit" value="Update Project" /></td>
+			<tr align="center">
+				<td><a  th:href="@{/client/myProject}"> <input type="button" class="btn btn-primary mb-2" value="Cancel" /> </a></td>
+				<td> <input class="btn btn-primary mb-2" type="submit" value="Update Project" /></td>
 				
 			</tr>
 		</table>

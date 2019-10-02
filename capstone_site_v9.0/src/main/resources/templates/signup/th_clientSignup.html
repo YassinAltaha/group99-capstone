@@ -16,11 +16,16 @@
 		
  <div class="container" align="center">
  <br/>
-		<h2>Client Sign up</h2>
+		
 
 		<form th:action="@{/saveClientInfo}" th:object="${client}" method="POST">
-		<table>
-			<tr>
+		<table class="table table-bordered table-dark">
+		<tr>
+			<td colspan="2" >
+				<h2 align="center">Client Sign up</h2>
+			</td>
+		</tr>
+			<tr> 
 				<td><label for="clientName">Name:</label> </td>
 				<td><input class="form-control w-auto mb-2" required th:field="*{clientName}" /></td>
 			</tr>
@@ -39,7 +44,7 @@
 			<tr>
 				<td><label for="clientAddress">Address:</label> </td>
 				<td><input class="form-control w-auto " required th:field="*{clientAddress}" /></td>
-			</tr>
+			</tr >
 			
 			<tr>
 				<td><label for="clientIndustry">Industry:</label></td>
@@ -82,8 +87,8 @@
 				<td><input class="form-control w-auto mb-2" type="password" required name="confirm_password" /></td>
 			</tr>
 
-			<tr>
-				<td colspan="2" align="center"> <input class="btn btn-primary mb-2" type="submit" value="Submit" /></td>
+			<tr >
+				<td class="bg-dark" colspan="2" align="center"> <input class="btn btn-primary mb-2" type="submit" value="Submit" /></td>
 			</tr>
 			</table>
 			
