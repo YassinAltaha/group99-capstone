@@ -16,7 +16,11 @@
 		
  <div class="container" align="center">
  <br/>
-		
+		<table class="table" >
+			<tr th:each="error :${errors}" class="table-danger">
+				<td align="center" th:text="*{error}" colspan="2"></td>
+			</tr>
+		</table>
 
 		<form th:action="@{/saveClientInfo}" th:object="${client}" method="POST">
 		<table class="table table-bordered table-dark">
@@ -93,12 +97,6 @@
 			</table>
 			
 		</form>
-		
-		<table style="border-style: hidden;">
-			<tr th:each="error :${errors}">
-				<td th:text="*{error}" colspan="2"></td>
-			</tr>
-		</table>
 		
 	</div>
 		
