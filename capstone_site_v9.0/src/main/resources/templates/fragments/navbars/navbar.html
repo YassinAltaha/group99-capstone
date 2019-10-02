@@ -7,298 +7,323 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div th:fragment="navbar">
+	<div th:fragment="navbar">
 
-<link rel="stylesheet" type="text/css" th:href="@{/css/base.css}" href="resources/css/base.css" media="all" />
-	<div class="header-secondary">
-		<div class="container">
-			<div class="wrapper">
-				<div class="nav-secondary">
-					<ul class="nav-horizontal">
-						<li><a href="https://slate.sheridancollege.ca/"
-							target="_blank">Slate</a></li>
-						<li><a href="https://access.sheridaninstitute.ca/"
-							target="_blank">Access Sheridan</a></li>
-						<li><a
-							href="http://sheridaninstitute.intelliresponse.com/asksheridan/"
-							target="">ASK.Sheridan</a></li>
-						<!--  <li><a href="/life-at-sheridan/student-services/library-services" target="">Library</a></li> -->
-					</ul>
-				</div>
-
-
-				<div class="cta-header-container">
-					<ul class="nav-horizontal cta-header">
-						<li><a th:href="@{/signup}" target="">Sign Up</a></li>
-						<li><a th:href="@{/login}" target="">Login</a></li>
-
-					</ul>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-
-	<div class="header-primary">
-		<div class="container inner-wrapper logo-container">
-			<a href="#"><img th:src="@{/resources/images/sheridan-logo.svg}"
-				class="logo" alt="Sheridan College logo"></a> <a href="#"
-				class="nav-mobile-link"> <img alt="mobile navigation"
-				th:src="@{/resources/images/sheridan-logo.svg}">
-			</a>
-		</div>
-
-		<div class="nav-primary-container" role="navigation">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"
+			href="resources/css/base.css" media="all" />
+		<div class="header-secondary">
 			<div class="container">
-				<ul class="nav-primary nav-horizontal" role="navigation">
-					<li><a class="small" href="/">&nbsp;</a></li>
-					<li><a th:href="@{/about}" class="nav-item" data-nav="about">About
-							Sheridan</a></li>
-					<li><a th:href="@{/meetProfs}"
-						data-nav="meet-our-Professors}" class="nav-item">Our Professors</a></li>
-					<li><a th:href="@{/projects}" class="nav-item" data-nav="projects">Past Projects</a></li>
-					<li><a th:href="@{/faq}" class="nav-item" data-nav="faq" >FAQ</a></li>
-					<li><a th:href="@{/contact}" class="nav-item" data-nav="contactus">Contact
-							Us</a></li>
-				</ul>
-			</div>
-		</div>
-		<!-- /.nav-primary-container -->
-	</div>
-</div>
+				<div class="wrapper">
+					<div class="nav-secondary">
+						<ul class="nav-horizontal">
+							<li><a href="https://slate.sheridancollege.ca/"
+								target="_blank">Slate</a></li>
+							<li><a href="https://access.sheridaninstitute.ca/"
+								target="_blank">Access Sheridan</a></li>
+							<li><a
+								href="http://sheridaninstitute.intelliresponse.com/asksheridan/"
+								target="">ASK.Sheridan</a></li>
+							<!--  <li><a href="/life-at-sheridan/student-services/library-services" target="">Library</a></li> -->
+						</ul>
+					</div>
 
 
+					<div class="cta-header-container">
+						<ul class="nav-horizontal cta-header">
+							<li><a th:href="@{/signup}" target="">Sign Up</a></li>
+							<li><a th:href="@{/login}" target="">Login</a></li>
 
-<div th:fragment="profNav">
-	
-	<link rel="stylesheet" type="text/css" th:href="@{/css/base.css}" href="resources/css/base.css" media="all" />
-	<div class="header-secondary">
-		<div class="container">
-			<div class="wrapper">
-				<div class="nav-secondary">
-					<ul class="nav-horizontal">
-						<li><a href="https://slate.sheridancollege.ca/"
-							target="_blank">Slate</a></li>
-						<li><a href="https://access.sheridaninstitute.ca/"
-							target="_blank">Access Sheridan</a></li>
-						<li><a
-							href="http://sheridaninstitute.intelliresponse.com/asksheridan/"
-							target="">ASK.Sheridan</a></li>
-						<!--  <li><a href="/life-at-sheridan/student-services/library-services" target="">Library</a></li> -->
-					</ul>
+						</ul>
+					</div>
+
 				</div>
-
-
-				<div class="cta-header-container">
-					<ul class="nav-horizontal cta-header">
-						<li><a th:href="@{/professor/addProf}" target="" data-nav="addProff" class="">Add Professor</a></li>
-						<li><a th:href="@{/professor/change_password}" target="/professor/change_password">Change Password</a></li>
-						<li><a th:href="@{/logout}" target="">Logout</a></li>
-						
-
-					</ul>
-				</div>
-
 			</div>
 		</div>
-	</div>
 
 
-	<div class="header-primary">
-		<div class="container inner-wrapper logo-container">
-			<a href="#"><img th:src="@{/resources/images/sheridan-logo.svg}"
-				class="logo" alt="Sheridan College logo"></a> <a href="#"
-				class="nav-mobile-link"> <img alt="mobile navigation"
-				th:src="@{/resources/images/sheridan-logo.svg}">
-			</a>
-		</div>
-
-		<div class="nav-primary-container" role="navigation">
-			<div class="container">
-				<ul class="nav-primary nav-horizontal" role="navigation">
-					<li><a class="small" href="/">&nbsp;</a></li>
-					<li><a th:href="@{/professor/about}" data-nav="about" class="">About Sheridan</a></li>
-					<li><a th:href="@{/professor/meetProfs}" data-nav="meet-our-Professors" class="">Our Professors</a></li>
-					<li><a th:href="@{/professor/projects}" data-nav="projects" class="">Past Projects</a></li>
-					<li><a th:href="@{/professor/faq}" data-nav="faq" class="">FAQ</a></li>
-					<li><a th:href="@{/professor/contact}" data-nav="contactus" class="">Contact
-							Us</a></li>
-				</ul>
+		<div class="header-primary">
+			<div class="container inner-wrapper logo-container">
+				<a href="#"><img th:src="@{/resources/images/sheridan-logo.svg}"
+					class="logo" alt="Sheridan College logo"></a> <a href="#"
+					class="nav-mobile-link"> <img alt="mobile navigation"
+					th:src="@{/resources/images/sheridan-logo.svg}">
+				</a>
 			</div>
-		</div>
-		<!-- /.nav-primary-container -->
-	
-	
 
-	<div class="header-primary">
 			<div class="nav-primary-container" role="navigation">
-                <div class="container">
-                    <ul class="nav-primary nav-horizontal" role="navigation">
-                        <li><a class="small" href="/">&nbsp;</a></li>
-                            <li><a th:href="@{/professor/listProjects}" target="" data-nav="listProject" class="">List Projects</a></li>
-                            <li><a th:href="@{/professor/groupList}" target="" data-nav="groupList" class="">Group List</a></li>
-                            <li><a th:href="@{/professor/listApprovedProjects}" target="" data-nav="listApprovedProject" class="">Assign Projects</a></li>
-                            
-                            <li><a th:href="@{/professor/report}" target="" data-nav="report" class="">Reports</a></li>
-                            </ul>
-                </div>
-			</div> 
-	</div>
-	</div>
-</div>
-
-
-<div th:fragment="Student_Nav">
-	
-	<link rel="stylesheet" type="text/css" th:href="@{/css/base.css}" href="resources/css/base.css" media="all" />
-	<div class="header-secondary">
-		<div class="container">
-			<div class="wrapper">
-				<div class="nav-secondary">
-					<ul class="nav-horizontal">
-						<li><a href="https://slate.sheridancollege.ca/"
-							target="_blank">Slate</a></li>
-						<li><a href="https://access.sheridaninstitute.ca/"
-							target="_blank">Access Sheridan</a></li>
-						<li><a
-							href="http://sheridaninstitute.intelliresponse.com/asksheridan/"
-							target="">ASK.Sheridan</a></li>
-
+				<div class="container">
+					<ul class="nav-primary nav-horizontal" role="navigation">
+						<li><a class="small" href="/">&nbsp;</a></li>
+						<li><a th:href="@{/about}" class="nav-item" data-nav="about">About
+								Sheridan</a></li>
+						<li><a th:href="@{/meetProfs}"
+							data-nav="meet-our-Professors}" class="nav-item">Our
+								Professors</a></li>
+						<li><a th:href="@{/projects}" class="nav-item"
+							data-nav="projects">Past Projects</a></li>
+						<li><a th:href="@{/faq}" class="nav-item" data-nav="faq">FAQ</a></li>
+						<li><a th:href="@{/contact}" class="nav-item"
+							data-nav="contactus">Contact Us</a></li>
 					</ul>
 				</div>
-
-
-				<div class="cta-header-container">
-					<ul class="nav-horizontal cta-header">
-						
-						<li><a th:href="@{/student/change_password}" target="/student/change_password">Change Password</a></li>
-						<li><a th:href="@{/logout}" target="">Logout</a></li>
-		
-					</ul>
-				</div>
-
 			</div>
+			<!-- /.nav-primary-container -->
 		</div>
 	</div>
 
 
-	<div class="header-primary">
-		<div class="container inner-wrapper logo-container">
-			<a href="#"><img th:src="@{/resources/images/sheridan-logo.svg}"
-				class="logo" alt="Sheridan College logo"></a> <a href="#"
-				class="nav-mobile-link"> <img alt="mobile navigation"
-				th:src="@{/resources/images/sheridan-logo.svg}">
-			</a>
-		</div>
 
-		<div class="nav-primary-container" role="navigation">
+	<div th:fragment="profNav">
+
+		<link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"
+			href="resources/css/base.css" media="all" />
+		<div class="header-secondary">
 			<div class="container">
-				<ul class="nav-primary nav-horizontal" role="navigation">
-					<li><a class="small" href="/">&nbsp;</a></li>
-					<li><a th:href="@{/student/about}" target="" data-nav="about" class="">About
-							Sheridan</a></li>
-					<li><a th:href="@{/student/meetProfs}" target=""
-						data-nav="meet-our-Professors}" class="">Our Professors</a></li>
-					<li><a th:href="@{/student/projects}" target="" data-nav="projects" class="">Past Projects</a></li>
-					<li><a th:href="@{/student/faq}" target="" data-nav="faq" class="">FAQ</a></li>
-					<li><a th:href="@{/student/contact}" target="" data-nav="contactus" class="">Contact Us</a></li>
-				</ul>
+				<div class="wrapper">
+					<div class="nav-secondary">
+						<ul class="nav-horizontal">
+							<li><a href="https://slate.sheridancollege.ca/"
+								target="_blank">Slate</a></li>
+							<li><a href="https://access.sheridaninstitute.ca/"
+								target="_blank">Access Sheridan</a></li>
+							<li><a
+								href="http://sheridaninstitute.intelliresponse.com/asksheridan/"
+								target="">ASK.Sheridan</a></li>
+							<!--  <li><a href="/life-at-sheridan/student-services/library-services" target="">Library</a></li> -->
+						</ul>
+					</div>
+
+
+					<div class="cta-header-container">
+						<ul class="nav-horizontal cta-header">
+							<li><a th:href="@{/professor/addProf}" target=""
+								data-nav="addProff" class="">Add Professor</a></li>
+							<li><a th:href="@{/professor/change_password}"
+								target="/professor/change_password">Change Password</a></li>
+							<li><a th:href="@{/logout}" target="">Logout</a></li>
+
+
+						</ul>
+					</div>
+
+				</div>
 			</div>
 		</div>
-		<!-- /.nav-primary-container -->
-	
-	
 
-	<div class="header-primary">
+
+		<div class="header-primary">
+			<div class="container inner-wrapper logo-container">
+				<a href="#"><img th:src="@{/resources/images/sheridan-logo.svg}"
+					class="logo" alt="Sheridan College logo"></a> <a href="#"
+					class="nav-mobile-link"> <img alt="mobile navigation"
+					th:src="@{/resources/images/sheridan-logo.svg}">
+				</a>
+			</div>
+
 			<div class="nav-primary-container" role="navigation">
-                <div class="container">
-                    <ul class="nav-primary nav-horizontal" role="navigation">
-                        <li><a class="small" href="/">&nbsp;</a></li>
-                            <li><a th:href="@{/student/group_info}" target="" data-nav="group_info" class="">Group Info</a></li>
-                            <li><a th:href="@{/student/project_info}" target="" data-nav="project_info" class="">Project Info</a></li>
-                            </ul>
-                </div>
-			</div> 
-	</div>
-	</div>
-</div>
-
-
-<div th:fragment="clientNav">
-	
-	<link rel="stylesheet" type="text/css" th:href="@{/css/base.css}" href="resources/css/base.css" media="all" />
-	<div class="header-secondary">
-		<div class="container">
-			<div class="wrapper">
-				<div class="nav-secondary">
-					<ul class="nav-horizontal">
-						<li><a href="https://slate.sheridancollege.ca/"
-							target="_blank">Slate</a></li>
-						<li><a href="https://access.sheridaninstitute.ca/"
-							target="_blank">Access Sheridan</a></li>
-						<li><a
-							href="http://sheridaninstitute.intelliresponse.com/asksheridan/"
-							target="">ASK.Sheridan</a></li>
-						<!--  <li><a href="/life-at-sheridan/student-services/library-services" target="">Library</a></li> -->
+				<div class="container">
+					<ul class="nav-primary nav-horizontal" role="navigation">
+						<li><a class="small" href="/">&nbsp;</a></li>
+						<li><a th:href="@{/professor/about}" data-nav="about"
+							class="">About Sheridan</a></li>
+						<li><a th:href="@{/professor/meetProfs}"
+							data-nav="meet-our-Professors" class="">Our Professors</a></li>
+						<li><a th:href="@{/professor/projects}" data-nav="projects"
+							class="">Past Projects</a></li>
+						<li><a th:href="@{/professor/faq}" data-nav="faq" class="">FAQ</a></li>
+						<li><a th:href="@{/professor/contact}" data-nav="contactus"
+							class="">Contact Us</a></li>
 					</ul>
 				</div>
+			</div>
+			<!-- /.nav-primary-container -->
 
 
-				<div class="cta-header-container">
-					<ul class="nav-horizontal cta-header">
-						<li><a th:href="@{/client/change_password}" target="/client/change_password">Change Password</a></li>
-						<li><a th:href="@{/logout}" target="">Logout</a></li>
 
+			<div class="header-primary">
+				<div class="nav-primary-container" role="navigation">
+					<div class="container">
+						<ul class="nav-primary nav-horizontal" role="navigation">
+							<li><a class="small" href="/">&nbsp;</a></li>
+							<li><a th:href="@{/professor/listProjects}" target=""
+								data-nav="listProject" class="">List Projects</a></li>
+							<li><a th:href="@{/professor/groupList}" target=""
+								data-nav="groupList" class="">Group List</a></li>
+							<li><a th:href="@{/professor/listApprovedProjects}"
+								target="" data-nav="listApprovedProject" class="">Assign
+									Projects</a></li>
+
+							<li><a th:href="@{/professor/report}" target=""
+								data-nav="report" class="">Reports</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div th:fragment="Student_Nav">
+
+		<link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"
+			href="resources/css/base.css" media="all" />
+		<div class="header-secondary">
+			<div class="container">
+				<div class="wrapper">
+					<div class="nav-secondary">
+						<ul class="nav-horizontal">
+							<li><a href="https://slate.sheridancollege.ca/"
+								target="_blank">Slate</a></li>
+							<li><a href="https://access.sheridaninstitute.ca/"
+								target="_blank">Access Sheridan</a></li>
+							<li><a
+								href="http://sheridaninstitute.intelliresponse.com/asksheridan/"
+								target="">ASK.Sheridan</a></li>
+
+						</ul>
+					</div>
+
+
+					<div class="cta-header-container">
+						<ul class="nav-horizontal cta-header">
+
+							<li><a th:href="@{/student/change_password}"
+								target="/student/change_password">Change Password</a></li>
+							<li><a th:href="@{/logout}" target="">Logout</a></li>
+
+						</ul>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+		<div class="header-primary">
+			<div class="container inner-wrapper logo-container">
+				<a href="#"><img th:src="@{/resources/images/sheridan-logo.svg}"
+					class="logo" alt="Sheridan College logo"></a> <a href="#"
+					class="nav-mobile-link"> <img alt="mobile navigation"
+					th:src="@{/resources/images/sheridan-logo.svg}">
+				</a>
+			</div>
+
+			<div class="nav-primary-container" role="navigation">
+				<div class="container">
+					<ul class="nav-primary nav-horizontal" role="navigation">
+						<li><a class="small" href="/">&nbsp;</a></li>
+						<li><a th:href="@{/student/about}" target="" data-nav="about"
+							class="">About Sheridan</a></li>
+						<li><a th:href="@{/student/meetProfs}" target=""
+							data-nav="meet-our-Professors}" class="">Our Professors</a></li>
+						<li><a th:href="@{/student/projects}" target=""
+							data-nav="projects" class="">Past Projects</a></li>
+						<li><a th:href="@{/student/faq}" target="" data-nav="faq"
+							class="">FAQ</a></li>
+						<li><a th:href="@{/student/contact}" target=""
+							data-nav="contactus" class="">Contact Us</a></li>
 					</ul>
 				</div>
+			</div>
+			<!-- /.nav-primary-container -->
 
+
+
+			<div class="header-primary">
+				<div class="nav-primary-container" role="navigation">
+					<div class="container">
+						<ul class="nav-primary nav-horizontal" role="navigation">
+							<li><a class="small" href="/">&nbsp;</a></li>
+							<li><a th:href="@{/student/group_info}" target=""
+								data-nav="group_info" class="">Group Info</a></li>
+							<li><a th:href="@{/student/project_info}" target=""
+								data-nav="project_info" class="">Project Info</a></li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 
 
-	<div class="header-primary">
-		<div class="container inner-wrapper logo-container">
-			<a href="#"><img th:src="@{/resources/images/sheridan-logo.svg}"
-				class="logo" alt="Sheridan College logo"></a> <a href="#"
-				class="nav-mobile-link"> <img alt="mobile navigation"
-				th:src="@{/resources/images/sheridan-logo.svg}">
-			</a>
-		</div>
+	<div th:fragment="clientNav">
 
-		<div class="nav-primary-container" role="navigation">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"
+			href="resources/css/base.css" media="all" />
+		<div class="header-secondary">
 			<div class="container">
-				<ul class="nav-primary nav-horizontal" role="navigation">
-					<li><a class="small" href="/">&nbsp;</a></li>
-					<li><a th:href="@{/client/about}" target="" data-nav="about" class="">About
-							Sheridan</a></li>
-					<li><a th:href="@{/client/meetProfs}" target=""
-						data-nav="meet-our-Professors}" class="">Our Professors</a></li>
-					<li><a th:href="@{/client/projects}" target="" data-nav="projects" class="">Past Projects</a></li>
-					<li><a th:href="@{/client/faq}" target="" data-nav="faq" class="">FAQ</a></li>
-					<li><a th:href="@{/client/contact}" target="" data-nav="contactus" class="">Contact
-							Us</a></li>
-				</ul>
+				<div class="wrapper">
+					<div class="nav-secondary">
+						<ul class="nav-horizontal">
+							<li><a href="https://slate.sheridancollege.ca/"
+								target="_blank">Slate</a></li>
+							<li><a href="https://access.sheridaninstitute.ca/"
+								target="_blank">Access Sheridan</a></li>
+							<li><a
+								href="http://sheridaninstitute.intelliresponse.com/asksheridan/"
+								target="">ASK.Sheridan</a></li>
+							<!--  <li><a href="/life-at-sheridan/student-services/library-services" target="">Library</a></li> -->
+						</ul>
+					</div>
+
+
+					<div class="cta-header-container">
+						<ul class="nav-horizontal cta-header">
+							<li><a th:href="@{/client/change_password}"
+								target="/client/change_password">Change Password</a></li>
+							<li><a th:href="@{/logout}" target="">Logout</a></li>
+
+						</ul>
+					</div>
+
+				</div>
 			</div>
 		</div>
-		<!-- /.nav-primary-container -->
-	
-	
 
-		<div class="nav-primary-container" role="navigation">
-			<div class="container">
-				<ul class="nav-primary nav-horizontal" role="navigation">
-					<li><a class="small" href="/">&nbsp;</a></li>
-					<li><a th:href="@{/client/addProject}" target="" data-nav="addProject"
-						class="">Add A Project</a></li>
-					<li><a th:href="@{/client/myProject}" target="" data-nav="myProject"
-						class="">My Projects</a></li>
-				</ul>
+
+		<div class="header-primary">
+			<div class="container inner-wrapper logo-container">
+				<a href="#"><img th:src="@{/resources/images/sheridan-logo.svg}"
+					class="logo" alt="Sheridan College logo"></a> <a href="#"
+					class="nav-mobile-link"> <img alt="mobile navigation"
+					th:src="@{/resources/images/sheridan-logo.svg}">
+				</a>
+			</div>
+
+			<div class="nav-primary-container" role="navigation">
+				<div class="container">
+					<ul class="nav-primary nav-horizontal" role="navigation">
+						<li><a class="small" href="/">&nbsp;</a></li>
+						<li><a th:href="@{/client/about}" target="" data-nav="about"
+							class="">About Sheridan</a></li>
+						<li><a th:href="@{/client/meetProfs}" target=""
+							data-nav="meet-our-Professors}" class="">Our Professors</a></li>
+						<li><a th:href="@{/client/projects}" target=""
+							data-nav="projects" class="">Past Projects</a></li>
+						<li><a th:href="@{/client/faq}" target="" data-nav="faq"
+							class="">FAQ</a></li>
+						<li><a th:href="@{/client/contact}" target=""
+							data-nav="contactus" class="">Contact Us</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- /.nav-primary-container -->
+
+
+
+			<div class="nav-primary-container" role="navigation">
+				<div class="container">
+					<ul class="nav-primary nav-horizontal" role="navigation">
+						<li><a class="small" href="/">&nbsp;</a></li>
+						<li><a th:href="@{/client/addProject}" target=""
+							data-nav="addProject" class="">Add A Project</a></li>
+						<li><a th:href="@{/client/myProject}" target=""
+							data-nav="myProject" class="">My Projects</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
 
 
