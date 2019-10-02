@@ -29,32 +29,30 @@ public class ProfessorController {
 	ProfDAO profDAO = new ProfDAO();
 	ProjectDAO projectDAO = new ProjectDAO();
 	ClientDAO clientDAO = new ClientDAO();
-	
+
 	@GetMapping("prof")
 	public String makeAdmin() {
-		Professor admin = new Professor(
-				"adminName", //professor name
-				"admin@sheridancollege.ca", //account
-				"admin", //password
-				"ADMIN" //program
-				);
+		Professor admin = new Professor("adminName", // professor name
+				"admin@sheridancollege.ca", // account
+				"admin", // password
+				"ADMIN" // program
+		);
 		try {
 			profDAO.addProf(admin);
 			return "th_login";
-		}catch (Exception e){
-			
+		} catch (Exception e) {
+
 			return "th_login";
 		}
-			
+
 	}
-	
+
 	@RequestMapping("professor/groupList")
 	public String groupHome(Model model) {
 		GroupDAO groupDAO = new GroupDAO();
 		model.addAttribute("groups", groupDAO.getAllGroups());
 		return "professor/th_groupList";
 	}
-	
 
 	// Register Professor-1.1(form)
 	@RequestMapping("professor/addProf")
@@ -72,17 +70,17 @@ public class ProfessorController {
 
 			// testing using the Professor Validtions
 			if (profDAO.validateProfessor(professor).isEmpty()) {
-				
+
 				// test if the username is used
 				// Catch
 				// sends the user back to Sign with new error message
 				try {
-					
+
 					profDAO.addProf(professor);
 					model.addAttribute("errors", professor.getProfName() + " Account was created");
 					return "professor/th_profSignup";
 				} catch (Exception e) {
-					
+
 					model.addAttribute("errors", "This email is already in use");
 					return "signup/th_profSignup";
 				}
@@ -148,7 +146,7 @@ public class ProfessorController {
 	// Assign Project to group-1.2
 	@RequestMapping("professor/profAssignProject/{projectId}")
 	public String editAssignProject(Model model, @PathVariable int projectId) {
-		
+
 		// get all groups without projects
 		GroupDAO groupDAO = new GroupDAO();
 		List<GroupBean> list = new ArrayList<GroupBean>();
@@ -167,86 +165,69 @@ public class ProfessorController {
 	@RequestMapping("professor/assignProjectForm")
 	public String assignProject(Model model, @ModelAttribute Project project, @RequestParam int projectId,
 			@RequestParam int groupId) {
-		
+
 		Project p = projectDAO.searchProjectById(projectId);
-		//If project is NOT null 
-		if(p != null)
-		{
+		// If project is NOT null
+		if (p != null) {
 			GroupDAO groupDAO = new GroupDAO();
 			GroupBean g = groupDAO.getGroupById(groupId);
-			//if Project DOES have a Group
-			if(p.getGroupBean() != null)
-			{
+			// if Project DOES have a Group
+			if (p.getGroupBean() != null) {
 				GroupBean oldGroup = groupDAO.getGroupById(p.getGroupBean().getGroupId());
 				oldGroup.setProject(null);
 				groupDAO.updateGroup(oldGroup);
 			}
-				
-				p.setGroupBean(g);
-				projectDAO.updateProject(p);
-				g.setProject(p);
-				groupDAO.updateGroup(g);
+
+			p.setGroupBean(g);
+			projectDAO.updateProject(p);
+			g.setProject(p);
+			groupDAO.updateGroup(g);
 			model.addAttribute("projectList", projectDAO.getApprovedProjects());
 			return "professor/th_listApprovedProjects";
-		}else
-		{
+		} else {
 			model.addAttribute("error", "Sorry, project ID is not avaiable");
 			model.addAttribute("project", p);
 			return "professor/th_assignProject";
 		}
-	
+
 	}
-	
-	
-	
-	//Change Password 1.1
-	@RequestMapping(value="professor/change_password" ,method = RequestMethod.GET)
-	public String changePassword(Model model)
-	{
+
+	// Change Password 1.1
+	@RequestMapping(value = "professor/change_password", method = RequestMethod.GET)
+	public String changePassword(Model model) {
 		return "professor/th_changePassword";
 	}
-	
-	//Change Password 1.2
-	@RequestMapping(value="professor/change_password" ,method=RequestMethod.POST)
-	public String changePassword_POST(Model model,
-			@RequestParam String old_password,
-			@RequestParam String new_password, 
-			@RequestParam String confirm_password
-			)
-	{
-		
-		if(new_password.equals(confirm_password))
-		{
+
+	// Change Password 1.2
+	@RequestMapping(value = "professor/change_password", method = RequestMethod.POST)
+	public String changePassword_POST(Model model, @RequestParam String old_password, @RequestParam String new_password,
+			@RequestParam String confirm_password) {
+
+		if (new_password.equals(confirm_password)) {
 			Professor p = getAuthProf();
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			
-			if(passwordEncoder.matches(old_password, p.getPassword()))
-			{	
+
+			if (passwordEncoder.matches(old_password, p.getPassword())) {
 				try {
-				String new_encoded_pass = passwordEncoder.encode(new_password);
-				p.setPassword(new_encoded_pass);
-				profDAO.updateProfessor(p);
-				model.addAttribute("error", "Password was successfully updated");
-				}
-				catch(Exception e){
-					
+					String new_encoded_pass = passwordEncoder.encode(new_password);
+					p.setPassword(new_encoded_pass);
+					profDAO.updateProfessor(p);
+					model.addAttribute("error", "Password was successfully updated");
+				} catch (Exception e) {
+
 					model.addAttribute("error", "Error updating password");
 					System.out.println(e);
 				}
-			}else
-			{
+			} else {
 				model.addAttribute("error", "Old password is incorrect");
 			}
-		}else
-		{
+		} else {
 			model.addAttribute("error", "Sorry, passwords don't match");
 		}
-		
+
 		return "professor/th_changePassword";
-		
+
 	}
-	
-	
 
 	// GO TO - Report page
 	@RequestMapping("professor/report")
@@ -292,17 +273,14 @@ public class ProfessorController {
 	public String goStudentContact() {
 		return "professor/common/th_contact";
 	}
-	
-	
-	
-	public Professor getAuthProf()
-	{
+
+	public Professor getAuthProf() {
 		ProfDAO dao = new ProfDAO();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication(); 
-		String username = auth.getName().toString();		
-		Professor professor = dao.findProfByEmail(username); 
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName().toString();
+		Professor professor = dao.findProfByEmail(username);
 		return professor;
-		
+
 	}
 
 }
