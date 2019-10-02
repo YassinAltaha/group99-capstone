@@ -29,8 +29,8 @@ public class ClientDAO {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hasedPassword = passwordEncoder.encode(pass);
 
-		Client client = new Client(c.getClientName(), c.getClientCompany(), c.getClientContact(), c.getClientAddress(),
-				c.getClientEmail(), hasedPassword);
+		Client client = new Client(c.getClientName(), c.getClientCompany(), c.getClientContact(), c.getClientAddress(), 
+				c.getClientIndustry(), c.getClientScale(), c.getClientEmail(), hasedPassword);
 
 		client.setRole(Role.ROLE_CLIENT);
 		session.save(client);

@@ -17,8 +17,7 @@
 
 		<div class="container" align="center">
 		<div class="wrapper block-row">
-			<div class="block large-text callout-with-stats welcome"
-				style="height: 458px;">
+			<div class="block large-text callout-with-stats welcome">
 
 
 				<div class="inner-wrapper title-block-wrapper">
@@ -38,7 +37,23 @@
 						<p th:utext="*{client.clientCompany} + ' Projects'"></p>
 					</th>
 				</tr>
-
+				<tr>
+					<th>Client Name</th>
+					<th>Client Phone</th>
+					<th>Client's Email</th>
+					<th>Industry</th>
+					<th>Company Size</th>
+					<th>Projects #</th>
+				</tr>
+				
+				<tr>
+					<td><p th:utext="*{client.clientName}" /></td>
+					<td><p th:utext="*{client.clientContact}" /></td>
+					<td><p th:utext="*{client.clientEmail}" /></td>
+					<td><p th:utext="*{client.clientIndustry}" /></td>
+					<td><p th:utext="*{client.clientScale}" /></td>
+					<td><p th:utext="*{client.projectList.size()}" /></td>
+				</tr>
 				
 				<tr>
 					<th>Project Title</th>
