@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css" media="all"/>
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
 <title>Delete Project</title>
@@ -18,31 +18,28 @@
 	
 <!-- View-dependent nav area -->
 	
-	 	<div class="bg-white" align="center">
+	 	<div class="container" align="center">
 	 	
-			<!--  display the message -->
-		<br/>
 		<form th:action="@{/client/deleteProject}" th:object="${project}" method="post">
 		<input th:field="*{projectId}" hidden="true" />
-		<table>
-			<tr>
-				<td colspan="2"><h2>Are you sure you to delete this project</h2></td>
+		<table class="table">
+			
+			<tr class="table-danger" align="center">
+				<th colspan="2" ><h2>Are you sure you to delete this project</h2></th>
 			</tr>
 			<tr>
-				
-				<td> <label >Project Title: </label></td>
-				<td> <input th:field="*{title}" readonly/></td>
-				
+				<td class="w-25"> <label >Project Title: </label></td>
+				<td> <input class="form-control w-autos col-xl-7" th:field="*{title}" readonly/></td>			
 			</tr>
 				
 			<tr>
-				<td> <label >Project Description: </label></td>
-				<td><textarea readonly form="projectForm" th:field="*{description}" style="width:475px; height:130px;" > </textarea></td>
+				<td class="w-25"> <label  >Project Description: </label></td>
+				<td><textarea class="form-control w-autos" readonly form="projectForm" th:field="*{description}" style="width:475px; height:130px;" > </textarea></td>
 				
 			</tr>	
 			<tr>
-				<td><a th:href="@{/client/myProject}"> <input type="Button" value="Cancel" /></a></td>
-				<td> <input type="submit" value="Delete Project" /></td>
+				<td><a th:href="@{/client/myProject}"> <input class="btn btn-primary" type="Button" value="Cancel" /></a></td>
+				<td> <input class="btn btn-danger" type="submit" value="Delete Project" /></td>
 			</tr>
 		</table>
 		</form>

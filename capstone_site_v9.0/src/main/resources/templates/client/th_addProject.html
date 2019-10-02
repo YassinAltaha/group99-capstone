@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
 <title>Add Project</title>
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css" media="all"/>
 </head>
 <body>
 
@@ -16,33 +17,36 @@
 	
 <!-- View-dependent nav area -->
 	
-	 	<div class="bg-white" align="center">
-	 	<br/>
-		<h2 th:text="'Create Project for '+ ${client.clientName}"></h2>
-		<!--  display the message -->
-		<div th:if="${msg != null}">
-			<p th:value="${msg}"> </p>
-		</div>
-		
-		
-		
-		<form th:action="@{/client/saveProject}" th:object="${project}" method="post" id="projectForm">
-		<table>
-			<tr>
-			<td><label >Project Title:</label></td>
-			<td> <input th:field="*{title}" /></td>
-			</tr>
-				
-			<tr>
-			<td><label >Project Description: </label></td>
-			<td><textarea form="projectForm" th:field="*{description}" style="width:475px; height:130px;" > </textarea></td>
-			</tr>
-				
-			<tr>
-			<td colspan="2"><input type="submit" value="Submit New Project" /></td>
-			</tr>
+	 	<div class="container" align="center">
 	
-		</table>	
+	 	<form th:action="@{/client/saveProject}" th:object="${project}" method="post" id="projectForm">
+	 		<table class="table">
+		 	 <thead class="bg-primary" align="center">
+			 	<tr>
+					<th colspan="2">
+						<h2 th:text="'Create Project for '+ ${client.clientName}"></h2>
+						<!--  display the message -->
+						<div th:if="${msg != null}">
+							<p th:value="${msg}"> </p>
+						</div>
+					</th>
+				</tr>
+			  </thead>
+				<tr>
+					<td class="w-25"><label >Project Title:</label></td>
+					<td> <input class="form-control w-autos col-xl-7" th:field="*{title}" /></td>
+				</tr>
+					
+				<tr>
+					<td class="w-25"><label >Project Description: </label></td>
+					<td><textarea class="form-control w-autos" form="projectForm" th:field="*{description}" style="width:100%; height:130px;" > </textarea></td>
+				</tr>
+					
+				<tr>
+					<td align="center" colspan="2"><input class="btn btn-primary mb-2" type="submit" value="Submit New Project" /></td>
+				</tr>
+	
+			</table>	
 		</form>
 
 	</div>

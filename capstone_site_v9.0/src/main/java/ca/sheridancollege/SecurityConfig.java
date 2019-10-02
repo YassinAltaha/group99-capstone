@@ -37,7 +37,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/professor/**").hasRole("ADMIN")
 				.antMatchers("/client/**").hasRole("CLIENT")
 				.antMatchers("/student/**").hasRole("STUDENT") 																		
-				.antMatchers("/", "/js/**", "/css/**", "/images/**", "/resources/**", "/**").permitAll().anyRequest()
+				.antMatchers("/", 
+							 "/js/**",
+							 "/css/**",
+							 "/images/**",
+							 "/resources/**",
+							 "**/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css",
+							 "/**").permitAll().anyRequest()
 				.authenticated()
 				.and()
 				.formLogin().loginPage("/login").permitAll().successHandler(customSuccessHandler)

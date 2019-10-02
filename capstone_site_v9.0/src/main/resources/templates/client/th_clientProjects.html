@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css" media="all"/>
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
 <title>My Projects</title>
@@ -18,11 +18,9 @@
 	
 <!-- View-dependent nav area -->
 	
-	 	<div class="bg-white" align="center">
+	 	<div class="container-fluid" align="center">
 	 	<br/>
 		<h2>My Projects</h2>
-		<a href="/client/addProject">Add Project</a><br>
-		
 	
 		<div th:if="${myProjectList == null}">
 			Sorry you don't have any projects yet <br />
@@ -31,32 +29,32 @@
 			<p th:text=${msg} />
 		</div>
 		
-		<table class="blueTable">
-			<tr>
-				<th>Title</th>
-				<th>Description</th>
-				<th>Status</th>
-				<th>Professor Note</th>
-				<th>Opt.</th>
-				<th>-</th>
-			</tr>
+		<table class="table">
+			<thead class="bg-primary">
+				<tr align="center">
+					<th>Title</th>
+					<th>Description</th>
+					<th>Status</th>
+					<th>Professor Note</th>
+					<th>Opt.</th>
+					<th>-</th>
+				</tr>
+			</thead>
 			
 			
-			<tr th:each="project: ${myProjectList}">
-			    <td th:text="${project.title}" />
-			    <td th:text="${project.description}" />
+			<tr th:each="project: ${myProjectList}" >
+			    <td class="w-25" th:text="${project.title}" />
+			    <td class="text-break"><p th:text="${project.description}"></p></td>
 			    <td th:text="${project.status}" />
 			    <td th:text="${project.profNote}" />
 			    <td>
-			     <a th:href="@{/client/editMyProject/{id}(id = ${project.projectId})}">Edit</a> 
-			    
+			     <a class="btn btn-primary btn-sm" th:href="@{/client/editMyProject/{id}(id = ${project.projectId})}">Edit</a> 	    
 			    </td>
 			    
 			    <td>
-			    <p th:if="${project.status} == Pending OR ${project.status} == Rejected ">
-			    
-			    	<a th:href="@{/client/deleteMyProject/{id}(id = ${project.projectId})}">Delete</a> 
-			    </p>
+			    <div th:if="${project.status} == Pending OR ${project.status} == Rejected ">
+			    	<a class="btn btn-danger btn-sm" th:href="@{/client/deleteMyProject/{id}(id = ${project.projectId})}">Delete</a> 
+			    </div>
 			    </td>
 			    
 			</tr>
