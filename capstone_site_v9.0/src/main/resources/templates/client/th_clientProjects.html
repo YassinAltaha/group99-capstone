@@ -56,7 +56,7 @@
 			
 			<tr th:each="project: ${myProjectList}" >
 			    <td class="w-25" th:text="${project.title}" />
-			    <td class="text-break"><p th:text="${project.description}"></p></td>
+			    <td class="text-break" th:text="${project.description}"></td>
 			    <td th:text="${project.status}" />
 			    <td th:text="${project.profNote}" />
 			    <td>

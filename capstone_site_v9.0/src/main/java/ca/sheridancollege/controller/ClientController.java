@@ -126,8 +126,25 @@ public class ClientController {
 		
 		ClientDAO dao = new ClientDAO();
 		Project project = dao.searchProjectById(projectId);
-		model.addAttribute("project", project);
-		return "client/th_editProject";
+		Client c = getAuthClient();
+		if(project == null) {
+			List<Project> projectList = dao.getMyProjects(c.getClientId());
+			model.addAttribute("myProjectList", projectList);
+			model.addAttribute("msg", "Error retriving project");
+			return "client/th_clientProjects";
+		}else {
+			if(c.getClientId() == project.getClient().getClientId())
+			{
+				model.addAttribute("project", project);
+				return "client/th_editProject";
+			}else
+			{
+				List<Project> projectList = dao.getMyProjects(c.getClientId());
+				model.addAttribute("myProjectList", projectList);
+				model.addAttribute("msg", "Error retriving project");
+				return "client/th_clientProjects";
+			}
+		}
 		
 	}
 	
@@ -158,28 +175,38 @@ public class ClientController {
 		ClientDAO dao = new ClientDAO();
 		Project project = dao.searchProjectById(projectId);
 		Client c = getAuthClient();
-		if(project.getClient().getClientId() == c.getClientId())	
+		if(project == null )
 		{
-			//INCASE CLIENTS TRY TO DELETE PROJECT USING THE URL
-			if(project.getStatus().equals("Pending") || project.getStatus().equals("Rejected"))
-			{
-				model.addAttribute("project", project);
-				return "client/th_delete_confirmation";
-			}else
-			{
-				List<Project> projectList = dao.getMyProjects(c.getClientId());
-				model.addAttribute("myProjectList", projectList);
-				model.addAttribute("msg", "Sorry, this project cannot be deleted. Contact a professor for more info.");
-				return "client/th_clientProjects";
-			}
-		}else {
-			
 			List<Project> projectList = dao.getMyProjects(c.getClientId());
 			model.addAttribute("myProjectList", projectList);
 			model.addAttribute("msg", "Error retriving project");
 			return "client/th_clientProjects";
-			
+		}else
+		{
+			if(project.getClient().getClientId() == c.getClientId())	
+			{
+				//INCASE CLIENTS TRY TO DELETE PROJECT USING THE URL
+				if(project.getStatus().equals("Pending") || project.getStatus().equals("Rejected"))
+				{
+					model.addAttribute("project", project);
+					return "client/th_delete_confirmation";
+				}else
+				{
+					List<Project> projectList = dao.getMyProjects(c.getClientId());
+					model.addAttribute("myProjectList", projectList);
+					model.addAttribute("msg", "Sorry, this project cannot be deleted. Contact a professor for more info.");
+					return "client/th_clientProjects";
+				}
+			}else {
+				
+				List<Project> projectList = dao.getMyProjects(c.getClientId());
+				model.addAttribute("myProjectList", projectList);
+				model.addAttribute("msg", "Error retriving project");
+				return "client/th_clientProjects";
+				
+			}
 		}
+		
 		
 		
 		
