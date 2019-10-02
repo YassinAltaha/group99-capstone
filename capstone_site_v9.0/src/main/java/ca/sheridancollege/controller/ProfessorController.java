@@ -30,7 +30,7 @@ public class ProfessorController {
 	ProjectDAO projectDAO = new ProjectDAO();
 	ClientDAO clientDAO = new ClientDAO();
 	
-	@GetMapping("/prof")
+	@GetMapping("prof")
 	public String makeAdmin() {
 		Professor admin = new Professor(
 				"adminName", //professor name
@@ -48,7 +48,7 @@ public class ProfessorController {
 			
 	}
 	
-	@RequestMapping("/professor/groupList")
+	@RequestMapping("professor/groupList")
 	public String groupHome(Model model) {
 		GroupDAO groupDAO = new GroupDAO();
 		model.addAttribute("groups", groupDAO.getAllGroups());
@@ -57,7 +57,7 @@ public class ProfessorController {
 	
 
 	// Register Professor-1.1(form)
-	@RequestMapping("/professor/addProf")
+	@RequestMapping("professor/addProf")
 	public String goHome(Model model) {
 		Professor professor = new Professor();
 		model.addAttribute("professor", professor);
@@ -65,7 +65,7 @@ public class ProfessorController {
 	}
 
 	// Register Professor-1.2 (saving prof)
-	@RequestMapping("/saveProf")
+	@RequestMapping("saveProf")
 	public String addProfessor(Model model, @ModelAttribute Professor professor) {
 
 		synchronized (Professor.class) {
@@ -95,16 +95,16 @@ public class ProfessorController {
 	}
 
 	// Professor's Project List
-	@RequestMapping("/professor/listProjects")
+	@RequestMapping("professor/listProjects")
 	public String displayProjects(Model model) {
 
 		List<Client> clientList = clientDAO.getAllClients();
 		model.addAttribute("clientList", clientList);
-		return "/professor/th_listProjects";
+		return "professor/th_listProjects";
 	}
 
 	// Editing Project-1.1
-	@RequestMapping("/professor/profEditProject/{projectId}")
+	@RequestMapping("professor/profEditProject/{projectId}")
 	public String editProject(Model model, @PathVariable int projectId) {
 
 		Project project = projectDAO.searchProjectById(projectId);
@@ -112,11 +112,11 @@ public class ProfessorController {
 		model.addAttribute("projectId", projectId);
 		model.addAttribute("project", project);
 
-		return "/professor/th_editProject";
+		return "professor/th_editProject";
 	}
 
 	// Editing Project-1.2
-	@RequestMapping("/professor/updateProject")
+	@RequestMapping("professor/updateProject")
 	public String updateProject(Model model, @ModelAttribute Project project, @RequestParam int projectId) {
 
 		String msg = "";
@@ -132,21 +132,21 @@ public class ProfessorController {
 		model.addAttribute("msg", msg);
 		model.addAttribute("clientList", clientList);
 
-		return "/professor/th_listProjects";
+		return "professor/th_listProjects";
 
 	}
 
 	// Assign Project to group-1.1
-	@RequestMapping("/professor/listApprovedProjects")
+	@RequestMapping("professor/listApprovedProjects")
 	public String displayApprovedProjects(Model model) {
 
 		List<Project> projectList = projectDAO.getApprovedProjects();
 		model.addAttribute("projectList", projectList);
-		return "/professor/th_listApprovedProjects";
+		return "professor/th_listApprovedProjects";
 	}
 
 	// Assign Project to group-1.2
-	@RequestMapping("/professor/profAssignProject/{projectId}")
+	@RequestMapping("professor/profAssignProject/{projectId}")
 	public String editAssignProject(Model model, @PathVariable int projectId) {
 		
 		// get all groups without projects
@@ -160,11 +160,11 @@ public class ProfessorController {
 		Project project = projectDAO.searchProjectById(projectId);
 		model.addAttribute("groups", list);
 		model.addAttribute("project", project);
-		return "/professor/th_assignProject";
+		return "professor/th_assignProject";
 	}
 
 	// Assign Project to group-1.3
-	@RequestMapping("/professor/assignProjectForm")
+	@RequestMapping("professor/assignProjectForm")
 	public String assignProject(Model model, @ModelAttribute Project project, @RequestParam int projectId,
 			@RequestParam int groupId) {
 		
@@ -187,12 +187,12 @@ public class ProfessorController {
 				g.setProject(p);
 				groupDAO.updateGroup(g);
 			model.addAttribute("projectList", projectDAO.getApprovedProjects());
-			return "/professor/th_listApprovedProjects";
+			return "professor/th_listApprovedProjects";
 		}else
 		{
 			model.addAttribute("error", "Sorry, project ID is not avaiable");
 			model.addAttribute("project", p);
-			return "/professor/th_assignProject";
+			return "professor/th_assignProject";
 		}
 	
 	}
@@ -200,14 +200,14 @@ public class ProfessorController {
 	
 	
 	//Change Password 1.1
-	@RequestMapping(value="/professor/change_password" ,method = RequestMethod.GET)
+	@RequestMapping(value="professor/change_password" ,method = RequestMethod.GET)
 	public String changePassword(Model model)
 	{
-		return "/professor/th_changePassword";
+		return "professor/th_changePassword";
 	}
 	
 	//Change Password 1.2
-	@RequestMapping(value="/professor/change_password" ,method=RequestMethod.POST)
+	@RequestMapping(value="professor/change_password" ,method=RequestMethod.POST)
 	public String changePassword_POST(Model model,
 			@RequestParam String old_password,
 			@RequestParam String new_password, 
@@ -242,55 +242,55 @@ public class ProfessorController {
 			model.addAttribute("error", "Sorry, passwords don't match");
 		}
 		
-		return "/professor/th_changePassword";
+		return "professor/th_changePassword";
 		
 	}
 	
 	
 
 	// GO TO - Report page
-	@RequestMapping("/professor/report")
+	@RequestMapping("professor/report")
 	public String goReport() {
-		return "/professor/th_report";
+		return "professor/th_report";
 	}
 
 	// GO TO - Report status
-	@RequestMapping("/professor/reportStatus")
+	@RequestMapping("professor/reportStatus")
 	public String reportParties(Model model) {
 		List<Double> statusPerList = projectDAO.statusPercentage();
 		model.addAttribute("statusPerList", statusPerList);
-		return "/professor/th_report";
+		return "professor/th_report";
 	}
 
 	// Main Pages
-	@RequestMapping("/professor")
+	@RequestMapping("professor")
 	public String goStudentHome() {
-		return "/professor/common/th_about";
+		return "professor/common/th_about";
 	}
 
-	@RequestMapping("/professor/about")
+	@RequestMapping("professor/about")
 	public String goStudentAbout() {
-		return "/professor/common/th_about";
+		return "professor/common/th_about";
 	}
 
-	@RequestMapping("/professor/meetProfs")
+	@RequestMapping("professor/meetProfs")
 	public String goStudentProfs() {
-		return "/professor/common/th_profs";
+		return "professor/common/th_profs";
 	}
 
-	@RequestMapping("/professor/projects")
+	@RequestMapping("professor/projects")
 	public String goStudentPastProjects() {
-		return "/professor/common/th_pastProject";
+		return "professor/common/th_pastProject";
 	}
 
-	@RequestMapping("/professor/faq")
+	@RequestMapping("professor/faq")
 	public String goStudentFaq() {
-		return "/professor/common/th_faqs";
+		return "professor/common/th_faqs";
 	}
 
-	@RequestMapping("/professor/contact")
+	@RequestMapping("professor/contact")
 	public String goStudentContact() {
-		return "/professor/common/th_contact";
+		return "professor/common/th_contact";
 	}
 	
 	

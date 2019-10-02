@@ -3,7 +3,7 @@ package ca.sheridancollege.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ca.sheridancollege.dao.ProfDAO;
+
 
 @Controller
 public class HomeController {
@@ -14,40 +14,40 @@ public class HomeController {
 		return "default/th_about";
 	}
 
-	@GetMapping("/login")
+	@GetMapping("login")
 	public String goLogin() {
 		return "th_login";
 	}
 
-	@GetMapping("/access_denied")
+	@GetMapping("access_denied")
 	public String goError() {
 		return "error/th_access_denied";
 	}
 
 	// GUEST PROCESS
-	@RequestMapping("/about")
+	@RequestMapping("about")
 	public String goAbout() {
-		return "/default/th_about";
+		return "default/th_about";
 	}
 
-	@RequestMapping("/meetProfs")
+	@RequestMapping("meetProfs")
 	public String goProfs() {
-		return "/default/th_prof";
+		return "default/th_prof";
 	}
 
-	@RequestMapping("/projects")
+	@RequestMapping("projects")
 	public String goPastProjects() {
-		return "/default/th_pastProject";
+		return "default/th_pastProject";
 	}
 
-	@RequestMapping("/faq")
+	@RequestMapping("faq")
 	public String goFaq() {
-		return "/default/th_faq";
+		return "default/th_faq";
 	}
 
-	@RequestMapping("/contact")
+	@RequestMapping("contact")
 	public String goContact() {
-		return "/default/th_contact";
+		return "default/th_contact";
 	}
 
 }

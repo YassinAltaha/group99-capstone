@@ -13,17 +13,17 @@ public class GroupController {
 
 	GroupDAO groupDAO = new GroupDAO();
 
-	@RequestMapping("/createGroup")
+	@RequestMapping("createGroup")
 	public String goAboutStudent(Model model) {
 
 		// give a new Group Bean
 		GroupBean g = new GroupBean();
 		// Attach the Group Bean to The model with "groupBean"
 		model.addAttribute("groupBean", g);
-		return "/student/createGroup";
+		return "student/createGroup";
 	}
 
-	@RequestMapping("/addGroup")
+	@RequestMapping("addGroup")
 	public String goAddGroup(Model model, @ModelAttribute GroupBean groupBean) {
 
 		String name = groupBean.getGroupName().toString();
@@ -37,30 +37,30 @@ public class GroupController {
 			model.addAttribute("groupSuccess", "Sorry, this group name is already in use");
 		}
 
-		return "/student/createGroup";
+		return "student/createGroup";
 	}
 
-	@RequestMapping("/deleteGroup")
+	@RequestMapping("deleteGroup")
 	public String goDeleteGroup() {
 		return "student/deleteGroup";
 	}
 
-	@RequestMapping("/leaveGroup")
+	@RequestMapping("leaveGroup")
 	public String goleaveGroup() {
 		return "student/leaveGroup";
 	}
 
-	@RequestMapping("/joinGroup")
+	@RequestMapping("joinGroup")
 	public String goJoinGroup() {
 		return "student/joinGroup";
 	}
 
-	@RequestMapping("/viewGroup")
+	@RequestMapping("viewGroup")
 	public String goViewGroup() {
 		return "student/viewGroup";
 	}
 
-	@RequestMapping("/viewProjects")
+	@RequestMapping("viewProjects")
 	public String goViewProjects() {
 		return "student/viewProjects";
 	}

@@ -9,9 +9,9 @@
 		<version>2.1.4.RELEASE</version>
 	</parent>
 	<groupId>ca.sheridancollege</groupId>
-	<artifactId>capstone_site</artifactId>
+	<artifactId>capstone_portal</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>9.0.1-SNAPSHOT</version>
 	<name>capstone_site</name>
 
 	<description>Capstone Portal</description>
@@ -124,16 +124,26 @@
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
 		</dependency>
+<!--
+<dependency>
+  <groupId>org.thymeleaf</groupId>
+  <artifactId>thymeleaf</artifactId>
+  <version>3.0.0.RELEASE</version>
+</dependency>
+<dependency>
+  <groupId>org.thymeleaf</groupId>
+  <artifactId>thymeleaf-spring4</artifactId>
+  <version>3.0.0.RELEASE</version>
+</dependency>
+-->
 
-		<!-- TESTING THYMELEAF EXTRAS -->
-		<dependency>
-			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
-		</dependency>
 		<dependency>
 		   <groupId>org.springframework.boot</groupId>
 		   <artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		
+		
+		
         <dependency>
         	<groupId>nz.net.ultraq.thymeleaf</groupId>
         	<artifactId>thymeleaf-layout-dialect</artifactId>
@@ -142,6 +152,7 @@
 	</dependencies>
 
 	<build>
+	<finalName>${artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

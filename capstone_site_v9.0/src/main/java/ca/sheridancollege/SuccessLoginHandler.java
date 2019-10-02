@@ -39,11 +39,11 @@ public class SuccessLoginHandler implements AuthenticationSuccessHandler {
 
 		// REDIRECTION based on the role of the authentication authorities role
 		if (admin) {
-			response.sendRedirect("/professor/about/");
+			response.sendRedirect("professor/about/");
 		} else if (client) {
-			response.sendRedirect("/client/myProject");
+			response.sendRedirect("client/myProject");
 		} else if (student) {
-			response.sendRedirect("/student/group_info/");
+			response.sendRedirect("student/group_info/");
 		}
 
 	}

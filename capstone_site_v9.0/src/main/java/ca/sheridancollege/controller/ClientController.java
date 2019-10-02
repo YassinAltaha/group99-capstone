@@ -24,16 +24,16 @@ import ca.sheridancollege.dao.ProjectDAO;
 public class ClientController {
 	
 	//Client Signup(form)
-	@RequestMapping("/signup")
+	@RequestMapping("signup")
 	public String addClientInfo(Model model) {
 		Client client = new Client();
 		model.addAttribute("errors", "");
 		model.addAttribute("client", client);
-		return "/signup/th_clientSignup";
+		return "signup/th_clientSignup";
 	}
 
 	//Client Signup(saving)
-	@RequestMapping("/saveClientInfo")
+	@RequestMapping("saveClientInfo")
 	public String saveClientInfo(Model model, @ModelAttribute Client client ,
 			@RequestParam String confirm_password) {
 		ClientDAO dao = new ClientDAO();
@@ -59,37 +59,37 @@ public class ClientController {
 					}catch(Exception e)
 					{
 						model.addAttribute("errors", "This email is already in use");
-						return "/signup/th_clientSignup";
+						return "signup/th_clientSignup";
 					}
 
 				}else
 				{
 					model.addAttribute("errors", "Passwords do not match");
-					return "/signup/th_clientSignup";
+					return "signup/th_clientSignup";
 				}
 				
 				
 			}else
 			{
 				model.addAttribute("errors", dao.validateClint(client));
-				return "/signup/th_clientSignup";
+				return "signup/th_clientSignup";
 			}	
 		}
 
 	}
 
 	//Add project-1.1
-	@RequestMapping("/client/addProject")
+	@RequestMapping("client/addProject")
 	public String addProject(Model model) {
 		
 		Project p = new Project();
 		model.addAttribute("project", p);
 		model.addAttribute("client", getAuthClient());
-		return "/client/th_addProject";
+		return "client/th_addProject";
 	}
 
 	//Add project-1.2
-	@RequestMapping(value= "/client/saveProject" , method = RequestMethod.POST)
+	@RequestMapping(value= "client/saveProject" , method = RequestMethod.POST)
 	public String saveProject(Model model, @ModelAttribute Project project) {
 		
 		ClientDAO dao = new ClientDAO();
@@ -110,13 +110,13 @@ public class ClientController {
 			model.addAttribute("msg", msg);
 			model.addAttribute("project", project);
 			model.addAttribute("myProjectList", projectList);
-			return "/client/th_clientProjects";
+			return "client/th_clientProjects";
 		} else {
 			error = "Sorry, there was an error adding your project";
 			model.addAttribute("client", getAuthClient());
 			model.addAttribute("error", error);
 			model.addAttribute("project", new Project());
-			return "/client/th_addProject";
+			return "client/th_addProject";
 		}
 	}
 	
@@ -127,12 +127,12 @@ public class ClientController {
 		ClientDAO dao = new ClientDAO();
 		Project project = dao.searchProjectById(projectId);
 		model.addAttribute("project", project);
-		return "/client/th_editProject";
+		return "client/th_editProject";
 		
 	}
 	
 	//editing project-1.2
-	@RequestMapping("/client/updateProject")
+	@RequestMapping("client/updateProject")
 	public String updateProject(Model model, @ModelAttribute Project project) {
 		
 		ProjectDAO dao = new ProjectDAO();
@@ -147,7 +147,7 @@ public class ClientController {
 		projectList =clientDao.getMyProjects(c.getClientId());
 		
 		model.addAttribute("myProjectList", projectList);
-		return "/client/th_clientProjects";
+		return "client/th_clientProjects";
 	}
 	
 	
@@ -164,20 +164,20 @@ public class ClientController {
 			if(project.getStatus().equals("Pending") || project.getStatus().equals("Rejected"))
 			{
 				model.addAttribute("project", project);
-				return "/client/th_delete_confirmation";
+				return "client/th_delete_confirmation";
 			}else
 			{
 				List<Project> projectList = dao.getMyProjects(c.getClientId());
 				model.addAttribute("myProjectList", projectList);
 				model.addAttribute("msg", "Sorry, this project cannot be deleted. Contact a professor for more info.");
-				return "/client/th_clientProjects";
+				return "client/th_clientProjects";
 			}
 		}else {
 			
 			List<Project> projectList = dao.getMyProjects(c.getClientId());
 			model.addAttribute("myProjectList", projectList);
 			model.addAttribute("msg", "Error retriving project");
-			return "/client/th_clientProjects";
+			return "client/th_clientProjects";
 			
 		}
 		
@@ -188,7 +188,7 @@ public class ClientController {
 	
 	
 	//Deleting project-1.2
-	@RequestMapping("/client/deleteProject")
+	@RequestMapping("client/deleteProject")
 	public String confdeleteProject(Model model, @ModelAttribute Project project) {
 		
 		//deleting the project after confirmation
@@ -202,12 +202,12 @@ public class ClientController {
 		
 		model.addAttribute("msg" , "Project successfully deleted");
 		model.addAttribute("myProjectList", projectList);
-		return "/client/th_clientProjects";
+		return "client/th_clientProjects";
 	}
 
 	
 	//Client's List of Projects
-	@RequestMapping("/client/myProject")
+	@RequestMapping("client/myProject")
 	public String myProject(Model model, @ModelAttribute Project project) {
 		
 		ClientDAO dao = new ClientDAO();
@@ -220,19 +220,19 @@ public class ClientController {
 		projectList = dao.getMyProjects(clientId);
 
 		model.addAttribute("myProjectList", projectList);
-		return "/client/th_clientProjects";
+		return "client/th_clientProjects";
 	}
 	
 	
 	//Change Password 1.1
-		@RequestMapping(value="/client/change_password" ,method = RequestMethod.GET)
+		@RequestMapping(value="client/change_password" ,method = RequestMethod.GET)
 		public String changePassword(Model model)
 		{
-			return "/client/th_change_password";
+			return "client/th_change_password";
 		}
 		
 		//Change Password 1.2
-			@RequestMapping(value="/client/change_password" ,method=RequestMethod.POST)
+			@RequestMapping(value="client/change_password" ,method=RequestMethod.POST)
 			public String changePassword_POST(Model model,
 					@RequestParam String old_password,
 					@RequestParam String new_password, 
@@ -267,40 +267,40 @@ public class ClientController {
 					model.addAttribute("error", "Sorry, passwords don't match");
 				}
 				
-				return "/client/th_change_password";
+				return "client/th_change_password";
 				
 			}
 	
 
 	//Main pages
-	@RequestMapping("/client")
+	@RequestMapping("client")
 	public String goStudentHome() {
-		return "/client/common/th_about";
+		return "client/common/th_about";
 	}
 
-	@RequestMapping("/client/about")
+	@RequestMapping("client/about")
 	public String goStudentAbout() {
-		return "/client/common/th_about";
+		return "client/common/th_about";
 	}
 
-	@RequestMapping("/client/meetProfs")
+	@RequestMapping("client/meetProfs")
 	public String goStudentProfs() {
-		return "/client/common/th_profs";
+		return "client/common/th_profs";
 	}
 
-	@RequestMapping("/client/projects")
+	@RequestMapping("client/projects")
 	public String goStudentPastProjects() {
-		return "/client/common/th_pastProject";
+		return "client/common/th_pastProject";
 	}
 
-	@RequestMapping("/client/faq")
+	@RequestMapping("client/faq")
 	public String goStudentFaq() {
-		return "/client/common/th_faqs";
+		return "client/common/th_faqs";
 	}
 
-	@RequestMapping("/client/contact")
+	@RequestMapping("client/contact")
 	public String goStudentContact() {
-		return "/client/common/th_contact";
+		return "client/common/th_contact";
 	}
 	
 	

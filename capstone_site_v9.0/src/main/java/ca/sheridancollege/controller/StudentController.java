@@ -28,12 +28,12 @@ public class StudentController {
 
 	// Signup 1.1
 	// Student Sign-up(form)
-	@RequestMapping("/addStudent")
+	@RequestMapping("addStudent")
 	public String addStudent(Model model) {
 		Student student = new Student();
 		model.addAttribute("errors", "");
 		model.addAttribute("student", student);
-		return "/signup/th_studentSignup";
+		return "signup/th_studentSignup";
 	}
 
 	// Signup 1.2
@@ -41,7 +41,7 @@ public class StudentController {
 	// Checking Validation
 	// Checking Email
 	// Checking StudentID
-	@RequestMapping("/saveStudent")
+	@RequestMapping("saveStudent")
 	public String saveStudent(Model model, @ModelAttribute Student student, @RequestParam String confirm_password) {
 
 
@@ -61,48 +61,48 @@ public class StudentController {
 						} else {
 							// StudentID is used
 							model.addAttribute("errors", "Student ID is already registered");
-							return "/signup/th_studentSignup";
+							return "signup/th_studentSignup";
 						}
 					}else
 					{
 						model.addAttribute("errors", "Passwords do not match");
-						return "/signup/th_studentSignup";
+						return "signup/th_studentSignup";
 					}
 					
 				} else {
 					// email is used
 					model.addAttribute("errors", "This email is already in use");
-					return "/signup/th_studentSignup";
+					return "signup/th_studentSignup";
 				}
 			}
 			// test if the email is used
 			else {
 				model.addAttribute("errors", dao.validateStudent(student));
-				return "/signup/th_studentSignup";
+				return "signup/th_studentSignup";
 			}
 		}
 	}
 
 	// TODO FINISH MAIN PAGE
 	// ADD delete Group
-	@RequestMapping("/student/group_info")
+	@RequestMapping("student/group_info")
 	public String groupInfo(Model model) {
 
 		Student student = getAuthStudent();
 		model.addAttribute("student", student);
-		return "/student/th_group_info";
+		return "student/th_group_info";
 	}
 
-	@RequestMapping("/student/joinGroup")
+	@RequestMapping("student/joinGroup")
 	public String JoinGroup(Model model) {
 
 		GroupDAO groupDAO = new GroupDAO();
 		List<GroupBean> groupList = groupDAO.getAllGroups();
 		model.addAttribute("groupList", groupList);
-		return "/student/th_join_group";
+		return "student/th_join_group";
 	}
 
-	@RequestMapping(value = "/student/join_group/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "student/join_group/{id}", method = RequestMethod.GET)
 	public String JoinGroup(Model model, @PathVariable int id) {
 
 		GroupDAO groupDAO = new GroupDAO();
@@ -110,17 +110,17 @@ public class StudentController {
 		try {
 			GroupBean group = groupDAO.getGroupById(id);
 			model.addAttribute("GroupInfo", group);
-			return "/student/th_join_group_portal";
+			return "student/th_join_group_portal";
 			
 		}catch(Exception e)
 		{
 			model.addAttribute("error", "Sorry, there was an error joining this group");
-			return "/student/th_join_group";
+			return "student/th_join_group";
 		}
 
 	}
 
-	@RequestMapping(value = "/student/join_group/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "student/join_group/{id}", method = RequestMethod.POST)
 	public String testPasscode(Model model, @PathVariable int id, @RequestParam(value = "password_test") int pass) {
 
 		String passcode = Integer.toString(pass);
@@ -146,37 +146,37 @@ public class StudentController {
 //				model.addAttribute("inGroup", true);
 //				model.addAttribute("GroupInfo", group);
 				model.addAttribute("student", s);
-				return "/student/th_group_info";
+				return "student/th_group_info";
 			}else {
 				
 				model.addAttribute("error", "Incorrect passcode");
 				model.addAttribute("GroupInfo", group);
-				return "/student/th_join_group_portal";	
+				return "student/th_join_group_portal";	
 				
 			}
 		} else {
 			model.addAttribute("error", "Sorry, there was an error joining this group");
 			model.addAttribute("groupList", groupDAO.getAllGroups());
-			return "/student/th_join_group";
+			return "student/th_join_group";
 		}
 	}
 
 	// Create Group 1.1
-	@RequestMapping("/student/createGroup")
+	@RequestMapping("student/createGroup")
 	public String goStudentCreateGroup(Model model) {
 
 		// TEST if students try to add group using links
 		if (getAuthStudent().getGroup() != null) {
 			model.addAttribute("student", getAuthStudent());
-			return "/student/th_group_info";
+			return "student/th_group_info";
 		}
 
 		model.addAttribute("group", new GroupBean());
-		return "/student/th_create_group";
+		return "student/th_create_group";
 	}
 
 	// Create Group 1.2
-	@RequestMapping("/student/addGroup")
+	@RequestMapping("student/addGroup")
 	public String goStudentAddGroup(Model model, @ModelAttribute GroupBean group) {
 
 		GroupDAO groupDAO = new GroupDAO();
@@ -213,17 +213,17 @@ public class StudentController {
 //			model.addAttribute("GroupInfo", s.getGroup());
 			
 			model.addAttribute("student", s);
-			return "/student/th_group_info";
+			return "student/th_group_info";
 
 		} else {
 			model.addAttribute("error", "Sorry, this group name is already registered");
 			model.addAttribute("group", new GroupBean());
-			return "/student/th_create_group";
+			return "student/th_create_group";
 		}
 	}
 	
 	
-	@RequestMapping("/student/leave_Group")
+	@RequestMapping("student/leave_Group")
 	public String leaveGroup(Model model) {
 		
 		Student s = getAuthStudent();
@@ -234,33 +234,33 @@ public class StudentController {
 			{
 				model.addAttribute("error", "Group Leader cannot leave group");
 				model.addAttribute("student", s);
-				return "/student/th_group_info";
+				return "student/th_group_info";
 				
 			}else
 			{	
 				s.setGroup(null);
 				dao.updateStudent(s);
 				model.addAttribute("student", s);
-				return "/student/th_group_info";
+				return "student/th_group_info";
 			}
 
 		}else
 		{
 			model.addAttribute("error", "Student is not part of a group");
 			model.addAttribute("student", s);
-			return "/student/th_group_info";
+			return "student/th_group_info";
 		}	
 	}
 	
 	//Change Password 1.1
-	@RequestMapping(value="/student/change_password" ,method = RequestMethod.GET)
+	@RequestMapping(value="student/change_password" ,method = RequestMethod.GET)
 	public String changePassword(Model model)
 	{
-		return "/student/th_change_password";
+		return "student/th_change_password";
 	}
 	
 	//Change Password 1.2
-		@RequestMapping(value="/student/change_password" ,method=RequestMethod.POST)
+		@RequestMapping(value="student/change_password" ,method=RequestMethod.POST)
 		public String changePassword_POST(Model model,
 				@RequestParam String old_password,
 				@RequestParam String new_password, 
@@ -295,46 +295,46 @@ public class StudentController {
 				model.addAttribute("error", "Sorry, passwords don't match");
 			}
 			
-			return "/student/th_change_password";
+			return "student/th_change_password";
 			
 		}
 		
 	
 
-	@RequestMapping("/student/deleteGroup")
+	@RequestMapping("student/deleteGroup")
 	public String deleteGroup() {
 
-		return "/student/common/th_about";
+		return "student/common/th_about";
 	}
 
-	@RequestMapping("/student")
+	@RequestMapping("student")
 	public String goStudentHome() {
-		return "/student/common/th_about";
+		return "student/common/th_about";
 	}
 
-	@RequestMapping("/student/about")
+	@RequestMapping("student/about")
 	public String goStudentAbout() {
 		return "/student/common/th_about";
 	}
 
-	@RequestMapping("/student/meetProfs")
+	@RequestMapping("student/meetProfs")
 	public String goStudentProfs() {
-		return "/student/common/th_profs";
+		return "student/common/th_profs";
 	}
 
-	@RequestMapping("/student/projects")
+	@RequestMapping("student/projects")
 	public String goStudentPastProjects() {
-		return "/student/common/th_pastProject";
+		return "student/common/th_pastProject";
 	}
 
-	@RequestMapping("/student/faq")
+	@RequestMapping("student/faq")
 	public String goStudentFaq() {
-		return "/student/common/th_faqs";
+		return "student/common/th_faqs";
 	}
 
-	@RequestMapping("/student/contact")
+	@RequestMapping("student/contact")
 	public String goStudentContact() {
-		return "/student/common/th_contact";
+		return "student/common/th_contact";
 	}
 
 	public Student getAuthStudent() {

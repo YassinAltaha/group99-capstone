@@ -24,7 +24,7 @@ public class LoginAccessDeniedHandler implements AccessDeniedHandler {
 		if (auth != null) {
 			System.out.println(auth.getName() + " was trying to access protected resource: " + request.getRequestURI());
 		}
-		response.sendRedirect(request.getContextPath() + "/access_denied");
+		response.sendRedirect(request.getContextPath() + "access_denied");
 	}
 
 }
