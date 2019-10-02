@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}" media="all"/>
 <link rel="stylesheet" type="text/css" href="resources/css/base.css" media="all" />
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
@@ -11,13 +12,13 @@
 				<div th:replace="fragments/navbars/navbar :: navbar">
 				</div>
 
-  <div class="" align="center">
+  <div class="contrainer" align="center">
   
       <p>HOME PAGE</p>
       <h2>USER LOGIN</h2>
       
 		<form th:action="@{/login}" method="POST">
-		
+		<div class="form-group">
 			<div th:if="${param.error}">
 				Email or Password Error
 			</div>
@@ -30,14 +31,13 @@
 				 You have registered account successfully!	<br/>
 			</div>
 			
-			Email:<input type="text" id="username" name="username" placeholder="username"/>
+			Email:<input class="form-control m-2 w-auto" type="text" id="username" name="username" placeholder="username@domain.com"/>
 			
-			Password:<input type="password" id="password" name="password" placeholder="password"/>
+			Password:<input class="form-control  m-2 w-auto" type="password" id="password" name="password" placeholder="password"/>
 			
-			<input type="submit" name="login_submit" id="login_submit" value="Login"/>
-			
-		</form>
-		<a href="/listProjects" th:href="@{/}">home/unsecure page</a>
+			<input class="btn btn-primary m-2 w-auto" type="submit" name="login_submit" id="login_submit" value="Login"/>
+		</div>	
+		</form>	
   </div>
 
 </body>
