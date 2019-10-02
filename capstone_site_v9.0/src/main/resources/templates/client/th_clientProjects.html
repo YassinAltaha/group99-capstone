@@ -20,16 +20,22 @@
 	
 	 	<div class="container-fluid" align="center">
 	 	<br/>
-		<h2>My Projects</h2>
-	
-		<div th:if="${myProjectList == null}">
-			Sorry you don't have any projects yet <br />
-		</div>
-		<div th:if="${msg}">
-			<p th:text=${msg} />
-		</div>
+
 		
 		<table class="table">
+		<thead class="bg-primary">
+			<tr align="center">
+				<th colspan="6" >
+				<h2>My Projects</h2>
+					<div th:if="${myProjectList == null}">
+						Sorry you don't have any projects yet <br />
+					</div>
+					<div th:if="${msg}">
+						<p th:text=${msg} />
+					</div>
+				</th>	
+			</tr>
+		</thead>
 			<thead class="bg-primary">
 				<tr align="center">
 					<th>Title</th>
