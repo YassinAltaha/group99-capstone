@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}" media="all"/>
 <link rel="stylesheet" type="text/css" href="resources/css/base.css" media="all" />
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
@@ -11,13 +12,12 @@
 				<div th:replace="fragments/navbars/navbar :: navbar">
 				</div>
 
-  <div class="" align="center">
+  <div class="container" align="center">
   
       <p>HOME PAGE</p>
       <h2>USER LOGIN</h2>
       
 		<form th:action="@{/login}" method="POST">
-		
 			<div th:if="${param.error}">
 				Email or Password Error
 			</div>
@@ -30,14 +30,16 @@
 				 You have registered account successfully!	<br/>
 			</div>
 			
-			Email:<input type="text" id="username" name="username" placeholder="username"/>
-			
-			Password:<input type="password" id="password" name="password" placeholder="password"/>
-			
-			<input type="submit" name="login_submit" id="login_submit" value="Login"/>
-			
-		</form>
-		<a href="/listProjects" th:href="@{/}">home/unsecure page</a>
+ 			<label for="username">Username </label>
+		    <input type="text" class="form-control w-auto mb-2" name="username" id="username" placeholder="email@domain.com" />
+
+		    <label for="passsword">Password</label>
+		    <input type="password" class="form-control w-auto mb-2" name="password" id="password" placeholder="password"/>
+		      
+		     <input type="submit" name="login_submit" id="login_submit" class="btn btn-primary mb-2" value="Login" />
+		    
+		
+		</form>	
   </div>
 
 </body>

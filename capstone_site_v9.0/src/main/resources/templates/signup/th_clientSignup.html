@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<link rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}" media="all"/>
 <link rel="stylesheet" type="text/css" href="resources/css/base.css" media="all" />
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
@@ -13,35 +14,36 @@
 
 
 		
- <div class="message-highlight" align="center">
+ <div class="container" align="center">
+ <br/>
 		<h2>Client Sign up</h2>
 
-		<form th:action="@{/saveClientInfo}" th:object="${client}" method="post">
+		<form th:action="@{/saveClientInfo}" th:object="${client}" method="POST">
 		<table>
 			<tr>
 				<td><label for="clientName">Name:</label> </td>
-				<td><input required th:field="*{clientName}" /></td>
+				<td><input class="form-control w-auto mb-2" required th:field="*{clientName}" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="clientCompany">Company:</label></td>
-				<td><input required th:field="*{clientCompany}" /></td>
+				<td><input class="form-control w-auto mb-2" required th:field="*{clientCompany}" /></td>
 			</tr>
 
 			<tr>
 			
-				<td><label for="clientContact">Contact:</label> </td>
-				<td><input required th:field="*{clientContact}" /></td>
+				<td><label for="clientContact">Contact:</label>  </td>
+				<td><input class="form-control w-auto " required th:field="*{clientContact}" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="clientAddress">Address:</label> </td>
-				<td><input required th:field="*{clientAddress}" /></td>
+				<td><input class="form-control w-auto " required th:field="*{clientAddress}" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="clientIndustry">Industry:</label></td>
-				<td><select required th:field="*{clientIndustry}" >
+				<td><select class="form-control w-auto mb-2" required th:field="*{clientIndustry}" >
 						<option value="Agriculture/Food Technology">Agriculture/Food Technology</option>
 						<option value="Building Technology">Building Technology</option>
 						<option value="Environmental Technology">Environmental Technology</option>
@@ -53,8 +55,8 @@
 			</tr>
 			
 			<tr>
-				<td><label for="clientScale">Organization Size:</label></td>
-				<td><select required th:field="*{clientScale}" >
+				<td><label  for="clientScale">Organization Size:</label></td>
+				<td><select class="form-control w-auto mb-2" required th:field="*{clientScale}" >
 						<option value="Large Enterprise">Large Enterprise(500+ employees)</option>
 						<option value="Small-to-medium Enterprise">Small-to-medium Enterprise(5-499 employees)</option>
 						<option value="Startup">Startup(1-4 employees)</option>
@@ -67,24 +69,24 @@
 			
 			<tr>
 				<td><label for="clientEmail">Email:</label> </td> 
-				<td><input required th:field="*{clientEmail}" /></td>
+				<td><input class="form-control w-auto mb-2" required th:field="*{clientEmail}" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="password">Password:</label></td>
-				<td><input type="password" required th:field="*{password}" /></td>
+				<td><input class="form-control w-auto mb-2" type="password" required th:field="*{password}" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="Confirm password">Confirm Password:</label></td>
-				<td><input type="password" required name="confirm_password" /></td>
+				<td><input class="form-control w-auto mb-2" type="password" required name="confirm_password" /></td>
 			</tr>
 
 			<tr>
-				<td colspan="2" align="center"> <input type="submit" value="Submit" /></td>
-			<tr>
-			
+				<td colspan="2" align="center"> <input class="btn btn-primary mb-2" type="submit" value="Submit" /></td>
+			</tr>
 			</table>
+			
 		</form>
 		
 		<table style="border-style: hidden;">
