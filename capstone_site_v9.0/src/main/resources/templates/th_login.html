@@ -12,13 +12,12 @@
 				<div th:replace="fragments/navbars/navbar :: navbar">
 				</div>
 
-  <div class="contrainer" align="center">
+  <div class="container" align="center">
   
       <p>HOME PAGE</p>
       <h2>USER LOGIN</h2>
       
 		<form th:action="@{/login}" method="POST">
-		<div class="form-group">
 			<div th:if="${param.error}">
 				Email or Password Error
 			</div>
@@ -31,12 +30,15 @@
 				 You have registered account successfully!	<br/>
 			</div>
 			
-			Email:<input class="form-control m-2 w-auto" type="text" id="username" name="username" placeholder="username@domain.com"/>
-			
-			Password:<input class="form-control  m-2 w-auto" type="password" id="password" name="password" placeholder="password"/>
-			
-			<input class="btn btn-primary m-2 w-auto" type="submit" name="login_submit" id="login_submit" value="Login"/>
-		</div>	
+ 			<label for="username">Username </label>
+		    <input type="text" class="form-control w-auto mb-2" name="username" id="username" placeholder="email@domain.com" />
+
+		    <label for="passsword">Password</label>
+		    <input type="password" class="form-control w-auto mb-2" name="password" id="password" placeholder="password"/>
+		      
+		     <input type="submit" name="login_submit" id="login_submit" class="btn btn-primary mb-2" value="Login" />
+		    
+		
 		</form>	
   </div>
 
