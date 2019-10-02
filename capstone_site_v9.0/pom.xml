@@ -144,7 +144,12 @@
         	<groupId>nz.net.ultraq.thymeleaf</groupId>
         	<artifactId>thymeleaf-layout-dialect</artifactId>
         </dependency>
-		
+
+        <dependency>
+        	<groupId>org.webjars.npm</groupId>
+        	<artifactId>bootstrap</artifactId>
+        	<version>4.3.1</version>
+        </dependency>
 	</dependencies>
 
 	<build>
