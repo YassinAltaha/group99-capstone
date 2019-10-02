@@ -22,11 +22,11 @@
 				Email or Password Error
 			</div>
 			
-			<div th:if="${param.logout}">
+			<div th:if="${param.logout}" class="alert alert-success w-25">
 				You have successfully logged out		
 			</div>
 			
-			<div th:if="${message}">
+			<div th:if="${message}" class="alert alert-danger w-25">
 				 You have registered account successfully!	<br/>
 			</div>
 			
