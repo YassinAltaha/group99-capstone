@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css" media="all"/>
 <link rel="stylesheet" type="text/css" href="resources/css/base.css" media="all" />
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
@@ -12,51 +14,52 @@
 	</div>
 
 		<div class="container" align="center">
-		<div class="wrapper block-row">
-			<div class="block large-text callout-with-stats welcome">
-
-
-				<div class="inner-wrapper title-block-wrapper">
-					<h2>Professor Sign Up</h2>
-				</div>
+		<table class="table" th:if="${errors != null}">
+			<tr th:each="error :${errors}" class="table-danger">
+				<td align="center" th:text="*{error}" colspan="2"></td>
+			</tr>
+		</table>
+				
 					<form th:action="@{/saveProf}" th:object="${professor}" method="post">
-					<table>
+					
+					<table class="table table-bordered bg-light text-dark">
+						<thead>
+							<tr>
+								<th colspan="2" >
+									<h2 align="center">Professor Sign Up</h2>
+								</th>
+							</tr>
+						</thead>
 						<tr>
 							<td><label for="profName">Name:</label> </td>
-							<td><input required th:field="*{profName}" /></td>
+							<td><input class="form-control w-auto mb-2" required th:field="*{profName}" /></td>
 						</tr>
 						
 						<tr>
 							<td><label for="program">Program:</label> </td>
-							<td><input required th:field="*{program}" /></td>
+							<td><input class="form-control w-auto mb-2" required th:field="*{program}" /></td>
 						</tr>
 						
 						<tr>
 							<td><label for="profEmail">Email:</label></td>
-							<td><input required th:field="*{profEmail}" /></td>
+							<td><input class="form-control w-auto mb-2" required th:field="*{profEmail}" /></td>
 						</tr>
 						
 						<tr>
 							<td><label for="password">Password:</label> </td>
-							<td><input required th:field="*{password}" type="password" /></td>
+							<td><input class="form-control w-auto mb-2" required th:field="*{password}" type="password" /></td>
 						</tr>
 						
 			
 						<tr>
-							<td colspan="2"> <input type="submit" value="Submit" /></td>
+							<td colspan="2" align="center"> <input class="btn btn-primary mb-2 w-25" type="submit" value="Submit" /></td>
 						<tr>
 						
 						</table>
 					</form>
-					<table style="border-style: hidden;">
-						<tr th:each="error :${errors}">
-							<td th:text="*{error}" colspan="2"></td>
-						</tr>
-					</table>
 					
 				</div>
-			</div>
-		</div>
+
 		
 			
 		

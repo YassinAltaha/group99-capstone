@@ -16,7 +16,7 @@
 		
  <div class="container" align="center">
  <br/>
-		<table class="table" th:if=${!errors.isEmpty()} >
+		<table class="table" th:if="${!errors.isEmpty()}" >
 			<tr th:each="error :${errors}" class="table-danger">
 				<td align="center" th:text="*{error}" colspan="2"></td>
 			</tr>
