@@ -1,5 +1,6 @@
 package ca.sheridancollege.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -97,7 +98,15 @@ public class StudentController {
 	public String JoinGroup(Model model) {
 
 		GroupDAO groupDAO = new GroupDAO();
-		List<GroupBean> groupList = groupDAO.getAllGroups();
+		List<GroupBean> raw_groupList = groupDAO.getAllGroups();
+		List<GroupBean> groupList = new ArrayList<GroupBean>();
+		for(GroupBean group : raw_groupList)
+		{
+			if(group.getGroup_members().size() > 4)
+			{
+				groupList.add(group);
+			}
+		}
 		model.addAttribute("groupList", groupList);
 		return "student/th_join_group";
 	}
@@ -109,6 +118,11 @@ public class StudentController {
 
 		try {
 			GroupBean group = groupDAO.getGroupById(id);
+			if(group.getGroup_members().size() == 4)
+			{
+				model.addAttribute("student", getAuthStudent());
+				return "student/th_group_info";
+			}
 			model.addAttribute("GroupInfo", group);
 			return "student/th_join_group_portal";
 			
