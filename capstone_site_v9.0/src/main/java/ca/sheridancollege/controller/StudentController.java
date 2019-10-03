@@ -230,12 +230,33 @@ public class StudentController {
 		
 		if(s.getGroup() != null)
 		{
-			if(s.getGroup().getGroupOwnerStudentId() == s.getId())
+			GroupBean g = s.getGroup();
+			if(g.getGroupOwnerStudentId() == s.getId())
 			{
-				model.addAttribute("error", "Group Leader cannot leave group");
-				model.addAttribute("student", s);
-				return "student/th_group_info";
-				
+				GroupDAO groupDAO = new GroupDAO();
+				if(g.getGroup_members().size() == 1)
+				{
+					s.setGroup(null);
+					dao.updateStudent(s);
+					
+					g.setGroup_members(null);
+					g.setGroupOwnerStudentId(0);
+					
+					groupDAO.deleteGroup(g);
+					
+					model.addAttribute("student", s);
+					return "student/th_group_info";
+					
+				}else
+				{
+					g.setGroupOwnerStudentId(g.getGroup_members().get(1).getId());
+					groupDAO.updateGroup(g);
+					s.setGroup(null);
+					dao.updateStudent(s);
+					model.addAttribute("student", s);
+					return "student/th_group_info";
+				}
+			
 			}else
 			{	
 				s.setGroup(null);
