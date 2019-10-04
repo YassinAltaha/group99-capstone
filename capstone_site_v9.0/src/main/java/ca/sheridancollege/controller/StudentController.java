@@ -44,6 +44,7 @@ public class StudentController {
 	// Checking StudentID
 	@RequestMapping("saveStudent")
 	public String saveStudent(Model model, @ModelAttribute Student student, @RequestParam String confirm_password) {
+		
 		synchronized (Student.class) {
 			// student validation
 			if (dao.validateStudent(student).isEmpty()) {
