@@ -54,10 +54,10 @@
 			
 			
 			<tr th:each="project: ${myProjectList}" >
-			    <td class="w-25" th:text="${project.title}" />
-			    <td class="text-break" th:text="${project.description}"></td>
-			    <td th:text="${project.status}" />
-			    <td th:text="${project.profNote}" />
+			    <td class="text-break w-25" th:text="${project.title}" />
+			    <td class="text-break w-100" th:text="${project.description}"></td>
+			    <td class="text-break w-25" th:text="${project.status}" />
+			    <td class="text-break w-25" th:text="${project.profNote}" />
 			    <td>
 			     <a class="btn btn-primary btn-sm" th:href="@{/client/editMyProject/{id}(id = ${project.projectId})}">Edit</a> 	    
 			    </td>
