@@ -20,7 +20,7 @@
 
 				<div class="inner-wrapper title-block-wrapper">
 				<br/>
-		<h2>Update the Project Status & Notes</h2>
+		<h2>Update Project Status & Notes</h2>
 		</div>
 		<form th:action="@{/professor/updateProject}" th:object="${project}" method="POST">
 			<input type="hidden" name="projectId" th:field="${project.projectId}" />
