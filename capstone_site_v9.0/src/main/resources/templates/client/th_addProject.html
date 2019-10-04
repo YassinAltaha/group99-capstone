@@ -6,51 +6,62 @@
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
 <title>Add Project</title>
-<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css" media="all"/>
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css" media="all" />
 </head>
 <body>
 
-   
-	<div th:replace="fragments/navbars/navbar :: clientNav">
-	</div>
-	
-	
-<!-- View-dependent nav area -->
-	
-	 	<div class="container" align="center">
-	
-	 	<form th:action="@{/client/saveProject}" th:object="${project}" method="post" id="projectForm">
-	 		<table class="table">
-		 	 <thead class="bg-primary" align="center">
-			 	<tr>
-					<th colspan="2">
-						<h2 th:text="'Create Project for '+ ${client.clientName}"></h2>
-					
-						<div th:if="${msg != null}">
-							<p th:value="${msg}"> </p>
-						</div>
-					</th>
-				</tr>
-			  </thead>
-				<tr>
-					<td class="w-25"><label >Project Title:</label></td>
-					<td> <input class="form-control w-autos col-xl-7" required th:field="*{title}" /></td>
-				</tr>
-					
-				<tr>
-					<td class="w-25"><label >Project Description: </label></td>
-					<td><textarea class="form-control w-autos" required form="projectForm" th:field="*{description}" style="width:100%; height:130px;" > </textarea></td>
-				</tr>
-					
-				<tr>
-					<td align="center" colspan="2"><input class="btn btn-primary mb-2" type="submit" value="Submit New Project" /></td>
-				</tr>
-	
-			</table>	
-		</form>
 
-	</div>
-	
+	<div th:replace="fragments/navbars/navbar :: clientNav"></div>
 
+
+	<!-- View-dependent nav area -->
+	<div th:fragment="addProject" class="bg-grey">
+		<div class="container" align="center">
+			<div class="wrapper block-row">
+				<div class="bg-white" align="center">
+				<div class="inner-wrapper">
+
+					<form th:action="@{/client/saveProject}" th:object="${project}"
+						method="post" id="projectForm">
+						<table class="table">
+							<thead class="bg-primary" align="center">
+								<tr>
+									<th colspan="2">
+										<h2 th:text="'Create Project for '+ ${client.clientName}"></h2>
+
+										<div th:if="${msg != null}">
+											<p th:value="${msg}"></p>
+										</div>
+									</th>
+								</tr>
+							</thead>
+							<tr>
+								<td class="w-25"><label>Project Title:</label></td>
+								<td><input class="form-control w-autos col-xl-7" required
+									th:field="*{title}" /></td>
+							</tr>
+
+							<tr>
+								<td class="w-25"><label>Project Description: </label></td>
+								<td><textarea class="form-control w-autos" required
+										form="projectForm" th:field="*{description}"
+										style="width: 100%; height: 130px;"> </textarea></td>
+							</tr>
+
+							<tr>
+								<td align="center" colspan="2"><input
+									class="btn btn-primary mb-2" type="submit"
+									value="Submit New Project" /></td>
+							</tr>
+
+						</table>
+					</form>
+
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
