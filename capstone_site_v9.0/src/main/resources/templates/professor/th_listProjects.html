@@ -123,7 +123,7 @@
 				<tr th:each="project : *{client.projectList}">
 					<td class="text-break w-25"><p th:utext="*{project.title}"> </p></td>
 					<td class="text-break w-100"><p th:utext="*{project.description}"></p></td>
-					<td class="text-break w-25"><p th:utext="*{project.status}"></p></td>
+					<td class="w-25"><p th:utext="*{project.status}"></p></td>
 					<td class="text-break w-25"><p th:utext="*{project.profNote}"></p></td>
 					<td class="text-break w-25"><p th:utext="*{project.groupBean?.groupName}"></p></td>
 					<td>

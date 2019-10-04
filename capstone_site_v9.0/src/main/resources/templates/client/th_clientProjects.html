@@ -1,13 +1,13 @@
 
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" class="bg-grey">
 <head>
 <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css" media="all"/>
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
 <title>My Projects</title>
 </head>
-<body>
+<body >
 
    
 	<div th:replace="fragments/navbars/navbar :: clientNav">
@@ -56,7 +56,7 @@
 			<tr th:each="project: ${myProjectList}" >
 			    <td class="text-break w-25" th:text="${project.title}" />
 			    <td class="text-break w-100" th:text="${project.description}"></td>
-			    <td class="text-break w-25" th:text="${project.status}" />
+			    <td class="w-25" th:text="${project.status}" />
 			    <td class="text-break w-25" th:text="${project.profNote}" />
 			    <td>
 			     <a class="btn btn-primary btn-sm" th:href="@{/client/editMyProject/{id}(id = ${project.projectId})}">Edit</a> 	    
