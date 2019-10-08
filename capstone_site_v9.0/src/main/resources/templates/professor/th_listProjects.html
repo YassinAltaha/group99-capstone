@@ -8,7 +8,7 @@
 <!-- <meta charset="ISO-8859-1"> -->
 <title>List of Projects</title>
 </head>
-<body>
+<body class="bg-grey">
 
   
 	<div th:replace="fragments/navbars/navbar :: profNav">
@@ -16,7 +16,7 @@
 	
 <!-- View-dependent nav area -->
 
-		<div class="container" align="center">
+		<div class="container-fluid" align="center">
 				
 			<br/>
 		<div th:if="${msg}" class="alert alert-success">
@@ -79,7 +79,7 @@
 			<h2>All Projects</h2>
 		</div>
 
-		<table class="table">
+		<table class="table bg-white">
 			
 			<div th:each="client : *{clientList}">
 				<thead class="thead-dark text-white" align="center">
@@ -126,7 +126,7 @@
 					<td class="text-break w-25"><p th:utext="*{project.profNote}"></p></td>
 					<td class="text-break w-25"><p th:utext="*{project.groupBean?.groupName}"></p></td>
 					<td>
-					<a th:href="@{/professor/profEditProject/{id}(id=${project.projectId})}"> Edit </a>
+					<a class="btn btn-primary mb-2" th:href="@{/professor/profEditProject/{id}(id=${project.projectId})}"> Edit </a>
 					</td>
 				</tr> 
 			</div>	
