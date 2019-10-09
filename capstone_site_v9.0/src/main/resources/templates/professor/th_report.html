@@ -2,22 +2,168 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" class="bg-grey">
 <head>
-
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}"
+	media="all" />
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
 <title>Reports</title>
 </head>
 <body class="bg-grey">
 
- 
-   
-	<div th:replace="fragments/navbars/navbar :: profNav">
+
+
+	<div th:replace="fragments/navbars/navbar :: profNav"></div>
+
+	<!-- View-dependent nav area -->
+
+	<div class="container-fluid" align="center">
+		<br />
+		<form th:action="@{/professor/reportStatus}" action="">
+			<select class="form-control w-auto mb-2" required name="reportType">
+				<option value="noGroupStudent">Students with no group</option>
+				<option value="noProjectGroup">Groups with no projects</option>
+				<option value="allGroups">All Groups</option>
+				<option value="approvedProjects">Approved Projects</option>
+				<option value="rejectedProjects">Rejected Projects</option>
+				<option value="pendingProjects">Pending Projects</option>
+			</select> <input type="submit" class="btn btn-primary mb-2" value="get Report">
+
+		</form>
+
+		<th:block th:switch="${reportType}">
+
+			<div th:case="'noGroupStudent'">
+				<table class="table table-bordered table-hover bg-white">
+					<thead>
+						<tr>
+							<th>Student Name</th>
+							<th>Student Program</th>
+							<th>Student Campus</th>
+							<th>Student Email</th>
+						</tr>
+					</thead>
+
+					<tr th:each="student : ${studentList}">
+						<td><p th:utext="*{student.name}" /></td>
+						<td><p th:utext="*{student.program}" /></td>
+						<td><p th:utext="*{student.campus}" /></td>
+						<td><p th:utext="*{student.student_email}" /></td>
+					</tr>
+				</table>
+
+			</div>
+			
+			
+			<div th:case="'noProjectGroup'">
+				<table class="table table-bordered table-hover bg-white">
+					<thead>
+						<tr>
+							<th>Group Name</th>
+							<th>Students</th>
+							<th>Program</th>
+						</tr>
+					</thead>
+
+					<tr th:each="group : ${noProjectList}">
+						<td><p th:utext="*{group.groupName}" /></td>
+						<td><ul th:each="student : *{group.group_members}">
+								<li th:utext="${student.name}"></li>
+							</ul></td>
+						<td><p th:utext="*{group.program}" /></td>
+					</tr>
+				</table>
+			</div>
+			<div th:case="'allGroups'">
+				<table class="table table-bordered table-hover bg-white">
+					<thead>
+						<tr>
+							<th>Group Name</th>
+							<th>Students</th>
+							<th>Program</th>
+						</tr>
+						<tr th:each="group : ${groupList}">
+							<td><p th:utext="*{group.groupName}" /></td>
+							<td><ul th:each="student : *{group.group_members}">
+									<li th:utext="${student.name}"></li>
+								</ul></td>
+							<td><p th:utext="*{group.program}" /></td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div th:case="'approvedProjects'">
+				<table class="table table-bordered table-hover bg-white">
+					<thead>
+						<tr>
+							<th>Project Title</th>
+							<th>Client Name</th>
+							<th>Client Phone</th>
+							<th>Client Email</th>
+						</tr>
+						<tr th:each="project : ${approvedProjects}">
+							<td class="text-break w-25"><p th:utext="*{project.title}" /></td>
+							<td><p th:utext="*{project.client.clientName}" /></td>
+							<td><p th:utext="*{project.client.clientContact}" /></td>
+							<td><p th:utext="*{project.client.clientEmail}" /></td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div th:case="'rejectedProjects'">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>Project Title</th>
+							<th>Client Name</th>
+							<th>Client Phone</th>
+							<th>Client Email</th>
+						</tr>
+						<tr th:each="project : ${rejectedProjects}">
+							<td class="text-break w-25"><p th:utext="*{project.title}" /></td>
+							<td><p th:utext="*{project.client.clientName}" /></td>
+							<td><p th:utext="*{project.client.clientContact}" /></td>
+							<td><p th:utext="*{project.client.clientEmail}" /></td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div th:case="'pendingProjects'">
+				<table class="table table-bordered table-hover bg-white">
+					<thead>
+						<tr>
+							<th>Project Title</th>
+							<th>Client Name</th>
+							<th>Client Phone</th>
+							<th>Client Email</th>
+						</tr>
+						<tr th:each="project : ${pendingProjects}">
+							<td class="text-break w-25"><p th:utext="*{project.title}" /></td>
+							<td><p th:utext="*{project.client.clientName}" /></td>
+							<td><p th:utext="*{project.client.clientContact}" /></td>
+							<td><p th:utext="*{project.client.clientEmail}" /></td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</th:block>
+
 	</div>
-	
-<!-- View-dependent nav area -->
-	
-		<div class="container" align="center">
-		<div class="wrapper block-row">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- 		<div class="wrapper block-row">
 			<div class="block large-text callout-with-stats welcome">
 
 
@@ -27,7 +173,7 @@
 				</div>
 					<br /> <br />
 
-					<!--  message div to display the report message -->
+					 message div to display the report message
 					<h2>Percentage of the Status Assigned to Groups</h2>
 					<table>
 						<tr>
@@ -47,9 +193,9 @@
 					</form>
 				
 			</div>
-		</div>
-	</div>
-	
+		</div> -->
+
+
 
 </body>
 </html>

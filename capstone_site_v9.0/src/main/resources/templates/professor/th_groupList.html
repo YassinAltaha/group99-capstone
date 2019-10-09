@@ -1,7 +1,8 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security" class="bg-grey">
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	class="bg-grey">
 <head>
 
 <meta charset="UTF-8">
@@ -9,69 +10,65 @@
 <title>Change Password</title>
 </head>
 <body class="bg-grey">
-  
-   
-   
-	<div th:replace="fragments/navbars/navbar :: profNav">
-	</div>
-	
-		<div class="container" align="center">
+
+
+
+	<div th:replace="fragments/navbars/navbar :: profNav"></div>
+
+	<div class="container" align="center">
 		<div class="wrapper block-row">
 			<div class="block large-text callout-with-stats welcome">
 
 
 				<div class="inner-wrapper title-block-wrapper">
 					<h2>Group List</h2>
-				</div>	
-					<div th:if="${groups!=null and !groups.empty}" >
-						
-					
-				
-			
-				<table>
-					<tr>
-						<th>Group ID</th>
-						<th>Group Name</th>
-						<th>Group Program</th>
-						<th>Group Members</th>
-						<th>Project Name</th>
-						
-					</tr>
-					
-					<tr th:each="group : ${groups}" >
-					
-						<td th:utext="*{group.groupId}"></td>
-						<td th:utext="*{group.groupName}"></td>
-						<td th:utext="*{group.program}"></td>
-						
-						<td >
-							<ul th:each="student : *{group.group_members}">
-								<li th:utext="${student.name}"></li>
-							</ul>
-						</td>
-											
-						<td th:if="${group.project != null}" >
-							<p th:utext="*{group.project.title}"></p>
-						</td>
-						<td th:unless="${group.project != null}" >
-							<p>-</p>
-						</td>
-						 
-					</tr>
-				</table>
-			</div>
-			
-			<div th:unless="${groups!=null and !groups.empty}">
-				<h1> No Groups Available</h1>
-			</div>
-	
+				</div>
+				<div th:if="${groups!=null and !groups.empty}">
 
-		
-		</div>
-		</div>
-		</div>
+					<table>
+						<tr>
+							<th>Group ID</th>
+							<th>Group Name</th>
+							<th>Group Program</th>
+							<th>Group Members</th>
+							<th>Project Name</th>
 
-	
+						</tr>
+
+						<tr th:each="group : ${groups}">
+
+							<td th:utext="*{group.groupId}"></td>
+							<td th:utext="*{group.groupName}"></td>
+							<td th:utext="*{group.program}"></td>
+
+							<td>
+								<ul th:each="student : *{group.group_members}">
+									<li th:utext="${student.name}"></li>
+								</ul>
+							</td>
+
+							<td th:if="${group.project != null}">
+								<p th:utext="*{group.project.title}"></p>
+							</td>
+							<td th:unless="${group.project != null}">
+								<p>-</p>
+							</td>
+
+						</tr>
+					</table>
+				</div>
+
+				<div th:unless="${groups!=null and !groups.empty}">
+					<h1>No Groups Available</h1>
+				</div>
+
+
+
+			</div>
+		</div>
+	</div>
+
+
 
 </body>
 </html>

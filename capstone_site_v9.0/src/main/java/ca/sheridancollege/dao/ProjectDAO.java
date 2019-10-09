@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import ca.sheridancollege.bean.Client;
 import ca.sheridancollege.bean.GroupBean;
 import ca.sheridancollege.bean.Project;
 
@@ -178,6 +179,19 @@ public class ProjectDAO {
 
 		session.getTransaction().commit();
 		session.close();
+	}
+	
+	public List<Project> getAllProjects() {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		Query query = session.createQuery("from Project");
+		List<Project> projectList = (List<Project>) query.getResultList();
+
+		session.getTransaction().commit();
+		session.close();
+
+		return projectList;
 	}
 
 }

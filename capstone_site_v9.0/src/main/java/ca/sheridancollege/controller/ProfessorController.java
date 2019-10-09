@@ -19,16 +19,20 @@ import ca.sheridancollege.dao.ClientDAO;
 import ca.sheridancollege.dao.GroupDAO;
 import ca.sheridancollege.dao.ProfDAO;
 import ca.sheridancollege.dao.ProjectDAO;
+import ca.sheridancollege.dao.StudentDAO;
 import ca.sheridancollege.bean.Client;
 import ca.sheridancollege.bean.GroupBean;
 import ca.sheridancollege.bean.Professor;
 import ca.sheridancollege.bean.Project;
+import ca.sheridancollege.bean.Student;
 
 @Controller
 public class ProfessorController {
 	ProfDAO profDAO = new ProfDAO();
 	ProjectDAO projectDAO = new ProjectDAO();
 	ClientDAO clientDAO = new ClientDAO();
+	StudentDAO studentDAO = new StudentDAO();
+	GroupDAO groupDAO = new GroupDAO();
 
 	@GetMapping("prof")
 	public String makeAdmin() {
@@ -237,9 +241,90 @@ public class ProfessorController {
 
 	// GO TO - Report status
 	@RequestMapping("professor/reportStatus")
-	public String reportParties(Model model) {
-		List<Double> statusPerList = projectDAO.statusPercentage();
-		model.addAttribute("statusPerList", statusPerList);
+	public String reportParties(Model model, @RequestParam String reportType) {
+		
+		switch(reportType)
+		{
+		
+			case "noGroupStudent" :{
+				List<Student> studentList = studentDAO.getAllStudents();
+				List<Student> noGroupList = new ArrayList<Student>();
+				for(Student s : studentList)
+				{
+					if(s.getGroup() == null)
+					{
+						noGroupList.add(s);
+					}
+				}
+				model.addAttribute("studentList", noGroupList);
+				break;
+			}
+			case "noProjectGroup" :{
+				List<GroupBean> allGroups = groupDAO.getAllGroups();
+				List<GroupBean> noProjectList = new ArrayList<GroupBean>();
+				for(GroupBean g : allGroups)
+				{
+					if(g.getProject() == null)
+					{
+						noProjectList.add(g);
+					}
+				}
+				model.addAttribute("noProjectList", noProjectList);
+				break;
+			}
+			
+			case "allGroups" : {
+				model.addAttribute("groupList", groupDAO.getAllGroups());
+				break;
+			}
+			
+			case "approvedProjects" : {
+				List<Project> allProjects = projectDAO.getAllProjects();
+				List<Project> pList = new ArrayList<Project>();
+				for(Project p : allProjects)
+				{
+					if(p.getStatus().equals("Approved"))
+					{
+						pList.add(p);
+					}
+				}
+				model.addAttribute("approvedProjects", pList);
+				break;
+			}
+			case "rejectedProjects" : {
+				List<Project> allProjects = projectDAO.getAllProjects();
+				List<Project> pList = new ArrayList<Project>();
+				for(Project p : allProjects)
+				{
+					if(p.getStatus().equals("Rejected"))
+					{
+						pList.add(p);
+					}
+				}
+				model.addAttribute("rejectedProjects", pList);
+				break;
+			}
+			case "pendingProjects" : {
+				List<Project> allProjects = projectDAO.getAllProjects();
+				List<Project> pList = new ArrayList<Project>();
+				for(Project p : allProjects)
+				{
+					if(p.getStatus().equals("Pending"))
+					{
+						pList.add(p);
+					}
+				}
+				model.addAttribute("pendingProjects", pList);
+				break;
+			}
+			
+		
+			
+		}
+		
+		
+		
+		model.addAttribute("reportType", reportType);
 		return "professor/th_report";
 	}
 
