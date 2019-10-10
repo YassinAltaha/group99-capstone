@@ -43,7 +43,7 @@ public class StudentController {
 	// Checking Email
 	// Checking StudentID
 	@RequestMapping("saveStudent")
-	public String saveStudent(Model model, @ModelAttribute Student student, @RequestParam String confirm_password) {
+	public String saveStudent(Model model, @ModelAttribute Student student, @RequestParam String confirm_password, @RequestParam String prof_code) {
 		
 		synchronized (Student.class) {
 			// student validation
@@ -53,18 +53,25 @@ public class StudentController {
 					
 					if(student.getPassword().equals(confirm_password))
 					{
-						// email IS new
-						// Checking if studentID is unique
-						if (dao.checkStudenID(student.getStudent_id()) == false) {
-							dao.addStudent(student);
-							return "th_login";
+						// Checking if Professor Code is matched
+						if(dao.checkProfCode(prof_code))
+						{
+							// email IS new
+							// Checking if studentID is unique
+							if (dao.checkStudenID(student.getStudent_id()) == false) {
+								dao.addStudent(student);
+								return "th_login";
+							} else {
+								// StudentID is used
+								model.addAttribute("errors", "Student ID is already registered");
+								return "signup/th_studentSignup";
+							}
 						} else {
-							// StudentID is used
-							model.addAttribute("errors", "Student ID is already registered");
+							// Professor Code is not matched 
+							model.addAttribute("errors", "Professor Code does not Exist");
 							return "signup/th_studentSignup";
 						}
-					}else
-					{
+					} else {
 						model.addAttribute("errors", "Passwords do not match");
 						return "signup/th_studentSignup";
 					}

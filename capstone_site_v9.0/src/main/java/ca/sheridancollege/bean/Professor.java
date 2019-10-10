@@ -25,7 +25,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Data 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -56,11 +56,23 @@ public class Professor implements Serializable {
 	@Column(name = "role", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Role Role;
+	
+	@Column(name = "profCode", nullable = true, length = 45)
+	//@NotNull(message = "Please Enter a Pass-code for Students.")
+	private String profCode;
 
 	public Professor(String profName, String profEmail, String password, String program) {
 		this.profName = profName;
 		this.profEmail = profEmail;
 		this.password = password;
 		this.program = program;
+	}
+	
+	public Professor(String profName, String profEmail, String password, String program, String profCode) {
+		this.profName = profName;
+		this.profEmail = profEmail;
+		this.password = password;
+		this.program = program;
+		this.profCode = profCode;
 	}
 }

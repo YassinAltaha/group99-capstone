@@ -24,7 +24,7 @@ import ca.sheridancollege.dao.ProjectDAO;
 public class ClientController {
 	
 	//Client Signup(form)
-	@RequestMapping("signup")
+	@RequestMapping("addClient")
 	public String addClientInfo(Model model) {
 		Client client = new Client();
 		model.addAttribute("errors", "");

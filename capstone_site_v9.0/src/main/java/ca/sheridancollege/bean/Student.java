@@ -42,7 +42,7 @@ public class Student implements Serializable {
 	@Size(min = 2, max = 30, message = "Name must between 2 - 30 letters")
 	private String name;
 	
-	@Column(name = "program", nullable = false, length = 45)
+	@Column(name = "program", nullable = false, length = 90)
 	@NotNull(message = "Please enter your program")
 	@Size(min = 2, max = 30, message = "Program must between 2 - 30 letters")
 	private String program;

@@ -39,7 +39,8 @@ public class ProfessorController {
 		Professor admin = new Professor("adminName", // professor name
 				"admin@sheridancollege.ca", // account
 				"admin", // password
-				"ADMIN" // program
+				"ADMIN", // program
+				"TestCode" // profCode
 		);
 		try {
 			profDAO.addProf(admin);

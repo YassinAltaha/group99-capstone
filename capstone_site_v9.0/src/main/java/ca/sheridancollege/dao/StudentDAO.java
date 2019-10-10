@@ -15,6 +15,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import ca.sheridancollege.bean.Professor;
 import ca.sheridancollege.bean.Project;
 import ca.sheridancollege.bean.Role;
 import ca.sheridancollege.bean.Student;
@@ -129,6 +130,24 @@ public class StudentDAO {
 			return null;
 		} else {
 			return studentList;
+		}
+	}
+	
+	public Boolean checkProfCode(String profCode) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		Query query = session.createQuery("from Professor where profCode=:profCode");
+		query.setParameter("profCode", profCode);
+
+		List<Professor> p = (List<Professor>) query.getResultList();
+		session.getTransaction().commit();
+		session.close();
+
+		if (p.size() > 0) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 
