@@ -2,6 +2,7 @@ package ca.sheridancollege.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.security.core.Authentication;
@@ -14,18 +15,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import ca.sheridancollege.bean.Client;
 import ca.sheridancollege.bean.GroupBean;
 import ca.sheridancollege.bean.Professor;
+import ca.sheridancollege.bean.Project;
 import ca.sheridancollege.bean.Student;
 import ca.sheridancollege.dao.GroupDAO;
+import ca.sheridancollege.dao.ProjectDAO;
 import ca.sheridancollege.dao.StudentDAO;
 
 @Controller
 public class StudentController {
 
 	StudentDAO dao = new StudentDAO();
+	ProjectDAO projectDAO = new ProjectDAO();
 
 	// Signup 1.1
 	// Student Sign-up(form)
@@ -44,15 +49,14 @@ public class StudentController {
 	// Checking StudentID
 	@RequestMapping("saveStudent")
 	public String saveStudent(Model model, @ModelAttribute Student student, @RequestParam String confirm_password) {
-		
+
 		synchronized (Student.class) {
 			// student validation
 			if (dao.validateStudent(student).isEmpty()) {
 				// Checking if email is unique
 				if (dao.checkStudentByEmail(student.getStudent_email()) == false) {
-					
-					if(student.getPassword().equals(confirm_password))
-					{
+
+					if (student.getPassword().equals(confirm_password)) {
 						// email IS new
 						// Checking if studentID is unique
 						if (dao.checkStudenID(student.getStudent_id()) == false) {
@@ -63,12 +67,11 @@ public class StudentController {
 							model.addAttribute("errors", "Student ID is already registered");
 							return "signup/th_studentSignup";
 						}
-					}else
-					{
+					} else {
 						model.addAttribute("errors", "Passwords do not match");
 						return "signup/th_studentSignup";
 					}
-					
+
 				} else {
 					// email is used
 					model.addAttribute("errors", "This email is already in use");
@@ -83,7 +86,6 @@ public class StudentController {
 		}
 	}
 
-	// TODO FINISH MAIN PAGE
 	// ADD delete Group
 	@RequestMapping("student/group_info")
 	public String groupInfo(Model model) {
@@ -99,10 +101,8 @@ public class StudentController {
 		GroupDAO groupDAO = new GroupDAO();
 		List<GroupBean> raw_groupList = groupDAO.getAllGroups();
 		List<GroupBean> groupList = new ArrayList<GroupBean>();
-		for(GroupBean group : raw_groupList)
-		{
-			if(group.getGroup_members().size() > 4)
-			{
+		for (GroupBean group : raw_groupList) {
+			if (group.getGroup_members().size() > 4) {
 				groupList.add(group);
 			}
 		}
@@ -117,20 +117,17 @@ public class StudentController {
 
 		try {
 			GroupBean group = groupDAO.getGroupById(id);
-			if(group.getGroup_members().size() == 4)
-			{
+			if (group.getGroup_members().size() == 4) {
 				model.addAttribute("student", getAuthStudent());
 				return "student/th_group_info";
 			}
 			model.addAttribute("GroupInfo", group);
 			return "student/th_join_group_portal";
-			
-		}catch(Exception e)
-		{
+
+		} catch (Exception e) {
 			model.addAttribute("error", "Sorry, there was an error joining this group");
 			return "student/th_join_group";
 		}
-
 	}
 
 	@RequestMapping(value = "student/join_group/{id}", method = RequestMethod.POST)
@@ -152,7 +149,7 @@ public class StudentController {
 
 				s.setGroup(group);
 				dao.updateStudent(s);
-				
+
 				group.getGroup_members().add(s);
 				groupDAO.updateGroup(group);
 
@@ -160,12 +157,12 @@ public class StudentController {
 //				model.addAttribute("GroupInfo", group);
 				model.addAttribute("student", s);
 				return "student/th_group_info";
-			}else {
-				
+			} else {
+
 				model.addAttribute("error", "Incorrect passcode");
 				model.addAttribute("GroupInfo", group);
-				return "student/th_join_group_portal";	
-				
+				return "student/th_join_group_portal";
+
 			}
 		} else {
 			model.addAttribute("error", "Sorry, there was an error joining this group");
@@ -202,7 +199,7 @@ public class StudentController {
 		// Add group to DB
 		// set the student to the group
 		// check groupName if it exists
-		
+
 		if (groupDAO.searchGroupByName(group.getGroupName()).isEmpty()) {
 			// Creating a 4 digit pass code for group
 			Random rn = new Random();
@@ -224,7 +221,7 @@ public class StudentController {
 
 //			model.addAttribute("inGroup", true);
 //			model.addAttribute("GroupInfo", s.getGroup());
-			
+
 			model.addAttribute("student", s);
 			return "student/th_group_info";
 
@@ -234,34 +231,29 @@ public class StudentController {
 			return "student/th_create_group";
 		}
 	}
-	
-	
+
 	@RequestMapping("student/leave_Group")
 	public String leaveGroup(Model model) {
-		
+
 		Student s = getAuthStudent();
-		
-		if(s.getGroup() != null)
-		{
+
+		if (s.getGroup() != null) {
 			GroupBean g = s.getGroup();
-			if(g.getGroupOwnerStudentId() == s.getId())
-			{
+			if (g.getGroupOwnerStudentId() == s.getId()) {
 				GroupDAO groupDAO = new GroupDAO();
-				if(g.getGroup_members().size() == 1)
-				{
+				if (g.getGroup_members().size() == 1) {
 					s.setGroup(null);
 					dao.updateStudent(s);
-					
+
 					g.setGroup_members(null);
 					g.setGroupOwnerStudentId(0);
-					
+
 					groupDAO.deleteGroup(g);
-					
+
 					model.addAttribute("student", s);
 					return "student/th_group_info";
-					
-				}else
-				{
+
+				} else {
 					g.setGroupOwnerStudentId(g.getGroup_members().get(1).getId());
 					groupDAO.updateGroup(g);
 					s.setGroup(null);
@@ -269,70 +261,128 @@ public class StudentController {
 					model.addAttribute("student", s);
 					return "student/th_group_info";
 				}
-			
-			}else
-			{	
+
+			} else {
 				s.setGroup(null);
 				dao.updateStudent(s);
 				model.addAttribute("student", s);
 				return "student/th_group_info";
 			}
 
-		}else
-		{
+		} else {
 			model.addAttribute("error", "Student is not part of a group");
 			model.addAttribute("student", s);
 			return "student/th_group_info";
-		}	
+		}
 	}
-	
-	//Change Password 1.1
-	@RequestMapping(value="student/change_password" ,method = RequestMethod.GET)
-	public String changePassword(Model model)
-	{
+
+	// Change Password 1.1
+	@RequestMapping(value = "student/change_password", method = RequestMethod.GET)
+	public String changePassword(Model model) {
 		return "student/th_change_password";
 	}
-	
-	//Change Password 1.2
-		@RequestMapping(value="student/change_password" ,method=RequestMethod.POST)
-		public String changePassword_POST(Model model,
-				@RequestParam String old_password,
-				@RequestParam String new_password, 
-				@RequestParam String confirm_password
-				)
-		{
-			
-			if(new_password.equals(confirm_password))
-			{
-				Student s = getAuthStudent();
-				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-				
-				if(passwordEncoder.matches(old_password, s.getPassword()))
-				{	
-					try {
+
+	// Change Password 1.2
+	@RequestMapping(value = "student/change_password", method = RequestMethod.POST)
+	public String changePassword_POST(Model model, @RequestParam String old_password, @RequestParam String new_password,
+			@RequestParam String confirm_password) {
+
+		if (new_password.equals(confirm_password)) {
+			Student s = getAuthStudent();
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+			if (passwordEncoder.matches(old_password, s.getPassword())) {
+				try {
 					String new_encoded_pass = passwordEncoder.encode(new_password);
 					s.setPassword(new_encoded_pass);
 					dao.updateStudent(s);
 					model.addAttribute("error", "Password was successfully updated");
-					}
-					catch(Exception e){
-						
-						model.addAttribute("error", "Error updating password");
-						System.out.println(e);
-					}
-				}else
-				{
-					model.addAttribute("error", "Old password is incorrect");
+				} catch (Exception e) {
+
+					model.addAttribute("error", "Error updating password");
+					System.out.println(e);
 				}
-			}else
-			{
-				model.addAttribute("error", "Sorry, passwords don't match");
+			} else {
+				model.addAttribute("error", "Old password is incorrect");
+			}
+		} else {
+			model.addAttribute("error", "Sorry, passwords don't match");
+		}
+
+		return "student/th_change_password";
+
+	}
+
+	@RequestMapping(value = "student/rank_projects", method = RequestMethod.GET)
+	public String rankProjects(Model model) {
+		Student s = getAuthStudent();
+		
+		// Check student is in a group
+		if (s.getGroup() != null) {
+			GroupBean g = s.getGroup();
+
+			/// Check group doesn't have any rankings
+//			if (g.getProjectRankings().isEmpty() || g.getProjectRankings() == null) {
+
+				// Display approved projects
+				List<Project> projectList = projectDAO.getApprovedProjects();
+
+//				if (projectList.isEmpty() || projectList == null) {
+//					model.addAttribute("error", "There are no projects available yet");
+//				} else {
+					model.addAttribute("projectList", projectList);
+
+//				}
+//			} 
+//			else {
+//				model.addAttribute("error", "Your group has already submitted rankings");
+//			}
+		} else {
+			model.addAttribute("error", "You are not yet in a group");
+		}
+		return "student/th_rank_projects";
+	}
+	
+	
+
+	@RequestMapping(value = "student/rank_projects", method = RequestMethod.POST)
+	public String submitForm(Model model, @RequestParam int proj1, @RequestParam int proj2, @RequestParam int proj3,
+			@RequestParam int proj4, @RequestParam int proj5) {
+
+		Student s = getAuthStudent();
+		GroupBean g = s.getGroup();
+		GroupDAO groupDAO = new GroupDAO(); 
+		
+//		try {
+			g.getProjectRankings().clear();
+				
+			int[] rank = { proj1, proj2, proj3, proj4, proj5 };
+
+			for (int i = 0; i < 5; i++) {
+				Project p = projectDAO.searchProjectById(rank[i]);
+				g.getProjectRankings().add(p);
+//				System.out.println(g.getProjectRankings().get(i).getProjectId());
 			}
 			
-			return "student/th_change_password";
+			groupDAO.updateGroup(g);
 			
-		}
-		
+			List<Project> list = g.getProjectRankings();
+			model.addAttribute("group", list);
+			
+			model.addAttribute("success", "Project rankings saved");
+
+			
+//		} catch (Exception e) {
+//			model.addAttribute("error", "Project rankings could not be saved");	
+//		}
+
+		// Display approved projects
+		List<Project> projectList = projectDAO.getApprovedProjects();;
+		model.addAttribute("projectList", projectList);
+
+		return "student/th_rank_projects";
+	}
+	
 	
 
 	@RequestMapping("student/deleteGroup")

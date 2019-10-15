@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	class="bg-grey">
+<head>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}"
+	media="all" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Rank Projects</title>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function () {
+
+	var count = 0;
+	
+	$('select').change(function () {
+
+
+		if (($('select option[value="' + $(this).val() + '"]:selected').length > 1) && ($(this).val() > 0)) {
+				$(this).val("--");
+		    	alert('You have already selected this ranking - please choose another.')
+		    	count--;
+		} else {
+			if (($(this).val() == 1)) {
+				$("#proj1").val($(this).find('option:selected').attr("id"));
+				count++;
+			} else if (($(this).val() == 2)) {
+				$("#proj2").val($(this).find('option:selected').attr("id"));
+				count++;
+			} else if (($(this).val() == 3)) {
+				$("#proj3").val($(this).find('option:selected').attr("id"));
+				count++;
+			} else if (($(this).val() == 4)) {
+				$("#proj4").val($(this).find('option:selected').attr("id"));
+				count++;
+			} else if (($(this).val() == 5)) {
+				$("#proj5").val($(this).find('option:selected').attr("id"));
+				count++;
+			}
+			
+			
+			
+		}
+		
+
+		
+		
+		
+	});
+});
+
+</script>
+
+
+
+</head>
+<body class="bg-grey">
+
+
+
+	<div th:replace="fragments/navbars/navbar :: Student_Nav"></div>
+
+
+	<div class="bg-white" align="center">
+	<br>
+	<div th:if="${error}" class="alert alert-danger w-25" role="alert">
+		<p th:text="*{error}" />
+	</div>
+
+	<div th:if="${success}" class="alert alert-success w-25" role="alert">
+		<p th:text="*{success}" />
+		<div th:each="item : ${list}">
+		<p th:text="${item.projectId}">
+		</div>
+	</div>
+
+		<form th:action="@{/student/rank_projects}" method="POST">
+
+
+			<table>
+
+				<tr align="center">
+					<th colspan="4">Rank Projects</th>
+				</tr>
+				<tr>
+					<th>Client</th>
+					<th>Title</th>
+					<th>Description</th>
+					<th>Rank</th>
+
+				</tr>
+				<tr th:each="project,iterStat : ${projectList}">
+					<td><p th:text="${project.client.clientName}"></td>
+					<td><p th:text="${project.title}"></td>
+					<td><p th:text="${project.description}"></td>
+					<td><p class="proj" id="proj">
+
+							<select th:name="${project.projectId}" th:id="${iterStat.index}">
+								<option value="">--</option>
+								<option th:each="i : ${#numbers.sequence(1, 5)}" th:value="${i}" 
+									th:text="${i}" th:id="${project.projectId}"></option>
+							</select></td>
+
+				</tr>
+				<tr>
+
+
+					<td colspan="4" align="center"><input class="btn btn-primary"
+						type="submit" value="Submit" />
+						
+						
+					<input type="text" id="proj1" name="proj1" value="" style="display: none;"/>
+					<input type="text" id="proj2" name="proj2" value="" style="display: none;"/>
+					<input type="text" id="proj3" name="proj3" value="" style="display: none;"/>
+					<input type="text" id="proj4" name="proj4" value="" style="display: none;"/>
+					<input type="text" id="proj5" name="proj5" value="" style="display: none;"/>
+					</td>
+				</tr>
+
+
+			</table>
+		</form>
+	</div>
+
+
+</body>
+</html>
