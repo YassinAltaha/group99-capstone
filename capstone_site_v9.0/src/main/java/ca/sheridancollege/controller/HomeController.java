@@ -14,6 +14,11 @@ public class HomeController {
 		return "default/th_about";
 	}
 
+	@GetMapping("signup")
+	public String goSignup() {
+		return "signup/th_mainSignup";
+	}
+	
 	@GetMapping("login")
 	public String goLogin() {
 		return "th_login";
