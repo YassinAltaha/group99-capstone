@@ -3,93 +3,117 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 
-<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}" media="all"/>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}"
+	media="all" />
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
 <title>List of Projects</title>
 </head>
 <body class="bg-grey">
 
-  
-	<div th:replace="fragments/navbars/navbar :: profNav">
-	</div>
-	
-<!-- View-dependent nav area -->
 
-		<div class="container-fluid" align="center">
-				
-			<br/>
-		<div th:if="${msg}" class="alert alert-success">
-			Record updated
-		</div>
-		
-		<!-- 
+	<div th:replace="fragments/navbars/navbar :: profNav"></div>
+
+	<!-- View-dependent nav area -->
+
+	<div class="container" align="center">
+
+		<br />
+		<div th:if="${msg}" class="alert alert-success">Record updated</div>
+
+
 		<div th:each="client : *{clientList}">
-			<br/>
-			<div class="row" >
-				  <div class="card w-100 border-dark">
-				  <div class="card-header">
-				    <h4 th:utext="*{client.clientCompany} + ' Projects'"> </h4>
-				  </div>
-				  <div class="card-body">
-				      <h6 class="card-title" th:utext="'Client Name: ' + *{client.clientName}"></h6>
-				  </div>
-				  <ul class="list-group list-group-flush ">
-				  	<li class="list-group-item" th:utext="'Client Contact#: ' + *{client.clientContact}"></li>
-				    <li class="list-group-item" th:utext="'Client Email: ' + *{client.clientEmail}"></li>
-				    <li class="list-group-item" th:utext="'Client Industry: ' + *{client.clientIndustry}"></li>
-				    <li class="list-group-item" th:utext="'Company Scale: ' + *{client.clientScale}"></li>
-				  </ul>
+
+			<div class="row ">
+				<div class="card w-100  shadow">
+					<div class="card-header " data-toggle="collapse"
+						th:href="'#collapse'+*{client.clientName}"
+						aria-controls="'collapse'+*{client.clientName}">
+						<h4 th:utext="*{client.clientCompany} + ' Projects'"></h4>
+					</div>
+					<div class="collapse-content collapse"
+						th:id="'collapse'+*{client.clientName}">
+						<div class="card-body ">
+							<h6 class="card-title"
+								th:utext="'Client Name: ' + *{client.clientName}"></h6>
+						</div>
+						<ul class="list-group list-group-flush ">
+							<li class="list-group-item"
+								th:utext="'Client Contact#: ' + *{client.clientContact}"></li>
+							<li class="list-group-item"
+								th:utext="'Client Email: ' + *{client.clientEmail}"></li>
+							<li class="list-group-item"
+								th:utext="'Client Industry: ' + *{client.clientIndustry}"></li>
+							<li class="list-group-item"
+								th:utext="'Company Scale: ' + *{client.clientScale}"></li>
+						</ul>
+					</div>
+					
+
+					<div class="card-footer">
+
+						<div class="card-deck-wrapper">
+	
+							<div class="card shadow "
+								th:each="project : *{client.projectList}">
+								<div class="card-header" data-toggle="collapse"
+									th:href="'#collapse'+*{project.projectId}"
+									aria-controls="'collapse'+${project.projectId}">
+	
+									<h5 th:utext="*{project.title}"></h5>
+									<h6 class="card-subtitle text-muted"
+										th:utext="*{project.status}"></h6>
+								</div>
+								<div class="collapse-content collapse"
+									th:id="'collapse'+*{project.projectId}">
+									<div class="card-body">
+										<div>
+											<p class="text-muted">Description</p>
+											<p class="card-text" th:utext="*{project.description}"></p>
+										</div>
+										<br />
+										<h6 class="card-title">Professor Notes:</h6>
+										<small class="text-muted" th:utext="*{project.profNote}"></small>
+									</div>
+									<div class="card-footer">
+										<p class="card-text"
+											th:if="*{project.groupBean?.groupName !=null }">
+											<small class="text-muted"
+												th:utext="'Group: ' + *{project.groupBean?.groupName}">
+											</small>
+										</p>
+	
+										<a
+											th:href="@{/professor/profEditProject/{id}(id=${project.projectId})}"
+											class="btn btn-primary mb-2">Edit</a>
+									</div>
+								</div>
+							</div>
+	
+						</div>
+					</div>
 				</div>
 			</div>
-		
 			<br/>
-		
-			<div class="row">
-				
-				<div class="card-deck w-auto ">
-				  <div class="card border-dark mb-3" style="width: 23rem;"  th:each="project : *{client.projectList}">
-				   <div class="card-header border-dark"><h5 th:utext="'Project Title: ' + *{project.title}" > </h5>
-				   	<h6 class="card-subtitle mb-2 text-muted" th:utext="'Status ' +*{project.status}"></h6>
-				   </div>
-				    <div class="card-body">
-				      <div class="collapse-content">
-      				  <div class="collapse" th:id="'collapse'+*{project.projectId}">
-				      	<p class="card-text" th:utext="*{project.description}"></p>
-				      </div>
-				      <br/>
-				      <a class="btn btn-secondary" data-toggle="collapse" th:href="'#collapse'+*{project.projectId}" aria-expanded="false" aria-controls="'collapse'+${project.projectId}">Description</a>
-				      </div>	      
-					  <br/>
-					  <h6 class="card-title">Professor Notes:</h6>
-				      <small class="text-muted" th:utext="*{project.profNote}"></small>
-				    </div>
-				    <div class="card-footer border-dark">
-				      <p class="card-text" th:if="*{project.groupBean?.groupName !=null }"><small class="text-muted" th:utext="'Group: ' + *{project.groupBean?.groupName}"> </small></p>
+			<br/>
+		</div>
 
-				      <a th:href="@{/professor/profEditProject/{id}(id=${project.projectId})}" class="btn btn-primary mb-2">Edit</a>
-				    </div>
-				  </div>
-				</div>
-			</div>
-
-		</div> -->
-		
-		<div  >
+		<div>
 			<h2>All Projects</h2>
 		</div>
 
 		<table class="table bg-white">
-			
+
 			<div th:each="client : *{clientList}">
 				<thead class="thead-dark text-white" align="center">
-					<tr >
-						<th colspan="6" >
+					<tr>
+						<th colspan="6">
 							<p th:utext="*{client.clientCompany} + ' Projects'"></p>
 						</th>
 					</tr>
 				</thead>
-				<thead >
+				<thead>
 					<tr>
 						<th>Client Name</th>
 						<th>Client Phone</th>
@@ -98,8 +122,8 @@
 						<th>Company Size</th>
 						<th>Projects #</th>
 					</tr>
-			</thead>
-				
+				</thead>
+
 				<tr>
 					<td><p th:utext="*{client.clientName}" /></td>
 					<td><p th:utext="*{client.clientContact}" /></td>
@@ -108,7 +132,7 @@
 					<td><p th:utext="*{client.clientScale}" /></td>
 					<td><p th:utext="*{client.projectList.size()}" /></td>
 				</tr>
-						
+
 				<thead>
 					<tr class="thead-light">
 						<th>Project Title</th>
@@ -120,23 +144,34 @@
 					</tr>
 				</thead>
 				<tr th:each="project : *{client.projectList}">
-					<td class="text-break w-25"><p th:utext="*{project.title}"> </p></td>
-					<td class="text-break w-100"><p th:utext="*{project.description}"></p></td>
+					<td class="text-break w-25"><p th:utext="*{project.title}">
+						</p></td>
+					<td class="text-break w-100"><p
+							th:utext="*{project.description}"></p></td>
 					<td class="w-25"><p th:utext="*{project.status}"></p></td>
 					<td class="text-break w-25"><p th:utext="*{project.profNote}"></p></td>
-					<td class="text-break w-25"><p th:utext="*{project.groupBean?.groupName}"></p></td>
-					<td>
-					<a class="btn btn-primary mb-2" th:href="@{/professor/profEditProject/{id}(id=${project.projectId})}"> Edit </a>
-					</td>
-				</tr> 
-			</div>	
+					<td class="text-break w-25"><p
+							th:utext="*{project.groupBean?.groupName}"></p></td>
+					<td><a class="btn btn-primary mb-2"
+						th:href="@{/professor/profEditProject/{id}(id=${project.projectId})}">
+							Edit </a></td>
+				</tr>
+			</div>
 
-		</table> 
+		</table>
 	</div>
 
-	
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous" type="text/javascript"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous" type="text/javascript"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous" type="text/javascript"></script>
 </body>
 </html>
