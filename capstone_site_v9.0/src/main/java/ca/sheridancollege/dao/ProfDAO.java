@@ -43,6 +43,7 @@ public class ProfDAO {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hasedPassword = passwordEncoder.encode(pass);
 		
+	
 		p.setPassword(hasedPassword);
 		p.setRole(Role.ROLE_ADMIN);
 

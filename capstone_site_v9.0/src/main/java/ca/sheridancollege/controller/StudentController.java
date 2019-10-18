@@ -358,6 +358,7 @@ public class StudentController {
 		return "/student/common/th_about";
 	}
 
+	
 	@RequestMapping("student/meetProfs")
 	public String goStudentProfs() {
 		return "student/common/th_profs";

@@ -43,6 +43,7 @@ public class ProfessorController {
 				"TestCode" // profCode
 		);
 		try {
+			
 			profDAO.addProf(admin);
 			return "th_login";
 		} catch (Exception e) {
