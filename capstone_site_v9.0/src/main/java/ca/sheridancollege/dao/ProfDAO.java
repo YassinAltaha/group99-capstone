@@ -42,12 +42,11 @@ public class ProfDAO {
 		String pass = p.getPassword();
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hasedPassword = passwordEncoder.encode(pass);
+		
+		p.setPassword(hasedPassword);
+		p.setRole(Role.ROLE_ADMIN);
 
-		Professor professor = new Professor(p.getProfName(), p.getProfEmail(), hasedPassword, p.getProgram());
-
-		professor.setRole(Role.ROLE_ADMIN);
-
-		session.save(professor);
+		session.save(p);
 
 		session.getTransaction().commit();
 		session.close();
