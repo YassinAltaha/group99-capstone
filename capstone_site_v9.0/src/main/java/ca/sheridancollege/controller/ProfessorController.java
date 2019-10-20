@@ -234,6 +234,24 @@ public class ProfessorController {
 		return "professor/th_changePassword";
 
 	}
+	
+	// Change ProfCode
+	@RequestMapping(value = "professor/change_profCode", method = RequestMethod.POST)
+	public String changeProfCode_POST(Model model, @RequestParam String new_profCode) {
+
+		Professor p = getAuthProf();
+
+		try {
+			p.setProfCode(new_profCode);
+			profDAO.updateProfessor(p);
+			model.addAttribute("error", "Pass Code was successfully updated");
+		} catch (Exception e) {
+			model.addAttribute("error", "Error updating Pass Code");
+			System.out.println(e);
+		}
+		
+		return "professor/th_changePassword";
+	}
 
 	// GO TO - Report page
 	@RequestMapping("professor/report")
