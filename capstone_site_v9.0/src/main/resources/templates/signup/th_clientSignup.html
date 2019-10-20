@@ -24,11 +24,11 @@
 
 		<form th:action="@{/saveClientInfo}" th:object="${client}" method="POST">
 		<table class="table table-bordered bg-light text-dark">
-		<tr class="bg-dark text-white">
-			<td colspan="2" >
-				<h2 align="center">Client Sign up</h2>
-			</td>
-		</tr>
+			<tr class="bg-dark text-white">
+				<td colspan="2" >
+					<h2 align="center">Client Sign up</h2>
+				</td>
+			</tr>
 			<tr> 
 				<td><label for="clientName">Name:</label> </td>
 				<td><input class="form-control w-auto mb-2" required th:field="*{clientName}" /></td>
