@@ -244,7 +244,7 @@ public class ProfessorController {
 		try {
 			p.setProfCode(new_profCode);
 			profDAO.updateProfessor(p);
-			model.addAttribute("error", "Pass Code was successfully updated");
+			model.addAttribute("message", "Pass Code was successfully updated");
 		} catch (Exception e) {
 			model.addAttribute("error", "Error updating Pass Code");
 			System.out.println(e);
