@@ -285,7 +285,6 @@ public class StudentController {
 
 		}else
 		{
-			model.addAttribute("error", "Student is not part of a group");
 			model.addAttribute("student", s);
 			return "student/th_group_info";
 		}	

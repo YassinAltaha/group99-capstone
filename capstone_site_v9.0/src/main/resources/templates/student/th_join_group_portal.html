@@ -22,7 +22,7 @@
 			<form th:object="${GroupInfo}" method="post" th:action="@{/student/join_group/{id}(id = ${GroupInfo.groupId})}" >
 				<table class="table text-center shadow bg-white">
 				
-					<tr th:if="${error}">
+					<tr class="alert alert-danger" th:if="${error}">
 						<td colspan = "3">
 							<p th:text="${error}" />
 						</td>
