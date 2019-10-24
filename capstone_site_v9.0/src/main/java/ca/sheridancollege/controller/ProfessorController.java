@@ -65,8 +65,6 @@ public class ProfessorController {
 	public String assignGroupAProject(Model model , @PathVariable int id)
 	{
 		GroupBean g = groupDAO.getGroupById(id);
-		System.out.println(g.getGroupId());
-		System.out.println(g.getGroupName());
 		List<Project> projectList = projectDAO.getApprovedProjects();
 		model.addAttribute("projects", projectList);
 		model.addAttribute("group", g);
@@ -77,12 +75,12 @@ public class ProfessorController {
 	public String finishAssignGroupAProject(Model model, @RequestParam int projectId , @ModelAttribute GroupBean group)
 	{
 		Project p = projectDAO.searchProjectById(projectId);
-
+		GroupBean g = groupDAO.getGroupById(group.getGroupId());
 		try {
-			group.setProject(p);
+			g.setProject(p);
 			
-			p.setGroupBean(group);
-			groupDAO.updateGroup(group);
+			p.setGroupBean(g);
+			groupDAO.updateGroup(g);
 			projectDAO.updateProject(p);
 			
 			model.addAttribute("msg", true);

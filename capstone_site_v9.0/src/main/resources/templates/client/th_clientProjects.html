@@ -37,7 +37,10 @@
 		    <h5 class="card-title " th:text="${project.status}"></h5>
 		    <p  class="card-text text-break w-100" th:text="${project.description}"></p>
 		    
-		    <p th:unless="${project.profNote.empty}"  class="card-text text-break w-100" th:text="'Professor Note: ' + ${project.profNote}"></p>
+		    <div th:unless="${project.profNote}== null OR ${project.profNote.empty}" class="card-text text-break w-100 mt-4">
+		    	<h5> Professor Note: </h5>
+		    	<p th:text="'Professor Note: ' + ${project.profNote}"></p>
+		    </div> 
 		    </div>
 		    <div class="card-footer alert-dark">
 		    	<div class="d-inline p-2 ">
