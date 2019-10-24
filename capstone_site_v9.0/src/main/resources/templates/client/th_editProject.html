@@ -19,7 +19,7 @@
 	 
 		<form th:action="@{/client/updateProject}" th:object="${project}" method="post" id="projectForm">
 		
-		<table class="table">
+		<table class="table shadow bg-white text-center">
 			<thead class="bg-primary" align="center">
 				<tr>
 					<th colspan="2" align="center"><h2>Edit Project</h2>
@@ -42,8 +42,8 @@
 				<td><textarea class="form-control w-autos" form="projectForm" th:field="*{description}" style="width:475px; height:130px;" > </textarea></td>
 			</tr>	
 			<tr align="center">
-				<td><a  th:href="@{/client/myProject}"> <input type="button" class="btn btn-primary mb-2" value="Cancel" /> </a></td>
-				<td> <input class="btn btn-primary mb-2" type="submit" value="Update Project" /></td>
+				<td><a  th:href="@{/client/myProject}"> <input type="button" class="btn btn-primary mb-2 shadow" value="Cancel" /> </a></td>
+				<td> <input class="btn btn-warning mb-2 w-25 shadow text-dark" type="submit" value="Update Project" /></td>
 				
 			</tr>
 		</table>

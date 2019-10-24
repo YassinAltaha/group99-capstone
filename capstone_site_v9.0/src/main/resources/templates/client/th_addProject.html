@@ -17,13 +17,10 @@
 	<!-- View-dependent nav area -->
 	<div >
 		<div class="container" align="center">
-			<div class="wrapper block-row">
-				<div class="bg-white" align="center">
-				<div class="inner-wrapper">
 
 					<form th:action="@{/client/saveProject}" th:object="${project}"
 						method="post" id="projectForm">
-						<table class="table">
+						<table class="table bg-white shadow text-center">
 							<thead class="bg-primary" align="center">
 								<tr>
 									<th colspan="2">
@@ -38,7 +35,7 @@
 							<tr>
 								<td class="w-25"><label>Project Title:</label></td>
 								<td><input class="form-control w-autos col-xl-7" required
-									th:field="*{title}" /></td>
+									th:field="*{title}" size="30"/></td>
 							</tr>
 
 							<tr>
@@ -50,7 +47,7 @@
 
 							<tr>
 								<td align="center" colspan="2"><input
-									class="btn btn-primary mb-2" type="submit"
+									class="btn btn-primary mb-2 shadow" type="submit"
 									value="Submit New Project" /></td>
 							</tr>
 
@@ -59,8 +56,5 @@
 
 				</div>
 				</div>
-			</div>
-		</div>
-	</div>
 </body>
 </html>

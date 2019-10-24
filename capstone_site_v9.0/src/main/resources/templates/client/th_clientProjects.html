@@ -7,102 +7,55 @@
 <!-- <meta charset="ISO-8859-1"> -->
 <title>My Projects</title>
 </head>
-<body >
+<body class="bg-grey">
 
    
 	<div th:replace="fragments/navbars/navbar :: clientNav">
 	</div>
-	
-<!-- 	<div class="container-fluid" align="center">
-			<div th:each="project: ${myProjectList}" >			
-				  <div class="card border-dark mb-3 w-50" align="center">
-				   <div class="card-header  border-dark"><h5 th:utext="'Project Title: ' + *{project.title}" > </h5>
-				   	<h6 class="card-subtitle mb-2 text-muted" th:utext="'Status ' +*{project.status}"></h6>
-				   </div>
-				    <div class="card-body">
-				      <div class="collapse-content">
-      				  <div class="collapse" th:id="'collapse'+*{project.projectId}">
-				      	<p class="card-text" th:utext="*{project.description}"></p>
-				      </div>
-				      <br/>
-				      <a class="btn btn-secondary" data-toggle="collapse" th:href="'#collapse'+*{project.projectId}" aria-expanded="false" aria-controls="'collapse'+${project.projectId}">Description</a>
-				      </div>	      
-					  <br/>
-					  <h6 class="card-title">Professor Notes:</h6>
-				      <small class="text-muted" th:utext="*{project.profNote}"></small>
-				    </div>
-				    <div class="card-footer border-dark">
-				      <p class="card-text" th:if="*{project.groupBean?.groupName !=null }"><small class="text-muted" th:utext="'Group: ' + *{project.groupBean?.groupName}"> </small></p>
-					
-				      <a class="btn btn-primary btn-sm" th:href="@{/client/editMyProject/{id}(id = ${project.projectId})}">Edit</a>
-				      	
-				    	<a th:if="${project.status} == Pending OR ${project.status} == Rejected " class="btn btn-danger btn-sm" th:href="@{/client/deleteMyProject/{id}(id = ${project.projectId})}">Delete</a> 
-				    		
-				    </div>
-				  </div>
-			</div>
-	</div> -->
 
-
-
-	
 	
 <!-- View-dependent nav area -->
 	
-	 	<div class="container-fluid" align="center">
-	 	<br/>
-		<table class="table" >
-		<tr th:if="${myProjectList == null}" class="table-warning w-auto">
-			<td align="center">
-				Sorry you don't have any projects yet.
-			</td>	
-		</tr> 
-		<tr th:if="${msg}" class="table-success w-auto">
-			<td align="center">		
-				<p th:text=${msg} />
-			</td>
-		</tr>
+	 	<div class="container" align="center">
+	 	
+	 	<table class="table" >
+			<tr th:if="${myProjectList == null}" class="table-warning w-auto">
+				<td align="center">
+					Sorry you don't have any projects yet.
+				</td>	
+			</tr> 
+			<tr th:if="${msg}" class="table-success w-auto">
+				<td align="center">		
+					<p th:text=${msg} />
+				</td>
+			</tr>
 		</table>
 		
-		<table class="table">
-		<thead>
-			<tr align="center">
-				<th colspan="6" >
-					<h2>My Projects</h2>
-				</th>	
-			</tr>
-		</thead>
-			<thead class="thead-light">
-				<tr align="center">
-					<th class="h6">Title</th>
-					<th class="h6">Description</th>
-					<th class="h6">Status</th>
-					<th class="h6">Professor Note</th>
-					<th class="h6"></th>
-					<th class="h6"></th>
-				</tr>
-			</thead>
-			
-			
-			<tr th:each="project: ${myProjectList}" >
-			    <td class="text-break w-25" th:text="${project.title}" />
-			    <td class="text-break w-100" th:text="${project.description}"></td>
-			    <td class="w-25" th:text="${project.status}" />
-			    <td class="text-break w-25" th:text="${project.profNote}" />
-			    <td>
-			     <a class="btn btn-primary btn-sm" th:href="@{/client/editMyProject/{id}(id = ${project.projectId})}">Edit</a> 	    
-			    </td>
-			    
-			    <td>
-			    <div th:if="${project.status} == Pending OR ${project.status} == Rejected ">
-			    	<a class="btn btn-danger btn-sm" th:href="@{/client/deleteMyProject/{id}(id = ${project.projectId})}">Delete</a> 
+	 	<div class="card text-center m-2 shadow" th:each="project: ${myProjectList}">
+		  <h5 class="card-header text-break alert-primary" th:text="${project.title}"></h5>
+		  <div class="card-body">
+		    <h5 class="card-title " th:text="${project.status}"></h5>
+		    <p  class="card-text text-break w-100" th:text="${project.description}"></p>
+		    
+		    <p th:unless="${project.profNote.empty}"  class="card-text text-break w-100" th:text="'Professor Note: ' + ${project.profNote}"></p>
+		    </div>
+		    <div class="card-footer alert-dark">
+		    	<div class="d-inline p-2 ">
+			    	<a class="btn btn-primary btn-sm shadow" th:href="@{/client/editMyProject/{id}(id = ${project.projectId})}">Edit</a> 
+		    	</div>
+		    	<div class="d-inline p-2 " th:if="${project.status} == Pending OR ${project.status} == Rejected ">
+			    	<a class="btn btn-danger btn-sm shadow" th:href="@{/client/deleteMyProject/{id}(id = ${project.projectId})}">Delete</a> 
 			    </div>
-			    </td>
-			    
-			</tr>
-			
-	
-		</table>
+		    </div>	
+		  
+		</div>
+	 	
+	 	
+	 	
+	 	
+
+		
+
 	</div>
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
