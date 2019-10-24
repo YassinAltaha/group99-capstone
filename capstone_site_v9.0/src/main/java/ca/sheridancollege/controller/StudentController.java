@@ -108,7 +108,7 @@ public class StudentController {
 		List<GroupBean> groupList = new ArrayList<GroupBean>();
 		for(GroupBean group : raw_groupList)
 		{
-			if(group.getGroup_members().size() > 4)
+			if(group.getGroup_members().size() < 4)
 			{
 				groupList.add(group);
 			}
@@ -215,23 +215,21 @@ public class StudentController {
 			Random rn = new Random();
 			int range = 9999 - 1000 + 1;
 			int pass = rn.nextInt(range) + 1000;
+			GroupBean g = new GroupBean();
+			
+			g.setGroupName(group.getGroupName());
+			g.setCampus(s.getCampus());
+			g.setPasscode(Integer.toString(pass));
+			g.setGroupOwnerStudentId(s.getId());
+			g.setProgram(s.getProgram());
+			g.getGroup_members().add(s);
 
-			// Adding Group info based on the Student's
-			group.setGroupOwnerStudentId(s.getId());
-			group.setProgram(s.getProgram());
-
-			group.setPasscode(Integer.toString(pass));
-			group.getGroup_members().add(s);
-			group.setCampus(s.getCampus());
-			groupDAO.addGroup(group);
+			groupDAO.addGroup(g);
 			// updating student
-			s.setGroup(group);
+			s.setGroup(g);
 			s.setGroupLeader(true);
 			dao.updateStudent(s);
-
-//			model.addAttribute("inGroup", true);
-//			model.addAttribute("GroupInfo", s.getGroup());
-			
+		
 			model.addAttribute("student", s);
 			return "student/th_group_info";
 

@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" class="bg-grey">
 <head>
 
 <link rel="stylesheet" type="text/css"
@@ -18,27 +18,30 @@
 	<!-- View-dependent nav area -->
 
 	<div class="container" align="center">
-
-		<br />
-		<div th:if="${msg}" class="alert alert-success">Record updated</div>
+		<div class="alert alert-primary">
+			<h2>List Projects</h2>
+		</div>
+		<div th:if="${msg}" class="alert alert-success">
+			Record updated
+		</div>
 
 
 		<div th:each="client : *{clientList}">
 
-			<div class="row ">
+			<div class="row">
 				<div class="card w-100  shadow">
-					<div class="card-header " data-toggle="collapse"
+					<div class="card-header " 
+						data-toggle="collapse"
 						th:href="'#collapse'+*{client.clientName}"
-						aria-controls="'collapse'+*{client.clientName}">
-						<h4 th:utext="*{client.clientCompany} + ' Projects'"></h4>
+						aria-controls="'collapse'+*{client.clientName}"
+						>
+						<h4 class="" th:utext="*{client.clientCompany} + ' Projects'"></h4>
 					</div>
 					<div class="collapse-content collapse"
-						th:id="'collapse'+*{client.clientName}">
-						<div class="card-body ">
-							<h6 class="card-title"
-								th:utext="'Client Name: ' + *{client.clientName}"></h6>
-						</div>
+						th:id="'collapse'+*{client.clientName}">	
 						<ul class="list-group list-group-flush ">
+							<li class="list-group-item"
+								th:utext="'Client Name: ' + *{client.clientName}"></li>
 							<li class="list-group-item"
 								th:utext="'Client Contact#: ' + *{client.clientContact}"></li>
 							<li class="list-group-item"
@@ -61,7 +64,7 @@
 									th:href="'#collapse'+*{project.projectId}"
 									aria-controls="'collapse'+${project.projectId}">
 	
-									<h5 th:utext="*{project.title}"></h5>
+									<h5 class="text-info" th:utext="*{project.title}"></h5>
 									<h6 class="card-subtitle text-muted"
 										th:utext="*{project.status}"></h6>
 								</div>
@@ -86,7 +89,7 @@
 	
 										<a
 											th:href="@{/professor/profEditProject/{id}(id=${project.projectId})}"
-											class="btn btn-primary mb-2">Edit</a>
+											class="btn btn-primary w-25 mb-2">Edit</a>
 									</div>
 								</div>
 							</div>
@@ -99,78 +102,18 @@
 			<br/>
 		</div>
 
-		<div>
-			<h2>All Projects</h2>
-		</div>
-
-		<table class="table bg-white">
-
-			<div th:each="client : *{clientList}">
-				<thead class="thead-dark text-white" align="center">
-					<tr>
-						<th colspan="6">
-							<p th:utext="*{client.clientCompany} + ' Projects'"></p>
-						</th>
-					</tr>
-				</thead>
-				<thead>
-					<tr>
-						<th>Client Name</th>
-						<th>Client Phone</th>
-						<th>Client's Email</th>
-						<th>Industry</th>
-						<th>Company Size</th>
-						<th>Projects #</th>
-					</tr>
-				</thead>
-
-				<tr>
-					<td><p th:utext="*{client.clientName}" /></td>
-					<td><p th:utext="*{client.clientContact}" /></td>
-					<td><p th:utext="*{client.clientEmail}" /></td>
-					<td><p th:utext="*{client.clientIndustry}" /></td>
-					<td><p th:utext="*{client.clientScale}" /></td>
-					<td><p th:utext="*{client.projectList.size()}" /></td>
-				</tr>
-
-				<thead>
-					<tr class="thead-light">
-						<th>Project Title</th>
-						<th>Description</th>
-						<th>Status</th>
-						<th>Professor Note</th>
-						<th>Group</th>
-						<th>Options</th>
-					</tr>
-				</thead>
-				<tr th:each="project : *{client.projectList}">
-					<td class="text-break w-25"><p th:utext="*{project.title}">
-						</p></td>
-					<td class="text-break w-100"><p
-							th:utext="*{project.description}"></p></td>
-					<td class="w-25"><p th:utext="*{project.status}"></p></td>
-					<td class="text-break w-25"><p th:utext="*{project.profNote}"></p></td>
-					<td class="text-break w-25"><p
-							th:utext="*{project.groupBean?.groupName}"></p></td>
-					<td><a class="btn btn-primary mb-2"
-						th:href="@{/professor/profEditProject/{id}(id=${project.projectId})}">
-							Edit </a></td>
-				</tr>
-			</div>
-
-		</table>
 	</div>
 
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous" type="text/javascript"></script>
 	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}"
 		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
 		crossorigin="anonymous" type="text/javascript"></script>
 	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js}"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous" type="text/javascript"></script>
 </body>

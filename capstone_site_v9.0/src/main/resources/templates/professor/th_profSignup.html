@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" class="bg-grey">
 <head>
 
-<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css" media="all"/>
-<link rel="stylesheet" type="text/css" href="resources/css/base.css" media="all" />
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}" media="all"/>
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/base.css}" media="all" />
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
 <title>Adding Professor</title>
@@ -22,7 +22,7 @@
 				
 					<form th:action="@{/saveProf}" th:object="${professor}" method="post">
 					
-					<table class="table table-bordered bg-light text-dark">
+					<table class="table table-bordered bg-white text-dark text-center ">
 						<thead>
 							<tr>
 								<th colspan="2" >
@@ -32,22 +32,22 @@
 						</thead>
 						<tr>
 							<td><label for="profName">Name:</label> </td>
-							<td><input class="form-control w-auto mb-2" required th:field="*{profName}" /></td>
+							<td><input class="form-control mb-2" required th:field="*{profName}" /></td>
 						</tr>
 						
 						<tr>
 							<td><label for="program">Program:</label> </td>
-							<td><input class="form-control w-auto mb-2" required th:field="*{program}" /></td>
+							<td><input class="form-control  mb-2" required th:field="*{program}" /></td>
 						</tr>
 						
 						<tr>
 							<td><label for="profEmail">Email:</label></td>
-							<td><input class="form-control w-auto mb-2" required th:field="*{profEmail}" /></td>
+							<td><input class="form-control  mb-2" required th:field="*{profEmail}" /></td>
 						</tr>
 						
 						<tr>
 							<td><label for="password">Password:</label> </td>
-							<td><input class="form-control w-auto mb-2" required th:field="*{password}" type="password" /></td>
+							<td><input class="form-control  mb-2" required th:field="*{password}" type="password" /></td>
 						</tr>
 						
 			

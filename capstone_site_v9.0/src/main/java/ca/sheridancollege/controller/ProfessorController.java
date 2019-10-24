@@ -55,9 +55,49 @@ public class ProfessorController {
 
 	@RequestMapping("professor/groupList")
 	public String groupHome(Model model) {
-		GroupDAO groupDAO = new GroupDAO();
+
 		model.addAttribute("groups", groupDAO.getAllGroups());
 		return "professor/th_groupList";
+	}
+	
+	
+	@RequestMapping("professor/projectToGroup/{id}")
+	public String assignGroupAProject(Model model , @PathVariable int id)
+	{
+		GroupBean g = groupDAO.getGroupById(id);
+		System.out.println(g.getGroupId());
+		System.out.println(g.getGroupName());
+		List<Project> projectList = projectDAO.getApprovedProjects();
+		model.addAttribute("projects", projectList);
+		model.addAttribute("group", g);
+		return "professor/th_AssignGroupToProject";
+	}
+	
+	@RequestMapping("professor/assignGroup")
+	public String finishAssignGroupAProject(Model model, @RequestParam int projectId , @ModelAttribute GroupBean group)
+	{
+		Project p = projectDAO.searchProjectById(projectId);
+
+		try {
+			group.setProject(p);
+			
+			p.setGroupBean(group);
+			groupDAO.updateGroup(group);
+			projectDAO.updateProject(p);
+			
+			model.addAttribute("msg", true);
+			model.addAttribute("groups", groupDAO.getAllGroups());
+			return "professor/th_groupList";
+			
+		}catch(Exception e)
+		{
+			List<Project> projectList = projectDAO.getApprovedProjects();
+			model.addAttribute("projects", projectList);
+			model.addAttribute("group", group);
+			return "professor/th_AssignGroupToProject";
+
+		}
+
 	}
 
 	// Register Professor-1.1(form)

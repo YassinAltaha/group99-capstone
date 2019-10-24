@@ -3,7 +3,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security" class="bg-grey">
 <head>
-
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}" media="all"/>
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/base.css}" media="all" />
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
 <title>Create Group</title>
@@ -16,30 +17,30 @@
 	</div>
 	
 	
-	<div class="bg-white" align="center">
+	<div class="container" align="center">
 	
 
 		<form th:action="@{/student/addGroup}" th:object="${group}" method="post">
-			<table>
+			<table class="table shadow bg-white text-center">
 			<tr>
 			<th colspan="2">
 				Create Group
 			</th>
 
 			</tr>
-				<tr  th:if=${error}>
-					<td colspan ="2" th:text="${error}">
+				<tr th:if=${error}>
+					<td class="alert alert-danger" colspan ="2" th:text="${error}">
 					</td>
 				</tr>
 			<tr>
 				
-				<td>Group Name: </td>
-				<td><input th:field="*{groupName}"/></td>
+				<td><h5>Group Name:</h5> </td>
+				<td><input class="form-control" th:field="*{groupName}"/></td>
 				
 			</tr>
 			
 			<tr>
-				<td><input type="submit" value="Create Group" /></td>
+				<td colspan="2" align="center"><input class="btn btn-primary w-25 shadow" type="submit" value="Create Group" /></td>
 			</tr>
 			
 			</table>

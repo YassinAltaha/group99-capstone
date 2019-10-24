@@ -3,6 +3,8 @@
 <html xmlns:th="http://www.thymeleaf.org" class="bg-grey">
 <head>
 
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}" media="all"/>
+
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
 <title>Edit Project</title>
@@ -13,50 +15,45 @@
 
 
 	<div class="container" align="center">
-		<div class="wrapper block-row">
-			<div class="block large-text callout-with-stats welcome">
-
-
-				<div class="inner-wrapper title-block-wrapper">
-					<br />
-					<h2>Update Project Status & Notes</h2>
-				</div>
-				<form th:action="@{/professor/updateProject}" th:object="${project}"
-					method="POST" action="">
-					<input type="hidden" name="projectId"
-						th:field="${project.projectId}" />
-
-					<table>
-
-						<tr>
-							<td><label>Project Title:</label></td>
-							<td><input type="text" readonly th:value="${project.title}" /></td>
-						</tr>
-
-						<tr>
-							<td><label>Project Status:</label></td>
-							<td><select th:field="${project.status}">
-									<option th:value="Approved">Approved</option>
-									<option th:value="Completed">Completed</option>
-									<option th:value="Pending">Pending</option>
-									<option th:value="Rejected">Rejected</option>
-							</select></td>
-						</tr>
-						<tr>
-							<td><label>Teacher's Note</label></td>
-							<td><input th:field="${project.profNote}" type="text"
-								th:value="${project.profNote}" /></td>
-						</tr>
-
-						<tr>
-							<td colspan="2"><input type="submit" value="Update" /></td>
-						</tr>
-
-					</table>
-				</form>
-			</div>
-		</div>
+		
+		<form th:action="@{/professor/updateProject}" th:object="${project}"
+			method="POST" action="">
+			<input type="hidden" name="projectId"
+				th:field="${project.projectId}" />
+	
+			<table class="table bg-white text-center">
+				<tr>					
+					<th colspan="2" >
+						<h2>Edit Project</h2>
+					</th>
+				</tr>
+				<tr>
+					<td><label>Project Title:</label></td>
+					<td><input class="form-control" type="text" readonly th:value="${project.title}" /></td>
+				</tr>
+	
+				<tr>
+					<td><label>Project Status:</label></td>
+					<td><select class="form-control" th:field="${project.status}">
+							<option th:value="Approved">Approved</option>
+							<option th:value="Completed">Completed</option>
+							<option th:value="Pending">Pending</option>
+							<option th:value="Rejected">Rejected</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td><label>Teacher's Note</label></td>
+					<td><input class="form-control" th:field="${project.profNote}" type="text" th:value="${project.profNote}" /></td>
+				</tr>
+	
+				<tr>
+					<td colspan="2"><input type="submit" class="btn btn-primary" value="Update" /></td>
+				</tr>
+	
+			</table>
+		</form>
 	</div>
+
 
 
 </body>

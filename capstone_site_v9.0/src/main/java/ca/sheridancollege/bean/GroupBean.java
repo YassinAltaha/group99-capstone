@@ -30,7 +30,7 @@ public class GroupBean implements Serializable {
 //	private List<Project> projectRankings;
 	private String campus;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Project project;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "group", fetch = FetchType.EAGER)

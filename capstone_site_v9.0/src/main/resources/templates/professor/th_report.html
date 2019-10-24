@@ -17,8 +17,10 @@
 
 	<!-- View-dependent nav area -->
 
-	<div class="container-fluid" align="center">
-		<br />
+	<div class="container" align="center">
+			<div class="alert alert-primary">
+				<h2>Reports</h2>
+			</div>
 		<form th:action="@{/professor/reportStatus}" action="">
 			<select class="form-control w-auto mb-2" required name="reportType">
 				<option value="noGroupStudent">Students with no group</option>
@@ -34,7 +36,7 @@
 		<th:block th:switch="${reportType}">
 
 			<div th:case="'noGroupStudent'">
-				<table class="table table-bordered table-hover bg-white">
+				<table class="table table-bordered text-center table-hover bg-white">
 					<thead>
 						<tr>
 							<th>Student Name</th>
@@ -58,7 +60,7 @@
 			
 			
 			<div th:case="'noProjectGroup'">
-				<table class="table table-bordered table-hover bg-white">
+				<table class="table table-bordered text-center table-hover bg-white">
 					<thead>
 						<tr>
 							<th>Group Name</th>
@@ -77,7 +79,7 @@
 				</table>
 			</div>
 			<div th:case="'allGroups'">
-				<table class="table table-bordered table-hover bg-white">
+				<table class="table table-bordered text-center table-hover bg-white">
 					<thead>
 						<tr>
 							<th>Group Name</th>
@@ -95,7 +97,7 @@
 				</table>
 			</div>
 			<div th:case="'approvedProjects'">
-				<table class="table table-bordered table-hover bg-white">
+				<table class="table table-bordered text-center table-hover bg-white">
 					<thead>
 						<tr>
 							<th>Project Title</th>
@@ -113,7 +115,7 @@
 				</table>
 			</div>
 			<div th:case="'rejectedProjects'">
-				<table class="table table-bordered table-hover">
+				<table class="table table-bordered text-center table-hover">
 					<thead>
 						<tr>
 							<th>Project Title</th>
@@ -131,7 +133,7 @@
 				</table>
 			</div>
 			<div th:case="'pendingProjects'">
-				<table class="table table-bordered table-hover bg-white">
+				<table class="table table-bordered text-center table-hover bg-white">
 					<thead>
 						<tr>
 							<th>Project Title</th>

@@ -3,7 +3,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security" class="bg-grey">
 <head>
-
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}" media="all"/>
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/base.css}" media="all" />
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
 <title>Group Info</title>
@@ -13,127 +14,88 @@
 	<div th:replace="fragments/navbars/navbar :: Student_Nav">
 	</div>
 	
-	<div class="bg-white" align="center">
 	
-				<div class="block large-text callout-with-stats welcome"
-				style="height: 458px;">
-
-
 	
-	<br/>
+	
+	
+	<div class="container" align="center">
+
 	<div >
 		<p th:text="${error}"> </p>
 	</div>
-		<div style="font-weight:bold;" th:if="${student.group} != null">
-			<table>
-			
-				<tr>
-					<th colspan="4">Group Info</th>
-				</tr>
-				<tr>
-						<td>
-						<p style="font-weight:bold;"> Group Name: </p>
-						</td>
-						<td th:text="*{student.group.groupName}">
-						</td>
-
-						<td>
-						<p style="font-weight:bold;">Group Program: </p>
-						</td>
-					
-						<td th:text="*{student.group.program}" >
-						</td>
-				</tr>
-			
-				<tr>
-						<td colspan="3">
-						<p style="font-weight:bold;">Group Password:</p>
-						</td>
-					
-						<td th:text="*{student.group.passcode}">
-						</td>
-					
-				</tr>
-				
-				<tr th:if="${student.group?.project} == null">
-				
-						<td colspan="4" align="center">
-						 <a style="font-weight:bold;" th:href="@{/student/leave_Group}">Leave Group </a>
-						</td>
+	
+		<div th:if="${student.group} != null">
 		
-					
-				</tr>
-			
-
-			<span th:if="${student.group?.Project != null}">
-			<tr>
-					<th colspan="4">Project Info</th>
-			</tr>
-				<tr>
-						<td>
-						<p style="font-weight:bold;">Project Title:</p>
-						</td>
-					
-						<td th:text="*{student.group?.Project.title}" >
-						</td>
-
-						<td>
-						<p style="font-weight:bold;">Project Description:</p>
-						</td>
-					
-						<td th:text="*{student.group?.Project.description}" >
-						</td>
-				</tr>
-			
+		<div class="card text-center w-50 shadow mt-4" >
+		  <div class="card-body">
+		    <h3 class="card-title" th:text="*{student.group.groupName}"></h3>
+		    <p class="card-text"  th:text="*{student.group.program}"></p>
+	   			<ul class="list-group list-group-flush ">		
+					<li class="list-group-item"
+						th:text="*{student.group.campus}"></li>
+					<li class="list-group-item"
+						th:utext="'Group Passcode: '+ *{student.group.passcode}"></li>
+						
+				</ul>
 				
-				<tr>
 				
-					<td>
-						<p style="font-weight:bold;">Client Name:</p>
-					</td>
-					
-					<td th:text="*{student.group?.Project.Client.clientName}" >
-					</td>
-					
-					<td>
-						<p style="font-weight:bold;">Client Email:</p>
-					</td>
-					
-					<td th:text="*{student.group?.Project.Client.clientEmail}">
-					</td>
-					
-				</tr>
-			</span>
-			
-			
-			</table>
-			
+		  </div>
+		  <div th:if="${student.group?.project} == null" class="card-footer" >
+		  	<a class="btn btn-danger" th:href="@{/student/leave_Group}">Leave Group </a>
+		  </div>
+		</div>
+		
+		<div th:if="${student.group?.Project != null}" class="card text-center w-75 shadow m-3 mb-5">
+		  <div class="card-body">
+		    <h4 class="card-title" th:text="*{student.group?.Project.title}" ></h4>
+		    <p class="card-text" th:text="*{student.group?.Project.description}"></p>
+		    	
+		    	 <ul class="list-group list-group-flush ">		
+					<li class="list-group-item"
+						th:text="'Client Name: '+ *{student.group?.Project.Client.clientName}"></li>
+					<li class="list-group-item"
+						th:text="'Client Email: '+ *{student.group?.Project.Client.clientEmail}"></li>	
+					<li class="list-group-item"
+						th:text="'Client contact: '+ *{student.group?.Project.Client.clientContact}"></li>
+					<li class="list-group-item"
+						th:text="'Client contact: '+ *{student.group?.Project.Client.clientCompany}"></li>		
+				</ul>
+		  </div>
+		</div>
+		
 		</div>
 		
 		
 		
 		
-		<div th:if="${student.group} == null">	
-			<table>
-				<tr>
-					<td>
-						<a th:href="@{/student/createGroup}">Create Group </a>
-					</td>
-				</tr>
-				
-				<tr>
-					<td>
-						<a th:href="@{/student/joinGroup}">Join Group </a>
-					</td>
-				</tr>
-			</table>
+		<!-- Students with no group -->
+		<div th:if="${student.group} == null">
 		
+			<div class="alert alert-primary shadow" role="alert">
+			  Welcome to Student capstone portal
+			</div>
+			<div class="card-deck">
+			  <div class="card shadow">
+			    <div class="card-body border border-primary">
+			      <h5 class="card-title">Create Group</h5>
+			      <p class="card-text">Creating a Capstone group</p>
+			      <small class="text-muted"><a class="btn btn-primary shadow" th:href="@{/student/createGroup}">Create Group </a></small>
+			    </div>
+			  </div>
+			  <div class="card shadow">
+			    <div class="card-body border border-primary">
+			      <h5 class="card-title">Join a Group</h5>
+			      <p class="card-text">Join one of the currently available groups</p>
+			      <small class="text-muted"><a class="btn btn-primary shadow" th:href="@{/student/joinGroup}">Join Group </a></small>
+			    </div>
+			  </div>
+			</div>
 
 		</div>
 		
 		
 	</div>
-	</div>
+
 
 	
 	

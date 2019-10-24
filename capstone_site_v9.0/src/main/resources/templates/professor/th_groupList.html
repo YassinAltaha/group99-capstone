@@ -20,56 +20,96 @@
 	<div th:replace="fragments/navbars/navbar :: profNav"></div>
 
 	<div class="container" align="center">
-		<div class="wrapper block-row">
 
-			<div class="inner-wrapper title-block-wrapper">
+			<div class="alert alert-primary">
 				<h2>Group List</h2>
 			</div>
+		<div th:if="${msg}" class="alert alert-success">
+			Group updated
+		</div>
 			<div th:if="${groups!=null and !groups.empty}">
 
-				<table>
-					<tr>
-						<th>Group ID</th>
-						<th>Group Name</th>
-						<th>Group Program</th>
-						<th>Group Members</th>
-						<th>Project Name</th>
+			<table class="table bg-white">
+				<tr>
+					<th>Group ID</th>
+					<th>Group Name</th>
+					<th>Group Program</th>
+					<th>Group Members</th>
+					<th>Project Name</th>
 
-					</tr>
+				</tr>
 
-					<tr th:each="group : ${groups}">
+				<tr th:each="group : ${groups}" class="text-center">
 
-						<td th:utext="*{group.groupId}"></td>
-						<td th:utext="*{group.groupName}"></td>
-						<td th:utext="*{group.program}"></td>
+					<td th:utext="*{group.groupId}"></td>
+					<td th:utext="*{group.groupName}"></td>
+					<td th:utext="*{group.program}"></td>
 
-						<td>
-							<ul th:each="student : *{group.group_members}">
-								<li th:utext="${student.name}"></li>
-							</ul>
-						</td>
-
-						<td th:if="${group.project != null}">
-							<p th:utext="*{group.project.title}"></p>
-						</td>
-						<td th:unless="${group.project != null}">
+					<td>
+						<ul th:each="student : *{group.group_members}">
+							<li th:utext="${student.name}"></li>
+						</ul>
+					</td>
+<!-- USING BOOTSTRAP MODEL TO REMOVE PROJECT FROM GROUP -->
+					<td th:if="${group.project != null}">
+						<p th:utext="*{group.project.title}"></p>
+						
+						<button type="button" class="btn btn-danger" data-toggle="modal" data-th-target="@{group.groupName}">
+						  Remove 
+						</button>
+						
+						<!-- Modal -->
+						<div class="modal fade" th:id="${group.groupName}" tabindex="-1" role="dialog" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title">Modal title</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						      	<p th:utext="${group.groupName}"/>
+						      	<p th:utext="${group.project.projectId}"/>
+						        <p th:utext="${group.project.title}"/>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						        <button type="button" class="btn btn-primary">Save changes</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					
+					</td>
+					
+					
+					<td th:unless="${group.project != null}">
 						<a class="btn btn-primary mb-2" th:href="@{/professor/projectToGroup/{id}(id=${group.groupId})}">Assign </a>
-						</td>
-					</tr>
-				</table>
-			</div>
-
-			<div th:unless="${groups!=null and !groups.empty}">
-				<h1>No Groups Available</h1>
-			</div>
-
-
-
-
+					</td>
+				</tr>
+			</table>
 		</div>
+
+
+
+		<div th:unless="${groups!=null and !groups.empty}">
+			<h1>No Groups Available</h1>
+		</div>
+
 	</div>
 
 
-
+	<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous" type="text/javascript"></script>
+	<script
+		th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous" type="text/javascript"></script>
+	<script
+		th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js}"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous" type="text/javascript"></script>
 </body>
 </html>

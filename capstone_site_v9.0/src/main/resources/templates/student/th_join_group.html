@@ -3,7 +3,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security" class="bg-grey">
 <head>
-
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}" media="all"/>
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/base.css}" media="all" />
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
 <title>Join Group</title>
@@ -16,13 +17,10 @@
 	</div>
 	
 	
-	<div class="bg-white" align="center">
+	<div class="container" align="center">
 	
-	<div th:if=${error}>
-		<p th:value="*{error}">
-	</div>
 	
-			<table>
+			<table class="table bg-white text-center shadow">
 				<tr th:if="${error}">
 					<td colspan = "3">
 						<p th:text="*{error}" />
@@ -41,7 +39,7 @@
 					<td>Group Name: </td>
 					<td><p th:text="*{group.groupName}"/></td>
 					
-					<td><a th:href="@{/student/join_group/{id}(id = ${group.groupId})}">Join Group</a>
+					<td><a class="btn btn-primary shadow" th:href="@{/student/join_group/{id}(id = ${group.groupId})}">Join Group</a>
 				</tr>
 			
 			</table>
