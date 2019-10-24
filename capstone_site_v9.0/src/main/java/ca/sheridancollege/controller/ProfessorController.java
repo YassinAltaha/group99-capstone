@@ -99,7 +99,29 @@ public class ProfessorController {
 		}
 
 	}
+	
+	
+	@RequestMapping("professor/removeProjectFromGroup/{id}")
+	public String removeProject(Model model , @PathVariable int id) {
+		
+		try {
+			GroupBean g = groupDAO.getGroupById(id);
+			Project p = g.getProject();
+			g.setProject(null);
+			groupDAO.updateGroup(g);
+			p.setGroupBean(null);
+			projectDAO.updateProject(p);
+			model.addAttribute("msg", true);
+			
+		}catch(Exception e)
+		{
+			model.addAttribute("error", "Error removing Project from Group");
 
+		}
+		model.addAttribute("groups", groupDAO.getAllGroups());
+		return "professor/th_groupList";
+	}
+	
 	// Register Professor-1.1(form)
 	@RequestMapping("professor/addProf")
 	public String goHome(Model model) {
