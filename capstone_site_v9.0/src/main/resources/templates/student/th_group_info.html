@@ -26,7 +26,7 @@
 	
 		<div th:if="${student.group} != null">
 		
-		<div class="card text-center w-50 shadow mt-4" >
+		<div class="card text-center w-50 shadow m-4" >
 		  <div class="card-body">
 		    <h3 class="card-title" th:text="*{student.group.groupName}"></h3>
 		    <p class="card-text"  th:text="*{student.group.program}"></p>
@@ -75,14 +75,14 @@
 			  Welcome to Student capstone portal
 			</div>
 			<div class="card-deck">
-			  <div class="card shadow">
+			  <div class="card shadow mb-4">
 			    <div class="card-body border border-primary">
 			      <h5 class="card-title">Create Group</h5>
 			      <p class="card-text">Creating a Capstone group</p>
 			      <small class="text-muted"><a class="btn btn-primary shadow" th:href="@{/student/createGroup}">Create Group </a></small>
 			    </div>
 			  </div>
-			  <div class="card shadow">
+			  <div class="card shadow mb-4">
 			    <div class="card-body border border-primary">
 			      <h5 class="card-title">Join a Group</h5>
 			      <p class="card-text">Join one of the currently available groups</p>

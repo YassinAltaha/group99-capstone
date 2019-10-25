@@ -267,7 +267,8 @@ public class StudentController {
 					
 				}else
 				{
-					g.setGroupOwnerStudentId(g.getGroup_members().get(1).getId());
+					g.getGroup_members().remove(s);
+					g.setGroupOwnerStudentId(g.getGroup_members().get(0).getId());
 					groupDAO.updateGroup(g);
 					s.setGroup(null);
 					dao.updateStudent(s);
