@@ -3,15 +3,13 @@
 <head>
 
 <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}" media="all"/>
-<link rel="stylesheet" type="text/css" th:href="@{/resources/css/base.css}" media="all" />
 <meta charset="UTF-8">
-<!-- <meta charset="ISO-8859-1"> -->
-<title>Assigning Group a Project</title>
+
+<title>Assigning Project</title>
 </head>
-  <body class="bg-grey">
-		
-	<div th:replace="fragments/navbars/navbar :: profNav">
-	</div>
+ <body class="bg-grey">
+  
+	<div th:replace="fragments/navbars/navbar :: profNav"></div>
 
 		<div class="container" align="center">
 			<form th:action="@{/professor/assignGroup}" th:object="${group}" method="post">
@@ -47,12 +45,12 @@
 						</ul>
 					</td>
 				</tr>
-				
+				<!--   -->
 				<tr>
 					<td><label>Approved Projects:</label> </td>
 					<td>
 						<select class="form-control text-center" name="projectId" th:value="${projectId}" >
-							<option th:each="project : ${projects}"
+							<option th:each="project : ${projects}" th:if="${!project.Archived} AND ${project.GroupBean == null}"
 									th:value="${project.projectId}"
 									th:text="${project.title}">
 							</option>

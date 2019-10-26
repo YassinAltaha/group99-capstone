@@ -47,7 +47,9 @@ public class Student implements Serializable {
 	@Size(min = 2, max = 30, message = "Program must between 2 - 30 letters")
 	private String program;
 
-	private boolean isGroupLeader;
+//	@org.hibernate.annotations.Type(type="yes_no")
+	@Column(nullable=false ,columnDefinition = "boolean default false")
+	private boolean isArchived;
 	
 	@NotNull(message = "Please Select Campus")
 	private String campus;

@@ -15,6 +15,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import ca.sheridancollege.bean.Client;
 import ca.sheridancollege.bean.Professor;
 import ca.sheridancollege.bean.Project;
 import ca.sheridancollege.bean.Role;
@@ -39,6 +40,21 @@ public class StudentDAO {
 		session.getTransaction().commit();
 		session.close();
 
+	}
+	
+	public Student getStudentById(int id) {
+
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		Query query = session.createQuery("from Student where id=:sId");
+		query.setParameter("sId", id);
+		Student s = (Student) query.getSingleResult();
+
+		session.getTransaction().commit();
+		session.close();
+
+		return s;
 	}
 
 	public Student getStudentByEmail(String email) {

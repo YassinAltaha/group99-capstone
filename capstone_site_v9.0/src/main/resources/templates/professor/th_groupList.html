@@ -43,7 +43,7 @@
 
 				</tr>
 
-				<tr th:each="group : ${groups}" class="text-center">
+				<tr th:each="group : ${groups}" class="text-center" th:if="${!group.Archived}">
 
 					<td th:utext="*{group.groupId}"></td>
 					<td th:utext="*{group.groupName}"></td>

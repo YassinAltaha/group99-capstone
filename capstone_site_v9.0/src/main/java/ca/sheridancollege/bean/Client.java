@@ -50,7 +50,11 @@ public class Client implements Serializable {
 	private String clientContact;
 
 	private String clientAddress;
-
+	
+	@Column(nullable=false ,columnDefinition = "boolean default false")
+	private boolean isArchived;
+	
+	
 	@NotNull(message = "Please Select Industry")
 	private String clientIndustry;
 	

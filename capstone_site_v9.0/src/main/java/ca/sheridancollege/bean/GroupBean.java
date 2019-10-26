@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,7 +30,11 @@ public class GroupBean implements Serializable {
 	private String passcode;
 //	private List<Project> projectRankings;
 	private String campus;
-
+	
+	@Column(nullable=false ,columnDefinition = "boolean default false")
+	private boolean isArchived;
+	
+	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Project project;
 

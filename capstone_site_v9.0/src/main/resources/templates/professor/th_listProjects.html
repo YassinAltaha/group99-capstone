@@ -26,7 +26,7 @@
 		</div>
 
 
-		<div th:each="client : *{clientList}">
+		<div th:each="client : *{clientList}" th:if="${!client.Archived}">
 
 			<div class="row">
 				<div class="card w-100  shadow">
@@ -59,7 +59,7 @@
 						<div class="card-deck-wrapper">
 	
 							<div class="card shadow "
-								th:each="project : *{client.projectList}">
+								th:each="project : *{client.projectList}" th:if="${!project.Archived}">
 								<div class="card-header" data-toggle="collapse"
 									th:href="'#collapse'+*{project.projectId}"
 									aria-controls="'collapse'+${project.projectId}">

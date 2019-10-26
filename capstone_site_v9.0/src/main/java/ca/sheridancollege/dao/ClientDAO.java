@@ -173,6 +173,21 @@ public class ClientDAO {
 
 		return groupList;
 	}
+	
+	public Client getClientById(int id) {
+
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		Query query = session.createQuery("from Client where clientId=:clientId");
+		query.setParameter("clientId", id);
+		Client c = (Client) query.getSingleResult();
+
+		session.getTransaction().commit();
+		session.close();
+
+		return c;
+	}
 
 	public List<String> validateClint(Client c) {
 		List<String> errorList = new ArrayList<String>();
@@ -187,5 +202,7 @@ public class ClientDAO {
 		}
 		return errorList;
 	}
+	
+	
 
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -35,7 +36,10 @@ public class Project implements Serializable {
 	private String description;
 	private String status;
 	private String profNote;
-
+	
+	@Column(nullable=false ,columnDefinition = "boolean default false")
+	private boolean isArchived;
+	
 	@Transient
 	private int GroupId;
 

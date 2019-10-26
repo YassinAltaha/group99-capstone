@@ -28,6 +28,7 @@ import ca.sheridancollege.bean.Student;
 
 @Controller
 public class ProfessorController {
+	
 	ProfDAO profDAO = new ProfDAO();
 	ProjectDAO projectDAO = new ProjectDAO();
 	ClientDAO clientDAO = new ClientDAO();
@@ -52,7 +53,201 @@ public class ProfessorController {
 		}
 
 	}
+	
+	
+	//----------------------------- ARCHIVING -------------------- (ADMINISTRATION)-------------//
+	
+	@RequestMapping(value="professor/administrate" ,method = RequestMethod.GET)
+	public String goAdminGET(Model model) {
 
+		return "professor/th_administrator";
+	}
+	
+	@RequestMapping(value="professor/administrate" ,method = RequestMethod.POST)
+	public String goAdminPOST(Model model, @RequestParam String objType ) {
+
+		switch(objType)
+		{
+			case "adminStudents":{
+				model.addAttribute("studentList", studentDAO.getAllStudents());
+				
+			}
+			case "adminGroups":{
+				model.addAttribute("groupList", groupDAO.getAllGroups());
+				
+				
+			}
+			case "adminClients":{
+				model.addAttribute("clientList", clientDAO.getAllClients());
+				
+				
+			}
+			case "adminProjects":{
+				model.addAttribute("projectList", projectDAO.getAllProjects());
+			
+			}
+			
+		}
+		model.addAttribute("objType", objType);
+		return "professor/th_administrator";
+		
+		
+	}
+	
+
+	@RequestMapping("/professor/archiveClient/{id}")
+	public String archiveClient(Model model, @PathVariable int id) {
+		
+		try {
+			Client c = clientDAO.getClientById(id);
+			c.setArchived(true);
+			clientDAO.updateClient(c);
+
+		}catch(Exception e)
+		{
+			model.addAttribute("error", "Error Archiving Client");
+
+		}
+		model.addAttribute("objType", "adminClients");
+		model.addAttribute("clientList", clientDAO.getAllClients());
+		return "professor/th_administrator";
+	}
+	
+	@RequestMapping("/professor/unarchiveClient/{id}")
+	public String unarchiveClient(Model model, @PathVariable int id) {
+		
+		try {
+			Client c = clientDAO.getClientById(id);
+			c.setArchived(false);
+			clientDAO.updateClient(c);
+
+		}catch(Exception e)
+		{
+			model.addAttribute("error", "Error Un-Archiving Client");
+
+		}
+		model.addAttribute("objType", "adminClients");
+		model.addAttribute("clientList", clientDAO.getAllClients());
+		return "professor/th_administrator";
+	}
+	
+	
+	@RequestMapping("/professor/archiveProject/{id}")
+	public String archiveProject(Model model, @PathVariable int id) {
+		
+		try {
+			Project p = projectDAO.searchProjectById(id);
+					
+			p.setArchived(true);
+			projectDAO.updateProject(p);
+			
+
+		}catch(Exception e)
+		{
+			model.addAttribute("error", "Error Archiving Project");
+
+		}
+		model.addAttribute("objType", "adminProjects");
+		model.addAttribute("projectList", projectDAO.getAllProjects());
+		return "professor/th_administrator";
+	}
+	
+	@RequestMapping("/professor/unarchiveProject/{id}")
+	public String unarchiveProject(Model model, @PathVariable int id) {
+		
+		try {
+			Project p = projectDAO.searchProjectById(id);
+					
+			p.setArchived(false);
+			projectDAO.updateProject(p);
+			
+
+		}catch(Exception e)
+		{
+			model.addAttribute("error", "Error Un-Archiving Project");
+
+		}
+		model.addAttribute("objType", "adminProjects");
+		model.addAttribute("projectList", projectDAO.getAllProjects());
+		return "professor/th_administrator";
+	}
+	
+	
+	@RequestMapping("/professor/archiveGroup/{id}")
+	public String archiveGroup(Model model, @PathVariable int id) {
+		
+		try {
+			GroupBean g = groupDAO.getGroupById(id);
+			g.setArchived(true);
+			groupDAO.updateGroup(g);
+			
+		}catch(Exception e)
+		{
+			model.addAttribute("error", "Error Archiving Groups");
+
+		}
+		model.addAttribute("objType", "adminGroups");
+		model.addAttribute("groupList", groupDAO.getAllGroups());
+		return "professor/th_administrator";
+	}
+	
+	@RequestMapping("/professor/unarchiveGroup/{id}")
+	public String unarchiveGroup(Model model, @PathVariable int id) {
+		
+		try {
+			GroupBean g = groupDAO.getGroupById(id);
+			g.setArchived(false);
+			groupDAO.updateGroup(g);	
+
+		}catch(Exception e)
+		{
+			model.addAttribute("error", "Error Un-Archiving Groups");
+
+		}
+		model.addAttribute("objType", "adminGroups");
+		model.addAttribute("groupList", groupDAO.getAllGroups());
+		return "professor/th_administrator";
+	}
+	
+	@RequestMapping("/professor/archiveStudent/{id}")
+	public String archiveStudent(Model model, @PathVariable int id) {
+		
+		try {
+			Student s = studentDAO.getStudentById(id);
+			s.setArchived(true);
+			studentDAO.updateStudent(s);
+
+			
+		}catch(Exception e)
+		{
+			model.addAttribute("error", "Error Archiving Student");
+
+		}
+		model.addAttribute("objType", "adminStudents");
+		model.addAttribute("studentList", studentDAO.getAllStudents());
+		return "professor/th_administrator";
+	}
+	
+	@RequestMapping("/professor/unarchiveStudent/{id}")
+	public String unarchiveStudent(Model model, @PathVariable int id) {
+		
+		try {
+			Student s = studentDAO.getStudentById(id);
+			s.setArchived(false);
+			studentDAO.updateStudent(s);
+
+			
+		}catch(Exception e)
+		{
+			model.addAttribute("error", "Error Un-Archiving Student");
+
+		}
+		model.addAttribute("objType", "adminStudents");
+		model.addAttribute("studentList", studentDAO.getAllStudents());
+		return "professor/th_administrator";
+	}
+	
+	
 	@RequestMapping("professor/groupList")
 	public String groupHome(Model model) {
 
@@ -119,6 +314,9 @@ public class ProfessorController {
 		model.addAttribute("groups", groupDAO.getAllGroups());
 		return "professor/th_groupList";
 	}
+	//END OF ----------------------------- ARCHIVING -------------------- ADMINISTRATION -------------//
+	
+	
 	
 	// Register Professor-1.1(form)
 	@RequestMapping("professor/addProf")

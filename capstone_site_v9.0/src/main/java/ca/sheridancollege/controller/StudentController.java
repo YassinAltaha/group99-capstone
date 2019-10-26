@@ -223,11 +223,10 @@ public class StudentController {
 			g.setGroupOwnerStudentId(s.getId());
 			g.setProgram(s.getProgram());
 			g.getGroup_members().add(s);
-
+			
 			groupDAO.addGroup(g);
 			// updating student
 			s.setGroup(g);
-			s.setGroupLeader(true);
 			dao.updateStudent(s);
 		
 			model.addAttribute("student", s);
