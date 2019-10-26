@@ -482,7 +482,7 @@ public class ProfessorController {
 					String new_encoded_pass = passwordEncoder.encode(new_password);
 					p.setPassword(new_encoded_pass);
 					profDAO.updateProfessor(p);
-					model.addAttribute("error", "Password was successfully updated");
+					model.addAttribute("msg", "Password was successfully updated");
 				} catch (Exception e) {
 
 					model.addAttribute("error", "Error updating password");
@@ -508,7 +508,7 @@ public class ProfessorController {
 		try {
 			p.setProfCode(new_profCode);
 			profDAO.updateProfessor(p);
-			model.addAttribute("error", "Pass Code was successfully updated");
+			model.addAttribute("msg", "Pass code was successfully updated");
 		} catch (Exception e) {
 			model.addAttribute("error", "Error updating Pass Code");
 			System.out.println(e);

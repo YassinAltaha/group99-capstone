@@ -17,11 +17,16 @@
 		<div th:if="${success}" class="alert alert-success shadow">
 			<h2>Professor Account Created</h2>
 		</div>
-		<table class="table" th:if="${errors != null}">
+		<table class="table shadow" th:if="${errors != null}">
 			<tr th:each="error :${errors}" class="table-danger">
 				<td align="center" th:text="*{error}" colspan="2"></td>
 			</tr>
-		</table>
+			<tr th:if="${msg}" align="center" class="table-success">
+				<td th:text="*{msg}" ></td>
+			</tr>
+		</table>		
+				
+				
 				
 					<form th:action="@{/saveProf}" th:object="${professor}" method="post">
 					

@@ -33,13 +33,13 @@
 			<tr>
 			
 				<td class="w-25"> <label >Project Title: </label> <input th:field="*{projectId}" hidden="true" /></td>
-				<td> <input class="form-control w-autos col-xl-7" th:field="*{title}" /></td>
+				<td> <input class="form-control w-autos col-xl-7"  required th:field="*{title}" /></td>
 				
 			</tr>
 				
 			<tr >
 				<td class="w-25"> <label >Project Description: </label></td>
-				<td><textarea class="form-control w-autos" form="projectForm" th:field="*{description}" style="width:475px; height:130px;" > </textarea></td>
+				<td><textarea class="form-control w-autos"  required form="projectForm" th:field="*{description}" style="width:475px; height:130px;" > </textarea></td>
 			</tr>	
 			<tr align="center">
 				<td><a  th:href="@{/client/myProject}"> <input type="button" class="btn btn-primary mb-2 shadow" value="Cancel" /> </a></td>
