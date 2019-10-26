@@ -58,8 +58,10 @@ $(document).ready(function () {
 	<div th:replace="fragments/navbars/navbar :: Student_Nav"></div>
 
 
-	<div class="bg-white" align="center">
-	<br>
+	<div class="container-fluid" align="center">
+		<div class="alert alert-primary shadow">
+			<h2>Rank Projects</h2>
+		</div>
 	<div th:if="${error}" class="alert alert-danger w-25" role="alert">
 		<p th:text="*{error}" />
 	</div>
@@ -73,16 +75,12 @@ $(document).ready(function () {
 
 		<form th:action="@{/student/rank_projects}" method="POST">
 
+			<table class="table bg-white text-center text-break shadow">
 
-			<table>
-
-				<tr align="center">
-					<th colspan="4">Rank Projects</th>
-				</tr>
 				<tr>
 					<th>Client</th>
 					<th>Title</th>
-					<th>Description</th>
+					<th class="w-50">Description</th>
 					<th>Rank</th>
 
 				</tr>
@@ -92,7 +90,7 @@ $(document).ready(function () {
 					<td><p th:text="${project.description}"></td>
 					<td><p class="proj" id="proj">
 
-							<select th:name="${project.projectId}" th:id="${iterStat.index}">
+							<select class="custom-select mr-sm-2" th:name="${project.projectId}" th:id="${iterStat.index}">
 								<option value="">--</option>
 								<option th:each="i : ${#numbers.sequence(1, 5)}" th:value="${i}" 
 									th:text="${i}" th:id="${project.projectId}"></option>
@@ -100,7 +98,7 @@ $(document).ready(function () {
 
 				</tr>
 				<tr>
-					<td colspan="4" align="center"><input class="btn btn-primary"
+					<td colspan="4"><input class="btn btn-primary shadow"
 						type="submit" value="Submit" />
 						
 					<input type="text" id="proj1" name="proj1" value="" style="display: none;"/>

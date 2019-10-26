@@ -328,27 +328,32 @@ public class ProfessorController {
 
 	// Register Professor-1.2 (saving prof)
 	@RequestMapping("saveProf")
-	public String addProfessor(Model model, @ModelAttribute Professor professor) {
+	public String addProfessor(Model model, @ModelAttribute Professor professor , @RequestParam String confirm_password) {
 
 		synchronized (Professor.class) {
 
 			// testing using the Professor Validtions
 			if (profDAO.validateProfessor(professor).isEmpty()) {
-
-				// test if the username is used
-				// Catch
-				// sends the user back to Sign with new error message
-				try {
-
-					profDAO.addProf(professor);
-					model.addAttribute("errors", professor.getProfName() + " Account was created");
+				if(professor.getPassword().equals(confirm_password))
+				{
+					// test if the username is used
+					// Catch
+					// sends the user back to Sign with new error message
+					try {
+	
+						profDAO.addProf(professor);
+						model.addAttribute("success", professor.getProfName() + " Account was created");
+						return "professor/th_profSignup";
+					} catch (Exception e) {
+	
+						model.addAttribute("errors", "This email is already in use");
+						return "professor/th_profSignup";
+					}
+				}else {
+					model.addAttribute("errors", "Passwords must match");
 					return "professor/th_profSignup";
-				} catch (Exception e) {
-
-					model.addAttribute("errors", "This email is already in use");
-					return "signup/th_profSignup";
 				}
-				// Validtion Failed
+			// Validtion Failed
 			} else {
 				model.addAttribute("errors", profDAO.validateProfessor(professor));
 				return "professor/th_profSignup";
