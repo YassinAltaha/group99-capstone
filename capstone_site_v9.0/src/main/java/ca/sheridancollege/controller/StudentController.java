@@ -2,7 +2,6 @@ package ca.sheridancollege.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import org.springframework.security.core.Authentication;
@@ -15,15 +14,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import ca.sheridancollege.bean.Client;
 import ca.sheridancollege.bean.GroupBean;
-import ca.sheridancollege.bean.Professor;
 import ca.sheridancollege.bean.Project;
+import ca.sheridancollege.bean.Ranking;
 import ca.sheridancollege.bean.Student;
 import ca.sheridancollege.dao.GroupDAO;
 import ca.sheridancollege.dao.ProjectDAO;
+import ca.sheridancollege.dao.RankingDAO;
 import ca.sheridancollege.dao.StudentDAO;
 
 @Controller
@@ -31,6 +29,8 @@ public class StudentController {
 
 	StudentDAO dao = new StudentDAO();
 	ProjectDAO projectDAO = new ProjectDAO();
+	GroupDAO groupDAO = new GroupDAO();
+	RankingDAO rankingDAO = new RankingDAO();
 
 	// Signup 1.1
 	// Student Sign-up(form)
@@ -98,7 +98,6 @@ public class StudentController {
 	@RequestMapping("student/joinGroup")
 	public String JoinGroup(Model model) {
 
-		GroupDAO groupDAO = new GroupDAO();
 		List<GroupBean> raw_groupList = groupDAO.getAllGroups();
 		List<GroupBean> groupList = new ArrayList<GroupBean>();
 		for (GroupBean group : raw_groupList) {
@@ -112,8 +111,6 @@ public class StudentController {
 
 	@RequestMapping(value = "student/join_group/{id}", method = RequestMethod.GET)
 	public String JoinGroup(Model model, @PathVariable int id) {
-
-		GroupDAO groupDAO = new GroupDAO();
 
 		try {
 			GroupBean group = groupDAO.getGroupById(id);
@@ -135,7 +132,7 @@ public class StudentController {
 
 		String passcode = Integer.toString(pass);
 
-		GroupDAO groupDAO = new GroupDAO();
+
 
 		// making sure the Path Variable is not being used without
 		if (groupDAO.getGroupById(id) != null) {
@@ -189,7 +186,6 @@ public class StudentController {
 	@RequestMapping("student/addGroup")
 	public String goStudentAddGroup(Model model, @ModelAttribute GroupBean group) {
 
-		GroupDAO groupDAO = new GroupDAO();
 		Student s = getAuthStudent();
 
 		// Create passcode
@@ -240,7 +236,7 @@ public class StudentController {
 		if (s.getGroup() != null) {
 			GroupBean g = s.getGroup();
 			if (g.getGroupOwnerStudentId() == s.getId()) {
-				GroupDAO groupDAO = new GroupDAO();
+
 				if (g.getGroup_members().size() == 1) {
 					s.setGroup(null);
 					dao.updateStudent(s);
@@ -316,34 +312,23 @@ public class StudentController {
 	@RequestMapping(value = "student/rank_projects", method = RequestMethod.GET)
 	public String rankProjects(Model model) {
 		Student s = getAuthStudent();
-		
+
 		// Check student is in a group
 		if (s.getGroup() != null) {
-			GroupBean g = s.getGroup();
 
-			/// Check group doesn't have any rankings
-//			if (g.getProjectRankings().isEmpty() || g.getProjectRankings() == null) {
-
-				// Display approved projects
+			// Display approved projects
+			try {
 				List<Project> projectList = projectDAO.getApprovedProjects();
-
-//				if (projectList.isEmpty() || projectList == null) {
-//					model.addAttribute("error", "There are no projects available yet");
-//				} else {
-					model.addAttribute("projectList", projectList);
-
-//				}
-//			} 
-//			else {
-//				model.addAttribute("error", "Your group has already submitted rankings");
-//			}
+				model.addAttribute("projectList", projectList);
+			} catch (Exception e) {
+				model.addAttribute("error", "There are no projects available yet");
+			}
+			
 		} else {
-			model.addAttribute("error", "You are not yet in a group");
+			model.addAttribute("error", "You must be in a group to rank projects");
 		}
 		return "student/th_rank_projects";
 	}
-	
-	
 
 	@RequestMapping(value = "student/rank_projects", method = RequestMethod.POST)
 	public String submitForm(Model model, @RequestParam int proj1, @RequestParam int proj2, @RequestParam int proj3,
@@ -351,39 +336,39 @@ public class StudentController {
 
 		Student s = getAuthStudent();
 		GroupBean g = s.getGroup();
-		GroupDAO groupDAO = new GroupDAO(); 
 		
-//		try {
-			g.getProjectRankings().clear();
-				
-			int[] rank = { proj1, proj2, proj3, proj4, proj5 };
-
-			for (int i = 0; i < 5; i++) {
-				Project p = projectDAO.searchProjectById(rank[i]);
-				g.getProjectRankings().add(p);
-//				System.out.println(g.getProjectRankings().get(i).getProjectId());
-			}
-			
+		if (g.getRanking() == null) {
+			g.setRanking(new Ranking());
 			groupDAO.updateGroup(g);
-			
-			List<Project> list = g.getProjectRankings();
-			model.addAttribute("group", list);
-			
-			model.addAttribute("success", "Project rankings saved");
+		} else {
+			g.getRanking().getRankings().clear();
+		}
+		
+		Ranking rank = g.getRanking();
 
-			
-//		} catch (Exception e) {
-//			model.addAttribute("error", "Project rankings could not be saved");	
-//		}
+		Project p1 = projectDAO.searchProjectById(proj1);
+		Project p2 = projectDAO.searchProjectById(proj2);
+		Project p3 = projectDAO.searchProjectById(proj3);
+		Project p4 = projectDAO.searchProjectById(proj4);
+		Project p5 = projectDAO.searchProjectById(proj5);
+		
+		rank.getRankings().add(p1);
+		rank.getRankings().add(p2);
+		rank.getRankings().add(p3);
+		rank.getRankings().add(p4);
+		rank.getRankings().add(p5);
+				
+		rankingDAO.updateRanking(rank);
+		
+		model.addAttribute("success", "Project rankings saved");
+
 
 		// Display approved projects
-		List<Project> projectList = projectDAO.getApprovedProjects();;
+		List<Project> projectList = projectDAO.getApprovedProjects();
 		model.addAttribute("projectList", projectList);
 
 		return "student/th_rank_projects";
 	}
-	
-	
 
 	@RequestMapping("student/deleteGroup")
 	public String deleteGroup() {

@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
@@ -41,22 +42,21 @@ public class GroupBean implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "group", fetch = FetchType.EAGER)
 	private List<Student> group_members = new ArrayList<Student>();
 
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(cascade = CascadeType.MERGE)
-	@JoinColumn(name="groupId", referencedColumnName = "groupId", nullable = true)
-	private List<Project> projectRankings = new ArrayList<Project>();
+//	@LazyCollection(LazyCollectionOption.FALSE)
+//	@ManyToMany(cascade = CascadeType.MERGE, targetEntity = GroupBean.class)
+//	@JoinColumn(name="projectId", nullable = true)
+//	private List<Project> projectRankings = new ArrayList<Project>();
 	
-	@Transient
-	public int[] rank = {1, 2, 3, 4, 5 };
+	@OneToOne(cascade = CascadeType.ALL, targetEntity = Ranking.class, fetch = FetchType.EAGER)
+	private Ranking ranking;
 	
-	public GroupBean(int groupId, String groupName, long groupOwnerStudentId, String program, String passcode, List<Project> projectRankings) {
+	public GroupBean(int groupId, String groupName, long groupOwnerStudentId, String program, String passcode) {
 
 		this.groupId = groupId;
 		this.groupName = groupName;
 		this.groupOwnerStudentId = groupOwnerStudentId;
 		this.program = program;
 		this.passcode = passcode;
-		this.projectRankings = projectRankings;
 	}
 
 	public GroupBean(int groupId, String groupName) {

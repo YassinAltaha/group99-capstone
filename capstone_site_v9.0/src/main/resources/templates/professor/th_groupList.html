@@ -4,7 +4,7 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	class="bg-grey">
 <head>
-
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}" media="all"/>
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
 <title>Change Password</title>
@@ -32,6 +32,7 @@
 							<th>Group Program</th>
 							<th>Group Members</th>
 							<th>Project Name</th>
+							<th>Project Rankings</th>
 
 						</tr>
 
@@ -51,7 +52,16 @@
 								<p th:utext="*{group.project.title}"></p>
 							</td>
 							<td th:unless="${group.project != null}">
-								<p>-</p>
+								<p>---</p>
+							</td>
+							
+							<td th:if="${group.ranking != null}">
+								<ul th:each="project: *{group.ranking.rankings}">
+									<li th:utext="${project.title}"></li>
+								</ul>
+							</td>
+							<td th:unless="${group.ranking != null}">
+								<p>---</p>
 							</td>
 
 						</tr>

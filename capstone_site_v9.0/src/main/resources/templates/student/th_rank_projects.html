@@ -4,9 +4,7 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	class="bg-grey">
 <head>
-<link rel="stylesheet" type="text/css"
-	th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}"
-	media="all" />
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}" media="all"/>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Rank Projects</title>
 
@@ -16,41 +14,35 @@
 <script>
 $(document).ready(function () {
 
-	var count = 0;
+	$(":submit").attr("disabled", true);
 	
 	$('select').change(function () {
+		
+		if (($('select option[value="1"]:selected').length == 1) && ($('select option[value="2"]:selected').length == 1) && 
+				($('select option[value="3"]:selected').length == 1) && ($('select option[value="4"]:selected').length == 1) &&
+				($('select option[value="5"]:selected').length == 1)) {
+			$(":submit").removeAttr("disabled");
+		} else {
+			$(":submit").attr("disabled", true);
+		}
 
 
 		if (($('select option[value="' + $(this).val() + '"]:selected').length > 1) && ($(this).val() > 0)) {
 				$(this).val("--");
 		    	alert('You have already selected this ranking - please choose another.')
-		    	count--;
 		} else {
 			if (($(this).val() == 1)) {
 				$("#proj1").val($(this).find('option:selected').attr("id"));
-				count++;
 			} else if (($(this).val() == 2)) {
 				$("#proj2").val($(this).find('option:selected').attr("id"));
-				count++;
 			} else if (($(this).val() == 3)) {
 				$("#proj3").val($(this).find('option:selected').attr("id"));
-				count++;
 			} else if (($(this).val() == 4)) {
 				$("#proj4").val($(this).find('option:selected').attr("id"));
-				count++;
 			} else if (($(this).val() == 5)) {
 				$("#proj5").val($(this).find('option:selected').attr("id"));
-				count++;
 			}
-			
-			
-			
 		}
-		
-
-		
-		
-		
 	});
 });
 
@@ -108,11 +100,8 @@ $(document).ready(function () {
 
 				</tr>
 				<tr>
-
-
 					<td colspan="4" align="center"><input class="btn btn-primary"
 						type="submit" value="Submit" />
-						
 						
 					<input type="text" id="proj1" name="proj1" value="" style="display: none;"/>
 					<input type="text" id="proj2" name="proj2" value="" style="display: none;"/>

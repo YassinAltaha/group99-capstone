@@ -35,13 +35,14 @@ public class Project implements Serializable {
 	@Transient
 	private int GroupId;
 
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = ca.sheridancollege.bean.Client.class)
+	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Client.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "clientId")
 	private Client client;
 
 	@OneToOne(cascade = CascadeType.ALL, targetEntity = GroupBean.class, fetch = FetchType.EAGER)
 	private GroupBean groupBean;
 	
+
 	public Project(String title, String description) {
 
 		this.title = title;
