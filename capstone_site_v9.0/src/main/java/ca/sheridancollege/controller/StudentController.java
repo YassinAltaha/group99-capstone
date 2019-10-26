@@ -75,7 +75,7 @@ public class StudentController {
 
 						} else {
 							// Professor Code is not matched 
-							model.addAttribute("errors", "Professor Code does not Exist");
+							model.addAttribute("errors", "Professor code is incorrect");
 							return "signup/th_studentSignup";
 						}
 					} else {

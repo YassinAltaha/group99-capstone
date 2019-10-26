@@ -14,11 +14,16 @@
 	</div>
 
 		<div class="container" align="center">
-		<table class="table" th:if="${errors != null}">
+		<table class="table shadow">
 			<tr th:each="error :${errors}" class="table-danger">
 				<td align="center" th:text="*{error}" colspan="2"></td>
 			</tr>
-		</table>
+			<tr th:if="${msg}" align="center" class="table-success">
+				<td th:text="*{msg}" ></td>
+			</tr>
+		</table>		
+				
+				
 				
 					<form th:action="@{/saveProf}" th:object="${professor}" method="post">
 					
