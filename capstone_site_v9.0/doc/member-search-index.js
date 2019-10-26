@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"ca.sheridancollege.bean","c":"Student","l":"campusList"},{"p":"ca.sheridancollege.bean","c":"Student","l":"Student(String, String, String, String, double, String, String, String)","url":"%3Cinit%3E(java.lang.String,java.lang.String,java.lang.String,java.lang.String,double,java.lang.String,java.lang.String,java.lang.String)"}]

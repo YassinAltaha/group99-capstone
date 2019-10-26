@@ -422,6 +422,7 @@ public class ProfessorController {
 		Project project = projectDAO.searchProjectById(projectId);
 		model.addAttribute("groups", list);
 		model.addAttribute("project", project);
+
 		return "professor/th_assignProject";
 	}
 

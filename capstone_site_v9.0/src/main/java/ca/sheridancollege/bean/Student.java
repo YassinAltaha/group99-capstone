@@ -30,7 +30,6 @@ public class Student implements Serializable {
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	private int id;
-
 	
 	@Column(unique=true)
 	@NotNull(message = "Please enter your Sheridan student number")

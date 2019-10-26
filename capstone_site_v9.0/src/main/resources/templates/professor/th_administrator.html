@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="bg-grey">
+<head>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}"
+	media="all" />
+<meta charset="UTF-8">
+<!-- <meta charset="ISO-8859-1"> -->
+<title>Administrator</title>
+</head>
+<body class="bg-grey">
+
+
+
+	<div th:replace="fragments/navbars/navbar :: profNav"></div>
+
+	<!-- View-dependent nav area -->
+
+	<div class="container-fluid" align="center">
+			<div class="alert alert-primary shadow">
+				<h2>Admin page</h2>
+			</div>
+			
+			<div th:if="${error}" class="alert alert-danger shadow">
+				<h2 th:utext="${error}"></h2>
+			</div>
+		<form th:action="@{/professor/administrate}" method="POST">
+			<select class="form-control w-auto mb-2" required name="objType">
+
+				<option value="adminStudents">Admin Students</option>
+				<option value="adminGroups">Admin Groups</option>
+				<option value="adminClients">Admin Clients</option>
+				<option value="adminProjects">Admin Projects</option>
+			</select> <input type="submit" class="btn btn-primary mb-2" value="Get List">
+
+		</form>
+
+		<th:block th:switch="${objType}">
+			<div th:case="'adminStudents'">
+				<table class="table table-bordered text-center bg-white">
+					<thead>
+						<tr>
+							<th>Student Name</th>
+							<th>Student Program</th>
+							<th>Student ID</th>
+							<th>Student Campus</th>
+							<th>Student Email</th>
+							<th>Archive</th>
+						</tr>
+					</thead>
+
+					<tr th:each="student : ${studentList}">
+						<td><p th:utext="*{student.name}" /></td>
+						<td><p th:utext="*{student.program}" /></td>
+						<td><p th:utext="*{student.student_id}" /></td>
+						<td><p th:utext="*{student.campus}" /></td>
+						<td><p th:utext="*{student.student_email}" /></td>
+						
+						<td th:if="${!student.Archived}">
+								<a data-toggle="modal" th:href="'#example'+*{student.id}" class="btn text-dark btn-warning shadow">
+								Archive
+								</a>
+							
+							
+							<div class="modal fade" th:id="'example'+${student.id}" tabindex="-1" role="dialog" aria-labelledby="'example'+${student.id}" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" th:id="'example'+${student.id}" th:utext="'Archiving '+*{student.name}"></h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+									<p th:utext="${student.student_email}">
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							        <a class="btn btn-warning text-dark"  th:href="@{/professor/archiveStudent/{id}(id=${student.id})}">Archive Student</a>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+							
+						</td>
+						<td th:if="${student.Archived}">
+								<a data-toggle="modal" th:href="'#example'+*{student.id}" class="btn text-dark btn-success shadow">
+								Unarchive
+								</a>
+							
+							
+							<div class="modal fade" th:id="'example'+${student.id}" tabindex="-1" role="dialog" aria-labelledby="'example'+${student.id}" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" th:id="'example'+${student.id}" th:utext="'Un-Archiving '+*{student.name}"></h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+									<p th:utext="${student.student_email}">
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							        <a class="btn btn-success text-dark"  th:href="@{/professor/unarchiveStudent/{id}(id=${student.id})}">Un-Archive Student</a>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+							
+						</td>
+					</tr>
+				</table>
+
+			</div>
+			
+			
+			<div th:case="'adminGroups'">
+				<table class="table table-bordered text-center  bg-white">
+					<thead>
+						<tr>
+							<th>Group Name</th>
+							<th>Students</th>
+							<th>Program</th>
+							<th>Archive</th>
+						</tr>
+					</thead>
+
+					<tr th:each="group : ${groupList}">
+						<td><p th:utext="*{group.groupName}" /></td>
+						<td><ul th:each="student : *{group.group_members}">
+							 	<li th:utext="${student.name}"></li>
+							</ul></td>
+						<td><p th:utext="*{group.program}" /></td>
+						
+							<td th:if="${!group.Archived}">
+								<a data-toggle="modal" th:href="'#example'+*{group.groupId}" class="btn text-dark btn-warning shadow">
+								Archive
+								</a>
+							
+							
+							<div class="modal fade" th:id="'example'+${group.groupId}" tabindex="-1" role="dialog" aria-labelledby="'example'+${group.groupId}" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" th:id="'example'+${group.groupId}" th:utext="'Archiving '+*{group.groupName}"></h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+										<ul th:each="student : *{group.group_members}" >
+											<li th:utext="*{student.name}" ></li>
+										</ul> 
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							        <a class="btn btn-warning text-dark"  th:href="@{/professor/archiveGroup/{id}(id=${group.groupId})}">Archive Group</a>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+							
+							</td>
+							
+							<td th:if="${group.Archived}">
+								<a data-toggle="modal" th:href="'#example'+*{group.groupId}" class="btn text-dark btn-success shadow">
+								Unarchive
+								</a>
+								
+								<div class="modal fade" th:id="'example'+${group.groupId}" tabindex="-1" role="dialog" aria-labelledby="'example'+${group.groupId}" aria-hidden="true">
+								  <div class="modal-dialog" role="document">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <h5 class="modal-title" th:id="'example'+${group.groupId}" th:utext="'Un-Archiving '+*{group.groupName}"></h5>
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								          <span aria-hidden="true">&times;</span>
+								        </button>
+								      </div>
+								      <div class="modal-body">
+										<ul th:each="student : *{group.group_members}" >
+											<li th:utext="*{student.name}" ></li>
+										</ul> 
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								        <a class="btn btn-success text-dark"  th:href="@{/professor/unarchiveGroup/{id}(id=${group.groupId})}">UnArchive Group</a>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+							</td>
+						
+					</tr>
+				</table>
+			</div>
+			<div th:case="'adminClients'">
+				<table class="table table-bordered text-center  bg-white">
+					<thead>
+						<tr>
+							<th>Group Name</th>
+							<th>Company</th>
+							<th>Industry</th>
+							<th>Scale</th>
+							<th>Contact</th>
+							<th>Email</th>
+							<th>Projects</th>
+							<th>Archive</th>
+						</tr>
+						<tr th:each="client : ${clientList}">
+							<td><p th:utext="*{client.clientName}" /></td>
+							<td><p th:utext="*{client.clientCompany}" /></td>
+							<td><p th:utext="*{client.clientIndustry}" /></td>
+							<td><p th:utext="*{client.clientScale}" /></td>
+							<td><p th:utext="*{client.clientContact}" /></td>
+							<td><p th:utext="*{client.clientEmail}" /></td>
+							<td><ul th:each="project : *{client.projectList}" >
+									<li th:utext="*{project.title}" ></li>
+								</ul> 
+							</td>
+							<td th:if="${!client.Archived}">
+								<a data-toggle="modal" th:href="'#example'+*{client.clientId}" class="btn text-dark btn-warning shadow">
+								Archive
+								</a>
+							
+							
+							<div class="modal fade" th:id="'example'+${client.clientId}" tabindex="-1" role="dialog" aria-labelledby="'example'+${client.clientId}" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" th:id="'example'+${client.clientId}" th:utext="'Archiving '+*{client.clientName}"></h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+										<ul th:each="project : *{client.projectList}" >
+											<li th:utext="*{project.title}" ></li>
+										</ul> 
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							        <a class="btn btn-warning text-dark"  th:href="@{/professor/archiveClient/{id}(id=${client.clientId})}">Archive Client</a>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+							
+							</td>
+							
+							<td th:if="${client.Archived}">
+								<a data-toggle="modal" th:href="'#example'+*{client.clientId}" class="btn text-dark btn-success shadow">
+								Unarchive
+								</a>
+								
+								<div class="modal fade" th:id="'example'+${client.clientId}" tabindex="-1" role="dialog" aria-labelledby="'example'+${client.clientId}" aria-hidden="true">
+								  <div class="modal-dialog" role="document">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <h5 class="modal-title" th:id="'example'+${client.clientId}" th:utext="'Un-Archiving '+*{client.clientName}"></h5>
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								          <span aria-hidden="true">&times;</span>
+								        </button>
+								      </div>
+								      <div class="modal-body">
+											<ul th:each="project : *{client.projectList}" >
+												<li th:utext="*{project.title}" ></li>
+											</ul> 
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								        <a class="btn btn-success text-dark"  th:href="@{/professor/unarchiveClient/{id}(id=${client.clientId})}">UnArchive Client</a>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+							</td>
+						</tr>
+					</thead>
+				</table>
+				
+
+				
+				
+				
+				
+			</div>
+			<div th:case="'adminProjects'">
+				<table class="table table-bordered text-center  bg-white">
+					<thead>
+						<tr>
+							<th>Project Title</th>
+							<th>Client Name</th>
+							<th>Client Phone</th>
+							<th>Client Email</th>
+							<th>Archive</th>
+						</tr>
+						<tr th:each="project : ${projectList}">
+							<td class="text-break w-25"><p th:utext="*{project.title}" /></td>
+							<td><p th:utext="*{project.client.clientName}" /></td>
+							<td><p th:utext="*{project.client.clientContact}" /></td>
+							<td><p th:utext="*{project.client.clientEmail}" /></td>
+							
+							<td th:if="${!project.Archived}">
+								<a data-toggle="modal" th:href="'#example'+*{project.projectId}" class="btn text-dark btn-warning shadow">
+								Archive
+								</a>
+							
+							
+							<div class="modal fade" th:id="'example'+${project.projectId}" tabindex="-1" role="dialog" aria-labelledby="'example'+${project.projectId}" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" th:id="'example'+${project.projectId}" th:utext="'Archiving '+*{project.title}"></h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+									<p th:utext="*{project.description}"> 
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							        <a class="btn btn-warning text-dark"  th:href="@{/professor/archiveProject/{id}(id=${project.projectId})}">Archive Project</a>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+							
+							</td>
+							
+							<td th:if="${project.Archived}">
+								<a data-toggle="modal" th:href="'#example'+*{project.projectId}" class="btn text-dark btn-success shadow">
+								Unarchive
+								</a>
+								
+								<div class="modal fade" th:id="'example'+${project.projectId}" tabindex="-1" role="dialog" aria-labelledby="'example'+${project.projectId}" aria-hidden="true">
+								  <div class="modal-dialog" role="document">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <h5 class="modal-title" th:id="'example'+${project.projectId}" th:utext="'UnArchiving '+*{project.title}"></h5>
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								          <span aria-hidden="true">&times;</span>
+								        </button>
+								      </div>
+								      <div class="modal-body">
+										<p th:utext="*{project.description}"> 
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								        <a class="btn btn-success text-dark"  th:href="@{/professor/unarchiveProject/{id}(id=${project.projectId})}">UnArchive Project</a>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+							</td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+
+
+		</th:block>
+
+	</div>
+
+
+	<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous" type="text/javascript"></script>
+	<script
+		th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous" type="text/javascript"></script>
+	<script
+		th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js}"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous" type="text/javascript"></script>
+</body>
+</html>

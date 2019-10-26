@@ -3,7 +3,9 @@
 <html xmlns:th="http://www.thymeleaf.org" class="bg-grey">
 <head>
 
+
 <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}" media="all"/>
+
 
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
@@ -15,6 +17,7 @@
 
 
 	<div class="container" align="center">
+
 		
 		<form th:action="@{/professor/updateProject}" th:object="${project}"
 			method="POST" action="">
@@ -52,6 +55,7 @@
 	
 			</table>
 		</form>
+
 	</div>
 
 
