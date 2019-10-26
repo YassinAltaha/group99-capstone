@@ -256,7 +256,8 @@ public class StudentController {
 					dao.updateStudent(s);
 
 					g.setGroup_members(null);
-					g.setGroupOwnerStudentId(0);
+					g.setGroupOwnerStudentId(0);	
+					g.setRanking(null);
 
 					groupDAO.deleteGroup(g);
 
