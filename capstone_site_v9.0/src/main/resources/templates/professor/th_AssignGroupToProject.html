@@ -45,7 +45,20 @@
 						</ul>
 					</td>
 				</tr>
-				<!--   -->
+				<tr th:unless="${group.ranking ==null}">
+				<td><label>Ranked Projects:</label></td>
+				<td>
+					<ul class="list-group" th:each="ranking : ${group.ranking.rankings}" >
+					  <li class="list-group-item d-flex justify-content-between align-items-center">
+					    <p th:text="${ranking.title}"></p>
+					    <span class="badge badge-success badge-pill" th:if="${ranking.GroupBean == null}">Open</span>
+					    <span class="badge badge-warning badge-pill" th:unless="${ranking.GroupBean == null}">Assigned</span>
+					  </li>
+						
+
+					</ul>
+				 </td>
+				</tr>
 				<tr>
 					<td><label>Approved Projects:</label> </td>
 					<td>

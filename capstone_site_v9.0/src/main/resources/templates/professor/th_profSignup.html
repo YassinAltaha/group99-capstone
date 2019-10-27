@@ -3,7 +3,7 @@
 <head>
 
 <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}" media="all"/>
-<link rel="stylesheet" type="text/css" th:href="@{/resources/css/base.css}" media="all" />
+
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
 <title>Adding Professor</title>
@@ -14,7 +14,10 @@
 	</div>
 
 		<div class="container" align="center">
-		<table class="table shadow">
+		<div th:if="${success}" class="alert alert-success shadow">
+			<h2>Professor Account Created</h2>
+		</div>
+		<table class="table shadow" th:if="${errors != null}">
 			<tr th:each="error :${errors}" class="table-danger">
 				<td align="center" th:text="*{error}" colspan="2"></td>
 			</tr>
@@ -53,6 +56,10 @@
 						<tr>
 							<td><label for="password">Password:</label> </td>
 							<td><input class="form-control  mb-2" required th:field="*{password}" type="password" /></td>
+						</tr>
+						<tr>
+							<td><label for="password">Confirm Password:</label> </td>
+							<td><input class="form-control  mb-2" required name="confirm_password" type="password" /></td>
 						</tr>
 						
 			

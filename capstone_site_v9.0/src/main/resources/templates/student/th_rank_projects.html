@@ -120,4 +120,122 @@ $(document).ready(function () {
 
 
 </body>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	class="bg-grey">
+<head>
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}" media="all"/>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Rank Projects</title>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function () {
+
+	$(":submit").attr("disabled", true);
+	
+	$('select').change(function () {
+		
+		if (($('select option[value="1"]:selected').length == 1) && ($('select option[value="2"]:selected').length == 1) && 
+				($('select option[value="3"]:selected').length == 1) && ($('select option[value="4"]:selected').length == 1) &&
+				($('select option[value="5"]:selected').length == 1)) {
+			$(":submit").removeAttr("disabled");
+		} else {
+			$(":submit").attr("disabled", true);
+		}
+
+
+		if (($('select option[value="' + $(this).val() + '"]:selected').length > 1) && ($(this).val() > 0)) {
+				$(this).val("--");
+		    	alert('You have already selected this ranking - please choose another.')
+		} else {
+			if (($(this).val() == 1)) {
+				$("#proj1").val($(this).find('option:selected').attr("id"));
+			} else if (($(this).val() == 2)) {
+				$("#proj2").val($(this).find('option:selected').attr("id"));
+			} else if (($(this).val() == 3)) {
+				$("#proj3").val($(this).find('option:selected').attr("id"));
+			} else if (($(this).val() == 4)) {
+				$("#proj4").val($(this).find('option:selected').attr("id"));
+			} else if (($(this).val() == 5)) {
+				$("#proj5").val($(this).find('option:selected').attr("id"));
+			}
+		}
+	});
+});
+
+</script>
+
+
+
+</head>
+<body class="bg-grey">
+
+
+
+	<div th:replace="fragments/navbars/navbar :: Student_Nav"></div>
+
+
+	<div class="container-fluid" align="center">
+		<div class="alert alert-primary shadow">
+			<h2>Rank Projects</h2>
+		</div>
+	<div th:if="${error}" class="alert alert-danger w-25" role="alert">
+		<p th:text="*{error}" />
+	</div>
+
+	<div th:if="${success}" class="alert alert-success w-25" role="alert">
+		<p th:text="*{success}" />
+		<div th:each="item : ${list}">
+		<p th:text="${item.projectId}">
+		</div>
+	</div>
+
+		<form th:action="@{/student/rank_projects}" method="POST">
+
+			<table class="table bg-white text-center text-break shadow">
+
+				<tr>
+					<th>Client</th>
+					<th>Title</th>
+					<th class="w-50">Description</th>
+					<th>Rank</th>
+
+				</tr>
+				<tr th:each="project,iterStat : ${projectList}">
+					<td><p th:text="${project.client.clientName}"></td>
+					<td><p th:text="${project.title}"></td>
+					<td><p th:text="${project.description}"></td>
+					<td><p class="proj" id="proj">
+
+							<select class="custom-select mr-sm-2" th:name="${project.projectId}" th:id="${iterStat.index}">
+								<option value="">--</option>
+								<option th:each="i : ${#numbers.sequence(1, 5)}" th:value="${i}" 
+									th:text="${i}" th:id="${project.projectId}"></option>
+							</select></td>
+
+				</tr>
+				<tr>
+					<td colspan="4"><input class="btn btn-primary shadow"
+						type="submit" value="Submit" />
+						
+					<input type="text" id="proj1" name="proj1" value="" style="display: none;"/>
+					<input type="text" id="proj2" name="proj2" value="" style="display: none;"/>
+					<input type="text" id="proj3" name="proj3" value="" style="display: none;"/>
+					<input type="text" id="proj4" name="proj4" value="" style="display: none;"/>
+					<input type="text" id="proj5" name="proj5" value="" style="display: none;"/>
+					</td>
+				</tr>
+
+
+			</table>
+		</form>
+	</div>
+
+
+</body>
 </html>
