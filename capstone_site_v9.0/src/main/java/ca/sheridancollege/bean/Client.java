@@ -98,6 +98,6 @@ public class Client implements Serializable {
 	public String[] industryList = {"Agriculture/Food Technology","Building Technology","Environmental Technology","Medical/Heath Science Technology","Information/Communication Technology","Manufacturing Technology"};
 
 	@Transient 
-	public String[] scaleList = {"Large Enterprise","Small-to-medium Enterprise","Startup(1-4 employees)","Not Yet Registered","Individual Client","NGO/Not for Profit"};
+	public String[] scaleList = {"Large Enterprise","Small-to-Medium Enterprise","Startup(1-4 employees)","Not Yet Registered","Individual Client","NGO/Not for Profit"};
 
 }

@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	class="bg-grey">
+<head>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}"
+	media="all" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>List All Projects</title>
+</head>
+<body class="bg-grey">
+
+	<div th:replace="fragments/navbars/navbar :: Student_Nav"></div>
+
+	<br>
+	<div class="container bg-white" align="center">
+	
+
+	<div class="alert bg-info shadow text-white p-0 m-2">
+			<h3>Current List of Projects</h3>
+	</div>
+			<br>
+			<div th:if="${error}" class="alert alert-danger w-25" role="alert">
+				<p th:text="*{error}" />
+			</div>
+
+			<div th:if="${success}" class="alert alert-success w-25" role="alert">
+				<p th:text="*{success}" />
+			</div>
+
+			<div th:each="project : ${projectList}">
+				<div class="row w-100 p-0 m-0 mx-auto">
+					<div class="card w-100 shadow mx-auto p-0 m-0">
+
+						<h5 class="card-header alert-info text-black p-1 m-1"
+							th:text="${project.title}"></h5>
+						<div class="card-body p-1 m-1">
+							<h5 class="card-title" th:text="${project.client.clientCompany}"></h5>
+							<h6 class="card-subtitle mb-2 text-muted"
+								th:text="${project.client.clientIndustry} + ' - ' + ${project.client.clientScale}"></h6>
+
+								
+							<p class="card-text" th:text="${project.description}"></p>
+						</div>
+					</div>
+				</div>
+				<br>
+			</div>
+
+		</div>
+	</div>
+	<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous" type="text/javascript"></script>
+	<script
+		th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous" type="text/javascript"></script>
+	<script
+		th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js}"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous" type="text/javascript"></script>
+</body>
+</html>

@@ -56,10 +56,15 @@ $(document).ready(function () {
 
 
 	<div th:replace="fragments/navbars/navbar :: Student_Nav"></div>
-
-
-	<div class="bg-white" align="center">
+		
 	<br>
+	<div class="container bg-white" align="center">
+	
+
+	<div class="alert bg-info shadow text-white">
+			<h5>Rank Projects</h5>
+	</div>
+
 	<div th:if="${error}" class="alert alert-danger w-25" role="alert">
 		<p th:text="*{error}" />
 	</div>
@@ -75,10 +80,6 @@ $(document).ready(function () {
 
 
 			<table>
-
-				<tr align="center">
-					<th colspan="4">Rank Projects</th>
-				</tr>
 				<tr>
 					<th>Client</th>
 					<th>Title</th>
@@ -114,6 +115,7 @@ $(document).ready(function () {
 
 			</table>
 		</form>
+	</div>
 	</div>
 
 

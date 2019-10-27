@@ -389,6 +389,16 @@ public class StudentController {
 		return "student/th_rank_projects";
 	}
 
+	
+	@RequestMapping ("student/list_projects")
+	public String listProjects(Model model) {
+		List<Project> projectList = projectDAO.getApprovedProjects();
+		model.addAttribute("projectList", projectList);
+		
+		return "student/th_list_projects";
+	}
+	
+	
 	@RequestMapping("student/deleteGroup")
 	public String deleteGroup() {
 
