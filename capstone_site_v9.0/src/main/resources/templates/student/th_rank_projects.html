@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
@@ -59,7 +58,8 @@ $(document).ready(function () {
 
 
 	<div class="container-fluid" align="center">
-		<div class="alert alert-primary shadow">
+	<br>
+		<div class="alert bg-info text-white shadow">
 			<h2>Rank Projects</h2>
 		</div>
 	<div th:if="${error}" class="alert alert-danger w-25" role="alert">
@@ -80,7 +80,7 @@ $(document).ready(function () {
 				<tr>
 					<th>Client & Project Title</th>
 					<th class="w-50">Description</th>
-					<th>Rank</th>
+					<th style="width: 85px;">Rank</th>
 
 				</tr>
 				<tr th:each="project,iterStat : ${projectList}">
