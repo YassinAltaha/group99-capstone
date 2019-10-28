@@ -252,10 +252,18 @@ public class StudentController {
 			
 			if (g.getGroupOwnerStudentId() == s.getId()) {
 				
+<<<<<<< HEAD
 				
+=======
+//				System.out.println(s.getName() + " Leader is leaving group");
+>>>>>>> branch 'master' of https://github.com/exospher3/group99-capstone.git
 				if (g.getGroup_members().size() == 1) {
 					
+<<<<<<< HEAD
 					
+=======
+//					System.out.println(s.getName() + " Group only has one member");
+>>>>>>> branch 'master' of https://github.com/exospher3/group99-capstone.git
 					s.setGroup(null);
 					g.setGroup_members(null);
 					g.setGroupOwnerStudentId(0);	
@@ -263,22 +271,40 @@ public class StudentController {
 					
 					dao.updateStudent(s);
 					groupDAO.deleteGroup(g);
+<<<<<<< HEAD
 					
+=======
+//					System.out.println(s.getName() + " Group Deleted");
+>>>>>>> branch 'master' of https://github.com/exospher3/group99-capstone.git
 			
 				}else {
 					
+<<<<<<< HEAD
 					
 					g.getGroup_members().remove(s);
+=======
+//					System.out.println(s.getName() + " Group has more than 1 member");
+>>>>>>> branch 'master' of https://github.com/exospher3/group99-capstone.git
 					s.setGroup(null);
+					s.getGroup().getGroup_members().remove(s);
+					
 					dao.updateStudent(s);
 					
 					g.setGroupOwnerStudentId(g.getGroup_members().get(0).getId());
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/exospher3/group99-capstone.git
 					groupDAO.updateGroup(g);
 					
+<<<<<<< HEAD
 					
+=======
+//					System.out.println(s.getName() + " Leadership gifted to index 0");
+>>>>>>> branch 'master' of https://github.com/exospher3/group99-capstone.git
 				}
 			} else {
-				System.out.println(s.getName() + " Left group ( Not leader)");
+//				System.out.println(s.getName() + " Left group ( Not leader)");
 				s.setGroup(null);
 				dao.updateStudent(s);
 
