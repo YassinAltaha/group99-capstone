@@ -30,12 +30,14 @@
 				<p th:text="*{success}" />
 			</div>
 
-			<div th:each="project : ${projectList}">
+			<div th:each="project : ${projectList}" th:if="${!project.Archived}">
 				<div class="row w-100 p-0 m-0 mx-auto">
-					<div class="card w-100 shadow mx-auto p-0 m-0">
-
-						<h5 class="card-header alert-info text-black p-1 m-1"
-							th:text="${project.title}"></h5>
+					<div class="card w-100 shadow mx-auto p-2 m-0">
+						<div>
+						
+							<h5 class="card-header alert-info text-black p-1 m-1"
+								th:text="${project.title}"></h5>
+						</div>
 						<div class="card-body p-1 m-1">
 							<h5 class="card-title" th:text="${project.client.clientCompany}"></h5>
 							<h6 class="card-subtitle mb-2 text-muted"

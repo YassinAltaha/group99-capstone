@@ -20,7 +20,7 @@
 	
 	<div class="container" align="center">
 
-	<div >
+	<div th:if="${error}" class="alert alert-danger shadow">
 		<p th:text="${error}"> </p>
 	</div>
 
