@@ -77,6 +77,7 @@ public class StudentDAO {
 		session.beginTransaction();
 
 		session.update(s);
+		
 		session.getTransaction().commit();
 		session.close();
 	}

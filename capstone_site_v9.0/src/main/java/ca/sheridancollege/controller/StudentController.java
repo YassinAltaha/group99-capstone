@@ -222,7 +222,6 @@ public class StudentController {
 			g.setGroupName(group.getGroupName());
 			g.setCampus(s.getCampus());
 			g.setPasscode(Integer.toString(pass));
-			g.setGroupOwnerStudentId(s.getId());
 			g.setProgram(s.getProgram());
 			g.getGroup_members().add(s);
 			
@@ -249,51 +248,21 @@ public class StudentController {
 
 		if (s.getGroup() != null) {
 			GroupBean g = groupDAO.getGroupById(s.getGroup().getGroupId());
-			
-			if (g.getGroupOwnerStudentId() == s.getId()) {
 				
-//				System.out.println(s.getName() + " Leader is leaving group");
-
-				if (g.getGroup_members().size() == 1) {
+			if (g.getGroup_members().size() == 1) {
 					
-//					System.out.println(s.getName() + " Group only has one member");
-
 					s.setGroup(null);
 					g.setGroup_members(null);
-					g.setGroupOwnerStudentId(0);	
-					g.setRanking(null);
-					
+					g.setRanking(null);				
 					dao.updateStudent(s);
 					groupDAO.deleteGroup(g);
-
-//					System.out.println(s.getName() + " Group Deleted");
-
 			
-				}else {
-					
-
-//					System.out.println(s.getName() + " Group has more than 1 member");
-
-					s.setGroup(null);
-					s.getGroup().getGroup_members().remove(s);
-					
-					dao.updateStudent(s);
-					
-					g.setGroupOwnerStudentId(g.getGroup_members().get(0).getId());
-
-
-					groupDAO.updateGroup(g);
-					
-//					System.out.println(s.getName() + " Leadership gifted to index 0");
-
-				}
-			} else {
-//				System.out.println(s.getName() + " Left group ( Not leader)");
+			}else {
+									
 				s.setGroup(null);
 				dao.updateStudent(s);
 
-			}
-
+				}
 		} else {
 			model.addAttribute("error", "Student is not part of a group");
 

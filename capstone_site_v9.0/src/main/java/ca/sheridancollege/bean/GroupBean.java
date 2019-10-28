@@ -25,7 +25,6 @@ public class GroupBean implements Serializable {
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	private int groupId;
 	private String groupName;
-	private long groupOwnerStudentId;
 	private String program;
 	private String passcode;
 	private String campus;
@@ -44,11 +43,10 @@ public class GroupBean implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, targetEntity = Ranking.class, fetch = FetchType.EAGER)
 	private Ranking ranking;
 	
-	public GroupBean(int groupId, String groupName, long groupOwnerStudentId, String program, String passcode) {
+	public GroupBean(int groupId, String groupName, String program, String passcode) {
 
 		this.groupId = groupId;
 		this.groupName = groupName;
-		this.groupOwnerStudentId = groupOwnerStudentId;
 		this.program = program;
 		this.passcode = passcode;
 	}
