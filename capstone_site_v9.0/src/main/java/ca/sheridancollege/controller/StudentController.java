@@ -252,10 +252,10 @@ public class StudentController {
 			
 			if (g.getGroupOwnerStudentId() == s.getId()) {
 				
-				System.out.println(s.getName() + " Leader is leaving group");
+				
 				if (g.getGroup_members().size() == 1) {
 					
-					System.out.println(s.getName() + " Group only has one member");
+					
 					s.setGroup(null);
 					g.setGroup_members(null);
 					g.setGroupOwnerStudentId(0);	
@@ -263,19 +263,19 @@ public class StudentController {
 					
 					dao.updateStudent(s);
 					groupDAO.deleteGroup(g);
-					System.out.println(s.getName() + " Group Deleted");
+					
 			
 				}else {
 					
-					System.out.println(s.getName() + " Group has more than 1 member");
-//					g.getGroup_members().remove(s);
+					
+					g.getGroup_members().remove(s);
 					s.setGroup(null);
 					dao.updateStudent(s);
 					
-					g.setGroupOwnerStudentId(g.getGroup_members().get(g.getGroup_members().size()-1).getId());
+					g.setGroupOwnerStudentId(g.getGroup_members().get(0).getId());
 					groupDAO.updateGroup(g);
 					
-					System.out.println(s.getName() + " Leadership gifted to index 0");
+					
 				}
 			} else {
 				System.out.println(s.getName() + " Left group ( Not leader)");
