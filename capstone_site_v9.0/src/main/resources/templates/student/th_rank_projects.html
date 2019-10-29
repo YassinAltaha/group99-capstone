@@ -79,12 +79,12 @@ $(document).ready(function () {
 
 				<tr>
 					<th class="w-25">Client & Project Title</th>
-					<th class="w-75">Description</th>
-					<th style="width: 85px;">Rank</th>
+					<th>Description</th>
+					<th style="width: 100px;">Rank</th>
 
 				</tr>
 				<tr th:each="project,iterStat : ${projectList}" th:if="${!project.Archived}">
-					<td><p th:text="${#strings.capitalizeWords(project.client.clientName)}" class="font-weight-bold"><br>
+					<td><p th:text="${#strings.capitalizeWords(project.client.clientCompany)}" class="font-weight-bold"><br>
 						<p th:text="${#strings.capitalizeWords(project.title)}"></td>
 
 					<td><p th:text="${project.description}"></td>
