@@ -39,12 +39,17 @@
 				
 				<tr>
 					<td><label>Students:</label> </td>
-					<td>
-						<ul class="list-group" th:each="student : ${group.group_members}">
+					<td >
+						<ul  class="list-group" th:each="student : ${group.group_members}">
 							<li class="list-group-item" th:utext="${student.name}"></li>
 						</ul>
 					</td>
 				</tr>
+				<tr th:if="${group.ranking ==null}">
+					<td><label>Ranked Projects:</label></td>
+					<td><input class="form-control text-center mb-2" readonly value="Group did not select a ranking"/></td>
+				</tr>
+				
 				<tr th:unless="${group.ranking ==null}">
 				<td><label>Ranked Projects:</label></td>
 				<td>
