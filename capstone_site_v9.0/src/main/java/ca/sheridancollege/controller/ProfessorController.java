@@ -34,7 +34,7 @@ public class ProfessorController {
 	ClientDAO clientDAO = new ClientDAO();
 	StudentDAO studentDAO = new StudentDAO();
 	GroupDAO groupDAO = new GroupDAO();
-
+//----------------------------------------------(ADMIN ACCOUNT)---------------------------------------------//
 	@GetMapping("prof")
 	public String makeAdmin() {
 		Professor admin = new Professor("adminName", // professor name
@@ -55,7 +55,7 @@ public class ProfessorController {
 	}
 	
 	
-	//----------------------------- ARCHIVING -------------------- (ADMINISTRATION)-------------//
+//----------------------------- ARCHIVING -------------------- (ADMINISTRATION)---------------------------------------------//
 	
 	@RequestMapping(value="professor/administrate" ,method = RequestMethod.GET)
 	public String goAdminGET(Model model) {
@@ -246,7 +246,7 @@ public class ProfessorController {
 		model.addAttribute("studentList", studentDAO.getAllStudents());
 		return "professor/th_administrator";
 	}
-	
+//------------------------------------------END OF ARCHIVING------------------------------------------------- //	
 	
 	@RequestMapping("professor/groupList")
 	public String groupHome(Model model) {
@@ -314,7 +314,6 @@ public class ProfessorController {
 		model.addAttribute("groups", groupDAO.getAllGroups());
 		return "professor/th_groupList";
 	}
-	//END OF ----------------------------- ARCHIVING -------------------- ADMINISTRATION -------------//
 	
 	
 	
@@ -517,7 +516,7 @@ public class ProfessorController {
 		return "professor/th_changePassword";
 	}
 
-	// GO TO - Report page
+//-------------------------------------------- GO TO - Report page-------------------------------------------------------------//
 	@RequestMapping("professor/report")
 	public String goReport() {
 		return "professor/th_report";
@@ -596,6 +595,7 @@ public class ProfessorController {
 		model.addAttribute("reportType", reportType);
 		return "professor/th_report";
 	}
+//-------------------------------------------- END OF - Report page-------------------------------------------------------------//
 
 	// Main Pages
 	@RequestMapping("professor")

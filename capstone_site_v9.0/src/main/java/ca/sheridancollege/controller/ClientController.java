@@ -51,7 +51,7 @@ public class ClientController {
 						
 						//add confirmation message 
 						
-						model.addAttribute("message", true);;
+						model.addAttribute("message", true);
 						
 						return "th_login";
 						
@@ -197,7 +197,8 @@ public class ClientController {
 					model.addAttribute("msg", "Sorry, this project cannot be deleted. Contact a professor for more info.");
 					return "client/th_clientProjects";
 				}
-			}else {
+			}else 
+			{
 				
 				List<Project> projectList = dao.getMyProjects(c.getClientId());
 				model.addAttribute("myProjectList", projectList);
@@ -206,10 +207,6 @@ public class ClientController {
 				
 			}
 		}
-		
-		
-		
-		
 	}
 	
 	
