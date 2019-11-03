@@ -246,6 +246,90 @@ public class ProfessorController {
 		model.addAttribute("studentList", studentDAO.getAllStudents());
 		return "professor/th_administrator";
 	}
+	
+	@RequestMapping("/professor/archiveAllStudents")
+	public String archiveAllStudent(Model model) {
+		
+		try {
+			List<Student> sList = studentDAO.getAllStudents();
+			for(Student s : sList)
+			{
+				s.setArchived(true);
+				studentDAO.updateStudent(s);
+			}
+			
+		}catch(Exception e)
+		{
+			model.addAttribute("error", "Error Archiving All Student");
+
+		}
+		model.addAttribute("objType", "adminStudents");
+		model.addAttribute("studentList", studentDAO.getAllStudents());
+		return "professor/th_administrator";
+	}
+	
+	@RequestMapping("/professor/archiveAllGroups")
+	public String archiveAllGroups(Model model) {
+		
+		try {
+			List<GroupBean> gList = groupDAO.getAllGroups();
+			for(GroupBean g : gList)
+			{
+				g.setArchived(true);
+				groupDAO.updateGroup(g);
+			}
+			
+		}catch(Exception e)
+		{
+			model.addAttribute("error", "Error Archiving All Groups");
+
+		}
+		model.addAttribute("objType", "adminGroups");
+		model.addAttribute("groupList", groupDAO.getAllGroups());
+		return "professor/th_administrator";
+	}
+	
+	@RequestMapping("/professor/archiveAllClients")
+	public String archiveAllClients(Model model) {
+		
+		try {
+			List<Client> cList = clientDAO.getAllClients();
+			for(Client c : cList)
+			{
+				c.setArchived(true);
+				clientDAO.updateClient(c);
+			}
+			
+		}catch(Exception e)
+		{
+			model.addAttribute("error", "Error Archiving All Clients");
+
+		}
+		model.addAttribute("objType", "adminClients");
+		model.addAttribute("clientList", clientDAO.getAllClients());
+		return "professor/th_administrator";
+	}
+	
+	@RequestMapping("/professor/archiveAllProjects")
+	public String archiveAllProjects(Model model) {
+		
+		try {
+			List<Project> pList = projectDAO.getAllProjects();
+			for(Project p : pList)
+			{
+				p.setArchived(true);
+				projectDAO.updateProject(p);
+			}
+			
+		}catch(Exception e)
+		{
+			model.addAttribute("error", "Error Archiving All Projects");
+
+		}
+		model.addAttribute("objType", "adminProjects");
+		model.addAttribute("projectList", projectDAO.getAllProjects());
+		return "professor/th_administrator";
+	}
 //------------------------------------------END OF ARCHIVING------------------------------------------------- //	
 	
 	@RequestMapping("professor/groupList")

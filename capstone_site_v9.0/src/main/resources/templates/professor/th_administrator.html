@@ -25,20 +25,51 @@
 			<div th:if="${error}" class="alert alert-danger shadow">
 				<h2 th:utext="${error}"></h2>
 			</div>
-		<form th:action="@{/professor/administrate}" method="POST">
-			<select class="form-control w-auto mb-2" required name="objType">
+		<div class="card w-25">
+		  <h5 class="card-header">Archiving Records</h5>
+		  <div class="card-body">
+		  
+		    <h5 class="card-title">Please select type</h5>
+			<form th:action="@{/professor/administrate}" method="POST">
+				<select class="form-control w-auto mb-2 shadow" required  name="objType">
+	
+					<option value="adminStudents">Admin Students</option>
+					<option value="adminGroups">Admin Groups</option>
+					<option value="adminClients">Admin Clients</option>
+					<option value="adminProjects">Admin Projects</option>
+				</select> <input type="submit" class="btn btn-primary m-2 shadow" value="Get List">
+	
+			</form>
+		  </div>
+		</div>
+		
 
-				<option value="adminStudents">Admin Students</option>
-				<option value="adminGroups">Admin Groups</option>
-				<option value="adminClients">Admin Clients</option>
-				<option value="adminProjects">Admin Projects</option>
-			</select> <input type="submit" class="btn btn-primary mb-2" value="Get List">
-
-		</form>
 
 		<th:block th:switch="${objType}">
 			<div th:case="'adminStudents'">
-				<table class="table table-bordered text-center bg-white">
+				<a data-toggle="modal" data-target="#AllStudents" class="btn text-dark btn-warning shadow w-25">
+				Archive All Students
+				</a>
+							<div class="modal fade" id="AllStudents" tabindex="-1" role="dialog" aria-labelledby="AllStudents" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="AllStudents" >Archiving All Students</h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+									Are you sure about archiving ALL students
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							        <a class="btn btn-warning text-dark"  th:href="@{/professor/archiveAllStudents}">Archive All Student</a>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+				<table class="table table-bordered text-center bg-white shadow">
 					<thead>
 						<tr>
 							<th>Student Name</th>
@@ -118,6 +149,28 @@
 			
 			
 			<div th:case="'adminGroups'">
+				<a data-toggle="modal" data-target="#AllGroups" class="btn text-dark btn-warning shadow w-25">
+				Archive All Groups
+				</a>
+							<div class="modal fade" id="AllGroups" tabindex="-1" role="dialog" aria-labelledby="AllGroups" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="AllGroups" >Archiving All Groups</h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+									Are you sure about archiving ALL Groups
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							        <a class="btn btn-warning text-dark"  th:href="@{/professor/archiveAllGroups}">Archive All Groups</a>
+							      </div>
+							    </div>
+							  </div>
+							</div>
 				<table class="table table-bordered text-center  bg-white">
 					<thead>
 						<tr>
@@ -197,6 +250,28 @@
 				</table>
 			</div>
 			<div th:case="'adminClients'">
+				<a data-toggle="modal" data-target="#AllClients" class="btn text-dark btn-warning shadow w-25">
+				Archive All Clients
+				</a>
+							<div class="modal fade" id="AllClients" tabindex="-1" role="dialog" aria-labelledby="AllClients" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="AllClients" >Archiving All Clients</h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+									Are you sure about archiving ALL Clients
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							        <a class="btn btn-warning text-dark"  th:href="@{/professor/archiveAllClients}">Archive All Clients</a>
+							      </div>
+							    </div>
+							  </div>
+							</div>
 				<table class="table table-bordered text-center  bg-white">
 					<thead>
 						<tr>
@@ -288,6 +363,28 @@
 				
 			</div>
 			<div th:case="'adminProjects'">
+				<a data-toggle="modal" data-target="#AllProjects" class="btn text-dark btn-warning shadow w-25">
+				Archive All Projects
+				</a>
+							<div class="modal fade" id="AllProjects" tabindex="-1" role="dialog" aria-labelledby="AllProjects" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="AllProjects" >Archiving All Projects</h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+									Are you sure about archiving ALL Projects
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							        <a class="btn btn-warning text-dark"  th:href="@{/professor/archiveAllProjects}">Archive All Projects</a>
+							      </div>
+							    </div>
+							  </div>
+							</div>
 				<table class="table table-bordered text-center  bg-white">
 					<thead>
 						<tr>
