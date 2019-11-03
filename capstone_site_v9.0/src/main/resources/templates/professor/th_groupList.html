@@ -38,7 +38,7 @@
 
 			<table class="table bg-white shadow">
 				<tr>
-					<th>Group ID</th>
+					
 					<th>Group Name</th>
 					<th>Group Program</th>
 					<th>Group Members</th>
@@ -47,8 +47,7 @@
 				</tr>
 
 				<tr th:each="group : ${groups}" class="text-center" th:if="${!group.Archived}">
-
-					<td th:utext="*{group.groupId}"></td>
+				
 					<td th:utext="*{group.groupName}"></td>
 					<td th:utext="*{group.program}"></td>
 
