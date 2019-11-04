@@ -18,25 +18,31 @@
 	<!-- View-dependent nav area -->
 
 	<div class="container" align="center">
-			<div class="alert alert-primary shadow">
+			<div class="alert bg-info text-light shadow">
 				<h2>Reports</h2>
 			</div>
-		<form th:action="@{/professor/reportStatus}" >
-			<select class="form-control w-auto mb-2" required name="reportType">
-				<option value="noGroupStudent">Students with no group</option>
-				<option value="noProjectGroup">Groups with no projects</option>
-				<option value="allGroups">All Groups</option>
-				<option value="approvedProjects">Approved Projects</option>
-				<option value="rejectedProjects">Rejected Projects</option>
-				<option value="pendingProjects">Pending Projects</option>
-			</select> <input type="submit" class="btn btn-primary mb-2" value="get Report">
-
-		</form>
+			
+		<div class="card w-25 shadow m-4">
+		  <h5 class="card-header">Reports</h5>
+		  <div class="card-body">
+			<form th:action="@{/professor/reportStatus}" >
+				<select class="form-control w-auto m-2 shadow" required name="reportType">
+					<option value="noGroupStudent">Students with no group</option>
+					<option value="noProjectGroup">Groups with no projects</option>
+					<option value="allGroups">All Groups</option>
+					<option value="approvedProjects">Approved Projects</option>
+					<option value="rejectedProjects">Rejected Projects</option>
+					<option value="pendingProjects">Pending Projects</option>
+				</select> <input type="submit" class="btn btn-primary m-2 shadow" value="get Report">
+	
+			</form>
+		  </div>
+		</div>
 
 		<th:block th:switch="${reportType}">
 
 			<div th:case="'noGroupStudent'">
-				<table class="table table-bordered text-center table-hover bg-white">
+				<table class="table table-bordered text-center table-hover bg-white shadow">
 					<thead>
 						<tr>
 							<th>Student Name</th>
@@ -60,7 +66,7 @@
 			
 			
 			<div th:case="'noProjectGroup'">
-				<table class="table table-bordered text-center table-hover bg-white">
+				<table class="table table-bordered text-center table-hover bg-white shadow">
 					<thead>
 						<tr>
 							<th>Group Name</th>
@@ -79,7 +85,7 @@
 				</table>
 			</div>
 			<div th:case="'allGroups'">
-				<table class="table table-bordered text-center table-hover bg-white">
+				<table class="table table-bordered text-center table-hover bg-white shadow">
 					<thead>
 						<tr>
 							<th>Group Name</th>
@@ -97,7 +103,7 @@
 				</table>
 			</div>
 			<div th:case="'approvedProjects'">
-				<table class="table table-bordered text-center table-hover bg-white">
+				<table class="table table-bordered text-center table-hover bg-white shadow">
 					<thead>
 						<tr>
 							<th>Project Title</th>
@@ -115,7 +121,7 @@
 				</table>
 			</div>
 			<div th:case="'rejectedProjects'">
-				<table class="table table-bordered text-center table-hover">
+				<table class="table table-bordered text-center table-hover bg-white shadow">
 					<thead>
 						<tr>
 							<th>Project Title</th>
@@ -133,7 +139,7 @@
 				</table>
 			</div>
 			<div th:case="'pendingProjects'">
-				<table class="table table-bordered text-center table-hover bg-white">
+				<table class="table table-bordered text-center table-hover bg-white shadow">
 					<thead>
 						<tr>
 							<th>Project Title</th>
@@ -153,51 +159,6 @@
 		</th:block>
 
 	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<!-- 		<div class="wrapper block-row">
-			<div class="block large-text callout-with-stats welcome">
-
-
-				<div class="inner-wrapper title-block-wrapper">
-			
-					<h2>Welcome</h2>
-				</div>
-					<br /> <br />
-
-					 message div to display the report message
-					<h2>Percentage of the Status Assigned to Groups</h2>
-					<table>
-						<tr>
-							<th>Pending</th>
-							<th>Approved</th>
-							<th>Rejected</th>
-							<th>Completed</th>
-						</tr>
-						<tr >
-							<td th:each="stat : ${statusPerList}">
-								<p th:text="${stat}+'%'" />
-							</td>	 
-						</tr>
-					</table>
-					<form action="/professor/reportStatus">
-						<input type="submit" value="Status Percentage" />
-					</form>
-				
-			</div>
-		</div> -->
 
 
 

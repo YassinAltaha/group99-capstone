@@ -18,7 +18,7 @@
 	<!-- View-dependent nav area -->
 
 	<div class="container-fluid" align="center">
-			<div class="alert alert-primary shadow">
+			<div class="alert bg-info text-light shadow">
 				<h2>Admin page</h2>
 			</div>
 			
@@ -115,6 +115,7 @@
 							</div>
 							
 						</td>
+						
 						<td th:if="${student.Archived}">
 								<a data-toggle="modal" th:href="'#example'+*{student.id}" class="btn text-dark btn-success shadow">
 								Unarchive
@@ -144,7 +145,9 @@
 						</td>
 					</tr>
 				</table>
-
+				<a data-toggle="modal" data-target="#AllStudents" class="btn text-dark btn-warning shadow w-25">
+				Archive All Students
+				</a>
 			</div>
 			
 			
@@ -248,6 +251,9 @@
 						
 					</tr>
 				</table>
+				<a data-toggle="modal" data-target="#AllGroups" class="btn text-dark btn-warning shadow w-25">
+				Archive All Groups
+				</a>
 			</div>
 			<div th:case="'adminClients'">
 				<a data-toggle="modal" data-target="#AllClients" class="btn text-dark btn-warning shadow w-25">
@@ -354,8 +360,11 @@
 							</td>
 						</tr>
 					</thead>
+					
 				</table>
-				
+				<a data-toggle="modal" data-target="#AllClients" class="btn text-dark btn-warning shadow w-25">
+				Archive All Clients
+				</a>
 
 				
 				
@@ -456,6 +465,9 @@
 						</tr>
 					</thead>
 				</table>
+			<a data-toggle="modal" data-target="#AllProjects" class="btn text-dark btn-warning shadow w-25">
+			Archive All Projects
+			</a>
 			</div>
 
 

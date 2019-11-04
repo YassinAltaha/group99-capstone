@@ -18,7 +18,7 @@
 	<!-- View-dependent nav area -->
 
 	<div class="container" align="center">
-		<div class="alert alert-primary shadow">
+		<div class="alert bg-info text-light shadow">
 			<h2>List Projects</h2>
 		</div>
 		<div th:if="${msg}" class="alert alert-success shadow">
@@ -29,8 +29,8 @@
 		<div th:each="client : *{clientList}" th:if="${!client.Archived}">
 
 			<div class="row">
-				<div class="card w-100  shadow">
-					<div class="card-header " 
+				<div class="card w-100  shadow bg-white">
+					<div class="card-header text-light" style="background-color:#003767" 
 						data-toggle="collapse"
 						th:href="'#collapse'+*{client.clientName}"
 						aria-controls="'collapse'+*{client.clientName}"
@@ -54,17 +54,17 @@
 					</div>
 					
 
-					<div class="card-footer">
+					<div class="card-footer bg-white">
 
 						<div class="card-deck-wrapper">
 	
-							<div class="card shadow "
+							<div class="card w-75 shadow "
 								th:each="project : *{client.projectList}" th:if="${!project.Archived}">
-								<div class="card-header" data-toggle="collapse"
+								<div class=" alert-info  text-black p-1 m-1" data-toggle="collapse"
 									th:href="'#collapse'+*{project.projectId}"
 									aria-controls="'collapse'+${project.projectId}">
 	
-									<h5 class="text-info" th:utext="*{project.title}"></h5>
+									<h5 class="text-dark" th:utext="*{project.title}"></h5>
 									<h6 class="card-subtitle text-muted"
 										th:utext="*{project.status}"></h6>
 								</div>
@@ -72,7 +72,7 @@
 									th:id="'collapse'+*{project.projectId}">
 									<div class="card-body">
 										<div>
-											<p class="text-muted">Description</p>
+											<p class="text-light badge badge-pill mt-0" style="background-color:#FF6347">Description</p>
 											<p class="card-text" th:utext="*{project.description}"></p>
 										</div>
 										<br />
@@ -89,7 +89,7 @@
 	
 										<a
 											th:href="@{/professor/profEditProject/{id}(id=${project.projectId})}"
-											class="btn btn-primary w-25 mb-2">Edit</a>
+											class="btn btn-primary w-25 mb-2 shadow">Edit</a>
 									</div>
 								</div>
 							</div>

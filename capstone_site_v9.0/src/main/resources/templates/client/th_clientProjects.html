@@ -18,7 +18,10 @@
 	
 
 	 	<div class="container" align="center">
-	 	
+	 	<div class="alert bg-info text-light shadow">
+			<h2>Projects List</h2>
+		</div>
+		
 	 	<table class="table" >
 			<tr th:if="${myProjectList == null}" class="table-warning w-auto">
 				<td align="center">
@@ -30,10 +33,11 @@
 					<p th:text=${msg} />
 				</td>
 			</tr>
+		
 		</table>
 		
-	 	<div class="card text-center m-2 shadow" th:each="project: ${myProjectList}">
-		  <h5 class="card-header text-break alert-primary" th:text="${project.title}"></h5>
+	 	<div class="card text-center m-4 shadow" th:each="project: ${myProjectList}">
+		  <h5 style="background-color:#003767"  class="card-header text-break text-light" th:text="${project.title}"></h5>
 		  <div class="card-body">
 		    <h5 class="card-title " th:text="${project.status}"></h5>
 		    <p  class="card-text text-break w-100" th:text="${project.description}"></p>
@@ -43,17 +47,21 @@
 			    	<p th:text="'Professor Note: ' + ${project.profNote}"></p>
 			    </div> 
 		    </div>
-		    <div class="card-footer alert-dark">
-		    	<div class="d-inline p-2 ">
-			    	<a class="btn btn-primary btn-sm shadow" th:href="@{/client/editMyProject/{id}(id = ${project.projectId})}">Edit</a> 
-		    	</div>
-		    	<div class="d-inline p-2 " th:if="${project.status} == Pending OR ${project.status} == Rejected ">
-			    	<a class="btn btn-danger btn-sm shadow" th:href="@{/client/deleteMyProject/{id}(id = ${project.projectId})}">Delete</a> 
-			    </div>
+		    <div class="card-footer container" >
+		    	<div class="row">
+		    		<div class="col align-self-start"></div>
+		    		<div class="col align-self-center">
+			    	<a class="btn btn-primary btn-sm w-50 shadow" th:href="@{/client/editMyProject/{id}(id = ${project.projectId})}">Edit</a> 
+		    		</div>
+		    		<div class="col align-self-end" >
+		    		<a th:if="${project.status} == Pending OR ${project.status} == Rejected " class="d-inline float-right btn btn-danger btn-sm shadow" th:href="@{/client/deleteMyProject/{id}(id = ${project.projectId})}">Delete</a> 
+			    	</div>
+
+				</div>
 		    </div>
 		  
 		</div>
-
+		
 	</div>
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

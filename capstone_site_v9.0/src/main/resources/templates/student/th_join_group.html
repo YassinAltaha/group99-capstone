@@ -28,12 +28,22 @@
 				
 				</tr>
 			
+			
+				<th:block th:if="${groupList.isEmpty()} OR ${groupList == null} ">
+					<tr>
+						<td colspan="3" class="alert alert-warning">
+							<p>No Groups available</p>
+						</td>
+					</tr>
+				
+				
+				</th:block>
+				<th:block th:unless="${groupList.isEmpty()} OR ${groupList == null} ">
 				<tr>
 					<th colspan="3">
 						Join Group
 					</th>
 				</tr>
-				
 				<tr th:each="group : ${groupList}">
 					
 					<td>Group Name: </td>
@@ -41,7 +51,7 @@
 					
 					<td><a class="btn btn-primary shadow" th:href="@{/student/join_group/{id}(id = ${group.groupId})}">Join Group</a>
 				</tr>
-			
+				</th:block>
 			</table>
 		
 	</div>
