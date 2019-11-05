@@ -126,7 +126,7 @@ public class StudentDAO {
 		Set<ConstraintViolation<Student>> violationErrors = validator.validate(s);
 		if (!violationErrors.isEmpty()) {
 			for (ConstraintViolation<Student> error : violationErrors) {
-				errorList.add(error.getPropertyPath() + " :: " + error.getMessage());
+				errorList.add( error.getMessage());
 			}
 		}
 		return errorList;

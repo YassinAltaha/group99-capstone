@@ -13,6 +13,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,8 +25,10 @@ public class Project implements Serializable {
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	private int projectId;
+	@Size(min = 5, max=30, message = "Title must be between 5-30 charecters long")
 	private String title;
 	@Lob
+	@Size(min = 30, message = "Description minimum size is 30 ")
 	private String description;
 	private String status;
 	private String profNote;

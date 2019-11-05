@@ -71,7 +71,7 @@ public class ProfDAO {
 		Set<ConstraintViolation<Professor>> violationErrors = validator.validate(p);
 		if (!violationErrors.isEmpty()) {
 			for (ConstraintViolation<Professor> error : violationErrors) {
-				errorList.add(error.getPropertyPath() + " :: " + error.getMessage());
+				errorList.add(error.getMessage());
 			}
 		}
 		return errorList;

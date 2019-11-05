@@ -101,23 +101,34 @@ public class ClientController {
 		//Getting the Client Using Security Context (Method in page)
 		Client c = getAuthClient();
 		
-		sP = dao.addProject(project, c.getClientId()); // status,
-		List<Project> projectList = dao.getMyProjects(c.getClientId());
-
-
-		if (sP > 0) {
-			msg = "You have successfully added a project!";
-			model.addAttribute("msg", msg);
-			model.addAttribute("project", project);
-			model.addAttribute("myProjectList", projectList);
-			return "client/th_clientProjects";
-		} else {
-			error = "Sorry, there was an error adding your project";
+		if(dao.validateProject(project).isEmpty())
+		{
+			sP = dao.addProject(project, c.getClientId()); // status,
+			List<Project> projectList = dao.getMyProjects(c.getClientId());
+			if (sP > 0) {
+				msg = "You have successfully added a project!";
+				model.addAttribute("msg", msg);
+				model.addAttribute("project", project);
+				model.addAttribute("myProjectList", projectList);
+				return "client/th_clientProjects";
+			} else {
+				error = "Sorry, there was an error adding your project";
+				model.addAttribute("client", getAuthClient());
+				model.addAttribute("error", error);
+				model.addAttribute("project", new Project());
+				return "client/th_addProject";
+			}
+		}else
+		{
 			model.addAttribute("client", getAuthClient());
-			model.addAttribute("error", error);
+			model.addAttribute("errors", dao.validateProject(project));
 			model.addAttribute("project", new Project());
 			return "client/th_addProject";
 		}
+	
+
+
+
 	}
 	
 	//Editing project-1.1

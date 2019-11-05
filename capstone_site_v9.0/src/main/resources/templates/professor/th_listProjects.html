@@ -60,7 +60,7 @@
 	
 							<div class="card w-75 shadow "
 								th:each="project : *{client.projectList}" th:if="${!project.Archived}">
-								<div class=" alert-info  text-black p-1 m-1" data-toggle="collapse"
+								<div class="alert-dark  text-black p-1" data-toggle="collapse"
 									th:href="'#collapse'+*{project.projectId}"
 									aria-controls="'collapse'+${project.projectId}">
 	

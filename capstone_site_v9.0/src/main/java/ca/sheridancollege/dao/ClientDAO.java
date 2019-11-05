@@ -197,7 +197,21 @@ public class ClientDAO {
 		Set<ConstraintViolation<Client>> violationErrors = validator.validate(c);
 		if (!violationErrors.isEmpty()) {
 			for (ConstraintViolation<Client> error : violationErrors) {
-				errorList.add(error.getPropertyPath() + " :: " + error.getMessage());
+				errorList.add(error.getMessage());
+			}
+		}
+		return errorList;
+	}
+	
+	public List<String> validateProject(Project p) {
+		List<String> errorList = new ArrayList<String>();
+		ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+		Validator validator = validatorFactory.getValidator();
+
+		Set<ConstraintViolation<Project>> violationErrors = validator.validate(p);
+		if (!violationErrors.isEmpty()) {
+			for (ConstraintViolation<Project> error : violationErrors) {
+				errorList.add(error.getMessage());
 			}
 		}
 		return errorList;
