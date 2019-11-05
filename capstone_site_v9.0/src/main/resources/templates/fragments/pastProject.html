@@ -9,20 +9,17 @@
 <body class="bg-grey">
 	<div th:fragment="pastProject" class="bg-grey">
 		<div class="container" align="center">
-			<div class="wrapper block-row">
-				<div class="bg-white" align="center">
-					<div align="center" class="large-text callout-with-stats welcome">
 
 
-						<div class="inner-wrapper title-block-wrapper">
+						<div class="alert bg-info shadow text-light">
 							<h2>2018 Projects</h2>
 						</div>
 
-						<div class="inner-wrapper">
-							<br /> <br />
+						<div class="text-center shadow bg-white p-4 m-3">
+							
 							<p>
 								<img th:src="@{/resources/images/capstone-winners.jpg}"
-									alt="capstone winners" /> <br>
+									alt="capstone winners" class="rounded img-fluid shadow mb-4" /> <br>
 							<p>Photo (left to right): Professors Rich Smith and Mark
 								Orlando, Team RADS members Raj Patel, Saloni Panchal, Dejoun
 								Robinson, Anthony Rella, and Program Coordinator Jerry Kotuba.</p>
@@ -61,7 +58,7 @@
 									developed for their year end project, click on the 2018
 									Capstone project video trailers below.</p>
 								<div align="center">
-									<table>
+									<table class="table shadow text-center">
 
 										<tr>
 											<th>Team</th>
@@ -109,9 +106,7 @@
 									</table>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
+
 			</div>
 		</div>
 	</div>
