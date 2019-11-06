@@ -44,12 +44,13 @@
 			<div th:case="'noGroupStudent'">
 				<table class="table table-bordered text-center table-hover bg-white shadow">
 					<thead>
-						<tr><th colspan="6"><h4>Students with no group</h4></th></tr>
+						<tr>
+						<th colspan="6"><h4>Students with no group</h4></th>
+						</tr>
 						<tr>
 							<th>Student Name</th>
 							<th>Student ID</th>
-							<th>Program</th>
-							
+							<th>Program</th>		
 							<th>Campus</th>
 							<th>GPA</th>
 							<th>Email</th>
@@ -116,8 +117,8 @@
 			<div th:case="'approvedProjects'">
 				<table class="table table-bordered text-center table-hover bg-white shadow">
 					<thead>
+						<tr><th colspan="4"><h4>Approved projects</h4></th></tr>
 						<tr>
-							<tr><th colspan="4"><h4>Approved projects</h4></th></tr>
 							<th>Project Title</th>
 							<th>Client Name</th>
 							<th>Client Phone</th>
@@ -135,8 +136,9 @@
 			<div th:case="'rejectedProjects'">
 				<table class="table table-bordered text-center table-hover bg-white shadow">
 					<thead>
+					<tr><th colspan="4"><h4>Rejected Projects</h4></th></tr>
 						<tr>
-							<tr><th colspan="4"><h4>Rejected Projects</h4></th></tr>
+							
 							<th>Project Title</th>
 							<th>Client Name</th>
 							<th>Client Phone</th>
@@ -154,8 +156,9 @@
 			<div th:case="'pendingProjects'">
 				<table class="table table-bordered text-center table-hover bg-white shadow">
 					<thead>
+					<tr><th colspan="4"><h4>Pending projects</h4></th></tr>
 						<tr>
-							<tr><th colspan="4"><h4>Pending projects</h4></th></tr>
+							
 							<th>Project Title</th>
 							<th>Client Name</th>
 							<th>Client Phone</th>
