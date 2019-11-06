@@ -44,21 +44,24 @@
 			<div th:case="'noGroupStudent'">
 				<table class="table table-bordered text-center table-hover bg-white shadow">
 					<thead>
-						<tr><th colspan="5"><h4>Students with no group</h4></th></tr>
+						<tr><th colspan="6"><h4>Students with no group</h4></th></tr>
 						<tr>
 							<th>Student Name</th>
-							<th>Student Program</th>
 							<th>Student ID</th>
-							<th>Student Campus</th>
-							<th>Student Email</th>
+							<th>Program</th>
+							
+							<th>Campus</th>
+							<th>GPA</th>
+							<th>Email</th>
 						</tr>
 					</thead>
 
 					<tr th:each="student : ${studentList}">
 						<td><p th:utext="*{student.name}" /></td>
-						<td><p th:utext="*{student.program}" /></td>
 						<td><p th:utext="*{student.student_id}" /></td>
+						<td><p th:utext="*{student.program}" /></td>
 						<td><p th:utext="*{student.campus}" /></td>
+						<td><p th:utext="*{student.gpa}" /></td>
 						<td><p th:utext="*{student.student_email}" /></td>
 					</tr>
 				</table>
