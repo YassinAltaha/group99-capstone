@@ -14,24 +14,36 @@
 
 
 		
- <div class="message-highlight" align="center">
-		<h2>Student Sign up</h2>
+ <div class="container" align="center">
 
+		<table th:if="${!errors.isEmpty()}" class="table bg-white shadow text-center" style="border-style: hidden;">
+			<tr th:each="error :${errors}">
+				<td class="alert-danger" th:text="*{error}" colspan="2"></td>
+			</tr>
+		</table>
+		
 		<form th:action="@{/saveStudent}" th:object="${student}" method="post">
-		<table>
+		
+		
+		<table class="table bg-white text-center shadow">
+		
+			<tr class="bg-dark text-white">
+				<td colspan="2"><h2>Student Sign up</h2> </td>
+			</tr>
+			
 			<tr>
 				<td><label for="name">Name:</label> </td>
-				<td><input required th:field="*{name}" /></td>
+				<td><input class="form-control w-auto mb-2" required th:field="*{name}" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="student_id">Student ID:</label></td>
-				<td><input required th:field="*{student_id}" /></td>
+				<td><input class="form-control w-auto mb-2" required th:field="*{student_id}" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="program">Program:</label> </td>
-				<td><select required th:field="*{program}" >
+				<td><select class="form-control w-auto" required th:field="*{program}" >
 						<option value="Computer System Analyst">Computer System Analyst</option>
 						<option value="Computer Engineering Technology">Computer Engineering Technology</option>
 						<option value="Internet Communications Technology">Internet Communications Technology</option>
@@ -45,17 +57,17 @@
 			
 			<tr>
 				<td><label for="gpa">GPA:</label></td>
-				<td><input required type="number"  max="4" min="0" step=".01" th:field="*{gpa}"/></td>
+				<td><input class="form-control w-auto mb-2" required type="number"  max="4" min="0" step=".01" th:field="*{gpa}"/></td>
 			</tr>
 			
 			<tr>
 				<td><label for="skill">Skill:</label></td>
-				<td><input required th:field="*{skill}" /></td>
+				<td><input class="form-control w-auto mb-2" required th:field="*{skill}" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="campus">Campus:</label></td>
-				<td><select required th:field="*{campus}" >
+				<td><select class="form-control w-auto" required th:field="*{campus}" >
 						<option value="Trafalgar">Trafalgar</option>
 						<option value="Hazel">Hazel</option>
 						<option value="Davis">Davis</option>
@@ -66,35 +78,32 @@
 			
 			<tr>
 				<td><label for="student_email">Email:</label></td>
-				<td><input required th:field="*{student_email}" /></td>
+				<td><input class="form-control w-auto mb-2" required th:field="*{student_email}" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="password">Password:</label> </td>
-				<td><input required th:field="*{password}" type="password" /></td>
+				<td><input class="form-control w-auto mb-2" required th:field="*{password}" type="password" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="confirm_password">Confirm Password:</label> </td>
-				<td><input required name="confirm_password" type="password" /></td>
+				<td><input class="form-control w-auto mb-2" required name="confirm_password" type="password" /></td>
 			</tr>
 			
 			<tr>
 				<td><label for="prof_code">Professor Code:</label> </td>
-				<td><input required name="prof_code" type="password" /></td>
+				<td><input class="form-control w-auto mb-2" required name="prof_code" type="password" /></td>
 			</tr>
 
 			<tr>
-				<td colspan="2" align="center"> <input type="submit" value="Submit" /></td>
+				<td colspan="2" align="center"> <input class="btn btn-primary shadow w-25" type="submit" value="Submit" /></td>
 			<tr>
 			
 			</table>
 		</form>
-		<table style="border-style: hidden;">
-			<tr th:each="error :${errors}">
-				<td th:text="*{error}" colspan="2"></td>
-			</tr>
-		</table>
+		
+
 		
 	</div>
 		

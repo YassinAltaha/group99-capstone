@@ -15,7 +15,6 @@
 
 		
  <div class="container" align="center">
- <br/>
 		<table class="table" th:if="${!errors.isEmpty()}" >
 			<tr th:each="error :${errors}" class="table-danger">
 				<td align="center" th:text="*{error}" colspan="2"></td>
@@ -23,7 +22,7 @@
 		</table>
 
 		<form th:action="@{/saveClientInfo}" th:object="${client}" method="POST">
-		<table class="table table-bordered bg-light text-dark">
+		<table class="table table-bordered bg-white text-center text-dark">
 		<tr class="bg-dark text-white">
 			<td colspan="2" >
 				<h2 align="center">Client Sign-Up</h2>
@@ -92,7 +91,7 @@
 			</tr>
 
 			<tr >
-				<td class="bg-dark" colspan="2" align="center"> <input class="btn btn-primary mb-2" type="submit" value="Submit" /></td>
+				<td colspan="2" align="center"> <input class="btn btn-primary w-25 shadow " type="submit" value="Submit" /></td>
 			</tr>
 			</table>
 			

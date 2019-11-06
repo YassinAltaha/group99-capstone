@@ -15,17 +15,27 @@
 
 		
  <div class="container" align="center">
- 	<br/>
+ 	<div class="alert bg-info shadow text-light">
       <h2>Please select an option</h2>
-      	<br/>
-		<form th:action="@{/addClient}" method="POST">
-		     <input type="submit" name="client_signup" id="client_signup" class="btn btn-primary mb-2" value="Client Signup" />   	
-		</form>	
-		<br/>
-		<form th:action="@{/addStudent}" method="POST">
-		     <input type="submit" name="student_signup" id="student_signup" class="btn btn-primary mb-2" value="Student Signup" />   	
-		</form>	
-		
+	</div>	
+		<div class="card-deck w-50 m-4">
+		  
+		    <div class="card shadow w-25">
+		      <div class="card-body">
+		        <h5 class="card-title">Client's sign up page</h5>
+		        <a th:href="@{/addClient}" class="btn btn-primary m-2 shadow">Client Signup</a>
+		      </div>
+		    </div>
+		  
+		  
+		    <div class="card shadow w-25">
+		      <div class="card-body">
+		        <h5 class="card-title">Student's sign up page</h5>
+		        <a th:href="@{/addStudent}" class="btn btn-primary m-2 shadow">Student Signup</a>
+		      </div>
+		    </div>
+		  
+		</div>      	
 	</div>
 		
 </body>
