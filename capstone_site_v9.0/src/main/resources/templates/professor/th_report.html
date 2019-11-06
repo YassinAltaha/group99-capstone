@@ -82,7 +82,7 @@
 
 					<tr th:each="group : ${noProjectList}">
 						<td><p th:utext="*{group.groupName}" /></td>
-						<td><ul th:each="student : *{group.group_members}">
+						<td align="left"><ul th:each="student : *{group.group_members}">
 								<li th:utext="${student.name}"></li>
 							</ul></td>
 						<td><p th:utext="*{group.program}" /></td>
@@ -92,18 +92,23 @@
 			<div th:case="'allGroups'">
 				<table class="table table-bordered text-center table-hover bg-white shadow">
 					<thead>
-						<tr><th colspan="3"><h4>All groups</h4></th></tr>
+						<tr><th colspan="4"><h4>All groups</h4></th></tr>
 						<tr>
 							<th>Group Name</th>
 							<th>Students</th>
 							<th>Program</th>
+							<th>Project</th>
 						</tr>
 						<tr th:each="group : ${groupList}">
 							<td><p th:utext="*{group.groupName}" /></td>
-							<td><ul th:each="student : *{group.group_members}">
+							<td align="left"><ul th:each="student : *{group.group_members}">
 									<li th:utext="${student.name}"></li>
 								</ul></td>
 							<td><p th:utext="*{group.program}" /></td>
+							<td>
+								<p th:utext="*{group.project.title}" th:if="*{group.project} != null"/>
+								<p th:utext="---" th:if="*{group.project} == null"/>
+							</td>
 						</tr>
 					</thead>
 				</table>
