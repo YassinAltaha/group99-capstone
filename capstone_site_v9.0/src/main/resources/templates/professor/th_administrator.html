@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css"
 	th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}"
 	media="all" />
+
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
 <title>Administrator</title>
@@ -50,7 +51,7 @@
 				<a data-toggle="modal" data-target="#AllStudents" class="btn text-dark btn-warning shadow w-25">
 				Archive All Students
 				</a>
-							<div class="modal fade" id="AllStudents" tabindex="-1" role="dialog" aria-labelledby="AllStudents" aria-hidden="true">
+							<div class="modal  fade" id="AllStudents" tabindex="-1" role="dialog" aria-labelledby="AllStudents" aria-hidden="true">
 							  <div class="modal-dialog" role="document">
 							    <div class="modal-content">
 							      <div class="modal-header">
@@ -63,7 +64,7 @@
 									Are you sure about archiving ALL students
 							      </div>
 							      <div class="modal-footer">
-							        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
 							        <a class="btn btn-warning text-dark"  th:href="@{/professor/archiveAllStudents}">Archive All Student</a>
 							      </div>
 							    </div>

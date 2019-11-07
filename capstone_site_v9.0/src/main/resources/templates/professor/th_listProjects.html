@@ -28,7 +28,7 @@
 
 		<div th:each="client : *{clientList}" th:if="${!client.Archived}">
 
-			<div class="row">
+			<div class="row m-auto">
 				<div class="card w-100  shadow bg-white" >
 					<div class="card-header text-light "
 						style="background-color: #003767" data-toggle="collapse"
@@ -60,7 +60,7 @@
 							<div class="card w-75 shadow "
 								th:each="project : *{client.projectList}"
 								th:if="${!project.Archived}">
-								<div class="alert-dark  text-black p-1" data-toggle="collapse"
+								<div class="alert-primary  text-black p-2" data-toggle="collapse"
 									th:href="'#collapse'+*{project.projectId}"
 									aria-controls="'collapse'+${project.projectId}">
 

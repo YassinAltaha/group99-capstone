@@ -9,11 +9,11 @@
 <link rel="stylesheet" type="text/css"
 	th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}"
 	media="all" />
-
+<link rel="stylesheet" th:href="@{/css/animated.css}"> 
 
 <meta charset="UTF-8">
 <!-- <meta charset="ISO-8859-1"> -->
-<title>Change Password</title>
+<title>Assigning Groups</title>
 </head>
 <body class="bg-grey">
 
@@ -52,8 +52,8 @@
 					<td th:utext="*{group.program}"></td>
 
 					<td>
-						<ul th:each="student : *{group.group_members}">
-							<li th:utext="${student.name}"></li>
+						<ul class="list-group list-group-flush" th:each="student : *{group.group_members}">
+							<li class="list-group-item" th:utext="${student.name}"></li>
 						</ul>
 					</td>
 					
@@ -68,7 +68,7 @@
 					Remove Project
 					</a>
 					<!-- Modal -->
-					<div class="modal fade" th:id="'example'+${group.groupId}" tabindex="-1" role="dialog" aria-labelledby="'example'+${group.groupId}" aria-hidden="true">
+					<div class="modal zoomOutRight" th:id="'example'+${group.groupId}" tabindex="-1" role="dialog" aria-labelledby="'example'+${group.groupId}" aria-hidden="true">
 					  <div class="modal-dialog" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">

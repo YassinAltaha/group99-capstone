@@ -34,7 +34,10 @@
 					<td><label>Project Title:</label></td>
 					<td><input class="form-control" type="text" readonly th:value="${project.title}" /></td>
 				</tr>
-	
+				<tr>
+					<td><label>Project Description</label></td>
+					<td><textarea class="form-control" readonly style="height: 230px;" th:utext="${project.description}"></textarea> </td>
+				</tr>
 				<tr>
 					<td><label>Project Status:</label></td>
 					<td><select class="form-control" th:field="${project.status}">
@@ -50,7 +53,9 @@
 				</tr>
 	
 				<tr>
-					<td colspan="2"><input type="submit" class="btn btn-primary" value="Update" /></td>
+					<td> <a th:href="@{/professor/listProjects}" class="btn btn-secondary w-25"  >Cancel</a>
+					<td ><input type="submit" class="btn btn-primary w-50" value="Update" /></td>
+					
 				</tr>
 	
 			</table>

@@ -56,7 +56,8 @@
 					<ul class="list-group" th:each="ranking : ${group.ranking.rankings}" >
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
 					    <p th:text="${ranking.title}"></p>
-					    <span class="badge badge-success badge-pill" th:if="${ranking.GroupBean == null}">Open</span>
+					    <span class="badge badge-success badge-pill" th:if="${ranking.GroupBean == null} ">Open</span>
+					    <span class="badge badge-danger badge-pill" th:if="${ranking.status == 'Rejected'} ">Open</span>
 					    <span class="badge badge-warning badge-pill" th:unless="${ranking.GroupBean == null}">Assigned</span>
 					  </li>
 						
@@ -78,7 +79,8 @@
 				</tr>
 				
 				<tr>
-					<td colspan="2" align="center"> <input class="btn btn-primary mb-2 w-25 shadow" type="submit" value="Submit" /></td>
+					<td> <a th:href="@{/professor/groupList}" class="btn btn-secondary mb-2 w-25 shadow">Cancel</a> </td>
+					<td  align="center"> <input class="btn btn-primary mb-2 w-50 shadow" type="submit" value="Submit" /></td>
 				<tr>
 				
 				</table>
