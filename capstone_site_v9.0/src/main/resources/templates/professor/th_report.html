@@ -43,7 +43,7 @@
 
 			<div th:case="'noGroupStudent'">
 				<table class="table table-bordered text-center table-hover bg-white shadow">
-					<thead>
+					<thead th:unless="${studentList.isEmpty()}">
 						<tr>
 						<th colspan="6"><h4>Students with no group</h4></th>
 						</tr>
@@ -65,14 +65,18 @@
 						<td><p th:utext="*{student.gpa}" /></td>
 						<td><p th:utext="*{student.student_email}" /></td>
 					</tr>
+					<tr th:if="${studentList.isEmpty()}">
+						<td class="alert alert-warning"><p>No Students are without a Group</td>
+					</tr>
 				</table>
+				
 
 			</div>
 			
 			
 			<div th:case="'noProjectGroup'">
 				<table class="table table-bordered text-center table-hover bg-white shadow">
-					<thead>
+					<thead th:unless="${noProjectList.isEmpty()}">
 						<tr><th colspan="3"><h4>Groups without a project</h4></th></tr>
 						<tr>
 							<th>Group Name</th>
@@ -88,11 +92,14 @@
 							</ul></td>
 						<td><p th:utext="*{group.program}" /></td>
 					</tr>
+					<tr th:if="${noProjectList.isEmpty()}">
+						<td class="alert alert-warning"><p>No Groups are without a Project</td>
+					</tr>
 				</table>
 			</div>
 			<div th:case="'allGroups'">
 				<table class="table table-bordered text-center table-hover bg-white shadow">
-					<thead>
+					<thead th:unless="${groupList.isEmpty()}">
 						<tr><th colspan="4"><h4>All groups</h4></th></tr>
 						<tr>
 							<th>Group Name</th>
@@ -100,6 +107,7 @@
 							<th>Program</th>
 							<th>Project</th>
 						</tr>
+						</thead>
 						<tr th:each="group : ${groupList}">
 							<td><p th:utext="*{group.groupName}" /></td>
 							<td align="left"><ul th:each="student : *{group.group_members}">
@@ -111,12 +119,14 @@
 								<p th:utext="---" th:if="*{group.project} == null"/>
 							</td>
 						</tr>
-					</thead>
+					<tr th:if="${groupList.isEmpty()}">
+						<td class="alert alert-warning"><p>No Groups</td>
+					</tr>				
 				</table>
 			</div>
 			<div th:case="'approvedProjects'">
 				<table class="table table-bordered text-center table-hover bg-white shadow">
-					<thead>
+					<thead th:unless="${approvedProjects.isEmpty()}">
 						<tr><th colspan="4"><h4>Approved projects</h4></th></tr>
 						<tr>
 							<th>Project Title</th>
@@ -124,19 +134,22 @@
 							<th>Client Phone</th>
 							<th>Client Email</th>
 						</tr>
+					</thead>
 						<tr th:each="project : ${approvedProjects}">
 							<td class="text-break w-25"><p th:utext="*{project.title}" /></td>
 							<td><p th:utext="*{project.client.clientName}" /></td>
 							<td><p th:utext="*{project.client.clientContact}" /></td>
 							<td><p th:utext="*{project.client.clientEmail}" /></td>
 						</tr>
-					</thead>
+					<tr th:if="${approvedProjects.isEmpty()}">
+						<td class="alert alert-warning"><p>No Approved Projects</td>
+					</tr>	
 				</table>
 			</div>
 			<div th:case="'rejectedProjects'">
 				<table class="table table-bordered text-center table-hover bg-white shadow">
-					<thead>
-					<tr><th colspan="4"><h4>Rejected Projects</h4></th></tr>
+					<thead th:unless="${rejectedProjects.isEmpty()}">
+						<tr><th colspan="4"><h4>Rejected Projects</h4></th></tr>
 						<tr>
 							
 							<th>Project Title</th>
@@ -144,18 +157,22 @@
 							<th>Client Phone</th>
 							<th>Client Email</th>
 						</tr>
+						</thead>
 						<tr th:each="project : ${rejectedProjects}">
 							<td class="text-break w-25"><p th:utext="*{project.title}" /></td>
 							<td><p th:utext="*{project.client.clientName}" /></td>
 							<td><p th:utext="*{project.client.clientContact}" /></td>
 							<td><p th:utext="*{project.client.clientEmail}" /></td>
 						</tr>
-					</thead>
+					
+					<tr th:if="${rejectedProjects.isEmpty()}">
+						<td class="alert alert-warning"><p>No Rejected Projects</td>
+					</tr>	
 				</table>
 			</div>
 			<div th:case="'pendingProjects'">
 				<table class="table table-bordered text-center table-hover bg-white shadow">
-					<thead>
+					<thead th:unless="${pendingProjects.isEmpty()}">
 					<tr><th colspan="4"><h4>Pending projects</h4></th></tr>
 						<tr>
 							
@@ -164,13 +181,16 @@
 							<th>Client Phone</th>
 							<th>Client Email</th>
 						</tr>
+						</thead>
 						<tr th:each="project : ${pendingProjects}">
 							<td class="text-break w-25"><p th:utext="*{project.title}" /></td>
 							<td><p th:utext="*{project.client.clientName}" /></td>
 							<td><p th:utext="*{project.client.clientContact}" /></td>
 							<td><p th:utext="*{project.client.clientEmail}" /></td>
 						</tr>
-					</thead>
+					<tr th:if="${pendingProjects.isEmpty()}">
+						<td class="alert alert-warning"><p>No Pending Projects</td>
+					</tr>	
 				</table>
 			</div>
 		</th:block>

@@ -33,7 +33,7 @@
 					<div class="card-header text-light "
 						style="background-color: #003767" data-toggle="collapse"
 						th:href="'#c'+*{client.clientId}"
-						aria-controls="'c'+*{client.clientId}">
+						>
 						<h4 class="" th:utext="*{client.clientCompany} + ' Projects'"></h4>
 					</div>
 					<div class="collapse-content collapse"
@@ -62,7 +62,7 @@
 								th:if="${!project.Archived}">
 								<div class="alert-primary  text-black p-2" data-toggle="collapse"
 									th:href="'#p'+*{project.projectId}"
-									aria-controls="'p'+${project.projectId}">
+									>
 
 									<h5 class="text-dark" th:utext="*{project.title}"></h5>
 									<h6 class="card-subtitle text-muted"
