@@ -32,12 +32,12 @@
 				<div class="card w-100  shadow bg-white" >
 					<div class="card-header text-light "
 						style="background-color: #003767" data-toggle="collapse"
-						th:href="'#collapse'+*{client.clientName}"
-						aria-controls="'collapse'+*{client.clientName}">
+						th:href="'#collapse'+*{client.clientEmail}"
+						aria-controls="'collapse'+*{client.clientEmail}">
 						<h4 class="" th:utext="*{client.clientCompany} + ' Projects'"></h4>
 					</div>
 					<div class="collapse-content collapse"
-						th:id="'collapse'+*{client.clientName}">
+						th:id="'collapse'+*{client.clientEmail}">
 						<ul class="list-group list-group-flush ">
 							<li class="list-group-item"
 								th:utext="'Client Name: ' + *{client.clientName}"></li>
