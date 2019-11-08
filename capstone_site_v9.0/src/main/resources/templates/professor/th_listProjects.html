@@ -32,12 +32,12 @@
 				<div class="card w-100  shadow bg-white" >
 					<div class="card-header text-light "
 						style="background-color: #003767" data-toggle="collapse"
-						th:href="'#collapse'+*{client.clientEmail}"
-						aria-controls="'collapse'+*{client.clientEmail}">
+						th:href="'#c'+*{client.clientId}"
+						aria-controls="'c'+*{client.clientId}">
 						<h4 class="" th:utext="*{client.clientCompany} + ' Projects'"></h4>
 					</div>
 					<div class="collapse-content collapse"
-						th:id="'collapse'+*{client.clientEmail}">
+						th:id="'c'+*{client.clientId}">
 						<ul class="list-group list-group-flush ">
 							<li class="list-group-item"
 								th:utext="'Client Name: ' + *{client.clientName}"></li>
@@ -61,15 +61,15 @@
 								th:each="project : *{client.projectList}"
 								th:if="${!project.Archived}">
 								<div class="alert-primary  text-black p-2" data-toggle="collapse"
-									th:href="'#collapse'+*{project.projectId}"
-									aria-controls="'collapse'+${project.projectId}">
+									th:href="'#p'+*{project.projectId}"
+									aria-controls="'p'+${project.projectId}">
 
 									<h5 class="text-dark" th:utext="*{project.title}"></h5>
 									<h6 class="card-subtitle text-muted"
 										th:utext="*{project.status}"></h6>
 								</div>
 								<div class="collapse-content collapse"
-									th:id="'collapse'+*{project.projectId}">
+									th:id="'p'+*{project.projectId}">
 									<div class="card-body">
 										<div>
 											<p class="text-light badge badge-pill mt-0"
