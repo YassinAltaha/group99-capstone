@@ -39,7 +39,7 @@
 				
 				<tr>
 					<td><label>Students:</label> </td>
-					<td >
+					<td>
 						<ul  class="list-group" th:each="student : ${group.group_members}">
 							<li class="list-group-item" th:utext="${student.name}"></li>
 						</ul>
@@ -56,8 +56,8 @@
 					<ul class="list-group" th:each="ranking : ${group.ranking.rankings}" >
 					  <li class="list-group-item d-flex justify-content-between align-items-center">
 					    <p th:text="${ranking.title}"></p>
-					    <span class="badge badge-success badge-pill" th:if="${ranking.GroupBean == null} ">Open</span>
-					    <span class="badge badge-danger badge-pill" th:if="${ranking.status == 'Rejected'} ">Open</span>
+					    <span class="badge badge-success badge-pill" th:if="${ranking.GroupBean == null AND ranking.status != 'Rejected'} ">Open</span>
+					    <span class="badge badge-danger badge-pill" th:if="${ranking.status == 'Rejected'} ">Rejected</span>
 					    <span class="badge badge-warning badge-pill" th:unless="${ranking.GroupBean == null}">Assigned</span>
 					  </li>
 						

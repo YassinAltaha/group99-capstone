@@ -37,7 +37,7 @@
 			<div th:if="${groups!=null and !groups.empty}">
 
 			<table class="table bg-white shadow">
-				<tr>
+				<tr class="text-center">
 					
 					<th>Group Name</th>
 					<th>Group Program</th>
@@ -51,9 +51,9 @@
 					<td th:utext="*{group.groupName}"></td>
 					<td th:utext="*{group.program}"></td>
 
-					<td>
-						<ul class="list-group list-group-flush" th:each="student : *{group.group_members}">
-							<li class="list-group-item" th:utext="${student.name}"></li>
+					<td class="text-left">
+						<ul th:each="student : *{group.group_members}">
+							<li th:utext="${student.name}"></li>
 						</ul>
 					</td>
 					
