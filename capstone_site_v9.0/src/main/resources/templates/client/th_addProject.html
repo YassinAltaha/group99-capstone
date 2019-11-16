@@ -15,7 +15,8 @@
 
 
 	<!-- View-dependent nav area -->
-	<div >
+	<div  th:unless="${#arrays.length(client.projectList) } == ${client.clientLimit}">
+
 		<div class="container" align="center">
 
 			<form th:action="@{/client/saveProject}" th:object="${project}"
@@ -58,6 +59,34 @@
 			</form>
 
 		</div>
-		</div>
+	</div>
+	
+	
+	<div th:if="${#arrays.length(client.projectList) } == ${client.clientLimit}">
+		<div class="container" align="center">
+					
+				<div class="card shadow m-3">
+				  <div class="card-header alert alert-danger">
+				    <h2>Project limit has been reached </h2>
+				  </div>
+				  <div class="card-body">
+				    <h5 class="card-title">In case you want to submit more projects </h5>
+				    <p class="card-text">Please Contact one of our Professors with your :</p>
+				    	<ul class="list-group w-25">
+				    		<li class="list-group-item">Name</li>
+				    		<li class="list-group-item">Email</li>
+				    		<li class="list-group-item">Company</li>
+				    		<li class="list-group-item">Reason for needing more space</li>
+				    	</ul>
+				    <a th:href="@{/client/contact}" class="btn btn-primary p-2 m-3 shadow w-25">Contact Us</a>
+				  </div>
+				</div>	
+		</div>	
+	</div>
+	
+	
+	
+	
+	
 </body>
 </html>

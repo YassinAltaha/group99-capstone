@@ -51,6 +51,8 @@ public class Client implements Serializable {
 
 	private String clientAddress;
 	
+	private int clientLimit;
+	
 	@Column(nullable=false ,columnDefinition = "boolean default false")
 	private boolean isArchived;
 	
@@ -92,6 +94,7 @@ public class Client implements Serializable {
 		this.clientScale = clientScale;
 		this.clientEmail = clientEmail;
 		this.password = password;
+		this.clientLimit = 3;
 	}
 
 	@Transient 

@@ -22,58 +22,45 @@
 		<div class="alert bg-info text-light shadow">
 			<h2>List Projects</h2>
 		</div>
-		<div th:if="${msg}" class="alert alert-success shadow">Record
-			updated</div>
-
+		<div th:if="${msg}" class="alert alert-success shadow">Record updated</div>
+		<div th:if="${error}" class="alert alert-danger shadow" th:utext="${error}"></div>
 
 		<div th:each="client : *{clientList}" th:if="${!client.Archived}">
 
 			<div class="row m-auto">
 				<div class="card w-100  shadow bg-white" >
-					<div class="card-header text-light "
-						style="background-color: #003767" data-toggle="collapse"
-						th:href="'#c'+*{client.clientId}"
-						>
-						<h4 class="" th:utext="*{client.clientCompany} + ' Projects'"></h4>
+					<div class="card-header text-light " th:href="'#c'+*{client.clientId}"
+						style="background-color: #003767" data-toggle="collapse" >	
+							<h4 th:utext="*{client.clientCompany} + ' Projects'">  </h4>
+							
 					</div>
-					<div class="collapse-content collapse"
-						th:id="'c'+*{client.clientId}">
+					<div class="collapse-content collapse" th:id="'c'+*{client.clientId}">
 						<ul class="list-group list-group-flush ">
-							<li class="list-group-item"
-								th:utext="'Client Name: ' + *{client.clientName}"></li>
-							<li class="list-group-item"
-								th:utext="'Client Contact#: ' + *{client.clientContact}"></li>
-							<li class="list-group-item"
-								th:utext="'Client Email: ' + *{client.clientEmail}"></li>
-							<li class="list-group-item"
-								th:utext="'Client Industry: ' + *{client.clientIndustry}"></li>
-							<li class="list-group-item"
-								th:utext="'Company Scale: ' + *{client.clientScale}"></li>
+							<li class="list-group-item" th:utext="'Client Name: ' + *{client.clientName}"></li>
+							<li class="list-group-item" th:utext="'Client Contact#: ' + *{client.clientContact}"></li>
+							<li class="list-group-item" th:utext="'Client Email: ' + *{client.clientEmail}"></li>
+							<li class="list-group-item" th:utext="'Client Industry: ' + *{client.clientIndustry}"></li>
+							<li class="list-group-item" th:utext="'Company Scale: ' + *{client.clientScale}"></li>
 						</ul>
+						
+						<a class="btn btn-secondary shadow m-3" th:href="@{/professor/editClient/{id}(id= *{client.clientId})}" 
+						th:utext="'Client Limit ' + *{client.clientLimit}">
+						</a>
+						
 					</div>
 
 
 					<div class="card-footer bg-white">
-
 						<div class="card-deck-wrapper">
-
-							<div class="card w-75 shadow "
-								th:each="project : *{client.projectList}"
-								th:if="${!project.Archived}">
-								<div class="alert-primary  text-black p-2" data-toggle="collapse"
-									th:href="'#p'+*{project.projectId}"
-									>
-
+							<div class="card w-75 shadow" th:each="project : *{client.projectList}" th:if="${!project.Archived}">
+								<div class="alert-primary  text-black p-2" data-toggle="collapse" th:href="'#p'+*{project.projectId}">
 									<h5 class="text-dark" th:utext="*{project.title}"></h5>
-									<h6 class="card-subtitle text-muted"
-										th:utext="*{project.status}"></h6>
+									<h6 class="card-subtitle text-muted" th:utext="*{project.status}"></h6>
 								</div>
-								<div class="collapse-content collapse"
-									th:id="'p'+*{project.projectId}">
+								<div class="collapse-content collapse" th:id="'p'+*{project.projectId}">
 									<div class="card-body">
 										<div>
-											<p class="text-light badge badge-pill mt-0"
-												style="background-color: #FF6347">Description</p>
+											<p class="text-light badge badge-pill mt-0" style="background-color: #FF6347">Description</p>
 											<p class="card-text" th:utext="*{project.description}"></p>
 										</div>
 										<br />
@@ -81,15 +68,11 @@
 										<small class="text-muted" th:utext="*{project.profNote}"></small>
 									</div>
 									<div class="card-footer">
-										<p class="card-text"
-											th:if="*{project.groupBean?.groupName !=null }">
-											<small class="text-muted"
-												th:utext="'Group: ' + *{project.groupBean?.groupName}">
+										<p class="card-text" th:if="*{project.groupBean?.groupName !=null }">
+											<small class="text-muted" th:utext="'Group: ' + *{project.groupBean?.groupName}">
 											</small>
-										</p>
-
-										<a
-											th:href="@{/professor/profEditProject/{id}(id=${project.projectId})}"
+										</p>		
+										<a	th:href="@{/professor/profEditProject/{id}(id=${project.projectId})}"
 											class="btn btn-primary w-25 mb-2 shadow">Edit</a>
 									</div>
 								</div>

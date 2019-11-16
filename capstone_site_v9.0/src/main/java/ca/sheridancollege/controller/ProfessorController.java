@@ -332,6 +332,42 @@ public class ProfessorController {
 	}
 //------------------------------------------END OF ARCHIVING------------------------------------------------- //	
 	
+	
+	@RequestMapping("professor/editClient/{id}")
+	public String editClient(Model model , @PathVariable int id) {
+		
+		try {
+			Client c = clientDAO.getClientById(id);
+			model.addAttribute("client", c);
+			return "professor/th_editClient";
+			
+		}catch(Exception e)
+		{
+			model.addAttribute("error", "Error Retriving Client from Database");
+			model.addAttribute("clientList",  clientDAO.getAllClients());
+			return "professor/th_listProjects";
+		}
+	}
+	@RequestMapping(value="professor/editClient" , method = RequestMethod.POST)
+	public String editClientPOST(Model model, @RequestParam int cid, @RequestParam int newLimit )
+	{
+		
+		try 
+		{
+			Client c = clientDAO.getClientById(cid);
+			c.setClientLimit(newLimit);
+			clientDAO.updateClient(c);
+			
+		}catch(Exception e)
+		{
+			model.addAttribute("error", "Error Updating Client Limit");
+		}
+				
+		model.addAttribute("clientList",  clientDAO.getAllClients());
+		return "professor/th_listProjects";
+	}
+	
+	
 	@RequestMapping("professor/groupList")
 	public String groupHome(Model model) {
 
@@ -448,8 +484,8 @@ public class ProfessorController {
 	@RequestMapping("professor/listProjects")
 	public String displayProjects(Model model) {
 
-		List<Client> clientList = clientDAO.getAllClients();
-		model.addAttribute("clientList", clientList);
+		
+		model.addAttribute("clientList",  clientDAO.getAllClients());
 		return "professor/th_listProjects";
 	}
 
