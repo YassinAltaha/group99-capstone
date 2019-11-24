@@ -40,12 +40,17 @@ public class ClientDAO {
 	}
 
 	public Client findClientByEmail(String email) {
-		List<Client> client = sessionFactory.openSession().createQuery("from Client where clientEmail=:clientEmail")
+		Session session = sessionFactory.openSession();
+		
+		List<Client> client = session.createQuery("from Client where clientEmail=:clientEmail")
 				.setParameter("clientEmail", email).list();
 		if (client.size() > 0) {
-			return client.get(0);
+			Client cl = client.get(0);
+			session.close();
+			return cl;
 		} else {
 			System.out.println("*** NO CLIENT FOUND ***");
+			session.close();
 			return null;
 		}
 	}
@@ -200,6 +205,7 @@ public class ClientDAO {
 				errorList.add(error.getMessage());
 			}
 		}
+		validatorFactory.close();
 		return errorList;
 	}
 	
@@ -214,6 +220,7 @@ public class ClientDAO {
 				errorList.add(error.getMessage());
 			}
 		}
+		validatorFactory.close();
 		return errorList;
 	}
 	
