@@ -44,7 +44,7 @@ public class ProfessorController {
 				"TestCode" // profCode
 		);
 		try {
-			
+			admin.setChange_Pass(true);
 			profDAO.addProf(admin);
 			return "th_login";
 		} catch (Exception e) {
@@ -350,8 +350,7 @@ public class ProfessorController {
 	}
 	@RequestMapping(value="professor/editClient" , method = RequestMethod.POST)
 	public String editClientPOST(Model model, @RequestParam int cid, @RequestParam int newLimit )
-	{
-		
+	{		
 		try 
 		{
 			Client c = clientDAO.getClientById(cid);
@@ -447,19 +446,16 @@ public class ProfessorController {
 
 	// Register Professor-1.2 (saving prof)
 	@RequestMapping("saveProf")
-	public String addProfessor(Model model, @ModelAttribute Professor professor , @RequestParam String confirm_password) {
+	public String addProfessor(Model model, @ModelAttribute Professor professor) {
 
 		synchronized (Professor.class) {
-
+			professor.setPassword("Sheridan");
 			// testing using the Professor Validtions
 			if (profDAO.validateProfessor(professor).isEmpty()) {
-				if(professor.getPassword().equals(confirm_password))
-				{
 					// test if the username is used
 					// Catch
 					// sends the user back to Sign with new error message
 					try {
-	
 						profDAO.addProf(professor);
 						model.addAttribute("success", professor.getProfName() + " Account was created");
 						return "professor/th_profSignup";
@@ -468,10 +464,6 @@ public class ProfessorController {
 						model.addAttribute("errors", "This email is already in use");
 						return "professor/th_profSignup";
 					}
-				}else {
-					model.addAttribute("errors", "Passwords must match");
-					return "professor/th_profSignup";
-				}
 			// Validtion Failed
 			} else {
 				model.addAttribute("errors", profDAO.validateProfessor(professor));
@@ -483,8 +475,12 @@ public class ProfessorController {
 	// Professor's Project List
 	@RequestMapping("professor/listProjects")
 	public String displayProjects(Model model) {
-
 		
+		Professor p = getAuthProf();
+		if(!p.isChange_Pass() )
+		{
+			model.addAttribute("change_password", true);
+		}
 		model.addAttribute("clientList",  clientDAO.getAllClients());
 		return "professor/th_listProjects";
 	}
@@ -600,6 +596,7 @@ public class ProfessorController {
 				try {
 					String new_encoded_pass = passwordEncoder.encode(new_password);
 					p.setPassword(new_encoded_pass);
+					p.setChange_Pass(true);
 					profDAO.updateProfessor(p);
 					model.addAttribute("msg", "Password was successfully updated");
 				} catch (Exception e) {
@@ -756,5 +753,5 @@ public class ProfessorController {
 		return professor;
 
 	}
-
+	
 }

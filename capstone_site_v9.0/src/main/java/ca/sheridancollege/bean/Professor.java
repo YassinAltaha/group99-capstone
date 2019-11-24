@@ -60,6 +60,10 @@ public class Professor implements Serializable {
 	@Column(name = "profCode", nullable = true, length = 45)
 	//@NotNull(message = "Please Enter a Pass-code for Students.")
 	private String profCode;
+	
+	@Column(nullable=false ,columnDefinition = "boolean default false")
+	private boolean change_Pass;
+	
 
 	public Professor(String profName, String profEmail, String password, String program) {
 		this.profName = profName;

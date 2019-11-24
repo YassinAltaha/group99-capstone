@@ -38,17 +38,17 @@ public class ProfDAO {
 	public void addProf(Professor p) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-
+		
+		
 		String pass = p.getPassword();
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hasedPassword = passwordEncoder.encode(pass);
 		
-	
 		p.setPassword(hasedPassword);
 		p.setRole(Role.ROLE_ADMIN);
 
 		session.save(p);
-
+		
 		session.getTransaction().commit();
 		session.close();
 	}
