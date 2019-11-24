@@ -19,12 +19,51 @@
 	<!-- View-dependent nav area -->
 
 	<div class="container" align="center">
+	
 		<div class="alert bg-info text-light shadow">
 			<h2>List Projects</h2>
 		</div>
 		<div th:if="${msg}" class="alert alert-success shadow">Record updated</div>
 		<div th:if="${error}" class="alert alert-danger shadow" th:utext="${error}"></div>
+		
+		
+	
+		<div class="container" th:if="${change_password}">
+		  <h1 class="display-4">Hello Teacher!</h1>	  
+		 	<p class="lead">Please Go and Change Password.</p>
+			<div class="spinner-grow text-warning" role="status">
+			  <span class="sr-only">Loading...</span>
+			</div>
+		  	<a class="btn btn-warning btn-lg " th:href="@{/professor/change_password}" role="button">Change Password</a>
+		  				<div class="spinner-grow text-warning" role="status">
+			  <span class="sr-only">Loading...</span>
+			</div>
+		  </div>
 
+		
+		
+		<div class="modal fade" tabindex="-1" role="dialog" >
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" > Change Password Please </h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+					<p>Welcome to Capstone Portal Please Change your Password</p> 
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        <a class="btn btn-warning text-dark"  >Change Password</a>
+			      </div>
+			    </div>
+			  </div>
+		</div>
+		
+	
+		
 		<div th:each="client : *{clientList}" th:if="${!client.Archived}">
 
 			<div class="row m-auto">

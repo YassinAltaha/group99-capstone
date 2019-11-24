@@ -120,18 +120,7 @@
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
 		</dependency>
-<!--
-<dependency>
-  <groupId>org.thymeleaf</groupId>
-  <artifactId>thymeleaf</artifactId>
-  <version>3.0.0.RELEASE</version>
-</dependency>
-<dependency>
-  <groupId>org.thymeleaf</groupId>
-  <artifactId>thymeleaf-spring4</artifactId>
-  <version>3.0.0.RELEASE</version>
-</dependency>
--->
+
 
 		<dependency>
 		   <groupId>org.springframework.boot</groupId>
@@ -150,14 +139,8 @@
         	<artifactId>bootstrap</artifactId>
         	<version>4.3.1</version>
         </dependency>
-        
-        <dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-dbcp2</artifactId>
-		    <version>2.1.1</version>
-		</dependency>
-		</dependencies>
-		
+	</dependencies>
+
 
 	<build>
 	<finalName>${artifactId}</finalName>

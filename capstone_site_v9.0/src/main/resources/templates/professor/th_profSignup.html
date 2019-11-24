@@ -40,7 +40,10 @@
 						</thead>
 						<tr>
 							<td><label for="profName">Name:</label> </td>
-							<td><input class="form-control mb-2" required th:field="*{profName}" /></td>
+							<td><input class="form-control mb-2" required th:field="*{profName}" />
+								<input hidden="true" type="text" th:field="*{password}" value="admin"/>
+							</td>
+							
 						</tr>
 						
 						<tr>
@@ -53,14 +56,6 @@
 							<td><input class="form-control  mb-2" required th:field="*{profEmail}" /></td>
 						</tr>
 						
-						<tr>
-							<td><label for="password">Password:</label> </td>
-							<td><input class="form-control  mb-2" required th:field="*{password}" type="password" /></td>
-						</tr>
-						<tr>
-							<td><label for="password">Confirm Password:</label> </td>
-							<td><input class="form-control  mb-2" required name="confirm_password" type="password" /></td>
-						</tr>
 						
 			
 						<tr>
