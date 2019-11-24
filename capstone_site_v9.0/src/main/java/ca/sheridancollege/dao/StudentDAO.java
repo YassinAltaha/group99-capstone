@@ -129,6 +129,7 @@ public class StudentDAO {
 				errorList.add( error.getMessage());
 			}
 		}
+		validatorFactory.close();
 		return errorList;
 	}
 

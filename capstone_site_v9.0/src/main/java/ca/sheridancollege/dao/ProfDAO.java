@@ -25,12 +25,16 @@ public class ProfDAO {
 	SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 
 	public Professor findProfByEmail(String profEmail) {
-		List<Professor> profs = sessionFactory.openSession().createQuery("from Professor where profEmail=:profEmail")
+		Session session = sessionFactory.openSession();
+		List<Professor> profs = session.createQuery("from Professor where profEmail=:profEmail")
 				.setParameter("profEmail", profEmail).list();
 		if (profs.size() > 0) {
-			return profs.get(0);
+			Professor pr = profs.get(0);
+			session.close();
+			return pr;
 		} else {
 			System.out.println("*** NO PROF FOUND ***");
+			session.close();
 			return null;
 		}
 	}
@@ -74,6 +78,7 @@ public class ProfDAO {
 				errorList.add(error.getMessage());
 			}
 		}
+		validatorFactory.close();
 		return errorList;
 	}
 	
