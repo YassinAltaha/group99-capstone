@@ -35,18 +35,21 @@
 						</th>
 					</tr>
 					
-					<tr>	
+<!-- 					<tr>	
 						<td><h5>PASSCODE FOR TESTING:</h5> </td>
 						<td><input class="form-control" th:value="${GroupInfo.passcode}" /> </td>
-					</tr>
+					</tr> -->
 					
 					<tr>
 						<td><h5>Group passcode: </h5> </td>
 						<td><input class="form-control" autofocus required max="9999" min="0001" type="number" name="password_test" /> </td>
 					</tr>
 					<tr>
-						<td colspan="3">
-							<input class="btn btn-primary shadow w-25" type="submit" value="Join Group" /> 
+						<td colspan="1">
+							<a  th:href="@{/student/joinGroup}"> <input type="button" class="btn btn-secondary mb-2 shadow" value="Cancel" /> </a>
+						</td>
+						<td colspan="2">
+							<input class="btn btn-primary shadow w-50" type="submit" value="Join Group" /> 
 						</td>
 					</tr>
 				

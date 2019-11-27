@@ -445,6 +445,7 @@ public class ProfessorController {
 	}
 
 	// Register Professor-1.2 (saving prof)
+	//DEFAULT PASSWORD FOR NEW PROFESSORS IS "SHERIDAN" 
 	@RequestMapping("saveProf")
 	public String addProfessor(Model model, @ModelAttribute Professor professor) {
 
@@ -532,7 +533,6 @@ public class ProfessorController {
 	public String editAssignProject(Model model, @PathVariable int projectId) {
 
 		// get all groups without projects
-		GroupDAO groupDAO = new GroupDAO();
 		List<GroupBean> list = new ArrayList<GroupBean>();
 		for (GroupBean group : groupDAO.getAllGroups()) {
 			if (group.getProject() == null) {
@@ -746,10 +746,10 @@ public class ProfessorController {
 	}
 
 	public Professor getAuthProf() {
-		ProfDAO dao = new ProfDAO();
+		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String username = auth.getName().toString();
-		Professor professor = dao.findProfByEmail(username);
+		Professor professor = profDAO.findProfByEmail(username);
 		return professor;
 
 	}
