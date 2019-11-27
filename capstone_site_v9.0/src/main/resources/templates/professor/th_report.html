@@ -45,7 +45,7 @@
 				<table class="table table-bordered text-center table-hover bg-white shadow">
 					<thead th:unless="${studentList.isEmpty()}">
 						<tr>
-						<th colspan="6"><h4>Students with no group</h4></th>
+						<th colspan="7"><h4>Students with no group</h4></th>
 						</tr>
 						<tr>
 							<th>Student Name</th>
@@ -53,6 +53,7 @@
 							<th>Program</th>		
 							<th>Campus</th>
 							<th>GPA</th>
+							<th>Skill</th>
 							<th>Email</th>
 						</tr>
 					</thead>
@@ -63,6 +64,7 @@
 						<td><p th:utext="*{student.program}" /></td>
 						<td><p th:utext="*{student.campus}" /></td>
 						<td><p th:utext="*{student.gpa}" /></td>
+						<td><p th:utext="*{student.skill}" /></td>
 						<td><p th:utext="*{student.student_email}" /></td>
 					</tr>
 					<tr th:if="${studentList.isEmpty()}">
